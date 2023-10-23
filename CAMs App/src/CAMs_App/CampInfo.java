@@ -9,11 +9,11 @@ public class CampInfo {
     // open to own school or NTU
     private String location;
     private int totalSlots;
-    private int campCommitteeSlots;
+    private int[] campCommitteeSlots = new int[10];
     private String description;
     private String staffInCharge;
 
-    public CampInfo(String campName, int campDate, int regCloseDate, String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge){
+    public CampInfo(String campName, int campDate, int regCloseDate, String location, int totalSlots, int[]campCommitteeSlots, String description, String staffInCharge){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -52,7 +52,7 @@ public class CampInfo {
         return true;
     }
 
-    public boolean setCampCommitteeSlots(int campCommitteeSlots){
+    public boolean setCampCommitteeSlots(int[] campCommitteeSlots){
         this.campCommitteeSlots = campCommitteeSlots;
         return true;
     }
@@ -87,7 +87,7 @@ public class CampInfo {
             return totalSlots;
     } 
 
-    public int getCampCommitteeSlots(){
+    public int[] getCampCommitteeSlots(){
             return campCommitteeSlots;
     } 
 
