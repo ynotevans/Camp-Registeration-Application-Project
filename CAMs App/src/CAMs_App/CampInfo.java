@@ -13,7 +13,20 @@ public class CampInfo {
     private String description;
     private String staffInCharge;
 
-     
+    public CampInfo(String campName, int campDate, int regCloseDate, String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge){
+        setCampName(campName);
+        setCampDate(campDate);
+        setRegCloseDate(regCloseDate);
+        setLocation(location);
+        setTotalSlots(totalSlots);
+        setCampCommitteeSlots(campCommitteeSlots);
+        setDescription(description);
+        setStaffInCharge(staffInCharge);
+    } 
+
+
+
+
     public boolean setCampName(String campName){
         this.campName = campName;
         return true;
@@ -85,6 +98,4 @@ public class CampInfo {
     public String getStaffInCharge() {
         return staffInCharge;
     }
-
-
 }

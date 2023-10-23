@@ -1,5 +1,4 @@
 package CAMs_App;
 
-public class Camp {
-
+public class Camp{
 }
