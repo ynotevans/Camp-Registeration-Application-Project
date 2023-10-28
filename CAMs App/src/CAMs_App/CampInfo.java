@@ -2,18 +2,21 @@ package CAMs_App;
 
 import java.util.*;
 
+import CAMs_App.User.Faculty;
+
 public class CampInfo {
     private String campName;
-    private int campDate;
-    private int regCloseDate;
-    // open to own school or NTU
+    private String campDate;
+    private String regCloseDate;
+    private Faculty userGroup;
     private String location;
     private int totalSlots;
-    private int[] campCommitteeSlots = new int[10];
+    private int campCommitteeSlots;
     private String description;
     private String staffInCharge;
+    private Boolean visibility;
 
-    public CampInfo(String campName, int campDate, int regCloseDate, String location, int totalSlots, int[]campCommitteeSlots, String description, String staffInCharge){
+    public CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -32,13 +35,18 @@ public class CampInfo {
         return true;
     }
 
-    public boolean setCampDate(int campDate){
+    public boolean setCampDate(String campDate){
         this.campDate = campDate;
         return true;
     }
 
-    public boolean setRegCloseDate(int regCloseDate){
+    public boolean setRegCloseDate(String regCloseDate){
         this.regCloseDate = regCloseDate;
+        return true;
+    }
+
+    public boolean setUserGroup(Faculty userGroup) {
+        this.userGroup = userGroup;
         return true;
     }
 
@@ -52,7 +60,7 @@ public class CampInfo {
         return true;
     }
 
-    public boolean setCampCommitteeSlots(int[] campCommitteeSlots){
+    public boolean setCampCommitteeSlots(int campCommitteeSlots){
         this.campCommitteeSlots = campCommitteeSlots;
         return true;
     }
@@ -67,17 +75,26 @@ public class CampInfo {
         return true;
     }
 
+    public boolean visibility(Boolean visibility){
+        this.visibility = visibility;
+        return true;
+    }
+
     public String getCampName(){
         return campName;
     }
         
-    public int getCampDate(){
+    public String getCampDate(){
             return campDate;
     } 
 
-    public int getRegCloseDate(){
+    public String getRegCloseDate(){
             return regCloseDate;
     } 
+
+    public Faculty getUserGroup() {
+        return userGroup;
+    }
 
     public String getLocation(){
             return location;
@@ -87,7 +104,7 @@ public class CampInfo {
             return totalSlots;
     } 
 
-    public int[] getCampCommitteeSlots(){
+    public int getCampCommitteeSlots(){
             return campCommitteeSlots;
     } 
 
@@ -97,5 +114,9 @@ public class CampInfo {
 
     public String getStaffInCharge() {
         return staffInCharge;
+    }
+
+    public Boolean getVisibility() {
+        return visibility;
     }
 }

@@ -3,11 +3,16 @@ package CAMs_App;
 public class User {
     private int userID;
     private String password;
-    private String faculty;
+    enum Faculty{
+        NIE, NBS, EEE, SOH, MAE, SCSE,
+        SPMS, SSS, CCEB, LKC, SBS, CEE,
+        MSE, WKWSOC, ADM, ASE, SCBE;
+    };
+
     public User(int userID, String password, String faculty){
         this.userID = userID;
         this.password = password;
-        this.faculty = faculty;
+        this.Faculty = faculty;
     }
 
     public void setUserID(int userID) {
