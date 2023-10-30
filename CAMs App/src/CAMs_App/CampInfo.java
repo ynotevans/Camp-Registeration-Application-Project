@@ -26,6 +26,7 @@ public class CampInfo {
         setCampCommitteeSlots(campCommitteeSlots);
         setDescription(description);
         setStaffInCharge(staffInCharge);
+        setNumberOfCampDays(numberOfCampDays);
     } 
 
 
@@ -83,7 +84,7 @@ public class CampInfo {
 
     public void setNumberOfCampDays(int numberOfCampDays) {
         this.numberOfCampDays = numberOfCampDays;
-        
+
     }
 
     public String getCampName(){
