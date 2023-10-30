@@ -11,7 +11,7 @@ public class Database {
         return -1;
     }
 
-    public static void addToDatabase(User user, ArrayList<User> database){
+    public static void addUserToDatabase(User user, ArrayList<User> database){
         int j = findUserPos(user, database);
         if (j!=-1) {
             database.set(j,user);
@@ -24,5 +24,25 @@ public class Database {
         return;
     }
 
-    
+     public static int findCampPos(Camp camp, ArrayList<User> database){
+        int j;
+        for (j=0;j<database.size();j++) {
+            if (database.get(j).getCampName() == camp.getCampName())
+                return j;
+        }
+        return -1;
+    }
+
+    public static void addCampToDatabase(Camp camp, ArrayList<User> database){
+        int j = findUserPos(camp, database);
+        if (j!=-1) {
+            database.set(j,camp);
+            System.out.println(camp.getCampName() + " successfully added.");
+            return;
+        }
+
+        database.add(camp);
+        System.out.println(camp.getCampName() + " successfully added.");
+        return;
+    }
 }
