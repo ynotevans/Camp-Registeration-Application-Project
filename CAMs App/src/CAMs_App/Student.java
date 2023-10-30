@@ -9,22 +9,23 @@ public class Student extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private ArrayList<Camp> attending = new ArrayList<>();
+	private ArrayList<Camp> camp_registered = new ArrayList<>();
+	
 	private Camp comitteeCamp = null;
 	
 	public void registerCamp (Camp camp, boolean comittee) {
 		if(comittee) {
 			comitteeCamp = camp;
-			attending.add(camp);
+			camp_registered.add(camp);
 		} else {
-			attending.add(camp);
+			camp_registered.add(camp);
 		}
 	}
 	
 	public void withdrawCamp (Camp camp) {
-		for(int i = 0; i < attending.size(); i++) {
-			if (attending.get(i) == camp) {
-				attending.remove(i);
+		for(int i = 0; i < camp_registered.size(); i++) {
+			if (camp_registered.get(i) == camp) {
+				camp_registered.remove(i);
 				//TODO ban list
 				comitteeCamp = comitteeCamp == camp ? null : comitteeCamp;
 				break;
@@ -38,8 +39,8 @@ public class Student extends User {
 	}
 	
 	public boolean checkDateClash (Camp camp) {
-		for(int i = 0; i < attending.size(); i++) {
-			if (attending.get(i).getCampInfo().getCampDate() == camp.getCampInfo().getCampDate()) {
+		for(int i = 0; i < camp_registered.size(); i++) {
+			if (camp_registered.get(i).getCampInfo().getCampDate() == camp.getCampInfo().getCampDate()) {
 				return true;
 			}
 		}
@@ -47,7 +48,7 @@ public class Student extends User {
 	}
 	
 	public ArrayList<Camp> getAttendingList () {
-		return attending;
+		return camp_registered;
 	}
 	
 	public Camp getComitteeCamp () {
