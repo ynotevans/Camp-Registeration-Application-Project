@@ -15,8 +15,9 @@ public class CampInfo {
     private String description;
     private String staffInCharge;
     private Boolean visibility;
+    private int numberOfCampDays;
 
-    public CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility){
+    public CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -75,9 +76,14 @@ public class CampInfo {
         return true;
     }
 
-    public boolean visibility(Boolean visibility){
+    public boolean setVisibility(Boolean visibility){
         this.visibility = visibility;
         return true;
+    }
+
+    public void setNumberOfCampDays(int numberOfCampDays) {
+        this.numberOfCampDays = numberOfCampDays;
+        
     }
 
     public String getCampName(){
@@ -85,11 +91,11 @@ public class CampInfo {
     }
         
     public String getCampDate(){
-            return campDate;
+        return campDate;
     } 
 
     public String getRegCloseDate(){
-            return regCloseDate;
+        return regCloseDate;
     } 
 
     public Faculty getUserGroup() {
@@ -97,15 +103,15 @@ public class CampInfo {
     }
 
     public String getLocation(){
-            return location;
+        return location;
     } 
 
     public int getTotalSlots(){
-            return totalSlots;
+        return totalSlots;
     } 
 
     public int getCampCommitteeSlots(){
-            return campCommitteeSlots;
+        return campCommitteeSlots;
     } 
 
     public String getDescription() {
@@ -118,5 +124,9 @@ public class CampInfo {
 
     public Boolean getVisibility() {
         return visibility;
+    }
+
+    public int getNumberOfCampDays() {
+        return numberOfCampDays;
     }
 }
