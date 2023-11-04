@@ -3,11 +3,26 @@ package CAMs_App;
 public class Enquiries {
     private String enquiry;
     private String answer;
-    private String inquirer;
-    private String answerer;
+    private int inquirer; //use student id better?
+    private int answerer; //staff id
     private Boolean processed;
     
-    public Enquiries(){};
+    public Enquiries(String enquiry , int inquirer){
+        this.enquiry = enquiry;
+        this.inquirer = inquirer;
+        this.answer = "Not processed yet";
+        this.answerer = -1;
+        this.processed = false;
+        
+    };
+
+    public void viewEnquiries(){
+        System.out.println("Inquirer:" + this.inquirer);
+        System.out.println("Enquiry: " + this.enquiry);
+
+        System.out.println("Answerer: " + this.answerer);
+        System.out.println("Answer: " + this.answer);
+    }
 
     public void setEnquiry(String enquiry) {
         this.enquiry = enquiry;
@@ -17,11 +32,11 @@ public class Enquiries {
         this.answer = answer;
     }
 
-    public void setInquirer(String inquirer) {
+    public void setInquirer(int inquirer) {
         this.inquirer = inquirer;
     }
 
-    public void setAnswerer(String answerer) {
+    public void setAnswerer(int answerer) {
         this.answerer = answerer;
     }
 
@@ -37,11 +52,11 @@ public class Enquiries {
         return answer;
     }
 
-    public String getInquirer() {
+    public int getInquirer() {
         return inquirer;
     }
 
-    public String getAnswerer() {
+    public int getAnswerer() {
         return answerer;
     }
 

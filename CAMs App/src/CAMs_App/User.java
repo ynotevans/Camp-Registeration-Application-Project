@@ -1,18 +1,20 @@
 package CAMs_App;
 
+import CAMs_App.enums.*;
+
 public class User {
     private int userID;
     private String password;
-    enum Faculty{
-        NIE, NBS, EEE, SOH, MAE, SCSE,
-        SPMS, SSS, CCEB, LKC, SBS, CEE,
-        MSE, WKWSOC, ADM, ASE, SCBE;
-    };
+    private Status status;
+    private Faculty faculty;
 
-    public User(int userID, String password, String faculty){
+    
+
+    public User(int userID, String password, Faculty faculty, Status status){
         this.userID = userID;
         this.password = password;
-        this.Faculty = faculty;
+        this.faculty = faculty;
+        this.status = status;
     }
 
     public void setUserID(int userID) {
@@ -23,7 +25,7 @@ public class User {
         this.password = password;
     }
 
-    public void setFaculty(String faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
 
@@ -36,7 +38,7 @@ public class User {
     }
 
     public String getFaculty() {
-        return faculty;
+        return faculty.toString();
     }
     
     

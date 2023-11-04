@@ -1,7 +1,5 @@
 package CAMs_App;
 import java.util.Scanner;
-import java.util.scanner;
-
 
 
 public class UI {

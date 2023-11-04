@@ -1,11 +1,11 @@
 package CAMs_App;
 
-import java.util.ArrayList;
-
+import java.util.*;
+import CAMs_App.enums.*;
 public class Student extends User {
-	
-	public Student(int userID, String password, String faculty) {
-		super(userID, password, faculty);
+	Scanner scan = new Scanner(System.in);
+	public Student(int userID, String password, Faculty faculty, Status status) {
+		super(userID, password, faculty, status);
 	}
 	
 	private ArrayList<Camp> camp_registered = new ArrayList<>();
@@ -13,10 +13,47 @@ public class Student extends User {
 	private Camp comitteeCamp = null;
 	private int points = 0;
 	
-	public void submitEnquiry() {return;}
-	public void viewEnquiry() {return;}
-	public void editEnquiry() {return;}
-	public void deleteEnquiry() {return;}
+	public Enquiries createQuery(){
+		System.out.println("Please write down your query: ");
+		String query = scan.next();
+		
+		Enquiries q = new Enquiries(query, this.getUserID());	
+		return q;
+	}
+
+	public void submitEnquiry(Camp camp,Enquiries q){
+		camp.addQuery(q);
+	}
+	public void viewEnquiry(Camp camp , Enquiries q){
+		if(q.getProcessed()){
+
+		}
+		else{
+			if(q.getInquirer() == this.getUserID()){
+				q.viewEnquiries();
+			}
+			else{
+				System.out.println("You do not have the permission to view the selected query!!");
+			}
+		}
+
+	}
+	public void editEnquiry() {
+
+	}
+
+	public void deleteEnquiry(Camp camp ,Enquiries q) {
+		if(q.getProcessed()){
+			System.out.println("Unable to delete processed queries");
+		}
+		else{
+			if(q.getInquirer() == this.getUserID()) camp.getQueryList().remove(q);
+			else{
+				System.out.println("You do not have the permisson to delete the selected query!!");
+			}
+		}
+
+	}
 	
 	public void registerCamp (Camp camp) {
 		if(camp_registered.contains(camp)) {	
@@ -57,7 +94,7 @@ public class Student extends User {
 	
 	public boolean checkDateClash (Camp camp) {
 		for(int i = 0; i < camp_registered.size(); i++) {
-			if (camp_registered.get(i).getCampInfo().getCampDate() == camp.getCampInfo().getCampDate()) {
+			if (camp_registered.get(i).getCampDate() == camp.getCampDate()) {
 				return true;
 			}
 		}
@@ -79,4 +116,5 @@ public class Student extends User {
 	public int getPoints() {
 		return points;
 	}
+
 }

@@ -1,7 +1,7 @@
 package CAMs_App;
 
 import java.util.*;
-
+import CAMs_App.enums.*;
 public class Staff extends User{
     Scanner sc = new Scanner(System.in);
     private CampInfo campInfo;
@@ -9,9 +9,9 @@ public class Staff extends User{
     private ArrayList <Camp> createdCamps = new ArrayList<>();
     private Suggestions suggestions;
 
-    public Staff(int userID, String password,String faculty) {
-        super(userID, password, faculty);
-        // TODO Auto-generated constructor stub
+    public Staff(int userID, String password,Faculty faculty,Status status) {
+        super(userID, password, faculty, status);
+    
     }
     public void createCamp (String campName,String dates,String registerDate,String availability,
     String location,int totalSlots,int campCommitteeSlots,String description,String staffInCharge){

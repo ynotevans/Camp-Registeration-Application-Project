@@ -2,8 +2,6 @@ package CAMs_App;
 
 import java.util.*;
 
-import CAMs_App.User.Faculty;
-
 public class CampInfo {
     private String campName;
     private String campDate;
@@ -17,7 +15,8 @@ public class CampInfo {
     private Boolean visibility;
     private int numberOfCampDays;
 
-    public CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
+    //constructor
+    CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -29,64 +28,57 @@ public class CampInfo {
         setNumberOfCampDays(numberOfCampDays);
     } 
 
+    //default constructor
+    CampInfo(){};
 
 
 
-    public boolean setCampName(String campName){
+    //setters
+    public void setCampName(String campName){
         this.campName = campName;
-        return true;
     }
 
-    public boolean setCampDate(String campDate){
+    public void setCampDate(String campDate){
         this.campDate = campDate;
-        return true;
     }
 
-    public boolean setRegCloseDate(String regCloseDate){
+    public void setRegCloseDate(String regCloseDate){
         this.regCloseDate = regCloseDate;
-        return true;
     }
 
-    public boolean setUserGroup(Faculty userGroup) {
+    public void setUserGroup(Faculty userGroup) {
         this.userGroup = userGroup;
-        return true;
     }
 
-    public boolean setLocation(String location){
+    public void setLocation(String location){
         this.location = location;
-        return true;
-    }
+        }
 
-    public boolean setTotalSlots(int totalSlots) {
+    public void setTotalSlots(int totalSlots) {
         this.totalSlots = totalSlots;
-        return true;
     }
 
-    public boolean setCampCommitteeSlots(int campCommitteeSlots){
+    public void setCampCommitteeSlots(int campCommitteeSlots){
         this.campCommitteeSlots = campCommitteeSlots;
-        return true;
     }
 
-    public boolean setDescription(String description){
+    public void setDescription(String description){
         this.description = description;
-        return true;
     }
 
-    public boolean setStaffInCharge(String staffInCharge){
+    public void setStaffInCharge(String staffInCharge){
         this.staffInCharge = staffInCharge;
-        return true;
     }
 
-    public boolean setVisibility(Boolean visibility){
+    public void setVisibility(Boolean visibility){
         this.visibility = visibility;
-        return true;
     }
 
     public void setNumberOfCampDays(int numberOfCampDays) {
         this.numberOfCampDays = numberOfCampDays;
-
     }
 
+    //getters
     public String getCampName(){
         return campName;
     }
