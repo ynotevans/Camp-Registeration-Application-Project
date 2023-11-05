@@ -47,7 +47,7 @@ public class Camp extends CampInfo{
         return this.committee;
     }
 
-    public ArrayList<Enquiries> getQueryList(){
+    public ArrayList<Enquiries> getEnquiryList(){
         return this.enquiries;
     }
 

@@ -4,7 +4,7 @@ import java.util.*;
 import CAMs_App.enums.*;
 public class Student extends User {
 	Scanner scan = new Scanner(System.in);
-	public Student(int userID, String password, Faculty faculty, Status status) {
+	Student(int userID, String password, Faculty faculty, Status status) {
 		super(userID, password, faculty, status);
 	}
 	
@@ -12,48 +12,6 @@ public class Student extends User {
 	private ArrayList<Camp> camp_withdrawn = new ArrayList<>();
 	private Camp comitteeCamp = null;
 	private int points = 0;
-	
-	public Enquiries createQuery(){
-		System.out.println("Please write down your query: ");
-		String query = scan.next();
-		
-		Enquiries q = new Enquiries(query, this.getUserID());	
-		return q;
-	}
-
-	public void submitEnquiry(Camp camp,Enquiries q){
-		camp.addQuery(q);
-	}
-	public void viewEnquiry(Camp camp , Enquiries q){
-		if(q.getProcessed()){
-
-		}
-		else{
-			if(q.getInquirer() == this.getUserID()){
-				q.viewEnquiries();
-			}
-			else{
-				System.out.println("You do not have the permission to view the selected query!!");
-			}
-		}
-
-	}
-	public void editEnquiry() {
-
-	}
-
-	public void deleteEnquiry(Camp camp ,Enquiries q) {
-		if(q.getProcessed()){
-			System.out.println("Unable to delete processed queries");
-		}
-		else{
-			if(q.getInquirer() == this.getUserID()) camp.getQueryList().remove(q);
-			else{
-				System.out.println("You do not have the permisson to delete the selected query!!");
-			}
-		}
-
-	}
 	
 	public void registerCamp (Camp camp) {
 		if(camp_registered.contains(camp)) {	
@@ -116,5 +74,59 @@ public class Student extends User {
 	public int getPoints() {
 		return points;
 	}
+	public void addPoints(){
+		this.points++;
+	}
+
+
+	//Enquiries
+	public Enquiries createQuery(){
+		System.out.println("Please write down your query: ");
+		String query = scan.next();
+		
+		Enquiries q = new Enquiries(query, this.getUserID());	
+		return q;
+	}
+
+	public void submitEnquiry(Camp camp,Enquiries q){
+		camp.addQuery(q);
+	}
+
+	public void viewEnquiry(Camp camp , Enquiries q){
+		if(q.getInquirer() != this.getUserID()){
+			System.out.println("Unable to view enquiry from other student");
+		}
+		else{
+			q.viewEnquiries();
+		}
+	}
+
+	public void editEnquiry(Camp camp , Enquiries q){
+		if(q.getInquirer() != this.getUserID()){
+			System.out.println("You are not allowed to edit enquiry made by other student!!");
+		}
+		else if(q.getProcessed()){
+			System.out.println("Enquiry has been processed");
+		}
+		else{
+			System.out.println("Original question: " + q.getEnquiry());
+			System.out.println("Edit: ");
+			q.setEnquiry(scan.next());
+		}
+	}
+
+	public void deleteEnquiry(Camp camp ,Enquiries q) {
+		if(q.getProcessed()){
+			System.out.println("Unable to delete processed queries");
+		}
+		else{
+			if(q.getInquirer() == this.getUserID()) camp.getEnquiryList().remove(q);
+			else{
+				System.out.println("You do not have the permisson to delete the selected query!!");
+			}
+		}
+
+	}
+	
 
 }

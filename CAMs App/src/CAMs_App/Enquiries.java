@@ -28,8 +28,10 @@ public class Enquiries {
         this.enquiry = enquiry;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(String answer , int answerer) {
         this.answer = answer;
+        this.answerer = answerer;
+        this.processed = true;
     }
 
     public void setInquirer(int inquirer) {

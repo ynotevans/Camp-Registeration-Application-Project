@@ -1,7 +1,7 @@
 package CAMs_App;
 
 import java.util.*;
-
+import CAMs_App.enums.*;
 public class CampInfo {
     private String campName;
     private String campDate;

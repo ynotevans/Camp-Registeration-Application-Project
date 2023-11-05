@@ -40,6 +40,7 @@ public class Staff extends User{
     public void deleteCamp(Camp camp){
         createdCamps.remove(camp);
     }
+
     public void toggleVisibility(Camp camp){
         System.out.println("Set visibility for "+camp+" (True/False):");
         boolean tV = sc.nextBoolean();
@@ -53,14 +54,36 @@ public class Staff extends User{
         return createdCamps;
     }
 
-    public void viewEnquiries(Camp camp){
-        enquiries.getEnquiry();
+
+    //Enquiries
+    //print all 
+    public void viewAllEnquiries(Camp camp){
+        for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+            System.out.println("Enquiry " + (i+1));
+            camp.getEnquiryList().get(i).viewEnquiries();
+            System.out.println("");
+        }
     }
-    public void replyEnquiries(Camp camp){
-        System.out.println("Enter enquiry");
-        String getenquiry = sc.next();
-        enquiries.setEnquiry(getenquiry);
+
+    //print 1
+    public void viewEnquiries(Camp camp , int index){
+        camp.getEnquiryList().get(index).viewEnquiries();
     }
+
+    public void replyEnquiries(Camp camp , int index){
+        Enquiries q = camp.getEnquiryList().get(index - 1);
+        if(!q.getProcessed()){
+            System.out.println("Reply to query: ");
+            String ans = sc.next();
+            q.setAnswer(ans, this.getUserID());
+        }
+        else{
+            System.out.println("This query has been processed...");
+        }
+     
+    }
+
+    //Suggestions
     public void viewSuggestions(Camp camp){
         suggestions.getSuggestion();
     }

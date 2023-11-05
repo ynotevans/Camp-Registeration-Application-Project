@@ -11,7 +11,7 @@ public class Database {
         return -1;
     }
 
-    public static Stirn
+   
 
     public static void addUserToDatabase(User user, ArrayList<User> database){
         int j = findUserPos(user, database);
