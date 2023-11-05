@@ -1,16 +1,25 @@
 package CAMs_App;
 
+import java.nio.file.FileAlreadyExistsException;
+
 public class Suggestions {
     private String suggestion;
-    private CampCompMem suggestBy;
+    private int suggestBy;  //UserID, use string?
     private Boolean processed;
     private Boolean accepted;
+
+    public Suggestions(String suggestion, int suggestBy){
+        this.suggestion = suggestion;
+        this.suggestBy = suggestBy;
+        this.processed = false;
+        this.accepted = false;
+    }
 
     public void setSuggestion(String suggestion) {
         this.suggestion = suggestion;
     }
     
-    public void setSuggestBy(CampCompMem suggestBy) {
+    public void setSuggestBy(int suggestBy) {
         this.suggestBy = suggestBy;
     }
 
@@ -26,7 +35,7 @@ public class Suggestions {
         return suggestion;
     }
 
-    public CampCompMem getSuggestBy() {
+    public int getSuggestBy() {
         return suggestBy;
     }
 

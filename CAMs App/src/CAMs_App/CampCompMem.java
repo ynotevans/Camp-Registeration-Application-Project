@@ -47,11 +47,53 @@ public class CampCompMem extends Student{
     Scanner scan = new Scanner(System.in);
     private ArrayList<String> suggestions = new ArrayList<>();
     
-    public void submitSuggestion(){};
+    public void submitSuggestion(){
+        Camp camp = this.getComitteeCamp();
+        System.out.println("Please provide your suggestion: ");
+        String suggest = scan.next();
+
+        Suggestions newSuggestions = new Suggestions(suggest, this.getUserID());
+        camp.addSuggestion(newSuggestions);
+    };
     
-    public void viewSuggestion(){};
+    public void viewSuggestion(Suggestions s){
+        if(s.getSuggestBy() == this.getUserID() && s.getProcessed() == false){
+            System.out.println("Your submitted suggestion is: " + s.getSuggestion());
+        }
+        else if(s.getProcessed() == true){
+            System.out.println("Your suggestion has been processed!!");
+        }
+        else{
+            System.out.println("No suggestion provided...");
+        }
+    };
     
-    public void editSuggestions(){};
+    public void editSuggestions(Suggestions s){
+        if(s.getSuggestBy() == this.getUserID() && s.getProcessed() == false){
+            System.out.println("Your submitted suggestion is: " + s.getSuggestion());
+            System.out.println("Please edit your suggestion: ");
+            String editSuggestions = scan.next();
+            s.setSuggestion(editSuggestions);
+        }
+        else if(s.getProcessed() == true){
+            System.out.println("Your suggestion has been processed!!");
+        }
+        else{
+            System.out.println("No suggestion provided...");
+        }
+    };
     
-    public void deleteSuggestion(){};
+    public void deleteSuggestion(Camp camp, Suggestions s){
+         if(s.getSuggestBy() == this.getUserID() && s.getProcessed() == false){
+            System.out.println("Deleting your suggestion...");
+            camp.getSuggestionList().remove(s);                          //need to modify again to check the index of the suggestion to be deleted
+            System.out.println("Successfully deleted. ");
+        }
+        else if(s.getProcessed() == true){
+            System.out.println("Your suggestion has been processed!!");
+        }
+        else{
+            System.out.println("No suggestion provided...");
+        }
+    };
 }

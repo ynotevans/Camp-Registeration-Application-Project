@@ -3,7 +3,7 @@ package CAMs_App;
 import CAMs_App.enums.*;
 
 public class User {
-    private int userID;
+    private int userID;       //UserID should be String?
     private String password;
     private Status status;
     private Faculty faculty;
