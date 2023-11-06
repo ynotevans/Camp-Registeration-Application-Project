@@ -1,6 +1,8 @@
 package CAMs_App;
 import java.util.Scanner;
 
+import CAMs_App.entity.User;
+
 
 public class UI {
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
-package CAMs_App;
+package CAMs_App.entity;
 
 import java.util.*;
+
 import CAMs_App.enums.*;
 public class Student extends User {
 	Scanner scan = new Scanner(System.in);

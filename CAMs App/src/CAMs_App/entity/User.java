@@ -1,4 +1,4 @@
-package CAMs_App;
+package CAMs_App.entity;
 
 import CAMs_App.enums.*;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class User {
         this.userID = userID;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -1,5 +1,8 @@
-package CAMs_App;
+package CAMs_App.data;
 import java.util.ArrayList;
+
+import CAMs_App.entity.Camp;
+import CAMs_App.entity.User;
 
 public class Database {
     public static int findUserPos(User user, ArrayList<User> database){

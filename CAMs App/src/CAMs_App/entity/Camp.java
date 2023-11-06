@@ -1,4 +1,4 @@
-package CAMs_App;
+package CAMs_App.entity;
 
 import java.util.ArrayList;
 
