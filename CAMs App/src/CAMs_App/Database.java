@@ -26,7 +26,7 @@ public class Database {
         return;
     }
 
-     public static int findCampPos(Camp camp, ArrayList<User> database){
+     public static int findCampPos(Camp camp, ArrayList<Camp> database){
         int j;
         for (j=0;j<database.size();j++) {
             if (database.get(j).getCampName() == camp.getCampName())
@@ -35,8 +35,8 @@ public class Database {
         return -1;
     }
 
-    public static void addCampToDatabase(Camp camp, ArrayList<User> database){
-        int j = findUserPos(camp, database);
+    public static void addCampToDatabase(Camp camp, ArrayList<Camp> database){
+        int j = findCampPos(camp, database);
         if (j!=-1) {
             database.set(j,camp);
             System.out.println(camp.getCampName() + " successfully added.");

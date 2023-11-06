@@ -54,5 +54,5 @@ public class Camp extends CampInfo{
     public ArrayList<Suggestions> getSuggestionList(){
         return this.suggestions;
     }
-
+    
 }
