@@ -1,11 +1,13 @@
 package CAMs_App.entity;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import CAMs_App.enums.*;
+
 public class CampInfo {
     private String campName;
-    private String campDate;
-    private String regCloseDate;
+    private LocalDateTime campDate;
+    private LocalDateTime regCloseDate;
     private Faculty userGroup;
     private String location;
     private int totalSlots;
@@ -14,9 +16,10 @@ public class CampInfo {
     private String staffInCharge;
     private Boolean visibility;
     private int numberOfCampDays;
+    private int remainingSlot;
 
     //constructor
-    CampInfo(String campName, String campDate, String regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
+    CampInfo(String campName, LocalDateTime campDate, LocalDateTime regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -26,6 +29,7 @@ public class CampInfo {
         setDescription(description);
         setStaffInCharge(staffInCharge);
         setNumberOfCampDays(numberOfCampDays);
+        setRemainingSlot(remainingSlot);
     } 
 
     //default constructor
@@ -38,11 +42,11 @@ public class CampInfo {
         this.campName = campName;
     }
 
-    public void setCampDate(String campDate){
+    public void setCampDate(LocalDateTime campDate){
         this.campDate = campDate;
     }
 
-    public void setRegCloseDate(String regCloseDate){
+    public void setRegCloseDate(LocalDateTime regCloseDate){
         this.regCloseDate = regCloseDate;
     }
 
@@ -78,16 +82,20 @@ public class CampInfo {
         this.numberOfCampDays = numberOfCampDays;
     }
 
+    public void setRemainingSlot(int remainingSlot) {
+        this.remainingSlot = remainingSlot;
+    }
+
     //getters
     public String getCampName(){
         return campName;
     }
         
-    public String getCampDate(){
+    public LocalDateTime getCampDate(){
         return campDate;
     } 
 
-    public String getRegCloseDate(){
+    public LocalDateTime getRegCloseDate(){
         return regCloseDate;
     } 
 
@@ -121,5 +129,9 @@ public class CampInfo {
 
     public int getNumberOfCampDays() {
         return numberOfCampDays;
+    }
+
+    public int getRemainingSlot() {
+        return remainingSlot;
     }
 }
