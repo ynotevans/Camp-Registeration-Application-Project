@@ -88,15 +88,15 @@ public class CampController extends StaffController {
 
     public void viewAttendeesList(Student student, ArrayList<User> database){
         for (int i = 0; i< database.size();i++){
-            if (Student.)
             System.out.println(database.get(i).getUserID());
         }
     }
 
     public void viewCommitteeList(ArrayList<User> database){
-        for (int i = 0; i< campDataBase.size();i++){
-            System.out.println(campDataBase.get(i).getCampName());
-        }
+        for (int i = 0; i< database.size();i++){
+            if (database.get(i)!= null) 
+                System.out.println(database.get(i).getUserID());
+        
     }
 
     public void updateRemainingSlot(){
