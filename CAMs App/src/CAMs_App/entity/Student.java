@@ -14,37 +14,41 @@ public class Student extends User {
 	private Camp comitteeCamp = null;
 	private int points = 0;
 	
-	public void registerCamp (Camp camp) {
+	public boolean registerCamp (Camp camp) {
 		if(camp_registered.contains(camp)) {	
 			System.out.println("Student has already registered for this camp.");
-			return;
+			return false;
 		}
 		if(camp_withdrawn.contains(camp)) {	
 			System.out.println("Student has already withdrawn from this camp.");
-			return;
+			return false;
 		}
 		if(comitteeCamp == camp) {
 			System.out.println("Student is already comittee of camp.");
-			return;
+			return false;
 		}
 		if(checkDateClash(camp)) {
 			System.out.println("There is a date clash.");
-			return;
+			return false;
 		}
 		camp_registered.add(camp);
+		System.out.println("Camp registered!");
+		return true;
 		
 	}
 	
-	public void withdrawCamp (Camp camp) {
+	public boolean withdrawCamp (Camp camp) {
 		for(int i = 0; i < camp_registered.size(); i++) {
 			if (camp_registered.get(i) == camp) {
 				camp_registered.remove(i);
 				camp_withdrawn.add(camp);
 				comitteeCamp = comitteeCamp == camp ? null : comitteeCamp;
-				break;
+				System.out.println("Camp withdrawn!");
+				return true;
 			}
 		}
 		System.out.println("Student is not registered to this camp.");
+		return false;
 	}
 	
 	public boolean isComittee () {
