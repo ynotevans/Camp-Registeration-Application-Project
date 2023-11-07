@@ -5,6 +5,7 @@ import CAMs_App.entity.Staff;
 import CAMs_App.entity.User;
 import CAMs_App.entity.Student;
 import CAMs_App.data.Database;
+import CAMs_App.enums.*;
 
 import java.util.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class CampController extends StaffController {
     Camp camp = new Camp();
     CampInfo campInfo = new CampInfo();
     Database db = new Database();
+    
 
    
     public CampController(){
@@ -86,25 +88,28 @@ public class CampController extends StaffController {
     
     }
 
-    public void viewAttendeesList(Student student, ArrayList<User> database){
+    public void viewAttendeesList(ArrayList<User> database){
         for (int i = 0; i< database.size();i++){
+            if (Status.student == database.get(i).getStatus())
             System.out.println(database.get(i).getUserID());
         }
     }
 
+    // not sure how to check through db if the student is committee since the db is just the users
     public void viewCommitteeList(ArrayList<User> database){
         for (int i = 0; i< database.size();i++){
-            if (database.get(i)!= null) 
-                System.out.println(database.get(i).getUserID());
+           if (Status.student == database.get(i).getStatus())
+            System.out.println(database.get(i).getUserID());
+        }
+    }
+
+    public void updateRemainingSlot(ArrayList<Camp> campDataBase){
+        for (int i = 0; i< campDataBase.size();i++)
+              System.out.println(campDataBase.get(i).getRemainingSlot());
+    }
+
+    public void checkWithdrawBefore(Student student){
         
-    }
-
-    public void updateRemainingSlot(){
-
-    }
-
-    public void checkWithdrawBefore(){
-
     }
 }
 
