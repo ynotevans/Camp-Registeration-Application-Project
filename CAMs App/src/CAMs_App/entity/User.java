@@ -32,6 +32,10 @@ public class User {
         this.faculty = faculty;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public int getUserID() {
         return userID;
     }
@@ -42,6 +46,10 @@ public class User {
 
     public String getFaculty() {
         return faculty.toString();
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void changePassword(){
