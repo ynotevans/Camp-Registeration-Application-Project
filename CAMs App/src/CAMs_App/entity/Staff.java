@@ -10,6 +10,8 @@ public class Staff extends User{
     private ArrayList <Camp> createdCamps = new ArrayList<>();
     private Suggestions suggestions;
 
+
+    
     public Staff(int userID, String password,Faculty faculty,Status status) {
         super(userID, password, faculty, status);
     

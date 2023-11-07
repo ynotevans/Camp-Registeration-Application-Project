@@ -2,6 +2,8 @@ package CAMs_App.controllers;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.CampInfo;
 import CAMs_App.entity.Staff;
+import CAMs_App.entity.User;
+import CAMs_App.entity.Student;
 import CAMs_App.data.Database;
 
 import java.util.*;
@@ -13,7 +15,7 @@ public class CampController extends StaffController {
     CampInfo campInfo = new CampInfo();
     Database db = new Database();
 
-
+   
     public CampController(){
         super();
     };
@@ -50,7 +52,7 @@ public class CampController extends StaffController {
                             "\n Remaining Slots for the camp: " + camp.getRemainingSlot()); 
     }
 
-    public boolean createCamp(Camp camp){
+    public boolean createCamp(){
         if (Database.findCamp(camp, db.getCampDataBase())==false) {
             Database.addCampToDatabase(camp, db.getCampDataBase());
             return true;
@@ -58,7 +60,7 @@ public class CampController extends StaffController {
         return false;
     }
 
-    public boolean deleteCamp(Camp camp){
+    public boolean deleteCamp(){
         if (Database.findCamp(camp,db.getCampDataBase())==true){
             Database.removeCampFromDatabase(camp,db.getCampDataBase());
             return true;    
@@ -66,27 +68,35 @@ public class CampController extends StaffController {
         return false;
     }
 
-    public boolean editCamp(Camp camp){
+    public boolean editCamp(){
         // super.editCamp(camp);
         return true;
     }
 
     // view functions
 
-    public void viewCamps(){
-        System.out.println(); // prints out all the camp names
+    public void viewCamps(ArrayList<Camp> campDataBase){
+        for (int i = 0; i< campDataBase.size();i++){
+            System.out.println(campDataBase.get(i).getCampName());
+        }
     }
 
     public void viewStaffCreatedCamp(String staffID){
-        // System.out.println(Camp.getCampName());
+    
+    
     }
 
-    public void viewAttendeesList(){
-        
+    public void viewAttendeesList(Student student, ArrayList<User> database){
+        for (int i = 0; i< database.size();i++){
+            if (Student.)
+            System.out.println(database.get(i).getUserID());
+        }
     }
 
-    public void viewCommitteeList(){
-        
+    public void viewCommitteeList(ArrayList<User> database){
+        for (int i = 0; i< campDataBase.size();i++){
+            System.out.println(campDataBase.get(i).getCampName());
+        }
     }
 
     public void updateRemainingSlot(){
