@@ -7,6 +7,7 @@ import CAMs_App.enums.*;
 
 public class Camp extends CampInfo{
 
+    
     private ArrayList<Student> attendees = new ArrayList<>();
     private ArrayList<Student> committee = new ArrayList<>();
     private ArrayList<Enquiries> enquiries = new ArrayList<>();
@@ -19,9 +20,10 @@ public class Camp extends CampInfo{
     }
 
     //default constructor
-    Camp(){
+    public Camp(){
         super();
     }
+
 
     public void addAttendees(Student attendee){
         this.attendees.add(attendee);

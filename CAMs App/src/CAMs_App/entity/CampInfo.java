@@ -19,7 +19,7 @@ public class CampInfo {
     private int remainingSlot;
 
     //constructor
-    CampInfo(String campName, LocalDateTime campDate, LocalDateTime regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+    public CampInfo(String campName, LocalDateTime campDate, LocalDateTime regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -33,7 +33,7 @@ public class CampInfo {
     } 
 
     //default constructor
-    CampInfo(){};
+    public CampInfo(){};
 
 
 
