@@ -8,7 +8,7 @@ import CAMs_App.data.Database;
 import CAMs_App.enums.*;
 
 import java.util.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class CampController {
     Scanner sc = new Scanner(System.in);
@@ -35,8 +35,8 @@ public class CampController {
     }
 
     public boolean checkRegisterDeadline(Camp camp){
-        // get the current date time
-        LocalDateTime today = LocalDateTime.now();
+        // get the current date
+        LocalDate today = LocalDate.now();
 
         // check if deadline is over 
         if (camp.getRegCloseDate().isBefore(today)){

@@ -1,6 +1,6 @@
 package CAMs_App.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import CAMs_App.enums.*;
@@ -14,7 +14,7 @@ public class Camp extends CampInfo{
     private ArrayList<Suggestions> suggestions = new ArrayList<>();
     
     //constructor
-    Camp(String campName , LocalDateTime campDate , LocalDateTime regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+    Camp(String campName , LocalDate campDate , LocalDate regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
              super(campName , campDate , regCloseDate ,  userGroup , location, totalSlots, campCommitteeSlots, description,  staffInCharge,  visibility, numberOfCampDays, remainingSlot);
        
     }
