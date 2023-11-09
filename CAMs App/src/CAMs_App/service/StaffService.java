@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
@@ -142,14 +143,27 @@ public class StaffService{
 
     // staff can view and reply enquiries to the students in the camp she created
     public void viewAllEnquiries(Camp camp){
-        for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+        if(camp.getStaffInCharge() == AuthData.getCurrentUser().getUserID()){
+            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
             System.out.println("Enquiry " + (i+1));
             camp.getEnquiryList().get(i).viewEnquiries();
             System.out.println("");
         }
+        }
+        else{
+            System.out.println("Unable to view enquiry list of camp created by other staff");
+        }
+      
     }
+
     public void viewEnquiries(Camp camp , int index){
-        camp.getEnquiryList().get(index).viewEnquiries();
+        if(camp.getStaffInCharge() == AuthData.getCurrentUser().getUserID()){
+             camp.getEnquiryList().get(index).viewEnquiries();
+        }
+        else{
+            System.out.println("Unable to view enquiry of camp created by other staff");
+        }
+       
     }
 
     public void replyEnquiries(Camp camp , int index){
@@ -157,13 +171,16 @@ public class StaffService{
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
             String ans = sc.next();
-            q.setAnswer(ans, this.getUserID());
+            q.setAnswer(ans, AuthData.getCurrentUser().getUserID());
+            System.out.println("Query processed");
         }
         else{
-            System.out.println("This query has been processed...");
+            System.out.println("This query has already been processed...");
         }
      
     }
+
+
     // can view and approve suggestions made
     public void viewSuggestions(Camp camp){
         camp.getSuggestionList(); 

@@ -20,10 +20,10 @@ public class CampCommitteeService {
 	}
 	
 	public void addPoints() {
-		
+		user.setPoints(user.getPoints() + 1);
 	}
 	
-	//Enquiries
+	
     public void viewAllEnquiries(){
         Camp camp = user.getComitteeCamp();
         ArrayList<Enquiries> q = camp.getEnquiryList();
@@ -33,23 +33,29 @@ public class CampCommitteeService {
         }
     }
 
-    //view 1
+    
     public void viewEnquiry(int index){
        Camp camp = user.getComitteeCamp();
        camp.getEnquiryList().get(index).viewEnquiries();
     }
     
     
-    public void replyEnquiry(Enquiries q){
+    public void replyEnquiry(int index){
+         Camp camp = user.getComitteeCamp();
+         Enquiries q = camp.getEnquiryList().get(index - 1);
+
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
             String ans = sc.next();
             q.setAnswer(ans , user.getUserID());
-            user.addPoints();
+            addPoints();
+            System.out.println("Query processed");
+            System.out.println("1 point awarded");
+            System.out.println("Current point(s): " + user.getPoints());
 
         }
         else{
-            System.out.println("This query has been processed...");
+            System.out.println("This query has already been processed...");
         }
     }
     

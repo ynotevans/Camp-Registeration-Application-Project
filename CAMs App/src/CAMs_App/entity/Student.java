@@ -7,7 +7,7 @@ public class Student extends User {
 	private boolean isCommittee;
 	private ArrayList<String> registeredCamp;
 	private ArrayList<String> withdrawnCamp;
-	private String committeeCamp;
+	private Camp committeeCamp;
 	private int points;
 	
 	public Student(String userID, String password, Faculty faculty, Status status) {
@@ -51,11 +51,11 @@ public class Student extends User {
 		withdrawnCamp = list;
 	}
 	
-	public String getComitteeCamp() {
+	public Camp getComitteeCamp() {
 		return committeeCamp;
 	}
 	
-	public void setCommitteeCamp(String camp) {
+	public void setCommitteeCamp(Camp camp) {
 		committeeCamp = camp;
 	}
 
