@@ -251,7 +251,7 @@ public class Database {
     //             return true;
     //     }
     //     return false;
-    // }
+    // }    
 
     // public static void addCampToDatabase(Camp camp, ArrayList<Camp> campDataBase){
     //     int j = findCampPos(camp, campDataBase);

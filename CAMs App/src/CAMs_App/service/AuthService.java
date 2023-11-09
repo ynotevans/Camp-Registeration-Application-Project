@@ -7,6 +7,8 @@ public abstract class AuthService {
 
     public abstract boolean login(String UserID, String password);
 
+    public AuthService(){};
+
     public boolean logout(){
         AuthData.setCurrentUser(null);
         return true;
@@ -18,7 +20,6 @@ public abstract class AuthService {
         
         if (!user.getPassword().equals(password))
             return false;
-            
         return true;
     }
 }
