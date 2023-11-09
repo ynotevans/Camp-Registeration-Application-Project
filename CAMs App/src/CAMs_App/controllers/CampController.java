@@ -10,16 +10,21 @@ import CAMs_App.enums.*;
 import java.util.*;
 import java.time.LocalDateTime;
 
-public class CampController extends StaffController {
+public class CampController {
     Scanner sc = new Scanner(System.in);
-    Camp camp = new Camp();
-    CampInfo campInfo = new CampInfo();
-    Database db = new Database();
+
+    // Camp camp = new Camp();
+    // CampInfo campInfo = new CampInfo();
+    // controller shld control all camps
+    
+    
+    // Database db = new Database();
     
 
-   
+   // staff controller will call this camp controller 
+   // need to check 
     public CampController(){
-        super();
+    
     };
     
     public boolean isCampFull(Camp camp){
@@ -55,7 +60,7 @@ public class CampController extends StaffController {
     }
 
     public boolean createCamp(){
-        if (Database.findCamp(camp, db.getCampDataBase())==false) {
+        if (Database.findCamp(camp, Database.getCampDataBase())==false) {
             Database.addCampToDatabase(camp, db.getCampDataBase());
             return true;
         }

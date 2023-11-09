@@ -7,8 +7,8 @@ import CAMs_App.entity.User;
 
 public class Database {
 
-    private ArrayList<User> database = new ArrayList<>();
-    private ArrayList<Camp> campDataBase = new ArrayList<>();
+    private static ArrayList<User> database = new ArrayList<>();
+    private static ArrayList<Camp> campDataBase = new ArrayList<>();
 
     public ArrayList<Camp> getCampDataBase() {
         return campDataBase;
@@ -18,6 +18,16 @@ public class Database {
         return database;
     }
 
+    public static void setCampDataBase(ArrayList<Camp> campDataBase) {
+        Database.campDataBase = campDataBase;
+    }
+
+    public static void setDatabase(ArrayList<User> database) {
+        Database.database = database;
+    }
+
+
+    // to incorporate service 
     public static int findUserPos(User user, ArrayList<User> database){
         int j;
         for (j=0;j<database.size();j++) {
