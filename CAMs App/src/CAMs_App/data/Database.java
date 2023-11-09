@@ -41,7 +41,7 @@ public class Database {
 	public static boolean saveData() {
 		Database.setStudentsData(studentsData);
 		Database.setstaffData(staffData);
-		Database.setCampComMemData(campCompMemData);
+		Database.setCampCompMemData(campCompMemData);
 		Database.setCampData(campData);
 		Database.setEnquiriesData(enquiriesData);
         Database.setEnquiriesData(enquiriesData);
@@ -112,7 +112,7 @@ public class Database {
 	 *                            key and {@link CampCompMem} objects as the
 	 *                            value
 	 */
-	public static void setCampComMemData(Map<String, CampCompMem> campCompMemData) {
+	public static void setCampCompMemData(Map<String, CampCompMem> campCompMemData) {
 		Database.campCompMemData = campCompMemData;
 		// fileDataService.exportFYPCoordinatorData(filePathsMap.get("user"), filePathsMap.get("supervisor"),
 		// 		filePathsMap.get("fypcoordinator"), fypcoordinatorsData);
@@ -185,9 +185,6 @@ public class Database {
 		// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
 		// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
 	}
-
-
-
 
 /*
     // private static ArrayList<User> database = new ArrayList<>();
