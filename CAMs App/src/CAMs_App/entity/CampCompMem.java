@@ -29,5 +29,17 @@ public class CampCompMem extends Student{
     public void setPosition(String post) {
     	position = post;
     }
+
+	@Override
+	public void setUserID(String userID) {
+		// TODO Auto-generated method stub
+		super.setUserID(userID);
+	}
+
+	@Override
+	public String getUserID() {
+		// TODO Auto-generated method stub
+		return super.getUserID();
+	}
     
 }
