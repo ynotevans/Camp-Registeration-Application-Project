@@ -1,6 +1,6 @@
 package CAMs_App.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class StaffService{
         System.out.println("Staff in Charge: "+camp.getStaffInCharge());
     }
     // create, edit, delete camp
-    public void createCamp (String campName,LocalDateTime dates,LocalDateTime registerDate,String availability,
+    public void createCamp (String campName,LocalDate dates,LocalDate registerDate,String availability,
     String location,int totalSlots,int campCommitteeSlots,String description,String staffInCharge){
         Camp camp = new Camp();
         camp.setCampName(campName);
@@ -70,9 +70,9 @@ public class StaffService{
                     String start = sc.next();
                     System.out.println("Enter ending date in dd-mm-yyyy format:");
                     String end = sc.next();
-                    LocalDateTime startDateTime = LocalDateTime.parse(start,formatter);
+                    LocalDate startDateTime = LocalDate.parse(start,formatter);
                     System.out.println(startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    LocalDateTime endDateTime = LocalDateTime.parse(end,formatter);
+                    LocalDate endDateTime = LocalDate.parse(end,formatter);
                     System.out.println(endDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     int numberofDays = (int)ChronoUnit.DAYS.between(startDateTime, endDateTime);
                     camp.setNumberOfCampDays(numberofDays);
@@ -81,7 +81,7 @@ public class StaffService{
                 case 3:
                     System.out.println("Edit camp registeration closing date");
                     System.out.println("Enter new closing date:");
-                    LocalDateTime regDateTime = LocalDateTime.parse(sc.next(),formatter);
+                    LocalDate regDateTime = LocalDate.parse(sc.next(),formatter);
                     camp.setRegCloseDate(regDateTime);
                     System.out.println("Camp new closing date: "+camp.getRegCloseDate());
                     break;

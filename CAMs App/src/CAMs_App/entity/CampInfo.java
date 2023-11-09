@@ -1,13 +1,13 @@
 package CAMs_App.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
 import CAMs_App.enums.*;
 
 public class CampInfo {
     private String campName;
-    private LocalDateTime campDate;
-    private LocalDateTime regCloseDate;
+    private LocalDate campDate;
+    private LocalDate regCloseDate;
     private Faculty userGroup;
     private String location;
     private int totalSlots;
@@ -19,7 +19,7 @@ public class CampInfo {
     private int remainingSlot;
 
     //constructor
-    public CampInfo(String campName, LocalDateTime campDate, LocalDateTime regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+    public CampInfo(String campName, LocalDate campDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
@@ -42,11 +42,11 @@ public class CampInfo {
         this.campName = campName;
     }
 
-    public void setCampDate(LocalDateTime campDate){
+    public void setCampDate(LocalDate campDate){
         this.campDate = campDate;
     }
 
-    public void setRegCloseDate(LocalDateTime regCloseDate){
+    public void setRegCloseDate(LocalDate regCloseDate){
         this.regCloseDate = regCloseDate;
     }
 
@@ -91,11 +91,11 @@ public class CampInfo {
         return campName;
     }
         
-    public LocalDateTime getCampDate(){
+    public LocalDate getCampDate(){
         return campDate;
     } 
 
-    public LocalDateTime getRegCloseDate(){
+    public LocalDate getRegCloseDate(){
         return regCloseDate;
     } 
 
