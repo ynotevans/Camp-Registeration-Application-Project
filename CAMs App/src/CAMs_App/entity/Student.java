@@ -10,7 +10,7 @@ public class Student extends User {
 	private String committeeCamp;
 	private int points;
 	
-	public Student(int userID, String password, Faculty faculty, Status status) {
+	public Student(String userID, String password, Faculty faculty, Status status) {
 		super(userID, password, faculty, status);
 		isCommittee = false;
 		registeredCamp = new ArrayList<String>();

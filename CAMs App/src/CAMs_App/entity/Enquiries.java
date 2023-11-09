@@ -3,15 +3,15 @@ package CAMs_App.entity;
 public class Enquiries {
     private String enquiry;
     private String answer;
-    private int inquirer; //use student id better?
-    private int answerer; //staff id
+    private String inquirer; 
+    private String answerer; 
     private Boolean processed;
     
-    public Enquiries(String enquiry , int inquirer){
+    public Enquiries(String enquiry , String inquirer){
         this.enquiry = enquiry;
         this.inquirer = inquirer;
         this.answer = "Not processed yet";
-        this.answerer = -1;
+        this.answerer = "NULL";
         this.processed = false;
         
     };
@@ -28,17 +28,17 @@ public class Enquiries {
         this.enquiry = enquiry;
     }
 
-    public void setAnswer(String answer , int answerer) {
+    public void setAnswer(String answer , String answerer) {
         this.answer = answer;
         this.answerer = answerer;
         this.processed = true;
     }
 
-    public void setInquirer(int inquirer) {
+    public void setInquirer(String inquirer) {
         this.inquirer = inquirer;
     }
 
-    public void setAnswerer(int answerer) {
+    public void setAnswerer(String answerer) {
         this.answerer = answerer;
     }
 
@@ -54,11 +54,11 @@ public class Enquiries {
         return answer;
     }
 
-    public int getInquirer() {
+    public String getInquirer() {
         return inquirer;
     }
 
-    public int getAnswerer() {
+    public String getAnswerer() {
         return answerer;
     }
 
