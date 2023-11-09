@@ -9,8 +9,8 @@ public class CampCompMem extends Student{
 	private ArrayList<Suggestions> suggestions;
 	private String position;
 	
-	CampCompMem(Student student, String post) {
-		super(student.getUserID(), student.getPassword(), student.getFaculty(), student.getStatus());
+	public CampCompMem(Student student, String post) {
+		super(student.getUserID(), student.getPassword(), Faculty.valueOf(student.getFaculty()), student.getStatus());
 		position = post;
 		suggestions = new ArrayList<>();
 	}
