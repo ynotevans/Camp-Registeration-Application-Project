@@ -5,7 +5,6 @@ import java.util.*;
 import CAMs_App.enums.*;
 
 public class CampCompMem extends Student{
-    //constructor
 	private ArrayList<Suggestions> suggestions;
 	private String position;
 	
