@@ -24,8 +24,12 @@ public class User {
         this.userID = userID;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public boolean setPassword(String oldPassword, String newPassword) {
+        if (!oldPassword.equals(this.password))
+            return false;
+           
+        this.password = newPassword;
+        return true;
     }
 
     public void setFaculty(Faculty faculty) {
@@ -51,31 +55,4 @@ public class User {
     public Status getStatus() {
         return status;
     }
-
-    public void changePassword(){
-        System.out.println("Changing password...");
-        System.out.println("Enter old password: ");
-        String oldPwd = scan.next();
-        if(oldPwd == this.getPassword()){
-             System.out.println("New password: ");
-             String newPwd1 = scan.next();
-
-             System.out.println("Confirm new password");
-             String newPwd2 = scan.next();
-             
-             while(newPwd1 != newPwd2){
-                System.out.println("Password deosn't match. Reenter your new password");
-                System.out.println("New Password"); 
-                newPwd1 = scan.next();
-                System.out.println("Confirm Password: ");
-                newPwd2 = scan.next();
-                }
-            
-            setPassword(newPwd2);
-            System.out.println("Password updated..");
-        }
-        else{
-            System.out.println("Wrong password!!Attempt failed");
-        }
-    }      
 }
