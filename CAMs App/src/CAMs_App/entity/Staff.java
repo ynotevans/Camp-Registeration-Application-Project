@@ -2,25 +2,14 @@ package CAMs_App.entity;
 
 import CAMs_App.enums.*;
 public class Staff extends User{
-    public Staff(String userID, String password,Faculty faculty,Status status) {
-        super(userID, password, faculty, status);
+    public Staff(String userID, String password,Faculty faculty) {
+        super(userID, password, faculty);
+        super.setStatus(Status.staff);
     }
     @Override
     public void setFaculty(Faculty faculty) {
         // TODO Auto-generated method stub
         super.setFaculty(faculty);
-    }
-
-    @Override
-    public void setPassword(String password) {
-        // TODO Auto-generated method stub
-        super.setPassword(password);
-    }
-
-    @Override
-    public void setStatus(Status status) {
-        // TODO Auto-generated method stub
-        super.setStatus(status);
     }
 
     @Override

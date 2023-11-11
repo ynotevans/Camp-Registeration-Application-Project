@@ -1,11 +1,8 @@
 package CAMs_App.entity;
 
 import CAMs_App.enums.*;
-import java.util.Scanner;
 
 public class User {
-     Scanner scan = new Scanner(System.in);
-
     private String userID;       
     private String password;
     private Status status;
@@ -13,11 +10,9 @@ public class User {
 
     
 
-    public User(String userID, String password, Faculty faculty, Status status){
+    public User(String userID, String password, Faculty faculty){
         this.userID = userID;
         this.password = password;
-        this.faculty = faculty;
-        this.status = status;
     }
 
     public void setUserID(String userID) {
@@ -36,8 +31,9 @@ public class User {
         this.faculty = faculty;
     }
 
-    public void setStatus(Status status) {
+    public boolean setStatus(Status status) {
         this.status = status;
+        return true;
     }
 
     public String getUserID() {

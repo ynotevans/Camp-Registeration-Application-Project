@@ -10,8 +10,9 @@ public class Student extends User {
 	private Camp committeeCamp;
 	private int points;
 	
-	public Student(String userID, String password, Faculty faculty, Status status) {
-		super(userID, password, faculty, status);
+	public Student(String userID, String password, Faculty faculty) {
+		super(userID, password, faculty);
+		super.setStatus(Status.student);
 		isCommittee = false;
 		registeredCamp = new ArrayList<String>();
 		withdrawnCamp  = new ArrayList<String>();
