@@ -41,7 +41,7 @@ public class Database {
 	public static boolean saveData() {
 		Database.setStudentsData(studentsData);
 		Database.setstaffData(staffData);
-		Database.setCampCompMemData(campCompMemData);
+		Database.setCampCompMemData(campCompMemData); // need to check whether this one needed
 		Database.setCampData(campData);
 		// Database.setEnquiriesData(enquiriesData);
         // Database.setEnquiriesData(enquiriesData);

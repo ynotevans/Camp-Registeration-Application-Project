@@ -94,18 +94,9 @@ public class HelperService {
                 continue;
             
             // String userID = userInfoMap.get("userID");
-            String password = userInfoMap.get("password");
-            String faculty = userInfoMap.get("faculty");
-            String status = userInfoMap.get("status");
-                
-            boolean isCommittee = false;
-            for (String[] studentRow : studentsRows){
-                if (!studentRow[0].equals(userID))
-                    continue;
-
-                isCommittee = Boolean.parseBoolean(studentRow[1]);
-            }            
-            
+            // String password = userInfoMap.get("password");
+            // String faculty = userInfoMap.get("faculty");
+            // String status = userInfoMap.get("status");
         
         }
         return studentsMap;
