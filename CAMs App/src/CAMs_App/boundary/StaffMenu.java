@@ -2,20 +2,23 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
+import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
-import CAMs_App.data.Database;
 import CAMs_App.entity.User;
 import CAMs_App.service.HelperService;
 
 public class StaffMenu implements Menu{
     User currentStaff = AuthData.getCurrentUser();
+    StaffController staffController = new StaffController();
 
     public void printMenu(){
         HelperService.clearScreen();
-        System.out.println("Welcome back"+ currentStaff.getUserID() + "...");
-        System.out.println("(1) Login");
-        System.out.println("(2) Change password");
-        System.out.println("(3) Exit\n");
+        System.out.println("Welcome back "+ currentStaff.getUserID() + "!!!");
+        System.out.println("Available actions for you: ");
+        System.out.println("(1) Create new camp");
+        System.out.println("(2) View all camps");
+        System.out.println("(3) View camp(s) created by you");
+        System.out.println("(4) Logout\n");
     }
 
     
@@ -29,18 +32,23 @@ public class StaffMenu implements Menu{
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1:
-                    System.out.println("Prompt to Login...");
-                    
+                case 1:    //create camp
+                    staffController.createCamp();
                     break;
 
-                case 2:
-                    System.out.println("Prompt to Change Password...");
+                case 2:    //view all camp
+                    staffController.viewAllCamp();
                     break;
                 
-                case 3:
-                    System.out.println("Prompt to Exit...");
-                    System.exit(0);
+                case 3:    //view staff created camp
+                    staffController.viewCreatedCamp(currentStaff.getUserID());
+
+                    CampMenu campMenu = new CampMenu();
+                    campMenu.viewApp();
+                    break;
+                
+                case 4:    //logout
+                    staffController.logout();
                     break;
                 
                 default:
@@ -48,7 +56,7 @@ public class StaffMenu implements Menu{
                     break;
             }
 
-        }while(choice != 3);
+        }while(choice != 4);
     
         sc.close();
 
