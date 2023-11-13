@@ -22,7 +22,7 @@ public class Database {
 	
 	private static Map<String, CampCompMem> campCompMemData = new HashMap<String, CampCompMem>();
 
-	private static Map<Integer, Camp> campData = new HashMap<Integer, Camp>();
+	private static Map<String, Camp> campData = new HashMap<String, Camp>();
 
 	// private static Map<Integer, Suggestions> suggestionsData = new HashMap<Integer, Suggestions>();
 
@@ -125,7 +125,7 @@ public class Database {
 	 * @return a {@link Map} containing Camp ID as the key and {@link Camp}
 	 *         objects as the value
 	 */
-	public static Map<Integer, Camp> getCampData() {
+	public static Map<String, Camp> getCampData() {
 		return Database.campData;
 	}
 
@@ -135,7 +135,7 @@ public class Database {
 	 * @param projectsData a {@link Map} containing project ID as the key and
 	 *                     {@link Camp} objects as the value
 	 */
-	public static void setCampData(Map<Integer, Camp> campData) {
+	public static void setCampData(Map<String, Camp> campData) {
 		Database.campData = campData;
 		// fileDataService.exportProjectData(filePathsMap.get("project"), projectsData);
 	}
