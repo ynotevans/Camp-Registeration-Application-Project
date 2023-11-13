@@ -7,7 +7,6 @@ public abstract class AuthService {
 
     public abstract boolean login(String UserID, String password);
 
-    public AuthService(){};
 
     public boolean logout(){
         AuthData.setCurrentUser(null);

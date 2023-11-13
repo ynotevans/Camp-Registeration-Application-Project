@@ -3,6 +3,7 @@ package CAMs_App.boundary;
 import java.security.cert.TrustAnchor;
 import java.util.Scanner;
 
+import CAMs_App.controllers.UserController;
 import CAMs_App.service.AuthStaffService;
 import CAMs_App.service.AuthStudentService;
 import CAMs_App.service.HelperService;
@@ -21,8 +22,7 @@ public class LoginMenu implements Menu {
         this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
-        boolean authenticated = false;
-        String userID, password;
+        UserController userController=new UserController();
 
         do{
             System.out.print("Enter ur selection: ");
@@ -30,48 +30,15 @@ public class LoginMenu implements Menu {
 
             switch (choice) {
                 case 1:
-                    AuthStaffService authStaffService = new AuthStaffService();
-                    sc.nextLine();
-                    System.out.print("User ID: ");
-                    userID = sc.nextLine();
-                    System.out.print("Password: ");
-                    password = sc.nextLine();
-                    authenticated = authStaffService.login(userID, password);
+                    userController.login(true);
 
-                    while(authenticated != true){               
-                        System.out.println("Wrong UserID or Password, please enter again...");
-                        System.out.print("User ID: ");
-                        userID = sc.nextLine();
-                        System.out.print("Password: ");
-                        password = sc.nextLine();
-                        authenticated = authStaffService.login(userID, password);
-                    }
-
-                    System.out.println("Login success");
                     StaffMenu staffMenu = new StaffMenu();
                     staffMenu.viewApp();
                     
                     break;
 
                 case 2:
-                    AuthStudentService authStudentService = new AuthStudentService();
-                    sc.nextLine();
-                    System.out.print("User ID: ");
-                    userID = sc.nextLine();
-                    System.out.print("Password: ");
-                    password = sc.nextLine();
-                    authenticated = authStudentService.login(userID, password);
-
-                    while(authenticated != true){               
-                        System.out.println("Wrong UserID or Password, please enter again...");
-                        System.out.print("User ID: ");
-                        userID = sc.nextLine();
-                        System.out.print("Password: ");
-                        password = sc.nextLine();
-                        authenticated = authStudentService.login(userID, password);
-                    }
-
-                    System.out.println("Login success");
+                    userController.login(true);
                     break;
                 
                 case 3:
