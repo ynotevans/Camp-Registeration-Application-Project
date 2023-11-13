@@ -4,11 +4,11 @@ package CAMs_App.entity;
 
 public class Suggestions {
     private String suggestion;
-    private int suggestBy;  //UserID, use string?
+    private String suggestBy;  //UserID, use string?
     private Boolean processed;
     private Boolean accepted;
 
-    public Suggestions(String suggestion, int suggestBy){
+    public Suggestions(String suggestion, String suggestBy){
         this.suggestion = suggestion;
         this.suggestBy = suggestBy;
         this.processed = false;
@@ -19,7 +19,7 @@ public class Suggestions {
         this.suggestion = suggestion;
     }
     
-    public void setSuggestBy(int suggestBy) {
+    public void setSuggestBy(String suggestBy) {
         this.suggestBy = suggestBy;
     }
 
@@ -35,7 +35,7 @@ public class Suggestions {
         return suggestion;
     }
 
-    public int getSuggestBy() {
+    public String getSuggestBy() {
         return suggestBy;
     }
 
