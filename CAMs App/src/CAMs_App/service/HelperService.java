@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.SupportedValuesAttribute;
+
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Student;
 import CAMs_App.entity.CampCompMem;
@@ -113,6 +115,26 @@ public class HelperService {
         } catch (Exception err) {}
     }
 
+    public void viewEnquiries(Enquiries q){
+        System.out.println("Inquirer:" + q.getInquirer());
+        System.out.println("Enquiry: " + q.getEnquiry());
+
+        System.out.println("Answerer: " + q.getAnswerer());
+        System.out.println("Answer: " + q.getAnswer());
+    }
+
+    public void viewCamp(Camp camp){
+        System.out.println("Camp Name: " + camp.getCampName());
+        System.out.println("Camp Date: " + camp.getCampDate());
+        System.out.println("Camp Registration Closing Date: " + camp.getRegCloseDate());
+        System.out.println("Camp open to faculty: " + camp.getUserGroup().toString());
+        System.out.println("Camp location: " + camp.getLocation());
+        System.out.println("Camp total slots: " + camp.getTotalSlots());
+        System.out.println("Camp descriptions: " + camp.getDescription());
+        System.out.println("Camp staffInCharge: " + camp.getStaffInCharge());
+        System.out.println("Number of days: " + camp.getNumberOfCampDays());
+        System.out.println("Camp remaining slot: " + camp.getRemainingSlot());
+    }
 
 
 

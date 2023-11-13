@@ -11,7 +11,7 @@ import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
 
-public class StaffService{
+public class StaffCampService extends CampManagementService{
     Scanner sc = new Scanner(System.in);  
     ArrayList<Camp>createdCamps = new ArrayList<>();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
