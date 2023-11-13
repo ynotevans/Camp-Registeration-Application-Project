@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,12 +17,15 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 import CAMs_App.entity.Student;
+import CAMs_App.entity.Camp;
+import CAMs_App.entity.CampCompMem;
+import CAMs_App.entity.Staff;
 import CAMs_App.enums.Faculty;
 
 
 
 
-public class DatabaseService {
+public class DatabaseService implements IFileDataService {
     private static List<String> userCsvHeaders = new ArrayList<String>();
 
 	/**
@@ -41,18 +46,18 @@ public class DatabaseService {
 	/**
 	 * The list of headers for the CSV file that stores project data.
 	 */
-	private static List<String> campsHeaders = new ArrayList<String>();
+	private static List<String> campCsvHeaders = new ArrayList<String>();
 
 	/**
 	 * The list of headers for the CSV file that stores request data.
 	 */
-	private static List<String> suggestionsCsvHeaders = new ArrayList<String>();
+	// private static List<String> suggestionsCsvHeaders = new ArrayList<String>();
 
 	/**
 	 * The list of headers for the CSV file that stores transfer student request
 	 * data.
 	 */
-	private static List<String> enquiriesCsvHeaders = new ArrayList<String>();
+	// private static List<String> enquiriesCsvHeaders = new ArrayList<String>();
 
 
     public DatabaseService() {
@@ -152,6 +157,7 @@ public class DatabaseService {
 
 	// ---------- Interface method implementation ---------- //
 	// Student
+    // will add interface
 	@Override
 	public Map<String, Student> importStudentData(String usersFilePath, String studentsFilePath) {
 		Map<String, Student> studentsMap = new HashMap<String, Student>();
@@ -194,22 +200,18 @@ public class DatabaseService {
 		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
 		for (String[] userRow : usersRows) {
 			Map<String, String> userInfoMap = parseUserRow(userRow);
-			String userLine = String.format("%s,%s,%s,%s,%s",
+			String userLine = String.format("%s,%s,%s",
 					userInfoMap.get("userID"),
 					userInfoMap.get("password"),
-					userInfoMap.get("email"),
-					userInfoMap.get("role"),
-					userInfoMap.get("name"));
+					userInfoMap.get("faculty"));
 
-			if (userInfoMap.get("role").equals("student")) {
+			if (userInfoMap.get("identity").equals("student")) {
 				Student student = studentMap.get(userInfoMap.get("userID"));
 
-				userLine = String.format("%s,%s,%s,%s,%s",
+				userLine = String.format("%s,%s,%s",
 						student.getUserID(),
 						student.getPassword(),
-						student.getEmail(),
-						"student", // role
-						student.getName());
+						student.getFaculty());
 			}
 
 			userLines.add(userLine);
@@ -217,9 +219,8 @@ public class DatabaseService {
 
 		// Student
 		for (Student student : studentMap.values()) {
-			String studentLine = String.format("%s,%b",
-					student.getStudentID(),
-					student.getIsDeregistered());
+			String studentLine = String.format("%s",
+					student.getUserID());
 
 			studentLines.add(studentLine);
 		}
@@ -232,129 +233,122 @@ public class DatabaseService {
 
 	// Supervisor
 	@Override
-	public Map<String, Supervisor> importSupervisorData(String usersFilePath, String supervisorsFilePath) {
-		Map<String, Supervisor> supervisorsMap = new HashMap<String, Supervisor>();
+	public Map<String, Staff> importStaffData(String usersFilePath, String staffFilePath) {
+		Map<String, Staff> staffMap = new HashMap<String, Staff>();
 
 		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
-		List<String[]> supervisorsRows = this.readCsvFile(supervisorsFilePath, supervisorCsvHeaders);
+		List<String[]> supervisorsRows = this.readCsvFile(staffFilePath, staffCsvHeaders);
 
 		for (String[] userRow : usersRows) {
 			Map<String, String> userInfoMap = parseUserRow(userRow);
 
-			String role = userInfoMap.get("role");
-			if (!role.equals("supervisor"))
+			String role = userInfoMap.get("identity");
+			if (!role.equals("staff"))
 				continue;
 
 			String userID = userInfoMap.get("userID");
 			String password = userInfoMap.get("password");
-			String name = userInfoMap.get("name");
-			String email = userInfoMap.get("email");
+            String facString = userInfoMap.get("faculty");
+            Faculty faculty = Faculty.valueOf(facString);
 
 			// get the associated supervisor data
-			int numOfProjects = 0;
 			for (String[] supervisorRow : supervisorsRows) {
 				if (!supervisorRow[0].equals(userID))
 					continue;
-
-				numOfProjects = Integer.parseInt(supervisorRow[1]);
 			}
 
-			Supervisor supervisor = new Supervisor(userID, name, email, password, numOfProjects);
+			Staff staff = new Staff(userID, password, faculty);
 
-			supervisorsMap.put(userID, supervisor);
+			staffMap.put(userID, staff);
 		}
 
-		return supervisorsMap;
+		return staffMap;
 	}
 
 	@Override
-	public boolean exportSupervisorData(String usersFilePath, String supervisorsFilePath,
-			Map<String, Supervisor> supervisorMap) {
-		List<String> supervisorLines = new ArrayList<String>();
+	public boolean exportStaffData(String usersFilePath, String staffFilePath,
+			Map<String, Staff> staffMap) {
+		List<String> staffLines = new ArrayList<String>();
 		List<String> userLines = new ArrayList<String>();
 
 		// User
 		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
 		for (String[] userRow : usersRows) {
 			Map<String, String> userInfoMap = parseUserRow(userRow);
-			String userLine = String.format("%s,%s,%s,%s,%s",
+			String userLine = String.format("%s,%s,%s",
 					userInfoMap.get("userID"),
 					userInfoMap.get("password"),
-					userInfoMap.get("email"),
-					userInfoMap.get("role"),
-					userInfoMap.get("name"));
+					userInfoMap.get("faculty"));
 
-			if (userInfoMap.get("role").equals("supervisor")) {
-				Supervisor supervisor = supervisorMap.get(userInfoMap.get("userID"));
+			if (userInfoMap.get("identity").equals("staff")) {
+				Staff staff = staffMap.get(userInfoMap.get("userID"));
 
 				userLine = String.format("%s,%s,%s,%s,%s",
-						supervisor.getUserID(),
-						supervisor.getPassword(),
-						supervisor.getEmail(),
-						"supervisor", // role
-						supervisor.getName());
+						staff.getUserID(),
+						staff.getPassword(),
+						staff.getFaculty());
 			}
 
 			userLines.add(userLine);
 		}
 
 		// Supervisor
-		for (Supervisor supervisor : supervisorMap.values()) {
-			String supervisorLine = String.format("%s,%d",
-					supervisor.getSupervisorID(),
-					supervisor.getNumOfProjects());
+		for (Staff staff : staffMap.values()) {
+			String staffLine = String.format("%s",
+					staff.getUserID());
 
-			supervisorLines.add(supervisorLine);
+			staffLines.add(staffLine);
 		}
 
 		// Write to CSV
 		boolean success1 = this.writeCsvFile(usersFilePath, userCsvHeaders, userLines);
-		boolean success2 = this.writeCsvFile(supervisorsFilePath, supervisorCsvHeaders, supervisorLines);
+		boolean success2 = this.writeCsvFile(staffFilePath, staffCsvHeaders, staffLines);
 		return success1 && success2;
 	}
 
 	// FYP Coordinator
 	@Override
-	public Map<String, FYPCoordinator> importFYPCoordinatorData(String usersFilePath, String supervisorsFilePath,
-			String fypCoordinatorsFilePath) {
-		Map<String, FYPCoordinator> fypCoordinatorsMap = new HashMap<String, FYPCoordinator>();
+	public Map<String, CampCompMem> importCampCompMemData(String usersFilePath, String studentFilePath,
+			String campCompMemFilePath) {
+		Map<String, CampCompMem> campCompMemMap = new HashMap<String, CampCompMem>();
 
 		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
-		List<String[]> fypCoordinatorsRows = this.readCsvFile(fypCoordinatorsFilePath, fypCoordinatorCsvHeaders);
+		List<String[]> campCompMemRows = this.readCsvFile(campCompMemFilePath, campCompMemCsvHeaders);
 
 		for (String[] userRow : usersRows) {
 			Map<String, String> userInfoMap = parseUserRow(userRow);
 
-			String role = userInfoMap.get("role");
-			if (!role.equals("fypcoordinator"))
+			String role = userInfoMap.get("identity");
+			if (!role.equals("student"))
 				continue;
 
+             
 			String userID = userInfoMap.get("userID");
 			String password = userInfoMap.get("password");
-			String name = userInfoMap.get("name");
-			String email = userInfoMap.get("email");
+            String facString = userInfoMap.get("faculty");
+            Faculty faculty = Faculty.valueOf(facString);
+            String position = userInfoMap.get("position");
+			
 
-			// Number of Projects
-			int numOfProjects = 0;
-			for (String[] fypCoordinatorRow : fypCoordinatorsRows) {
-				if (!fypCoordinatorRow[0].equals(userID))
+		
+			for (String[] campCompMemRow : campCompMemRows) {
+				if (!campCompMemRow[0].equals(userID))
 					continue;
 
-				numOfProjects = Integer.parseInt(fypCoordinatorRow[1]);
 			}
 
-			FYPCoordinator fypCoordinator = new FYPCoordinator(userID, name, email, password, numOfProjects);
+			// CampCompMem campCompMem = new CampCompMem(student, position); // need fix
 
-			fypCoordinatorsMap.put(userID, fypCoordinator);
+			// campCompMemMap.put(userID, campCompMem);
 		}
 
-		return fypCoordinatorsMap;
+		return campCompMemMap;
 	}
 
 	@Override
-	public boolean exportFYPCoordinatorData(String usersFilePath, String supervisorsFilePath,
-			String fypCoordinatorsFilePath, Map<String, FYPCoordinator> fypCoordinatorMap) {
-		List<String> fypCoordinatorLines = new ArrayList<String>();
+	public boolean exportCampCompMemData(String usersFilePath, String studentFilePath,
+			String campCompMemFilePath, Map<String, CampCompMem> campCompMemMap) {
+		List<String> campCompMemLines = new ArrayList<String>();
 		List<String> userLines = new ArrayList<String>();
 
 		// User
@@ -368,180 +362,197 @@ public class DatabaseService {
 					userInfoMap.get("role"),
 					userInfoMap.get("name"));
 
-			if (userInfoMap.get("role").equals("fypcoordinator")) {
-				FYPCoordinator fypCoordinator = fypCoordinatorMap.get(userInfoMap.get("userID"));
+			if (userInfoMap.get("Identity").equals("student")) {
+				CampCompMem campCompMem = campCompMemMap.get(userInfoMap.get("userID"));
 
 				userLine = String.format("%s,%s,%s,%s,%s",
-						fypCoordinator.getUserID(),
-						fypCoordinator.getPassword(),
-						fypCoordinator.getEmail(),
-						"fypcoordinator", // role
-						fypCoordinator.getName());
+						campCompMem.getUserID(),
+						campCompMem.getPassword());
+						
 			}
 
 			userLines.add(userLine);
 		}
 
 		// FYP Coordinator
-		for (FYPCoordinator fypcoordinator : fypCoordinatorMap.values()) {
-			String fypcoordinatorLine = String.format("%s,%d", fypcoordinator.getSupervisorID(), fypcoordinator.getNumOfProjects());
+		for (CampCompMem campCompMem : campCompMemMap.values()) {
+			String campCompMemLine = String.format("%s", campCompMem.getUserID());
 
-			fypCoordinatorLines.add(fypcoordinatorLine);
+			campCompMemLines.add(campCompMemLine);
 		}
 
 		// Write to CSV
 		boolean success1 = this.writeCsvFile(usersFilePath, userCsvHeaders, userLines);
-		boolean success2 = this.writeCsvFile(fypCoordinatorsFilePath, fypCoordinatorCsvHeaders, fypCoordinatorLines);
+		boolean success2 = this.writeCsvFile(campCompMemFilePath, campCompMemCsvHeaders, campCompMemLines);
 		return success1 && success2;
 	}
 
 	// Projects
 	@Override
-	public Map<Integer, Project> importProjectData(String projectsFilePath, String usersFilePath,
-			String studentsFilePath, String supervisorsFilePath, String fypCoordinatorsFilePath) {
-		Map<Integer, Project> projectsMap = new HashMap<Integer, Project>();
+	public Map<String, Camp> importCampData(String campFilePath, String usersFilePath,
+			String studentsFilePath, String staffFilePath, String campCompMemFilePath) {
+		Map<String, Camp> campMap = new HashMap<String, Camp>();
 
-		List<String[]> projectsRows = this.readCsvFile(projectsFilePath, projectCsvHeaders);
+		List<String[]> campRows = this.readCsvFile(campFilePath, campCsvHeaders);
+        
+        // Faculty faculty = Faculty.valueOf(facString);
+        // Camp(String campName , LocalDate campDate , LocalDate regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot)
 
-		for (String[] projectRow : projectsRows) {
-			int projectID = Integer.parseInt(projectRow[0]);
-			String title = projectRow[1];
-			ProjectStatus status = ProjectStatus.valueOf(projectRow[2]);
-			String supervisorID = projectRow[3];
-			String studentID = projectRow.length > 4 ? projectRow[4] : null;
+		for (String[] campRow : campRows) {
+			String campName = campRow[0];
+            // LocalDate campDate = LocalDate.parse(campRow[1]);
+            // LocalDate regCloseDate = LocalDate.parse(campRow[2]);   
+            // Faculty userGroup = Faculty.valueOf(campRow[3]);
+            // String location = campRow[4];
+            // int totalSlots = Integer.parseInt(campRow[5]);
+            // int campCommitteeSlots = Integer.parseInt(campRow[6]);
+            // String description= campRow[7];
+            // String staffInCharge = campRow[8];
+            // Boolean visibility = Boolean.parseBoolean(campRow[9]);
+            // int numberOfCampDays = Integer.parseInt(campRow[10]);
+            // int remainingSlot = Integer.parseInt(campRow[11]);
+            
+			Camp camp = new Camp();
+            
+			campMap.put(campName, camp);
+        }
+		
 
-			Project project = new Project(projectID, title, supervisorID, studentID, status);
-
-			projectsMap.put(projectID, project);
-		}
-
-		return projectsMap;
+		return campMap;
 	}
 
 	@Override
-	public boolean exportProjectData(String projectsFilePath, Map<Integer, Project> projectMap) {
-		List<String> projectLines = new ArrayList<String>();
+	public boolean exportCampData(String campFilePath, Map<String, Camp> campMap) {
+		List<String> campLines = new ArrayList<String>();
 
 		// Project
-		for (Project project : projectMap.values()) {
-			String projectLine = String.format("%d,%s,%s,%s,%s",
-					project.getProjectID(),
-					project.getTitle(),
-					project.getStatus(),
-					project.getSupervisor().getSupervisorID(),
-					project.getStudent() != null ? project.getStudent().getStudentID() : "");
+		for (Camp camp : campMap.values()) {
+			String campLine = String.format("%s,%s,%s,%s,%s,%d,%d,%s,%s,%b,%d,%d",
+					camp.getCampName(),
+					camp.getCampDate(),
+					camp.getRegCloseDate(),
+					camp.getUserGroup(),
+					camp.getLocation(),
+                    camp.getTotalSlots(),
+                    camp.getCampCommitteeSlots(),
+                    camp.getDescription(),
+                    camp.getStaffInCharge(),
+                    camp.getVisibility(),
+                    camp.getNumberOfCampDays(),
+                    camp.getRemainingSlot());
 
-			projectLines.add(projectLine);
+
+			campLines.add(campLine);
 		}
 
 		// Write to CSV
-		return this.writeCsvFile(projectsFilePath, projectCsvHeaders, projectLines);
+		return this.writeCsvFile(campFilePath, campCsvHeaders, campLines);
 	}
 
-	// Requests
-	@Override
-	public Map<Integer, Request> importRequestData(String requestsFilePath, String transferStudentRequestsFilePath,
-			String changeProjectTitleRequestsFilePath) {
-		Map<Integer, Request> requestsMap = new HashMap<Integer, Request>();
-		List<String[]> requestsRows = this.readCsvFile(requestsFilePath, requestCsvHeaders);
-		List<String[]> transferStudentRequestsRows = this.readCsvFile(transferStudentRequestsFilePath,
-				transferStudentRequestCsvHeaders);
-		List<String[]> changeProjectTitleRequestsRows = this.readCsvFile(changeProjectTitleRequestsFilePath,
-				changeProjectTitleRequestCsvHeaders);
+	// // Requests
+	// @Override
+	// public Map<Integer, Request> importRequestData(String requestsFilePath, String transferStudentRequestsFilePath,
+	// 		String changeProjectTitleRequestsFilePath) {
+	// 	Map<Integer, Request> requestsMap = new HashMap<Integer, Request>();
+	// 	List<String[]> requestsRows = this.readCsvFile(requestsFilePath, requestCsvHeaders);
+	// 	List<String[]> transferStudentRequestsRows = this.readCsvFile(transferStudentRequestsFilePath,
+	// 			transferStudentRequestCsvHeaders);
+	// 	List<String[]> changeProjectTitleRequestsRows = this.readCsvFile(changeProjectTitleRequestsFilePath,
+	// 			changeProjectTitleRequestCsvHeaders);
 
-		for (String[] requestRow : requestsRows) {
-			int requestID = Integer.parseInt(requestRow[0]);
-			int projectID = Integer.parseInt(requestRow[1]);
-			String senderID = requestRow[2];
-			String receiverID = requestRow[3];
-			RequestStatus status = RequestStatus.valueOf(requestRow[4]);
-			ArrayList<String> history = new ArrayList<String>(Arrays.asList(requestRow[5].split(";")));
-			RequestType type = RequestType.valueOf(requestRow[6]);
+	// 	for (String[] requestRow : requestsRows) {
+	// 		int requestID = Integer.parseInt(requestRow[0]);
+	// 		int projectID = Integer.parseInt(requestRow[1]);
+	// 		String senderID = requestRow[2];
+	// 		String receiverID = requestRow[3];
+	// 		RequestStatus status = RequestStatus.valueOf(requestRow[4]);
+	// 		ArrayList<String> history = new ArrayList<String>(Arrays.asList(requestRow[5].split(";")));
+	// 		RequestType type = RequestType.valueOf(requestRow[6]);
 
-			// Handle different Requests subclasses
-			if (type == RequestType.TRANSFER_STUDENT) { // TransferStudentRequest
-				for (String[] transferStudentRequestRow : transferStudentRequestsRows) {
-					if (requestID != Integer.parseInt(transferStudentRequestRow[0]))
-						continue;
+	// 		// Handle different Requests subclasses
+	// 		if (type == RequestType.TRANSFER_STUDENT) { // TransferStudentRequest
+	// 			for (String[] transferStudentRequestRow : transferStudentRequestsRows) {
+	// 				if (requestID != Integer.parseInt(transferStudentRequestRow[0]))
+	// 					continue;
 
-					String replacementSupervisorID = transferStudentRequestRow[1];
-					Request transferStudentRequest = new TransferStudentRequest(senderID, receiverID, projectID,
-							requestID, status, history, replacementSupervisorID);
+	// 				String replacementSupervisorID = transferStudentRequestRow[1];
+	// 				Request transferStudentRequest = new TransferStudentRequest(senderID, receiverID, projectID,
+	// 						requestID, status, history, replacementSupervisorID);
 
-					requestsMap.put(requestID, transferStudentRequest);
-					break;
-				}
-			} else if (type == RequestType.CHANGE_PROJECT_TITLE) { // ChangeProjectTitleRequest
-				for (String[] changeProjectTitleRequestRow : changeProjectTitleRequestsRows) {
-					if (requestID != Integer.parseInt(changeProjectTitleRequestRow[0]))
-						continue;
+	// 				requestsMap.put(requestID, transferStudentRequest);
+	// 				break;
+	// 			}
+	// 		} else if (type == RequestType.CHANGE_PROJECT_TITLE) { // ChangeProjectTitleRequest
+	// 			for (String[] changeProjectTitleRequestRow : changeProjectTitleRequestsRows) {
+	// 				if (requestID != Integer.parseInt(changeProjectTitleRequestRow[0]))
+	// 					continue;
 
-					String newTitle = changeProjectTitleRequestRow[1];
-					Request changeProjectTitleRequest = new ChangeProjectTitleRequest(senderID, receiverID, projectID,
-							requestID, status, history, newTitle);
+	// 				String newTitle = changeProjectTitleRequestRow[1];
+	// 				Request changeProjectTitleRequest = new ChangeProjectTitleRequest(senderID, receiverID, projectID,
+	// 						requestID, status, history, newTitle);
 
-					requestsMap.put(requestID, changeProjectTitleRequest);
-					break;
-				}
-			} else if (type == RequestType.ALLOCATE_PROJECT) { // AllocateProjectRequest
-				Request allocateProjectRequest = new AllocateProjectRequest(senderID, receiverID, projectID, requestID,
-						status, history);
-				requestsMap.put(requestID, allocateProjectRequest);
-			} else if (type == RequestType.DEREGISTER_PROJECT) { // DeregisterProjectRequest
-				Request deregisterProjectRequest = new DeregisterProjectRequest(senderID, receiverID, projectID,
-						requestID, status, history);
-				requestsMap.put(requestID, deregisterProjectRequest);
-			}
-		}
+	// 				requestsMap.put(requestID, changeProjectTitleRequest);
+	// 				break;
+	// 			}
+	// 		} else if (type == RequestType.ALLOCATE_PROJECT) { // AllocateProjectRequest
+	// 			Request allocateProjectRequest = new AllocateProjectRequest(senderID, receiverID, projectID, requestID,
+	// 					status, history);
+	// 			requestsMap.put(requestID, allocateProjectRequest);
+	// 		} else if (type == RequestType.DEREGISTER_PROJECT) { // DeregisterProjectRequest
+	// 			Request deregisterProjectRequest = new DeregisterProjectRequest(senderID, receiverID, projectID,
+	// 					requestID, status, history);
+	// 			requestsMap.put(requestID, deregisterProjectRequest);
+	// 		}
+	// 	}
 
-		return requestsMap;
-	}
+	// 	return requestsMap;
+	// }
 
-	@Override
-	public boolean exportRequestData(String requestsFilePath, String transferStudentRequestsFilePath,
-			String changeProjectTitleRequestsFilePath, Map<Integer, Request> requestMap) {
-		List<String> requestLines = new ArrayList<String>();
-		List<String> transferStudentRequestLines = new ArrayList<String>();
-		List<String> changeProjectTitleLines = new ArrayList<String>();
+	// @Override
+	// public boolean exportRequestData(String requestsFilePath, String transferStudentRequestsFilePath,
+	// 		String changeProjectTitleRequestsFilePath, Map<Integer, Request> requestMap) {
+	// 	List<String> requestLines = new ArrayList<String>();
+	// 	List<String> transferStudentRequestLines = new ArrayList<String>();
+	// 	List<String> changeProjectTitleLines = new ArrayList<String>();
 
-		// Request
-		for (Request request : requestMap.values()) {
-			// To handle different Requests subclasses
-			if (request.getType() == RequestType.TRANSFER_STUDENT) {
-				TransferStudentRequest transferStudentRequest = (TransferStudentRequest) request;
-				String transferStudentRequestLine = String.format("%d,%s",
-						transferStudentRequest.getRequestID(),
-						transferStudentRequest.getReplacementSupervisorID());
+	// 	// Request
+	// 	for (Request request : requestMap.values()) {
+	// 		// To handle different Requests subclasses
+	// 		if (request.getType() == RequestType.TRANSFER_STUDENT) {
+	// 			TransferStudentRequest transferStudentRequest = (TransferStudentRequest) request;
+	// 			String transferStudentRequestLine = String.format("%d,%s",
+	// 					transferStudentRequest.getRequestID(),
+	// 					transferStudentRequest.getReplacementSupervisorID());
 
-				transferStudentRequestLines.add(transferStudentRequestLine);
-			} else if (request.getType() == RequestType.CHANGE_PROJECT_TITLE) {
-				ChangeProjectTitleRequest changeProjectTitleRequest = (ChangeProjectTitleRequest) request;
-				String changeProjectTitleRequestLine = String.format("%d,%s",
-						changeProjectTitleRequest.getRequestID(),
-						changeProjectTitleRequest.getNewTitle());
+	// 			transferStudentRequestLines.add(transferStudentRequestLine);
+	// 		} else if (request.getType() == RequestType.CHANGE_PROJECT_TITLE) {
+	// 			ChangeProjectTitleRequest changeProjectTitleRequest = (ChangeProjectTitleRequest) request;
+	// 			String changeProjectTitleRequestLine = String.format("%d,%s",
+	// 					changeProjectTitleRequest.getRequestID(),
+	// 					changeProjectTitleRequest.getNewTitle());
 
-				changeProjectTitleLines.add(changeProjectTitleRequestLine);
-			}
+	// 			changeProjectTitleLines.add(changeProjectTitleRequestLine);
+	// 		}
 
-			// Request base class
-			String requestLine = String.format("%d,%d,%s,%s,%s,%s,%s",
-					request.getRequestID(),
-					request.getProject().getProjectID(),
-					request.getSender().getUserID(),
-					request.getReceiver().getUserID(),
-					request.getStatus(),
-					String.join(";", request.getHistory()),
-					request.getType());
+	// 		// Request base class
+	// 		String requestLine = String.format("%d,%d,%s,%s,%s,%s,%s",
+	// 				request.getRequestID(),
+	// 				request.getProject().getProjectID(),
+	// 				request.getSender().getUserID(),
+	// 				request.getReceiver().getUserID(),
+	// 				request.getStatus(),
+	// 				String.join(";", request.getHistory()),
+	// 				request.getType());
 
-			requestLines.add(requestLine);
-		}
+	// 		requestLines.add(requestLine);
+	// 	}
 
-		// Write to CSV
-		boolean success1 = this.writeCsvFile(requestsFilePath, requestCsvHeaders, requestLines);
-		boolean success2 = this.writeCsvFile(transferStudentRequestsFilePath, transferStudentRequestCsvHeaders,
-				transferStudentRequestLines);
-		boolean success3 = this.writeCsvFile(changeProjectTitleRequestsFilePath, changeProjectTitleRequestCsvHeaders,
-				changeProjectTitleLines);
-		return success1 && success2 && success3;
-	}
+	// 	// Write to CSV
+	// 	boolean success1 = this.writeCsvFile(requestsFilePath, requestCsvHeaders, requestLines);
+	// 	boolean success2 = this.writeCsvFile(transferStudentRequestsFilePath, transferStudentRequestCsvHeaders,
+	// 			transferStudentRequestLines);
+	// 	boolean success3 = this.writeCsvFile(changeProjectTitleRequestsFilePath, changeProjectTitleRequestCsvHeaders,
+	// 			changeProjectTitleLines);
+	// 	return success1 && success2 && success3;
+	// }
 }
