@@ -16,14 +16,6 @@ public class Enquiries {
         
     };
 
-    public void viewEnquiries(){
-        System.out.println("Inquirer:" + this.inquirer);
-        System.out.println("Enquiry: " + this.enquiry);
-
-        System.out.println("Answerer: " + this.answerer);
-        System.out.println("Answer: " + this.answer);
-    }
-
     public void setEnquiry(String enquiry) {
         this.enquiry = enquiry;
     }

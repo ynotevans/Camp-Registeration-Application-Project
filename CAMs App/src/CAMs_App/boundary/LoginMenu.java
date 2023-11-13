@@ -1,11 +1,8 @@
 package CAMs_App.boundary;
 
-import java.security.cert.TrustAnchor;
 import java.util.Scanner;
 
 import CAMs_App.controllers.UserController;
-import CAMs_App.service.AuthStaffService;
-import CAMs_App.service.AuthStudentService;
 import CAMs_App.service.HelperService;
 
 public class LoginMenu implements Menu {
