@@ -1,5 +1,5 @@
 package CAMs_App.enums;
 
-public enum Status {
+public enum Identity {
     student, staff;
 }

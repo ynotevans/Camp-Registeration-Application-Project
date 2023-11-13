@@ -5,14 +5,15 @@ import CAMs_App.enums.*;
 public class User {
     private String userID;       
     private String password;
-    private Status status;
+    private Identity identity;
     private Faculty faculty;
 
     
 
     public User(String userID, String password, Faculty faculty){
         this.userID = userID;
-        this.password = password;
+        this.password = "password";  //should use default password right???
+        this.faculty = faculty;
     }
 
     public void setUserID(String userID) {
@@ -31,8 +32,8 @@ public class User {
         this.faculty = faculty;
     }
 
-    public boolean setStatus(Status status) {
-        this.status = status;
+    public boolean setIdentity(Identity status) {
+        this.identity = status;
         return true;
     }
 
@@ -48,7 +49,7 @@ public class User {
         return faculty.toString();
     }
 
-    public Status getStatus() {
-        return status;
+    public Identity getIdentity() {
+        return identity;
     }
 }

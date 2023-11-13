@@ -4,7 +4,7 @@ import CAMs_App.enums.*;
 public class Staff extends User{
     public Staff(String userID, String password,Faculty faculty) {
         super(userID, password, faculty);
-        super.setStatus(Status.staff);
+        super.setIdentity(Identity.staff);
     }
     @Override
     public void setFaculty(Faculty faculty) {
@@ -31,9 +31,9 @@ public class Staff extends User{
     }
 
     @Override
-    public Status getStatus() {
+    public Identity getIdentity() {
         // TODO Auto-generated method stub
-        return super.getStatus();
+        return super.getIdentity();
     }
 
     @Override
