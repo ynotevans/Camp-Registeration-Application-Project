@@ -8,8 +8,7 @@ import CAMs_App.service.HelperService;
 
 
 public class StudentController extends UserController {
-    User currentUser = AuthData.getCurrentUser();
-    
+    Student currentUser = (Student)AuthData.getCurrentUser();
 
 	public void viewAvailableCamp(){
         
@@ -37,12 +36,12 @@ public class StudentController extends UserController {
         HelperService.clearScreen();
         //from student switch to camp committee
         if(currentMode == 1){
-            if(currentUser.getFaculty() == "CEE"){    //need to change the condition
+            if(currentUser.getIsComittee()== true){    //need to change the condition
                 CampComMenu campComMenu = new CampComMenu();
                 campComMenu.viewApp();
             }
             else{
-                System.out.println("You are not a committee for any camp.");
+                System.out.println("You are not a committe member of any camp");
                 System.out.println("Unable to switch mode !!!");
             }
         }

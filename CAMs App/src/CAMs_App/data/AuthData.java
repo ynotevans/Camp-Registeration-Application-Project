@@ -1,5 +1,6 @@
 package CAMs_App.data;
-import CAMs_App.entity.User;
+import CAMs_App.entity.*;
+
 
 
 public class AuthData {
@@ -7,7 +8,8 @@ public class AuthData {
     private AuthData(){};
 
     public static void setCurrentUser(User currentUser) {
-        AuthData.currentUser = currentUser;
+        if(currentUser instanceof Student)  AuthData.currentUser = (Student)currentUser;
+        else     AuthData.currentUser = (Staff)currentUser;
     }
 
     public static boolean isLoggedIn(){
@@ -15,6 +17,7 @@ public class AuthData {
     }
 
     public static User getCurrentUser() {
+        
         return AuthData.currentUser;
     }
 
