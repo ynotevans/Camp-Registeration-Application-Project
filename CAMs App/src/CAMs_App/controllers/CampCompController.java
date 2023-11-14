@@ -4,9 +4,11 @@ import static CAMs_App.controllers.UserController.sc;
 
 import java.util.ArrayList;
 
+import CAMs_App.entity.User;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
+import CAMs_App.service.*;
 
 public class CampCompController extends UserController{
     public void viewAttendeesList(){}
