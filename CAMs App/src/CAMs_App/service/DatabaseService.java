@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 import CAMs_App.entity.Student;
+import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Staff;
@@ -41,7 +42,7 @@ public class DatabaseService implements IFileDataService {
 	/**
 	 * The list of headers for the CSV file that stores FYP coordinator data.
 	 */
-	private static List<String> campCompMemCsvHeaders = new ArrayList<String>();
+	//private static List<String> campCompMemCsvHeaders = new ArrayList<String>();
 
 	/**
 	 * The list of headers for the CSV file that stores project data.
@@ -366,6 +367,11 @@ public class DatabaseService implements IFileDataService {
 
 		// Write to CSV
 		return this.writeCsvFile(campFilePath, campCsvHeaders, campLines);
+	}
+
+	public static Camp getCamp(String campName){
+		Map<String ,Camp> campData = Database.getCampData();
+		return campData.get(campName);
 	}
 
 	// // Requests

@@ -1,6 +1,7 @@
 package CAMs_App.entity;
-
+import java.time.LocalDateTime;
 public class Enquiries {
+
     private String enquiry;
     private String answer;
     private String inquirer; 
@@ -20,10 +21,8 @@ public class Enquiries {
         this.enquiry = enquiry;
     }
 
-    public void setAnswer(String answer , String answerer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
-        this.answerer = answerer;
-        this.processed = true;
     }
 
     public void setInquirer(String inquirer) {
@@ -34,8 +33,8 @@ public class Enquiries {
         this.answerer = answerer;
     }
 
-    public void setProcessed(Boolean processed) {
-        this.processed = processed;
+    public void setProcessed() {
+        this.processed = true;
     }
 
     public String getEnquiry() {
@@ -57,4 +56,6 @@ public class Enquiries {
     public Boolean getProcessed() {
         return processed;
     }
+
+
 }

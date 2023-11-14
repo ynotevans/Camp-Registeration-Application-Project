@@ -4,10 +4,10 @@ import java.util.Map;
 
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.CampCompMem;
-// import CAMs_App.entity.Enquiries;
+import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
-// import CAMs_App.entity.Suggestions;
+import CAMs_App.entity.Suggestions;
 
 // import interfaces.IFileDataService;
 
@@ -24,9 +24,9 @@ public class Database {
 
 	private static Map<String, Camp> campData = new HashMap<String, Camp>();
 
-	// private static Map<Integer, Suggestions> suggestionsData = new HashMap<Integer, Suggestions>();
+	private static Map<Integer, Suggestions> suggestionsData = new HashMap<Integer, Suggestions>();
 
-    // private static Map<Integer, Enquiries> enquiriesData = new HashMap<Integer, Enquiries>();
+    private static Map<Integer, Enquiries> enquiriesData = new HashMap<Integer, Enquiries>();
 
 	
 	private Database() {
@@ -43,8 +43,8 @@ public class Database {
 		Database.setstaffData(staffData);
 		Database.setCampData(campData);
 		// Database.setCampCompMemData(campCompMemData); // don't need this, delete during last check
-		// Database.setEnquiriesData(enquiriesData);
-        // Database.setEnquiriesData(enquiriesData);
+		Database.setEnquiriesData(enquiriesData);
+        Database.setEnquiriesData(enquiriesData);
         
 
 		return true;
@@ -117,51 +117,51 @@ public class Database {
 		// fileDataService.exportProjectData(filePathsMap.get("project"), projectsData);
 	}
 
-	// // ---------- Suggestion ---------- //
-	// /**
-	//  * Gets the Suggestion data map.
-	//  *
-	//  * @return a {@link Map} containing Suggestion ID as the key and {@link Request}
-	//  *         objects as the value
-	//  */
-	// public static Map<Integer, Suggestions> getSuggestionsData() {
-	// 	return Database.suggestionsData;
-	// }
+	// ---------- Suggestion ---------- //
+	/**
+	 * Gets the Suggestion data map.
+	 *
+	 * @return a {@link Map} containing Suggestion ID as the key and {@link Request}
+	 *         objects as the value
+	 */
+	public static Map<Integer, Suggestions> getSuggestionsData() {
+		return Database.suggestionsData;
+	}
 
-	// /**
-	//  * Sets the Suggestion data map and saves the data to the file system.
-	//  *
-	//  * @param requestData a {@link Map} containing Suggestion ID as the key and
-	//  *                    {@link Request} objects as the value
-	//  */
-	// public static void setSuggestionsData(Map<Integer, Suggestions> suggestionsData) {
-	// 	Database.suggestionsData = suggestionsData;
-	// 	// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
-	// 	// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
-    // }
+	/**
+	 * Sets the Suggestion data map and saves the data to the file system.
+	 *
+	 * @param requestData a {@link Map} containing Suggestion ID as the key and
+	 *                    {@link Request} objects as the value
+	 */
+	public static void setSuggestionsData(Map<Integer, Suggestions> suggestionsData) {
+		Database.suggestionsData = suggestionsData;
+		// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
+		// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
+    }
 
-    // // ---------- Enqueiries ---------- //
-	// /**
-	//  * Gets the Enqueiries data map.
-	//  *
-	//  * @return a {@link Map} containing Enqueiries ID as the key and {@link Enqueiries}
-	//  *         objects as the value
-	//  */
-	// public static Map<Integer, Enquiries> getEnquiriesData() {
-	// 	return Database.enquiriesData;
-	// }
+    // ---------- Enqueiries ---------- //
+	/**
+	 * Gets the Enqueiries data map.
+	 *
+	 * @return a {@link Map} containing Enqueiries ID as the key and {@link Enqueiries}
+	 *         objects as the value
+	 */
+	public static Map<Integer, Enquiries> getEnquiriesData() {
+		return Database.enquiriesData;
+	}
 
-	// /**
-	//  * Sets the Enqueiries data map and saves the data to the file system.
-	//  *
-	//  * @param requestData a {@link Map} containing Enqueiries ID as the key and
-	//  *                    {@link Enqueiries} objects as the value
-	//  */
-	// public static void setEnquiriesData(Map<Integer, Enquiries> EnquiriesData) {
-	// 	Database.enquiriesData = EnquiriesData;
-	// 	// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
-	// 	// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
-	// }
+	/**
+	 * Sets the Enqueiries data map and saves the data to the file system.
+	 *
+	 * @param requestData a {@link Map} containing Enqueiries ID as the key and
+	 *                    {@link Enqueiries} objects as the value
+	 */
+	public static void setEnquiriesData(Map<Integer, Enquiries> EnquiriesData) {
+		Database.enquiriesData = EnquiriesData;
+		// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
+		// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
+	}
 
 /*
     // private static ArrayList<User> database = new ArrayList<>();

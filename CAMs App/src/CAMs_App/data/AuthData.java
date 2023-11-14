@@ -17,7 +17,6 @@ public class AuthData {
     }
 
     public static User getCurrentUser() {
-        
         return AuthData.currentUser;
     }
 

@@ -61,31 +61,31 @@ public interface IFileDataService {
 	 * @return a {@link Map} of {@link FYPCoordinator} objects with their IDs as
 	 *         keys
 	 */
-	Map<String, CampCompMem> importCampCompMemData(String usersFilePath, String studentFilePath, String campCompMemFilePath);
+	// Map<String, CampCompMem> importCampCompMemData(String usersFilePath, String studentFilePath, String campCompMemFilePath);
 	
-	/**
-	 * Exports FYP Coordinator data to the specified file paths.
-	 *
-	 * @param usersFilePath           the file path of the users file
-	 * @param supervisorsFilePath     the file path of the supervisors file
-	 * @param fypCoordinatorsFilePath the file path of the FYP Coordinators file
-	 * @param fypCoordinatorMap       a {@link Map} of {@link FYPCoordinator}
-	 *                                objects with their IDs as keys
-	 * @return true if the data was exported successfully, false otherwise
-	 */
-	boolean exportCampCompMemData(String usersFilePath, String studentsilePath, String campCompMemFilePath, Map<String, CampCompMem> fypCoordinatorMap);
+	// /**
+	//  * Exports FYP Coordinator data to the specified file paths.
+	//  *
+	//  * @param usersFilePath           the file path of the users file
+	//  * @param supervisorsFilePath     the file path of the supervisors file
+	//  * @param fypCoordinatorsFilePath the file path of the FYP Coordinators file
+	//  * @param fypCoordinatorMap       a {@link Map} of {@link FYPCoordinator}
+	//  *                                objects with their IDs as keys
+	//  * @return true if the data was exported successfully, false otherwise
+	//  */
+	// boolean exportCampCompMemData(String usersFilePath, String studentsilePath, String campCompMemFilePath, Map<String, CampCompMem> fypCoordinatorMap);
 
-	// ---------- Project ---------- //
-	/**
-	 * Imports project data from the specified file paths.
-	 *
-	 * @param projectsFilePath        the file path of the projects file
-	 * @param usersFilePath           the file path of the users file
-	 * @param studentsFilePath        the file path of the students file
-	 * @param supervisorsFilePath     the file path of the supervisors file
-	 * @param fypCoordinatorsFilePath the file path of the FYP Coordinators file
-	 * @return a {@link Map} of {@link Project} objects with their IDs as keys
-	 */
+	// // ---------- Project ---------- //
+	// /**
+	//  * Imports project data from the specified file paths.
+	//  *
+	//  * @param projectsFilePath        the file path of the projects file
+	//  * @param usersFilePath           the file path of the users file
+	//  * @param studentsFilePath        the file path of the students file
+	//  * @param supervisorsFilePath     the file path of the supervisors file
+	//  * @param fypCoordinatorsFilePath the file path of the FYP Coordinators file
+	//  * @return a {@link Map} of {@link Project} objects with their IDs as keys
+	//  */
 	Map<String, Camp> importCampData(String campFilePath, String usersFilePath, String studentsFilePath, String staffFilePath, String campCompMemFilePath);
 	
 	/**
