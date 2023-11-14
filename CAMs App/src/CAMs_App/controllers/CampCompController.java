@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import CAMs_App.entity.User;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.Student;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
 import CAMs_App.service.*;
@@ -21,13 +22,13 @@ public class CampCompController extends UserController{
 
     public void deleteSuggestion(){}
 
-    public void addPoints() {
-		user.setPoints(user.getPoints() + 1);
+    public void addPoints(Student student) {
+		student.setPoints(student.getPoints() + 1);
 	}
 	
 	
     public void viewAllEnquiries(){
-        Camp camp = user.getComitteeCamp();
+        Camp camp = user.getComitteeCamp(); // ???
         ArrayList<Enquiries> q = camp.getEnquiryList();
         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
             System.out.println("Enquiry: " + (i+1));
@@ -37,7 +38,7 @@ public class CampCompController extends UserController{
 
     
     public void viewEnquiry(int index){
-       Camp camp = user.getComitteeCamp();
+       Camp camp = user.getComitteeCamp(); // ??
        camp.getEnquiryList().get(index).viewEnquiries();
     }
     
