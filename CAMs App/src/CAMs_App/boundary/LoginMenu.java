@@ -2,8 +2,6 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
-import javax.print.DocFlavor.STRING;
-
 import CAMs_App.controllers.UserController;
 import CAMs_App.service.HelperService;
 
