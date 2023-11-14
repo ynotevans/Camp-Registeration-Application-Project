@@ -7,7 +7,7 @@ import CAMs_App.service.AuthService;
 import CAMs_App.service.UserService;
 
 public class UserController {
-    private static final Scanner sc = new Scanner(System.in);
+    public static final Scanner sc = new Scanner(System.in);
     UserService userService =new UserService();
     AuthService authService;
     public UserController(){}
