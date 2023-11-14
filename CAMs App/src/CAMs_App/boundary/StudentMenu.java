@@ -2,22 +2,22 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
-import CAMs_App.controllers.StaffController;
+import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.User;
 import CAMs_App.service.HelperService;
 
-public class StaffMenu implements Menu{
-    User currentStaff = AuthData.getCurrentUser();
-    StaffController staffController = new StaffController();
+public class StudentMenu implements Menu {
+    User currentStudent = AuthData.getCurrentUser();
+    StudentController studentController = new StudentController();
 
     public void printMenu(){
         HelperService.clearScreen();
-        System.out.println("Welcome back "+ currentStaff.getUserID() + "!!!");
+        System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
         System.out.println("Available actions for you: ");
-        System.out.println("(1) Create new camp");
-        System.out.println("(2) View all camps");
-        System.out.println("(3) View camp(s) created by you");
+        System.out.println("(1) View available camps");
+        System.out.println("(2) View registered camp(s)");
+        System.out.println("(3) Switch to camp committee mode");
         System.out.println("(4) Logout\n");
     }
 
@@ -33,22 +33,19 @@ public class StaffMenu implements Menu{
 
             switch (choice) {
                 case 1:    //create camp
-                    staffController.createCamp();
+                    studentController.viewAvailableCamp();
                     break;
 
                 case 2:    //view all camp
-                    staffController.viewAllCamp();
+                    studentController.viewRegisteredCamp();
                     break;
-                
-                case 3:    //view staff created camp
-                    staffController.viewCreatedCamp(currentStaff.getUserID());
 
-                    SatffCampMenu campMenu = new SatffCampMenu();
-                    campMenu.viewApp();
+                case 3:    //switch mode
+                    studentController.switchMode(1);
                     break;
-                
+
                 case 4:    //logout
-                    staffController.logout();
+                    studentController.logout();
                     break;
                 
                 default:

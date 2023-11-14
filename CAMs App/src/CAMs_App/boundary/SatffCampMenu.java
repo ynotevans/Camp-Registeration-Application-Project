@@ -5,12 +5,11 @@ import java.util.Scanner;
 import CAMs_App.controllers.StaffController;
 import CAMs_App.service.HelperService;
 
-public class CampMenu implements Menu {
+public class SatffCampMenu implements Menu {
     StaffController staffController = new StaffController();
 
     public void printMenu(){
         HelperService.clearScreen();
-        
         System.out.println("Available actions for this camp: ");
         System.out.println("(1) Edit camp");
         System.out.println("(2) Delete camps");

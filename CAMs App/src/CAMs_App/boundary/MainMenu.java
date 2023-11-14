@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import CAMs_App.data.Database;
 import CAMs_App.entity.Staff;
+import CAMs_App.entity.Student;
 import CAMs_App.service.HelperService;
 
 
@@ -23,17 +24,19 @@ public class MainMenu implements Menu{
 
     public void testData(){
         Map<String, Staff> user = new HashMap<String, Staff>();
+        Map<String, Student> user1 = new HashMap<String, Student>();
         Staff staff1 = new Staff("WWW111", null, Faculty.SCSE);
         Staff staff2 = new Staff("RRR222", null, Faculty.EEE);
-        Staff staff3 = new Staff("TTT444", null, Faculty.SCSE);
-        Staff staff4 = new Staff("YYY555", null, Faculty.CCEB);
+        Student staff3 = new Student("TTT444", null, Faculty.SCSE);
+        Student staff4 = new Student("YYY555", null, Faculty.CCEB);
 
         user.put("WWW111", staff1);
         user.put("RRR222", staff2);
-        user.put("TTT444", staff3);
-        user.put("YYY555", staff4);
+        user1.put("TTT444", staff3);
+        user1.put("YYY555", staff4);
         
         Database.setstaffData(user);
+        Database.setStudentsData(user1);
     }
 
     public void viewApp(){

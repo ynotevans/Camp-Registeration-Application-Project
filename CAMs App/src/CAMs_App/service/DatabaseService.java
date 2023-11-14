@@ -306,90 +306,6 @@ public class DatabaseService implements IFileDataService {
 		return success1 && success2;
 	}
 
-	// FYP Coordinator
-	@Override
-	public Map<String, CampCompMem> importCampCompMemData(String usersFilePath, String studentFilePath,
-			String campCompMemFilePath) {
-		Map<String, CampCompMem> campCompMemMap = new HashMap<String, CampCompMem>();
-
-		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
-		List<String[]> campCompMemRows = this.readCsvFile(campCompMemFilePath, campCompMemCsvHeaders);
-
-		for (String[] userRow : usersRows) {
-			Map<String, String> userInfoMap = parseUserRow(userRow);
-
-			String role = userInfoMap.get("identity");
-			if (!role.equals("student"))
-				continue;
-
-				
-			String userID = userInfoMap.get("userID");
-			String password = userInfoMap.get("password");
-            String facString = userInfoMap.get("faculty");
-            String position = userInfoMap.get("position");
-            Faculty faculty = Faculty.valueOf(facString);
-			
-			
-			
-			
-
-		
-			for (String[] campCompMemRow : campCompMemRows) {
-				if (!campCompMemRow[0].equals(userID))
-					continue;
-
-			}
-
-			CampCompMem campCompMem = new CampCompMem(student, position); // need fix
-
-			campCompMemMap.put(userID, campCompMem);
-		}
-
-		return campCompMemMap;
-	}
-
-	@Override
-	public boolean exportCampCompMemData(String usersFilePath, String studentFilePath,
-			String campCompMemFilePath, Map<String, CampCompMem> campCompMemMap) {
-		List<String> campCompMemLines = new ArrayList<String>();
-		List<String> userLines = new ArrayList<String>();
-
-		// User
-		List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
-		for (String[] userRow : usersRows) {
-			Map<String, String> userInfoMap = parseUserRow(userRow);
-			String userLine = String.format("%s,%s,%s,%s,%s",
-					userInfoMap.get("userID"),
-					userInfoMap.get("password"),
-					userInfoMap.get("email"),
-					userInfoMap.get("role"),
-					userInfoMap.get("name"));
-
-			if (userInfoMap.get("Identity").equals("student")) {
-				CampCompMem campCompMem = campCompMemMap.get(userInfoMap.get("userID"));
-
-				userLine = String.format("%s,%s,%s,%s,%s",
-						campCompMem.getUserID(),
-						campCompMem.getPassword());
-						
-			}
-
-			userLines.add(userLine);
-		}
-
-		// FYP Coordinator
-		for (CampCompMem campCompMem : campCompMemMap.values()) {
-			String campCompMemLine = String.format("%s", campCompMem.getUserID());
-
-			campCompMemLines.add(campCompMemLine);
-		}
-
-		// Write to CSV
-		boolean success1 = this.writeCsvFile(usersFilePath, userCsvHeaders, userLines);
-		boolean success2 = this.writeCsvFile(campCompMemFilePath, campCompMemCsvHeaders, campCompMemLines);
-		return success1 && success2;
-	}
-
 	// Projects
 	@Override
 	public Map<String, Camp> importCampData(String campFilePath, String usersFilePath,
@@ -558,4 +474,90 @@ public class DatabaseService implements IFileDataService {
 	// 			changeProjectTitleLines);
 	// 	return success1 && success2 && success3;
 	// test}
+
+
+	// // Camp Committee, dont need this, remove during final check
+	// @Override
+	// public Map<String, CampCompMem> importCampCompMemData(String usersFilePath, String studentFilePath,
+	// 		String campCompMemFilePath) {
+	// 	Map<String, CampCompMem> campCompMemMap = new HashMap<String, CampCompMem>();
+
+	// 	List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
+	// 	List<String[]> campCompMemRows = this.readCsvFile(campCompMemFilePath, campCompMemCsvHeaders);
+
+	// 	for (String[] userRow : usersRows) {
+	// 		Map<String, String> userInfoMap = parseUserRow(userRow);
+
+	// 		String role = userInfoMap.get("identity");
+	// 		if (!role.equals("student"))
+	// 			continue;
+
+				
+	// 		String userID = userInfoMap.get("userID");
+	// 		String password = userInfoMap.get("password");
+    //         String facString = userInfoMap.get("faculty");
+    //         String position = userInfoMap.get("position");
+    //         Faculty faculty = Faculty.valueOf(facString);
+			
+			
+			
+			
+
+		
+	// 		for (String[] campCompMemRow : campCompMemRows) {
+	// 			if (!campCompMemRow[0].equals(userID))
+	// 				continue;
+
+	// 		}
+
+	// 		CampCompMem campCompMem = new CampCompMem(student, position); // need fix
+
+	// 		campCompMemMap.put(userID, campCompMem);
+	// 	}
+
+	// 	return campCompMemMap;
+	// }
+
+	// @Override
+	// public boolean exportCampCompMemData(String usersFilePath, String studentFilePath,
+	// 		String campCompMemFilePath, Map<String, CampCompMem> campCompMemMap) {
+	// 	List<String> campCompMemLines = new ArrayList<String>();
+	// 	List<String> userLines = new ArrayList<String>();
+
+	// 	// User
+	// 	List<String[]> usersRows = this.readCsvFile(usersFilePath, userCsvHeaders);
+	// 	for (String[] userRow : usersRows) {
+	// 		Map<String, String> userInfoMap = parseUserRow(userRow);
+	// 		String userLine = String.format("%s,%s,%s,%s,%s",
+	// 				userInfoMap.get("userID"),
+	// 				userInfoMap.get("password"),
+	// 				userInfoMap.get("email"),
+	// 				userInfoMap.get("role"),
+	// 				userInfoMap.get("name"));
+
+	// 		if (userInfoMap.get("Identity").equals("student")) {
+	// 			CampCompMem campCompMem = campCompMemMap.get(userInfoMap.get("userID"));
+
+	// 			userLine = String.format("%s,%s,%s,%s,%s",
+	// 					campCompMem.getUserID(),
+	// 					campCompMem.getPassword());
+						
+	// 		}
+
+	// 		userLines.add(userLine);
+	// 	}
+
+	// 	// FYP Coordinator
+	// 	for (CampCompMem campCompMem : campCompMemMap.values()) {
+	// 		String campCompMemLine = String.format("%s", campCompMem.getUserID());
+
+	// 		campCompMemLines.add(campCompMemLine);
+	// 	}
+
+	// 	// Write to CSV
+	// 	boolean success1 = this.writeCsvFile(usersFilePath, userCsvHeaders, userLines);
+	// 	boolean success2 = this.writeCsvFile(campCompMemFilePath, campCompMemCsvHeaders, campCompMemLines);
+	// 	return success1 && success2;
+	// }
+
 }

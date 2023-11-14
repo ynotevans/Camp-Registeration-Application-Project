@@ -2,6 +2,8 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
+import javax.print.DocFlavor.STRING;
+
 import CAMs_App.controllers.UserController;
 import CAMs_App.service.HelperService;
 
@@ -15,6 +17,7 @@ public class LoginMenu implements Menu {
         
     }
 
+    
     public void viewApp(){
         this.printMenu();
         Scanner sc = new Scanner(System.in);
@@ -26,7 +29,7 @@ public class LoginMenu implements Menu {
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1:
+                case 1:  //staff login
                     userController.login(true);
 
                     StaffMenu staffMenu = new StaffMenu();
@@ -34,8 +37,43 @@ public class LoginMenu implements Menu {
                     
                     break;
 
-                case 2:
-                    userController.login(true);
+                case 2:   //student login
+                    userController.login(false);
+                    HelperService.clearScreen();
+                    System.out.println("Do you want to operate as: ");
+                    System.out.println("(1) Student ");
+                    System.out.println("(2) Camp Committee");
+                    System.out.println("(3) Exit\n");
+                    int mode;
+
+                    do{
+                        System.out.print("Enter your selection: ");
+                        mode = sc.nextInt();
+
+                        switch (mode) {
+                            case 1:
+                                StudentMenu studentMenu = new StudentMenu();
+                                studentMenu.viewApp();
+                                break;
+
+                            case 2:
+                                CampComMenu campComMenu = new CampComMenu();
+                                campComMenu.viewApp();
+                                break;
+
+                            case 3:   
+                                System.out.println("Prompt to Exit...");
+                                System.exit(0);
+                                break;
+                        
+                            default:
+                                System.out.println("Invalid selection, please select again...");
+                                break;
+                    
+                    
+                            
+                        }
+                    }while (mode!= 3);
                     break;
                 
                 case 3:
@@ -49,7 +87,8 @@ public class LoginMenu implements Menu {
             }
 
         }while(choice != 3);
-    
+
         sc.close();
     }
+
 }
