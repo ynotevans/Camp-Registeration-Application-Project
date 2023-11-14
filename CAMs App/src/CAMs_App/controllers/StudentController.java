@@ -43,6 +43,8 @@ public class StudentController extends UserController {
             else{
                 System.out.println("You are not a committe member of any camp");
                 System.out.println("Unable to switch mode !!!");
+                StudentMenu studentMenu = new StudentMenu();
+                studentMenu.printMenu();
             }
         }
         else{
