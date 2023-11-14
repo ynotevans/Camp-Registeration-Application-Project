@@ -41,8 +41,8 @@ public class Database {
 	public static boolean saveData() {
 		Database.setStudentsData(studentsData);
 		Database.setstaffData(staffData);
-		Database.setCampCompMemData(campCompMemData); // need to check whether this one needed
 		Database.setCampData(campData);
+		// Database.setCampCompMemData(campCompMemData); // don't need this, delete during last check
 		// Database.setEnquiriesData(enquiriesData);
         // Database.setEnquiriesData(enquiriesData);
         
@@ -94,29 +94,6 @@ public class Database {
 		// fileDataService.exportSupervisorData(filePathsMap.get("user"), filePathsMap.get("supervisor"), supervisorsData);
 	}
 
-	// ---------- Camp Committee member ---------- //
-	/**
-	 * Gets the FYP coordinators data map.
-	 *
-	 * @return a {@link Map} containing CampCompMem ID as the key and
-	 *         {@link CampCompMem} objects as the value
-	 */
-	public static Map<String, CampCompMem> getCampCompMemData() {
-		return Database.campCompMemData;
-	}
-
-	/**
-	 * Sets the CampCompMem data map and saves the data to the file system.
-	 *
-	 * @param fypcoordinatorsData a {@link Map} containing CampCompMem ID as the
-	 *                            key and {@link CampCompMem} objects as the
-	 *                            value
-	 */
-	public static void setCampCompMemData(Map<String, CampCompMem> campCompMemData) {
-		Database.campCompMemData = campCompMemData;
-		// fileDataService.exportFYPCoordinatorData(filePathsMap.get("user"), filePathsMap.get("supervisor"),
-		// 		filePathsMap.get("fypcoordinator"), fypcoordinatorsData);
-	}
 
 	// ---------- Camp ---------- //
 	/**
