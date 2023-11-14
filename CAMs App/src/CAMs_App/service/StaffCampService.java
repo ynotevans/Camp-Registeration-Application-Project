@@ -5,32 +5,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import CAMs_App.service.EnquiriesService;
 import CAMs_App.data.AuthData;
-import CAMs_App.entity.Camp;
-import CAMs_App.entity.Enquiries;
-import CAMs_App.entity.Suggestions;
+import CAMs_App.data.Database;
+import CAMs_App.entity.*;
 
+import CAMs_App.service.DatabaseService;
 public class StaffCampService extends CampManagementService{
     Scanner sc = new Scanner(System.in);  
     ArrayList<Camp>createdCamps = new ArrayList<>();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    // view camp info
 
-    public void viewCampInfo(Camp camp){
-        System.out.println(camp.getCampName());
-        System.out.println("Registeration closing date: "+camp.getRegCloseDate());
-        System.out.println("Camp description: "+camp.getDescription());
-        System.out.println("Location of the camp: "+camp.getLocation());
-        System.out.println("Camp start date: "+camp.getCampDate());
-        System.out.println("Number of days for the camp: "+camp.getNumberOfCampDays());
-        System.out.println("Camp end date: "+camp.getCampDate().plusDays(camp.getNumberOfCampDays()));
-        System.out.println("Total slots: "+camp.getTotalSlots());
-        System.out.println("Remaining slots: "+camp.getRemainingSlot());
-        System.out.println("Committee members participating: "+camp.getCommittee());
-        System.out.println("Staff in Charge: "+camp.getStaffInCharge());
-    }
-    // create, edit, delete camp
+ 
     public void createCamp (String campName,LocalDate dates,LocalDate registerDate,String availability,
     String location,int totalSlots,int campCommitteeSlots,String description,String staffInCharge){
         Camp camp = new Camp();
@@ -119,8 +105,15 @@ public class StaffCampService extends CampManagementService{
         }while(choice!=8);
     }
 
-    public void deleteCamp(Camp camp){
-        //camp=null;
+    public boolean deleteCamp(String campName){
+        Camp camp = DatabaseService.getCamp(campName);
+
+        if(camp.getAttendees().size()!= 0) return false;
+        else{
+            Database.getCampData().remove(campName);
+            return true;
+        }
+
     }
 
     // toggle visibility
@@ -132,54 +125,18 @@ public class StaffCampService extends CampManagementService{
 
     // view camp
     public void viewAllCamps(){
-        //print all camps from database
+        for(int i = 0 ; i < Database.getCampData().size() ; i++){
+           
+        }
     }
 
     // see camps created
     public void viewCampsCreated(){
-        for(int i=0;i<createdCamps.size();i++)
-            System.out.println(createdCamps.get(i).getCampName());
+        for(int i=0;i<createdCamps.size();i++){
+            
+        }
+            
     }
-
-    // staff can view and reply enquiries to the students in the camp she created
-    public void viewAllEnquiries(Camp camp){
-        if(camp.getStaffInCharge() == AuthData.getCurrentUser().getUserID()){
-            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
-            System.out.println("Enquiry " + (i+1));
-            camp.getEnquiryList().get(i).viewEnquiries();
-            System.out.println("");
-        }
-        }
-        else{
-            System.out.println("Unable to view enquiry list of camp created by other staff");
-        }
-      
-    }
-
-    public void viewEnquiries(Camp camp , int index){
-        if(camp.getStaffInCharge() == AuthData.getCurrentUser().getUserID()){
-             camp.getEnquiryList().get(index).viewEnquiries();
-        }
-        else{
-            System.out.println("Unable to view enquiry of camp created by other staff");
-        }
-       
-    }
-
-    public void replyEnquiries(Camp camp , int index){
-        Enquiries q = camp.getEnquiryList().get(index - 1);
-        if(!q.getProcessed()){
-            System.out.println("Reply to query: ");
-            String ans = sc.next();
-            q.setAnswer(ans, AuthData.getCurrentUser().getUserID());
-            System.out.println("Query processed");
-        }
-        else{
-            System.out.println("This query has already been processed...");
-        }
-     
-    }
-
 
     // can view and approve suggestions made
     public void viewSuggestions(Camp camp){
@@ -205,5 +162,46 @@ public class StaffCampService extends CampManagementService{
             System.out.println(camp.getAttendees().get(i).getUserID()+":"
             +camp.getAttendees().get(i).getPoints());
         }
+    }
+
+    //can choose to view processed or unprocessed 
+    public void viewAllEnquiries(String CampName , boolean printProcessed){
+        Camp camp = DatabaseService.getCamp(CampName);
+        if(camp.getStaffInCharge() != AuthData.getCurrentUser().getUserID()){
+           System.out.println("Unable to view enquiry list of camp created by other staff");
+           return;
+        }
+        
+        ArrayList<Enquiries> enquiries = camp.getEnquiryList();
+        Enquiries q;
+        if(printProcessed){
+            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+                q = enquiries.get(i);
+                if(q.getProcessed()){
+                    System.out.println("Enquiry: " + i + 1);
+                    EnquiriesService.viewEnquiries(q);
+                }
+            }
+        }
+        else{
+            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+                q = enquiries.get(i);
+                if(!q.getProcessed()){
+                    System.out.println("Enquiry: " + i + 1);
+                    EnquiriesService.viewEnquiries(q);
+                }
+            }
+        }
+           
+    }
+
+    public void replyEnquiries(Camp camp , int index , String reply){
+       if(AuthData.getCurrentUser().getUserID() != camp.getStaffInCharge()){
+        System.out.println("Unable to reply, camp is incharged by other staff!!");
+       }
+       else{
+        EnquiriesService.replyEnquiries(camp.getCampName(), index, reply);
+        System.out.println("Reply posted!!");
+       }
     }
 }

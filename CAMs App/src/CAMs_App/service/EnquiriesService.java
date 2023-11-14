@@ -1,9 +1,9 @@
 package CAMs_App.service;
 import CAMs_App.entity.*;
 import CAMs_App.data.AuthData;
-public class EnquiriesService {
+public final class EnquiriesService {
 
-    public boolean replyEnquiries(String CampName, int index , String reply){
+    public static boolean replyEnquiries(String CampName, int index , String reply){
         Camp camp = DatabaseService.getCamp(CampName);
         Enquiries q = camp.getEnquiryList().get(index);
         if(q.getProcessed())return false;
@@ -15,7 +15,7 @@ public class EnquiriesService {
         return true;
     }
 
-    public void createEnquiries(String CampName , String question){
+    public static void createEnquiries(String CampName , String question){
         Enquiries q = new Enquiries(question,AuthData.getCurrentUser().getUserID());
         Camp camp = DatabaseService.getCamp(CampName);
 
@@ -23,7 +23,7 @@ public class EnquiriesService {
 
     }
 
-    public boolean editEnquiries(String CampName , int index , String question){
+    public static boolean editEnquiries(String CampName , int index , String question){
         Camp camp = DatabaseService.getCamp(CampName);
         Enquiries q = camp.getEnquiryList().get(index);
         if(q.getProcessed()) return false;
@@ -33,7 +33,7 @@ public class EnquiriesService {
         }
     }
 
-    public boolean deleteEnquiry(String CampName , int index){
+    public static boolean deleteEnquiry(String CampName , int index){
         Camp camp = DatabaseService.getCamp(CampName);
         Enquiries q = camp.getEnquiryList().get(index);
         if(q.getProcessed()) return false;
@@ -42,5 +42,14 @@ public class EnquiriesService {
            return true;
         }
     }
+
+    public static void viewEnquiries(Enquiries q){
+        System.out.println("Inquirer:" + q.getInquirer());
+        System.out.println("Enquiry: " + q.getEnquiry());
+
+        System.out.println("Answerer: " + q.getAnswerer());
+        System.out.println("Answer: " + q.getAnswer());
+    }
+
 
 }
