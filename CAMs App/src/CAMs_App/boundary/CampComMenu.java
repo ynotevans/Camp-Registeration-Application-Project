@@ -44,7 +44,7 @@ public class CampComMenu implements Menu{
                 case 2:    //view  enquiries
                     campComController.viewAllEnquiries();    //update the functions
                     break;
-                
+            
                 case 3:    //reply enquiries
                     campComController.replyEnquiry(0);   //update the functions
                     break;
