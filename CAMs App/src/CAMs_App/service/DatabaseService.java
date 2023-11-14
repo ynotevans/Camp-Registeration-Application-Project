@@ -322,12 +322,15 @@ public class DatabaseService implements IFileDataService {
 			if (!role.equals("student"))
 				continue;
 
-             
+				
 			String userID = userInfoMap.get("userID");
 			String password = userInfoMap.get("password");
             String facString = userInfoMap.get("faculty");
-            Faculty faculty = Faculty.valueOf(facString);
             String position = userInfoMap.get("position");
+            Faculty faculty = Faculty.valueOf(facString);
+			
+			
+			
 			
 
 		
@@ -337,9 +340,9 @@ public class DatabaseService implements IFileDataService {
 
 			}
 
-			// CampCompMem campCompMem = new CampCompMem(student, position); // need fix
+			CampCompMem campCompMem = new CampCompMem(student, position); // need fix
 
-			// campCompMemMap.put(userID, campCompMem);
+			campCompMemMap.put(userID, campCompMem);
 		}
 
 		return campCompMemMap;
