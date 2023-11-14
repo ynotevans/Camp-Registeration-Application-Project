@@ -28,5 +28,4 @@ public class HelperService {
         System.out.println("Number of days: " + camp.getNumberOfCampDays());
         System.out.println("Camp remaining slot: " + camp.getRemainingSlot());
     }
-
 }

@@ -23,7 +23,7 @@ public class CampComController extends StudentController{
 
     public void deleteSuggestion(){}
 
-    public void addPoints(Student student) {
+    public static void addPoints(Student student) {
 		student.setPoints(student.getPoints() + 1);
 	}
 	

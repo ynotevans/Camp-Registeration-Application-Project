@@ -12,8 +12,8 @@ public class StudentMenu implements Menu {
     StudentController studentController = new StudentController();
 
     public void printMenu(){
-        HelperService.clearScreen();
         System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
+        System.out.println("Student profile reflected here....");
         System.out.println("Available actions for you: ");
         System.out.println("(1) View available camps");
         System.out.println("(2) View registered camp(s)");
@@ -24,6 +24,7 @@ public class StudentMenu implements Menu {
     
 
     public void viewApp(){
+        HelperService.clearScreen();
         this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
