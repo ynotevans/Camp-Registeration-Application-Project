@@ -13,6 +13,7 @@ public class StudentMenu implements Menu {
 
     public void printMenu(){
         System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
+        System.out.println("Student profile reflected here....");
         System.out.println("Available actions for you: ");
         System.out.println("(1) View available camps");
         System.out.println("(2) View registered camp(s)");
