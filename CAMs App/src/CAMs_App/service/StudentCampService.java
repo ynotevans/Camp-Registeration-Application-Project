@@ -29,10 +29,11 @@ public class StudentCampService {
 	 * joinAsAttendee in the Student Controller will call this method
 	 * 
 	 * do necessary checking in registerAsAttendee
+	 * //
 	 */
 	
-	public boolean registerAsAttendee(String camp){
-	
+	public void registerAsAttendee(String camp){
+		System.out.println("test");
 	}
 	
 	public void registerAsCommittee(String camp) {
@@ -48,7 +49,7 @@ public class StudentCampService {
 		System.out.println("Please write down your query: ");
 		String query = sc.next();
 		
-		Enquiries q = new Enquiries(query, user.getUserID());	
+		Enquiries q = new Enquiries(query, user.getUserID());		
 		return q;
 	}
 
