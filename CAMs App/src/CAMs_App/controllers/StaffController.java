@@ -1,6 +1,13 @@
 package CAMs_App.controllers;
 
+import java.util.Scanner;
+
+import CAMs_App.service.DatabaseService;
+import CAMs_App.service.SuggestionsService;
+
 public class StaffController extends UserController{
+    SuggestionsService suggestionsService = new SuggestionsService();
+
     public void createCamp(){
 
     }
@@ -41,8 +48,28 @@ public class StaffController extends UserController{
 
     }
 
-    public void processSuggestions(){
+    public void processSuggestions(){                   //set the process attribute
 
+    }
+
+    public void approveSuggestion(){                    //only show the processed suggestions
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Do you want to accept this suggestion? (Y/N)");
+        char ans = sc.next().charAt(0);
+        boolean approve;
+
+        if(ans == 'Y')
+            approve = true;
+        else
+            approve = false;
+
+        
+        if(suggestionsService.approveSuggestions(null, 0, approve)){
+            CampComController.addPoints(null);
+        }
+
+        sc.close();
     }
 
     public void viewEnquiries(){
@@ -53,7 +80,6 @@ public class StaffController extends UserController{
 
     }
 
-
-
+    
 
 }

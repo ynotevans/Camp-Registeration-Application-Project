@@ -3,7 +3,6 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.CampComController;
-import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.User;
 import CAMs_App.service.HelperService;
