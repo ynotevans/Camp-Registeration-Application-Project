@@ -54,8 +54,8 @@ public class CampComController extends StudentController{
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
             String ans = sc.next();
-            q.setAnswer(ans , user.getUserID());
-            addPoints();
+            q.setAnswer(ans);
+            addPoints(user);
             System.out.println("Query processed");
             System.out.println("1 point awarded");
             System.out.println("Current point(s): " + user.getPoints());
