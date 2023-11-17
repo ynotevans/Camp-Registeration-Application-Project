@@ -5,7 +5,9 @@ import static CAMs_App.controllers.UserController.sc;
 import java.util.ArrayList;
 
 import CAMs_App.entity.User;
+import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
@@ -13,6 +15,7 @@ import CAMs_App.service.*;
 
 public class CampComController extends StudentController{
 
+    Student user = (CampCompMem)AuthData.getCurrentUser();
     public void createSuggestion(){}
 
     public void viewCampDetails(){     ///print the camp details
