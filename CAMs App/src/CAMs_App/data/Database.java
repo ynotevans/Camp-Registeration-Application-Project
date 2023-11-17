@@ -20,7 +20,7 @@ public class Database {
 	private static Map<String, Staff> staffData = new HashMap<String, Staff>();
 
 	
-	private static Map<String, CampCompMem> campCompMemData = new HashMap<String, CampCompMem>();
+	//private static Map<String, CampCompMem> campCompMemData = new HashMap<String, CampCompMem>();
 
 	private static Map<String, Camp> campData = new HashMap<String, Camp>();
 
