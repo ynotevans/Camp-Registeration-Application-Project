@@ -14,10 +14,10 @@ import CAMs_App.entity.User;
 
 public class CampCommitteeService {
 	private static final Scanner sc = new Scanner(System.in);
-	// private CampCompMem user = Database.getStudentsData().get(AuthData.getCurrentUser().getUserID());
+	private Student user = Database.getStudentsData().get(AuthData.getCurrentUser().getUserID());
     
-	private CampCompMem user = Database.getStudentsData().get(AuthData.getCurrentUser().getUserID()); 
-	
+    public CampCommitteeService(){};
+
 	public void viewAttendeeList() {
 		
 	}
