@@ -143,12 +143,6 @@ public class StaffCampService extends CampManagementService{
         camp.getSuggestionList(); 
     }
 
-    public void approveSuggestions(Camp camp, Suggestions suggestions){
-        System.out.println("Approve suggestion?");
-        boolean approve = sc.nextBoolean();
-        suggestions.setAccepted(approve);
-    }
-
     // generate attendance report
     public void generateAttendanceReport(Camp camp){
         System.out.println("Participants attending camp");
