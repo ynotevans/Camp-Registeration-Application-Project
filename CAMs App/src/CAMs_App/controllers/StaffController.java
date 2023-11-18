@@ -2,7 +2,9 @@ package CAMs_App.controllers;
 
 import java.util.Scanner;
 
+import CAMs_App.entity.Student;
 import CAMs_App.service.DatabaseService;
+import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
 public class StaffController extends UserController{
@@ -66,7 +68,7 @@ public class StaffController extends UserController{
 
         
         if(suggestionsService.approveSuggestions(null, 0, approve)){
-            CampComController.addPoints(null);
+            StaffCampService.addPoints(Student);
         }
 
         sc.close();

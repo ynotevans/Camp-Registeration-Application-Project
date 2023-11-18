@@ -25,10 +25,6 @@ public class CampComController extends StudentController{
     public void generateReport(){}
 
     public void deleteSuggestion(){}
-
-    public static void addPoints(Student student) {
-		student.setPoints(student.getPoints() + 1);
-	}
 	
 	
     public void viewAllEnquiries(){
@@ -55,7 +51,7 @@ public class CampComController extends StudentController{
             System.out.println("Reply to query: ");
             String ans = sc.next();
             q.setAnswer(ans);
-            addPoints(user);
+            StaffCampService.addPoints(user);
             System.out.println("Query processed");
             System.out.println("1 point awarded");
             System.out.println("Current point(s): " + user.getPoints());

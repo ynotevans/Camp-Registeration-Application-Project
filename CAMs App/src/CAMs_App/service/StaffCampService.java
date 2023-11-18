@@ -130,7 +130,7 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
-    // see camps created
+    // see staff created camps
     public void viewCampsCreated(){
         for(int i=0;i<createdCamps.size();i++){
             
@@ -138,10 +138,6 @@ public class StaffCampService extends CampManagementService{
             
     }
 
-    // can view and approve suggestions made
-    public void viewSuggestions(Camp camp){
-        camp.getSuggestionList(); 
-    }
 
     // generate attendance report
     public void generateAttendanceReport(Camp camp){
@@ -160,44 +156,53 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
-    //can choose to view processed or unprocessed 
-    public void viewAllEnquiries(String CampName , boolean printProcessed){
-        Camp camp = DatabaseService.getCamp(CampName);
-        if(camp.getStaffInCharge() != AuthData.getCurrentUser().getUserID()){
-           System.out.println("Unable to view enquiry list of camp created by other staff");
-           return;
-        }
-        
-        ArrayList<Enquiries> enquiries = camp.getEnquiryList();
-        Enquiries q;
-        if(printProcessed){
-            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
-                q = enquiries.get(i);
-                if(q.getProcessed()){
-                    System.out.println("Enquiry: " + i + 1);
-                    EnquiriesService.viewEnquiries(q);
-                }
-            }
-        }
-        else{
-            for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
-                q = enquiries.get(i);
-                if(!q.getProcessed()){
-                    System.out.println("Enquiry: " + i + 1);
-                    EnquiriesService.viewEnquiries(q);
-                }
-            }
-        }
-           
-    }
+    public static void addPoints(Student student) {
+		student.setPoints(student.getPoints() + 1);
+	}
 
-    public void replyEnquiries(Camp camp , int index , String reply){
-       if(AuthData.getCurrentUser().getUserID() != camp.getStaffInCharge()){
-        System.out.println("Unable to reply, camp is incharged by other staff!!");
-       }
-       else{
-        EnquiriesService.replyEnquiries(camp.getCampName(), index, reply);
-        System.out.println("Reply posted!!");
-       }
-    }
+    // //can choose to view processed or unprocessed 
+    // public void viewAllEnquiries(String CampName , boolean printProcessed){
+    //     Camp camp = DatabaseService.getCamp(CampName);
+    //     if(camp.getStaffInCharge() != AuthData.getCurrentUser().getUserID()){
+    //        System.out.println("Unable to view enquiry list of camp created by other staff");
+    //        return;
+    //     }
+        
+    //     ArrayList<Enquiries> enquiries = camp.getEnquiryList();
+    //     Enquiries q;
+    //     if(printProcessed){
+    //         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+    //             q = enquiries.get(i);
+    //             if(q.getProcessed()){
+    //                 System.out.println("Enquiry: " + i + 1);
+    //                 EnquiriesService.viewEnquiries(q);
+    //             }
+    //         }
+    //     }
+    //     else{
+    //         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
+    //             q = enquiries.get(i);
+    //             if(!q.getProcessed()){
+    //                 System.out.println("Enquiry: " + i + 1);
+    //                 EnquiriesService.viewEnquiries(q);
+    //             }
+    //         }
+    //     }
+           
+    // }
+
+    // public void replyEnquiries(Camp camp , int index , String reply){
+    //    if(AuthData.getCurrentUser().getUserID() != camp.getStaffInCharge()){
+    //     System.out.println("Unable to reply, camp is incharged by other staff!!");
+    //    }
+    //    else{
+    //     EnquiriesService.replyEnquiries(camp.getCampName(), index, reply);
+    //     System.out.println("Reply posted!!");
+    //    }
+    // }
+
+    // // can view and approve suggestions made
+    // public void viewSuggestions(Camp camp){
+    //     camp.getSuggestionList(); 
+    // }
 }

@@ -5,6 +5,7 @@ import CAMs_App.entity.*;
 
 public class AuthData {
     private static User currentUser;
+    private static Camp currentCamp;
     private AuthData(){};
 
     public static void setCurrentUser(User currentUser) {
@@ -18,6 +19,14 @@ public class AuthData {
 
     public static User getCurrentUser() {
         return AuthData.currentUser;
+    }
+
+    public static Camp getCurrentCamp() {
+        return AuthData.currentCamp;
+    }
+
+    public static void setCurrentCamp(Camp currentCamp){
+        AuthData.currentCamp = currentCamp;
     }
 
 }
