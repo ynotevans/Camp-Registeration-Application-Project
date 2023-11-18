@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import CAMs_App.service.EnquiriesService;
 import CAMs_App.data.AuthData;
@@ -125,15 +126,20 @@ public class StaffCampService extends CampManagementService{
 
     // view camp
     public void viewAllCamps(){
-        for(int i = 0 ; i < Database.getCampData().size() ; i++){
-           
+        Map<String, Camp> camp1 = Database.getCampData(); 
+
+        for (Camp camp : camp1.values()){
+            HelperService.viewCamp(camp);
         }
     }
 
     // see staff created camps
-    public void viewCampsCreated(){
-        for(int i=0;i<createdCamps.size();i++){
-            
+    public void viewCampsCreated(String userID){
+        Map<String, Camp> camp1 = Database.getCampData(); 
+
+        for (Camp camp : camp1.values()){
+            if(camp.getStaffInCharge() == userID)
+                HelperService.viewCamp(camp);
         }
             
     }

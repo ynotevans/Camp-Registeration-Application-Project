@@ -3,12 +3,14 @@ package CAMs_App.controllers;
 import java.util.Scanner;
 
 import CAMs_App.entity.Student;
+import CAMs_App.entity.Suggestions;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
 public class StaffController extends UserController{
     SuggestionsService suggestionsService = new SuggestionsService();
+    StaffCampService staffCampService = new StaffCampService();
 
     public void createCamp(){
 
@@ -28,10 +30,12 @@ public class StaffController extends UserController{
 
     public void viewAllCamp(){
         System.out.println("print all camp........");
+        staffCampService.viewAllCamps();
     }
 
-    public void viewCreatedCamp(String staffID){
+    public void viewCreatedCamp(String userID){
         System.out.println("print staff created camp........");
+        staffCampService.viewCampsCreated(userID);
     }
 
     public void generateReport(String campName){
@@ -50,11 +54,11 @@ public class StaffController extends UserController{
 
     }
 
-    public void processSuggestions(){                   //set the process attribute
-
+    public void processSuggestions(int index){                   //set the process attribute
+        suggestionsService.processSuggestions(null, index);
     }
 
-    public void approveSuggestion(Student student){                    //only show the processed suggestions
+    public void approveSuggestion(Student student, int index){                    //only show the processed suggestions
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Do you want to accept this suggestion? (Y/N)");
@@ -67,7 +71,7 @@ public class StaffController extends UserController{
             approve = false;
 
         
-        if(suggestionsService.approveSuggestions(null, 0, approve)){
+        if(suggestionsService.approveSuggestions(null, index, approve)){
             CampComController.addPoints(student);
         }
 

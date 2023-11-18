@@ -67,6 +67,7 @@ public class StudentCampService {
 		Camp camp = DatabaseService.getCamp(campName);
 		camp.addAttendees((Student)AuthData.getCurrentUser());
 	}
+	
 	public static void registerAsCommittee(String campName){
 		Camp camp = DatabaseService.getCamp(campName);
 		camp.addCommittee((Student)AuthData.getCurrentUser());

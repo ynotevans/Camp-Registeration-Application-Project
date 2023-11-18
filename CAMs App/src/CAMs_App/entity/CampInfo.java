@@ -23,6 +23,7 @@ public class CampInfo {
         setCampName(campName);
         setCampDate(campDate);
         setRegCloseDate(regCloseDate);
+        setUserGroup(userGroup);
         setLocation(location);
         setTotalSlots(totalSlots);
         setCampCommitteeSlots(campCommitteeSlots);

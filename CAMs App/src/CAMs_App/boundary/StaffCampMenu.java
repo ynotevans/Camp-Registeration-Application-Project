@@ -5,7 +5,7 @@ import java.util.Scanner;
 import CAMs_App.controllers.StaffController;
 import CAMs_App.service.HelperService;
 
-public class SatffCampMenu implements Menu {
+public class StaffCampMenu implements Menu {
     StaffController staffController = new StaffController();
 
     public void printMenu(){
@@ -17,8 +17,9 @@ public class SatffCampMenu implements Menu {
         System.out.println("(4) View enquiries for this camp");
         System.out.println("(5) Reply enquiries for this camp");
         System.out.println("(6) View suggestions for this camp");
-        System.out.println("(7) Approve suggestions to this camp");
-        System.out.println("(8) Logout\n");
+        System.out.println("(7) Process suggestions for this camp");
+        System.out.println("(8) Approve suggestions for this camp");
+        System.out.println("(9) Logout\n");
     }
 
     
@@ -56,11 +57,15 @@ public class SatffCampMenu implements Menu {
                     staffController.viewSuggestions();
                     break;
 
-                case 7:    //approve suggestion
-                    staffController.processSuggestions();
+                case 7:    //process suggestion
+                    staffController.processSuggestions(0);
                     break;
                 
-                case 8:    //logout
+                case 8:    //approve suggestion
+                    staffController.approveSuggestion(null, 0);
+                    break;
+                                
+                case 9:    //logout
                     staffController.logout();
                     break;
                 
@@ -69,7 +74,7 @@ public class SatffCampMenu implements Menu {
                     break;
             }
 
-        }while(choice != 8);
+        }while(choice != 9);
     
         sc.close();
 

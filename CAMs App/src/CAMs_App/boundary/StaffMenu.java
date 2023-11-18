@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
+import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
+import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
 
 public class StaffMenu implements Menu{
@@ -43,7 +45,13 @@ public class StaffMenu implements Menu{
                 case 3:    //view staff created camp
                     staffController.viewCreatedCamp(currentStaff.getUserID());
 
-                    SatffCampMenu campMenu = new SatffCampMenu();
+                    System.out.println("Select a camp to operate (campName): ");
+                    String campName = sc.next();
+
+                    Camp selectedCamp = DatabaseService.getCamp(campName);
+                    AuthData.setCurrentCamp(selectedCamp);
+
+                    StaffCampMenu campMenu = new StaffCampMenu();   //not here
                     campMenu.viewApp();
                     break;
                 

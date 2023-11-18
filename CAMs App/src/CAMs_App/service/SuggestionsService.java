@@ -20,6 +20,14 @@ public class SuggestionsService {
         }
     }
 
+
+    public void processSuggestions(String CampName, int index){
+        Camp camp = DatabaseService.getCamp(CampName);
+        Suggestions s = camp.getSuggestionList().get(index);
+
+        s.setProcessed(true);
+    }
+
     public void createSuggestion(String CampName, String suggestion){
         Suggestions s = new Suggestions(suggestion, AuthData.getCurrentUser().getUserID());
         Camp camp = DatabaseService.getCamp(CampName);
