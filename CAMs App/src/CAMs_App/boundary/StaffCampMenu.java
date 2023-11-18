@@ -19,7 +19,9 @@ public class StaffCampMenu implements Menu {
         System.out.println("(6) View suggestions for this camp");
         System.out.println("(7) Process suggestions for this camp");
         System.out.println("(8) Approve suggestions for this camp");
-        System.out.println("(9) Logout\n");
+        System.out.println("(9) Previous Page");
+        System.out.println("(10) Logout\n");
+        
     }
 
     
@@ -29,14 +31,12 @@ public class StaffCampMenu implements Menu {
         Scanner sc = new Scanner(System.in);
         int choice;
         do{
-            System.out.print("Enter ur selection: ");
+            System.out.print("Enter ur action for this camp: ");
             choice = sc.nextInt();
 
             switch (choice) {
                 case 1:    //edit camp
-                    System.out.println("Enter current camp name: \n");
-                    String curCampName = sc.nextLine();
-                    staffController.editCamp(curCampName);
+                    staffController.editCamp();
                     break;
 
                 case 2:    //delete camp
@@ -66,8 +66,13 @@ public class StaffCampMenu implements Menu {
                 case 8:    //approve suggestion
                     staffController.approveSuggestion(null, 0);
                     break;
+
+                case 9: //go to previous page
+                    StaffMenu staffMenu = new StaffMenu();
+                    staffMenu.viewApp();
+                    break;
                                 
-                case 9:    //logout
+                case 10:    //logout
                     staffController.logout();
                     break;
                 
@@ -76,7 +81,7 @@ public class StaffCampMenu implements Menu {
                     break;
             }
 
-        }while(choice != 9);
+        }while(choice != 10);
     
         sc.close();
 

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
+import CAMs_App.data.AuthData;
 import CAMs_App.data.Database;
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Camp;
@@ -20,7 +21,8 @@ public class StaffController extends UserController{
     
     }
 
-    public void editCamp(String campName){
+    public void editCamp(){
+        String campName = AuthData.getCurrentCamp().getCampName();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Camp camp = DatabaseService.getCamp(campName);
         int choice=0;
