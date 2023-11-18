@@ -1,95 +1,79 @@
 package CAMs_App.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import CAMs_App.data.AuthData;
-import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Student;
 
 public class StudentCampService {
-	private static final Scanner sc = new Scanner(System.in);
-	private Student user = Database.getStudentsData().get(AuthData.getCurrentUser().getUserID()); 
 	
 	
-	
-	public void viewAvailableCamp() {
-		
+	private static boolean checkClash(Camp camp1 , Camp camp2){
+		LocalDate camp1Start = camp1.getCampDate();
+		LocalDate camp1End  = camp1Start.plusDays(camp1.getNumberOfCampDays());
+
+		LocalDate camp2Start = camp2.getCampDate();
+		LocalDate camp2End  = camp2Start.plusDays(camp2.getNumberOfCampDays());
+
+		boolean isClash = !((camp1End.isBefore(camp2Start)) || (camp1Start.isAfter(camp2End)));
+    return isClash;
 	}
-	
-	public void viewRegisteredCamp() {
-		ArrayList<String> list = user.getRegisteredCamp();
-		for(int i =0;i < list.size(); i++) {
-			
+
+	public static boolean checkCampClashDate(String campName){
+		Student student = (Student)AuthData.getCurrentUser();
+		Camp newCamp = DatabaseService.getCamp(campName); //to check clash date with this camp
+		
+		ArrayList<String> registeredCamp = student.getRegisteredCamp();
+		Camp camp; //camp registered by current student
+
+		for(int i = 0 ; i < registeredCamp.size() ; i++){
+			camp = DatabaseService.getCamp(registeredCamp.get(i));
+			if(!checkClash(newCamp , camp)) continue;
+			return true;
 		}
+	return false;
 	}
-	/*
-	 * joinAsAttendee in the Student Controller will call this method
-	 * 
-	 * do necessary checking in registerAsAttendee
-	 * //
-	 */
-	
-	public void registerAsAttendee(String camp){
-		System.out.println("test");
+
+	public static boolean checkRegisterDeadline(String campName){
+		Camp camp = DatabaseService.getCamp(campName);
+		if(camp.getRegCloseDate().isBefore(LocalDate.now()))return true;
+		return false;
+
 	}
-	
-	public void registerAsCommittee(String camp) {
+
+	public static boolean isCampFull(String campName){
+		Camp camp = DatabaseService.getCamp(campName);
+		if(camp.getRemainingSlot() == 0) return true;
+		return false;
+	}
+
+	public static void upDateRemainingSlot(String campName){
+		Camp camp = DatabaseService.getCamp(campName);
+		camp.setRemainingSlot(camp.getRemainingSlot()-1);
+	}
+
+	public static boolean checkWithdrawBefore(String campName){
+		Student user = (Student)AuthData.getCurrentUser();
+		ArrayList<String> withdraw = user.getWithdrawnCamp();
 		
+		for(int i = 0 ; i < withdraw.size() ; i++){
+			if(withdraw.get(i) == campName) return true; 
+		}
+		return false;
 	}
-	
-	public void withdrawCamp(String camp) {
-		
+
+	public static void registerAsAttendee(String campName){
+		Camp camp = DatabaseService.getCamp(campName);
+		camp.addAttendees((Student)AuthData.getCurrentUser());
 	}
+	public static void registerAsCommittee(String campName){
+		Camp camp = DatabaseService.getCamp(campName);
+		camp.addCommittee((Student)AuthData.getCurrentUser());
+	}
+
 	
-	// //Enquiries
-	// public Enquiries createQuery(){
-	// 	System.out.println("Please write down your query: ");
-	// 	String query = sc.next();
-		
-	// 	Enquiries q = new Enquiries(query, user.getUserID());		
-	// 	return q;
-	// }
-
-	// public void submitEnquiry(Camp camp,Enquiries q){
-	// 	camp.addQuery(q);
-	// }
-
-	// public void viewEnquiry(Camp camp , Enquiries q){
-	// 	if(q.getInquirer() != user.getUserID()){
-	// 		System.out.println("Unable to view enquiry from other student");
-	// 	}
-	// 	else{
-	// 		q.viewEnquiries();
-	// 	}
-	// }
-
-	// public void editEnquiry(Camp camp , Enquiries q){
-	// 	if(q.getInquirer() != user.getUserID()){
-	// 		System.out.println("You are not allowed to edit enquiry made by other student!!");
-	// 	}
-	// 	else if(q.getProcessed()){
-	// 		System.out.println("Enquiry has been processed");
-	// 	}
-	// 	else{
-	// 		System.out.println("Original question: " + q.getEnquiry());
-	// 		System.out.println("Edit: ");
-	// 		q.setEnquiry(sc.next());
-	// 	}
-	// }
-
-	// public void deleteEnquiry(Camp camp ,Enquiries q) {
-	// 	if(q.getProcessed()){
-	// 		System.out.println("Unable to delete processed queries");
-	// 	}
-	// 	else{
-	// 		if(q.getInquirer() == user.getUserID()) camp.getEnquiryList().remove(q);
-	// 		else{
-	// 			System.out.println("You do not have the permisson to delete the selected query!!");
-	// 		}
-	// 	}
-
-	// }
+	
+	
+	
 }

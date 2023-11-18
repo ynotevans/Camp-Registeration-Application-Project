@@ -1,28 +1,28 @@
-package CAMs_App.controllers;
-
-import static CAMs_App.controllers.UserController.sc;
+package CAMs_App.service;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import CAMs_App.data.AuthData;
+import CAMs_App.data.Database;
 import CAMs_App.entity.*;
-import CAMs_App.service.*;
+import CAMs_App.service.EnquiriesService;
 
-public class CampComController extends StudentController{
-
-    Student user = (CampCompMem)AuthData.getCurrentUser();
-    public void createSuggestion(){}
-
-    public void viewCampDetails(){     ///print the camp details
-
-    }
-
-    public void generateReport(){}
-
-    public void deleteSuggestion(){}
+public class CampCommitteeService {
+	private static final Scanner sc = new Scanner(System.in);
+	private CampCompMem user = Database.getCampCompMemData().get(AuthData.getCurrentUser().getUserID());
+	
+	public void viewAttendeeList() {
+		
+	}
+	
+	public void addPoints() {
+		user.setPoints(user.getPoints() + 1);
+	}
 	
 	
     public void viewAllEnquiries(){
-        Camp camp = user.getComitteeCamp(); // ???
+        Camp camp = user.getComitteeCamp();
         ArrayList<Enquiries> q = camp.getEnquiryList();
         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
             System.out.println("Enquiry: " + (i+1));
@@ -32,8 +32,8 @@ public class CampComController extends StudentController{
 
     
     public void viewEnquiry(int index){
-       Camp camp = user.getComitteeCamp(); // ??
-       EnquiriesService.viewEnquiries(camp.getEnquiryList().get(index));
+       Camp camp = user.getComitteeCamp();
+        EnquiriesService.viewEnquiries( camp.getEnquiryList().get(index));
     }
     
     
@@ -45,7 +45,7 @@ public class CampComController extends StudentController{
             System.out.println("Reply to query: ");
             String ans = sc.next();
             q.setAnswer(ans);
-            CampComController.addPoints(user);            //addpoint fucntion put at campComController or put at staffCampService
+            addPoints();
             System.out.println("Query processed");
             System.out.println("1 point awarded");
             System.out.println("Current point(s): " + user.getPoints());
@@ -106,10 +106,9 @@ public class CampComController extends StudentController{
             System.out.println("No suggestion provided...");
         }
     }
-
-    public static void addPoints(Student student) {
-		student.setPoints(student.getPoints() + 1);
-	}
     
-
+    //other
+    public void generateReport() {
+    	
+    }
 }
