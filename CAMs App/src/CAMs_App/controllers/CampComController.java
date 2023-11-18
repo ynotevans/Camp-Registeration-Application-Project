@@ -51,7 +51,7 @@ public class CampComController extends StudentController{
             System.out.println("Reply to query: ");
             String ans = sc.next();
             q.setAnswer(ans);
-            StaffCampService.addPoints(user);
+            CampComController.addPoints(user);            //addpoint fucntion put at campComController or put at staffCampService
             System.out.println("Query processed");
             System.out.println("1 point awarded");
             System.out.println("Current point(s): " + user.getPoints());
@@ -112,6 +112,10 @@ public class CampComController extends StudentController{
             System.out.println("No suggestion provided...");
         }
     }
+
+    public static void addPoints(Student student) {
+		student.setPoints(student.getPoints() + 1);
+	}
     
 
 }

@@ -68,7 +68,7 @@ public class StaffController extends UserController{
 
         
         if(suggestionsService.approveSuggestions(null, 0, approve)){
-            StaffCampService.addPoints(Student);
+            CampComController.addPoints(student);
         }
 
         sc.close();
