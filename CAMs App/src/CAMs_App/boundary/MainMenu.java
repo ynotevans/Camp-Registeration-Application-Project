@@ -30,8 +30,8 @@ public class MainMenu implements Menu{
 
         Staff staff1 = new Staff("WWW111", null, Faculty.SCSE);
         Staff staff2 = new Staff("RRR222", null, Faculty.EEE);
-        Student staff3 = new Student("TTT444", null, Faculty.SCSE);
-        Student staff4 = new Student("YYY555", null, Faculty.CCEB);
+        Student student3 = new Student("TTT444", "test", Faculty.SCSE);
+        Student student4 = new Student("YYY555", null, Faculty.CCEB);
 
 
         Camp camp1 = new Camp("camp1", LocalDate.of(2023, 10, 30), 
@@ -48,8 +48,8 @@ public class MainMenu implements Menu{
 
         user.put("WWW111", staff1);
         user.put("RRR222", staff2);
-        user1.put("TTT444", staff3);
-        user1.put("YYY555", staff4);
+        user1.put("TTT444", student3);
+        user1.put("YYY555", student4);
         
         Database.setstaffData(user);
         Database.setStudentsData(user1);
