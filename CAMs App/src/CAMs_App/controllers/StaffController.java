@@ -54,7 +54,7 @@ public class StaffController extends UserController{
 
     }
 
-    public void approveSuggestion(){                    //only show the processed suggestions
+    public void approveSuggestion(Student student){                    //only show the processed suggestions
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Do you want to accept this suggestion? (Y/N)");
