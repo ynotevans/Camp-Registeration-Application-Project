@@ -16,7 +16,7 @@ public class HelperService {
     } catch (Exception err) {}
   }
 
-    public void viewCamp(Camp camp){
+    public static void viewCamp(Camp camp){
         System.out.println("Camp Name: " + camp.getCampName());
         System.out.println("Camp Date: " + camp.getCampDate());
         System.out.println("Camp Registration Closing Date: " + camp.getRegCloseDate());
