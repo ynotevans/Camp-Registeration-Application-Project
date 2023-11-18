@@ -34,7 +34,9 @@ public class CampMenu implements Menu {
 
             switch (choice) {
                 case 1:    //edit camp
-                    staffController.editCamp();
+                    System.out.println("Enter current camp name: \n");
+                    String curCampName = sc.nextLine();
+                    staffController.editCamp(curCampName);
                     break;
 
                 case 2:    //delete camp
@@ -58,7 +60,9 @@ public class CampMenu implements Menu {
                     break;
 
                 case 7:    //approve suggestion
-                    staffController.processSuggestions();
+                    System.out.println("Enter the suggestion number you want to process: \n");
+                    int suggNumber = sc.nextInt();
+                    staffController.processSuggestions(suggNumber);
                     break;
                 
                 case 8:    //logout
