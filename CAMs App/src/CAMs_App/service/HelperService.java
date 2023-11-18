@@ -27,6 +27,6 @@ public class HelperService {
         System.out.println("Camp staffInCharge: " + camp.getStaffInCharge());
         System.out.println("Number of days: " + camp.getNumberOfCampDays());
         System.out.println("Camp remaining slot: " + camp.getRemainingSlot());
-        System.out.println("");
+        System.out.println("\n");
     }
 }
