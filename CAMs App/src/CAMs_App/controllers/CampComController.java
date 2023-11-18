@@ -5,7 +5,9 @@ import static CAMs_App.controllers.UserController.sc;
 import java.util.ArrayList;
 
 import CAMs_App.entity.User;
+import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
@@ -13,6 +15,7 @@ import CAMs_App.service.*;
 
 public class CampComController extends StudentController{
 
+    Student user = (CampCompMem)AuthData.getCurrentUser();
     public void createSuggestion(){}
 
     public void viewCampDetails(){     ///print the camp details
@@ -22,10 +25,6 @@ public class CampComController extends StudentController{
     public void generateReport(){}
 
     public void deleteSuggestion(){}
-
-    public static void addPoints(Student student) {
-		student.setPoints(student.getPoints() + 1);
-	}
 	
 	
     public void viewAllEnquiries(){
@@ -51,8 +50,8 @@ public class CampComController extends StudentController{
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
             String ans = sc.next();
-            q.setAnswer(ans , user.getUserID());
-            addPoints();
+            q.setAnswer(ans);
+            CampComController.addPoints(user);            //addpoint fucntion put at campComController or put at staffCampService
             System.out.println("Query processed");
             System.out.println("1 point awarded");
             System.out.println("Current point(s): " + user.getPoints());
@@ -113,6 +112,10 @@ public class CampComController extends StudentController{
             System.out.println("No suggestion provided...");
         }
     }
+
+    public static void addPoints(Student student) {
+		student.setPoints(student.getPoints() + 1);
+	}
     
 
 }

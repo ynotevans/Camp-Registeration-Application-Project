@@ -2,7 +2,6 @@ package CAMs_App.service;
 
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
 
 public class SuggestionsService {

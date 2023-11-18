@@ -2,7 +2,9 @@ package CAMs_App.controllers;
 
 import java.util.Scanner;
 
+import CAMs_App.entity.Student;
 import CAMs_App.service.DatabaseService;
+import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
 public class StaffController extends UserController{
@@ -52,7 +54,7 @@ public class StaffController extends UserController{
 
     }
 
-    public void approveSuggestion(){                    //only show the processed suggestions
+    public void approveSuggestion(Student student){                    //only show the processed suggestions
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Do you want to accept this suggestion? (Y/N)");
@@ -66,7 +68,7 @@ public class StaffController extends UserController{
 
         
         if(suggestionsService.approveSuggestions(null, 0, approve)){
-            CampComController.addPoints(null);
+            CampComController.addPoints(student);
         }
 
         sc.close();
