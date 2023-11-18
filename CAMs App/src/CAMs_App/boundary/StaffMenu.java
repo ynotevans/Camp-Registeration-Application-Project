@@ -45,14 +45,22 @@ public class StaffMenu implements Menu{
                 case 3:    //view staff created camp
                     staffController.viewCreatedCamp(currentStaff.getUserID());
 
-                    System.out.println("Select a camp to operate (campName): ");
+                    System.out.print("Select a camp to operate (campName): ");
                     String campName = sc.next();
 
-                    Camp selectedCamp = DatabaseService.getCamp(campName);
-                    AuthData.setCurrentCamp(selectedCamp);
+                    System.out.println(campName);
+                    if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){      //this not working, need help
+                        Camp selectedCamp = DatabaseService.getCamp(campName);
+                        AuthData.setCurrentCamp(selectedCamp);
 
-                    StaffCampMenu campMenu = new StaffCampMenu();   //not here
-                    campMenu.viewApp();
+                        StaffCampMenu campMenu = new StaffCampMenu();   //not here
+                        campMenu.viewApp();
+                    }
+                    else{
+                        System.out.println("Camp not exist, please enter the correct camp Name... ");
+                    }
+                    
+                    
                     break;
                 
                 case 4:    //logout

@@ -374,6 +374,18 @@ public class DatabaseService implements IFileDataService {
 		return campData.get(campName);
 	}
 
+	public static boolean checkCampName(String campName, String userID){
+		Map<String, Camp> camp1 = Database.getCampData(); 
+
+        for (Camp camp : camp1.values()){
+            if(camp.getStaffInCharge() == userID && camp.getCampName() == campName){
+				return true;
+			}
+                //return true;
+        }
+		return false;
+	}
+
 	// // Requests
 	// @Override
 	// public Map<Integer, Request> importRequestData(String requestsFilePath, String transferStudentRequestsFilePath,
