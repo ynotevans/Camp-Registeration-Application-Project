@@ -21,8 +21,9 @@ public class StaffController extends UserController{
     }
 
     public void editCamp(String campName){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Camp camp = DatabaseService.getCamp(campName);
-         int choice=0;
+        int choice=0;
         do
         {
             System.out.println("Editting "+camp.getCampName());

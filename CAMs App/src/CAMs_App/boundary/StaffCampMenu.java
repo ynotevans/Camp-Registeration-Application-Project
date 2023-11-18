@@ -34,7 +34,9 @@ public class StaffCampMenu implements Menu {
 
             switch (choice) {
                 case 1:    //edit camp
-                    staffController.editCamp();
+                    System.out.println("Enter current camp name: \n");
+                    String curCampName = sc.nextLine();
+                    staffController.editCamp(curCampName);
                     break;
 
                 case 2:    //delete camp
