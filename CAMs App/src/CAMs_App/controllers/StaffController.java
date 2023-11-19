@@ -9,6 +9,7 @@ import java.util.Scanner;
 import CAMs_App.data.AuthData;
 
 import CAMs_App.entity.Student;
+import CAMs_App.enums.Faculty;
 import CAMs_App.entity.Camp;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.StaffCampService;
@@ -29,6 +30,7 @@ public class StaffController extends UserController{
             System.out.println("Camp Name already exists!! Enter another name");
             campName = sc.next();
         }
+        camp.setCampName(campName);
 
 
         //camp starting date
@@ -59,8 +61,8 @@ public class StaffController extends UserController{
         }
        
         //set camp days
-        camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate()));
-        System.out.println(camp.getNumberOfCampDays());
+        camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate())+1);
+        //System.out.println(camp.getNumberOfCampDays());
 
                    
         //registratoin closing date
@@ -77,10 +79,21 @@ public class StaffController extends UserController{
         }
         
 
+        //set user group
+        System.out.println("Enter the user group of the camp: ");
+        String fac = sc.next();
+        Faculty faculty = Faculty.valueOf(fac.toUpperCase());
+        camp.setUserGroup(faculty);
+
         //camp location
         System.out.println("Enter camp location: ");
         String location = sc.next();
         camp.setLocation(location);
+
+        //number of participants slots
+        System.out.println("Enter total number of camp slots: ");
+        int campSlots = sc.nextInt();
+        camp.setTotalSlots(campSlots);
         
         //number of committee slots
         System.out.println("Enter number of camp committeee slots: ");
@@ -91,13 +104,19 @@ public class StaffController extends UserController{
         System.out.println("Enter camp description: ");
         String description = sc.next();
         camp.setDescription(description);
+        
+        //set visibility
+        System.out.println("Set Visibility: ");
+        System.out.println("Input 1 to make camp visible, else invisible....");
+        int visibility = sc.nextInt();
+        if(visibility == 1) camp.setVisibility(true);
+        else camp.setVisibility(false);
+        
+        //set creator and visibility
+        camp.setStaffInCharge(AuthData.getCurrentUser().getUserID());
 
-        //staff id of staff incharge
-        System.out.println("Enter camp staff in charge name: ");
-        String staffInCharge = sc.next();
-
-        camp.setStaffInCharge(staffInCharge);
-        camp.setVisibility(true);
+        camp.setRemainingSlot(campSlots);
+        
 
         StaffCampService.addNewCampToDB(camp);
     }
