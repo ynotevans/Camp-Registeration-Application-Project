@@ -49,7 +49,7 @@ public class StaffMenu implements Menu{
                     String campName = sc.next();
 
                     System.out.println(campName);
-                    if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){      //this not working, need help
+                    if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){
                         Camp selectedCamp = DatabaseService.getCamp(campName);
                         AuthData.setCurrentCamp(selectedCamp);
 

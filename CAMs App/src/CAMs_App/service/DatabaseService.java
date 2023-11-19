@@ -378,7 +378,7 @@ public class DatabaseService implements IFileDataService {
 		Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
-            if(camp.getStaffInCharge() == userID && camp.getCampName() == campName){
+            if(camp.getStaffInCharge() == userID && camp.getCampName().equals(campName)){
 				return true;
 			}
                 //return true;
