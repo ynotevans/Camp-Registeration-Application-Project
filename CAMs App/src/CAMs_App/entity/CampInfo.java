@@ -20,7 +20,7 @@ public class CampInfo {
     private int remainingSlot;
 
     //constructor
-    public CampInfo(String campName, LocalDate campDate, LocalDate campEndDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+    public CampInfo(String campName, LocalDate campDate, LocalDate campEndDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
         setCampName(campName);
         setCampDate(campDate);
         setCampEndDate(campEndDate);
@@ -33,7 +33,7 @@ public class CampInfo {
         setStaffInCharge(staffInCharge);
         setVisibility(visibility);
         setNumberOfCampDays(numberOfCampDays);
-        setRemainingSlot(remainingSlot);
+        setRemainingSlot(totalSlots);
     } 
 
 
@@ -144,6 +144,6 @@ public class CampInfo {
     }
 
     public int getRemainingSlot() {
-        return remainingSlot;
+        return this.remainingSlot;
     }
 }
