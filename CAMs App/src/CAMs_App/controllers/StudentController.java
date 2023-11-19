@@ -55,7 +55,12 @@ public class StudentController extends UserController {
         
     }
     
-    public void viewRegisteredCamp(){}
+    public boolean viewRegisteredCamp(){
+        if (StudentCampService.viewRegisteredCamp()==0){
+            return false;
+        }
+        return true;
+    }
 
     public void viewEnquiry(){}
 
