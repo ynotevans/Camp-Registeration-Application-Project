@@ -7,6 +7,7 @@ import CAMs_App.enums.*;
 public class CampInfo {
     private String campName;
     private LocalDate campDate;
+    private LocalDate campEndDate;
     private LocalDate regCloseDate;
     private Faculty userGroup;
     private String location;
@@ -19,9 +20,10 @@ public class CampInfo {
     private int remainingSlot;
 
     //constructor
-    public CampInfo(String campName, LocalDate campDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+    public CampInfo(String campName, LocalDate campDate, LocalDate campEndDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
         setCampName(campName);
         setCampDate(campDate);
+        setCampEndDate(campEndDate);
         setRegCloseDate(regCloseDate);
         setUserGroup(userGroup);
         setLocation(location);
@@ -33,9 +35,9 @@ public class CampInfo {
         setRemainingSlot(remainingSlot);
     } 
 
+
     //default constructor
     public CampInfo(){};
-
 
 
     //setters
@@ -47,6 +49,10 @@ public class CampInfo {
         this.campDate = campDate;
     }
 
+    public void setCampEndDate(LocalDate campEndDate){
+        this.campEndDate = campEndDate;
+    }
+   
     public void setRegCloseDate(LocalDate regCloseDate){
         this.regCloseDate = regCloseDate;
     }
@@ -94,6 +100,10 @@ public class CampInfo {
         
     public LocalDate getCampDate(){
         return campDate;
+    } 
+    
+    public LocalDate getCampEndDate(){
+        return campEndDate;
     } 
 
     public LocalDate getRegCloseDate(){
