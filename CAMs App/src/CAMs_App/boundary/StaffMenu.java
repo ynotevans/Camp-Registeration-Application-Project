@@ -14,7 +14,7 @@ public class StaffMenu implements Menu{
     StaffController staffController = new StaffController();
 
     public void printMenu(){
-        HelperService.clearScreen();
+        
         System.out.println("Welcome back "+ currentStaff.getUserID() + "!!!");
         System.out.println("Available actions for you: ");
         System.out.println("(1) Create new camp");
@@ -26,10 +26,12 @@ public class StaffMenu implements Menu{
     
 
     public void viewApp(){
-        this.printMenu();
+        HelperService.clearScreen();
+        
         Scanner sc = new Scanner(System.in);
         int choice;
         do{
+            this.printMenu();
             System.out.print("Enter ur selection: ");
             choice = sc.nextInt();
 
