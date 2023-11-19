@@ -9,6 +9,7 @@ import java.util.Scanner;
 import CAMs_App.data.AuthData;
 
 import CAMs_App.entity.Student;
+import CAMs_App.enums.Faculty;
 import CAMs_App.entity.Camp;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.StaffCampService;
@@ -98,6 +99,16 @@ public class StaffController extends UserController{
 
         camp.setStaffInCharge(staffInCharge);
         camp.setVisibility(true);
+
+        //User group
+        System.out.println("Enter faculty for which the camp is open to: ");
+        String fac = sc.next();
+        try {
+            Faculty faculty = Faculty.valueOf(fac);
+            camp.setUserGroup(faculty);
+        } catch (Exception e){
+            System.out.println("Invalid faculty.");
+        }
 
         StaffCampService.addNewCampToDB(camp);
     }
