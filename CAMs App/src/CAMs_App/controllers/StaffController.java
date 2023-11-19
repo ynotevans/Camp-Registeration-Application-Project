@@ -204,7 +204,7 @@ public class StaffController extends UserController{
 
     public void viewCommitteeList(String campName){
         Camp camp = DatabaseService.getCamp(campName);
-        StaffCampService.g
+        StaffCampService.generateCommitteeList(camp);
     }
 
     public void viewAttendeeList(String campName){
