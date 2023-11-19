@@ -10,7 +10,6 @@ import CAMs_App.data.AuthData;
 
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.Staff;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;

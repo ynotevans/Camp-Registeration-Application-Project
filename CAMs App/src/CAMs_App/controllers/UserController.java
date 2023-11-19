@@ -8,7 +8,6 @@ import CAMs_App.service.UserService;
 
 public class UserController {
     public static final Scanner sc = new Scanner(System.in);
-    UserService userService =new UserService();
     AuthService authService;
     public UserController(){}
 
@@ -32,7 +31,7 @@ public class UserController {
                 continue;
             }
 
-            success = userService.changePassword(oldPassword,newPassword);
+            success = UserService.changePassword(oldPassword,newPassword);
 
             if (!success) {
                 System.out.println("Old password does not match.");
