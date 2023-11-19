@@ -38,7 +38,7 @@ public class StaffController extends UserController{
         camp.setCampDate(startDateTime);
         
         //camp ending date
-        System.out.println("Enter camp duration in day(s)");                    
+        System.out.println("Enter ending date in dd-mm-yyyy format:");                    
         String end = sc.next();
         LocalDate endDateTime = LocalDate.parse(end,formatter);
         camp.setCampEndDate(endDateTime);
