@@ -34,23 +34,48 @@ public class StaffController extends UserController{
         //camp starting date
         System.out.println("Enter starting date in dd-mm-yyyy format:");
         String start = sc.next();
-        LocalDate startDateTime = LocalDate.parse(start,formatter);
-        camp.setCampDate(startDateTime);
+        try {
+            // Parse the user input into a LocalDateTime object
+            LocalDate startDateTime = LocalDate.parse(start,formatter);
+            camp.setCampDate(startDateTime);
+            
+        
+        } catch (Exception e) {
+            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+        } 
         
         //camp ending date
-        System.out.println("Enter ending date in dd-mm-yyyy format:");                    
+        System.out.println("Enter end date for camp in dd-mm-yyyy format:");                    
         String end = sc.next();
-        LocalDate endDateTime = LocalDate.parse(end,formatter);
-        camp.setCampEndDate(endDateTime);
+    
+        try {
+            // Parse the user input into a LocalDateTime object
+            LocalDate endDateTime = LocalDate.parse(end,formatter);
+            camp.setCampEndDate(endDateTime);
+            
         
+        } catch (Exception e) {
+            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+        }
+       
         //set camp days
-        camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(startDateTime, endDateTime));
+        camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate()));
+        System.out.println(camp.getNumberOfCampDays());
+
                    
         //registratoin closing date
         System.out.println("Enter camp registration closing date: ");
         String date = sc.next(); 
-        LocalDate regClosing = LocalDate.parse(date,formatter);
-        camp.setRegCloseDate(regClosing);
+        try {
+            // Parse the user input into a LocalDateTime object
+            LocalDate regClosing = LocalDate.parse(date,formatter);
+            camp.setRegCloseDate(regClosing);
+            
+        
+        } catch (Exception e) {
+            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+        }
+        
 
         //camp location
         System.out.println("Enter camp location: ");
@@ -105,23 +130,45 @@ public class StaffController extends UserController{
                     System.out.println("Edit camp dates");
                     System.out.println("Enter starting date in dd-mm-yyyy format:");
                     String start = sc.next();
+
+                    try {
+                        LocalDate startDateTime = LocalDate.parse(start,formatter);
+                        System.out.println(startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                        camp.setCampDate(startDateTime);
+
+                    } catch (Exception e) {
+                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                    }
+
                     System.out.println("Enter ending date in dd-mm-yyyy format:");
                     String end = sc.next();
-                    LocalDate startDateTime = LocalDate.parse(start,formatter);
-                    System.out.println(startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    LocalDate endDateTime = LocalDate.parse(end,formatter);
-                    System.out.println(endDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    int numberofDays = (int)ChronoUnit.DAYS.between(startDateTime, endDateTime);
-                    camp.setNumberOfCampDays(numberofDays);
-                    camp.setCampDate(startDateTime);
+
+                    try {
+                        LocalDate endDateTime = LocalDate.parse(end,formatter);
+                        System.out.println(endDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                        camp.setCampDate(endDateTime);
+
+                    } catch (Exception e) {
+                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                    }
+
+                    camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate()));
                     break;
+
                 case 3:
                     System.out.println("Edit camp registeration closing date");
                     System.out.println("Enter new closing date:");
-                    LocalDate regDateTime = LocalDate.parse(sc.next(),formatter);
-                    camp.setRegCloseDate(regDateTime);
+                    try {
+                        LocalDate regDateTime = LocalDate.parse(sc.next(),formatter);
+                        System.out.println(regDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                        camp.setRegCloseDate(regDateTime);
+
+                    } catch (Exception e) {
+                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                    }
                     System.out.println("Camp new closing date: "+camp.getRegCloseDate());
                     break;
+
                 case 4:
                     System.out.println("Edit camp to open to own school or whole NTU");
                     System.out.println("1.Open to School\n2.Open to NTU\nEnter(1/2):");
