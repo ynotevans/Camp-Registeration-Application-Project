@@ -95,6 +95,17 @@ public class StudentCampService {
 		}
     }
 
+	public static int viewRegisteredCamp(){
+		int i = 0;
+		ArrayList<String> registeredCamp = Student.getRegisteredCamp();
+		for (String camp : registeredCamp){
+			
+			System.out.println(camp);
+			i++;
+			}
+		return i;
+    }
+
 
 	public static void withdrawCamp(String campName, Student student, boolean isComittee){
 		Camp camp = DatabaseService.getCamp(campName);
