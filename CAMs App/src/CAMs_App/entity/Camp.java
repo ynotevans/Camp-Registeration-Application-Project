@@ -20,7 +20,7 @@ public class Camp extends CampInfo{
     }
     
     //default constructor
-    public Camp(){
+    Camp(){
         super();
     }
 

@@ -38,7 +38,7 @@ public class CampInfo {
 
 
     //default constructor
-    public CampInfo(){};
+    CampInfo(){};
 
 
     //setters
