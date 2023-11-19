@@ -40,14 +40,20 @@ public class StudentMenu implements Menu {
                     break;
 
                 case 2:    //view all camp
-                    studentController.viewRegisteredCamp();
+                    if (studentController.viewRegisteredCamp()==true){
 
-                    System.out.print("Select a camp to operate (campName): ");
-                    String campName = sc.next();
+                        System.out.print("Select a camp to operate (campName): ");
+                        String campName = sc.next();
 
-                    if(DatabaseService.checkCampName(campName, currentStudent.getUserID())){
-                        Camp selectedCamp = DatabaseService.getCamp(campName);
-                        AuthData.setCurrentCamp(selectedCamp);
+                        if(DatabaseService.checkCampName(campName, currentStudent.getUserID())){
+                            Camp selectedCamp = DatabaseService.getCamp(campName);
+                            AuthData.setCurrentCamp(selectedCamp);
+                        }
+
+                    }
+
+                    else {
+                            System.out.println("Currently no available camp for you.");
                     }
 
                     break;
