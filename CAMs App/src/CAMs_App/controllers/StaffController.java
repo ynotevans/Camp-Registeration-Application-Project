@@ -79,11 +79,15 @@ public class StaffController extends UserController{
         }
         
 
-        //set user group
-        System.out.println("Enter the user group of the camp: ");
+        //User group
+        System.out.println("Enter faculty for which the camp is open to: ");
         String fac = sc.next();
-        Faculty faculty = Faculty.valueOf(fac.toUpperCase());
-        camp.setUserGroup(faculty);
+        try {
+            Faculty faculty = Faculty.valueOf(fac);
+            camp.setUserGroup(faculty);
+        } catch (Exception e){
+            System.out.println("Invalid faculty.");
+        }
 
         //camp location
         System.out.println("Enter camp location: ");
@@ -117,16 +121,6 @@ public class StaffController extends UserController{
 
         camp.setRemainingSlot(campSlots);
         
-
-        //User group
-        System.out.println("Enter faculty for which the camp is open to: ");
-        String fac = sc.next();
-        try {
-            Faculty faculty = Faculty.valueOf(fac);
-            camp.setUserGroup(faculty);
-        } catch (Exception e){
-            System.out.println("Invalid faculty.");
-        }
 
         StaffCampService.addNewCampToDB(camp);
     }
