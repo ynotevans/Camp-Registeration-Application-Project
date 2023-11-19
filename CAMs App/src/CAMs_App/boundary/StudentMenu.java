@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
+import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
+import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
 
 public class StudentMenu implements Menu {
@@ -39,6 +41,15 @@ public class StudentMenu implements Menu {
 
                 case 2:    //view all camp
                     studentController.viewRegisteredCamp();
+
+                    System.out.print("Select a camp to operate (campName): ");
+                    String campName = sc.next();
+
+                    if(DatabaseService.checkCampName(campName, currentStudent.getUserID())){
+                        Camp selectedCamp = DatabaseService.getCamp(campName);
+                        AuthData.setCurrentCamp(selectedCamp);
+                    }
+
                     break;
 
                 case 3:    //switch mode

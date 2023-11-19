@@ -50,7 +50,6 @@ public class StaffMenu implements Menu{
                     System.out.print("Select a camp to operate (campName): ");
                     String campName = sc.next();
 
-                    System.out.println(campName);
                     if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){
                         Camp selectedCamp = DatabaseService.getCamp(campName);
                         AuthData.setCurrentCamp(selectedCamp);
