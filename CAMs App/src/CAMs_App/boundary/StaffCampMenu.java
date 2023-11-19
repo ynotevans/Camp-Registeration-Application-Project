@@ -40,7 +40,9 @@ public class StaffCampMenu implements Menu {
                     break;
 
                 case 2:    //delete camp
-                    staffController.deleteCamp();
+                    System.out.println("Enter camp name to be deleted: ");
+                    String campName = sc.next();
+                    staffController.deleteCamp(campName);
                     break;
                 
                 case 3:    //toggle camp visibility
