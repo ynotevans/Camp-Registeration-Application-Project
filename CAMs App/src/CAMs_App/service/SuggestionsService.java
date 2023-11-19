@@ -6,7 +6,7 @@ import CAMs_App.entity.Suggestions;
 
 public class SuggestionsService {
     
-    public boolean approveSuggestions(String CampName, int index, boolean approve){
+    public static boolean approveSuggestions(String CampName, int index, boolean approve){
         Camp camp = DatabaseService.getCamp(CampName);
         Suggestions s = camp.getSuggestionList().get(index);
 
@@ -21,14 +21,14 @@ public class SuggestionsService {
     }
 
 
-    public void processSuggestions(String CampName, int index){
+    public static void processSuggestions(String CampName, int index){
         Camp camp = DatabaseService.getCamp(CampName);
         Suggestions s = camp.getSuggestionList().get(index);
 
         s.setProcessed(true);
     }
 
-    public void createSuggestion(String CampName, String suggestion){
+    public static void createSuggestion(String CampName, String suggestion){
         Suggestions s = new Suggestions(suggestion, AuthData.getCurrentUser().getUserID());
         Camp camp = DatabaseService.getCamp(CampName);
 
@@ -36,7 +36,7 @@ public class SuggestionsService {
 
     }
 
-    public boolean editSuggestion(String CampName, int index, String suggestion){
+    public static boolean editSuggestion(String CampName, int index, String suggestion){
         Camp camp = DatabaseService.getCamp(CampName);
         Suggestions s = camp.getSuggestionList().get(index);
         if(s.getProcessed()) 
@@ -47,7 +47,7 @@ public class SuggestionsService {
         }
     }
 
-    public boolean deleteSuggestion(String CampName, int index){
+    public static boolean deleteSuggestion(String CampName, int index){
         Camp camp = DatabaseService.getCamp(CampName);
         Suggestions s = camp.getSuggestionList().get(index);
         if(s.getProcessed()) return false;
