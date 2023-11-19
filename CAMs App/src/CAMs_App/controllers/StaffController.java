@@ -83,7 +83,7 @@ public class StaffController extends UserController{
         System.out.println("Enter faculty for which the camp is open to: ");
         String fac = sc.next();
         try {
-            Faculty faculty = Faculty.valueOf(fac);
+            Faculty faculty = Faculty.valueOf(fac.toUpperCase());
             camp.setUserGroup(faculty);
         } catch (Exception e){
             System.out.println("Invalid faculty.");
