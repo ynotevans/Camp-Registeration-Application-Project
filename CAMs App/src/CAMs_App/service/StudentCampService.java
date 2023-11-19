@@ -2,12 +2,16 @@ package CAMs_App.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
+
 import CAMs_App.data.AuthData;
+import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Student;
+import CAMs_App.enums.Faculty;
 
 public class StudentCampService {
-	
+	static Student currentStudent = (Student) AuthData.getCurrentUser();
 	
 	private static boolean checkClash(Camp camp1 , Camp camp2){
 		LocalDate camp1Start = camp1.getCampDate();
@@ -48,7 +52,7 @@ public class StudentCampService {
 		return false;
 	}
 
-	public static void upDateRemainingSlot(String campName){
+	public static void updateRemainingSlot(String campName){
 		Camp camp = DatabaseService.getCamp(campName);
 		camp.setRemainingSlot(camp.getRemainingSlot()-1);
 	}
@@ -71,6 +75,37 @@ public class StudentCampService {
 	public static void registerAsCommittee(String campName){
 		Camp camp = DatabaseService.getCamp(campName);
 		camp.addCommittee((Student)AuthData.getCurrentUser());
+	}
+
+	// view available camp
+    public static void viewAvailableCamps(){
+		int i=0;
+        Map<String, Camp> camp1 = Database.getCampData(); 
+
+        for (Camp camp : camp1.values()){
+			if((camp.getVisibility() == true && camp.getUserGroup().toString() == currentStudent.getFaculty()) 
+				|| camp.getUserGroup() == Faculty.NTU){
+					HelperService.viewCamp(camp);
+					i++;
+				}
+        }
+
+		if(i==0){
+			System.out.println("Currently no available camp for you.");
+		}
+    }
+
+
+	public static void withdrawCamp(String campName, Student student, boolean isComittee){
+		Camp camp = DatabaseService.getCamp(campName);
+		
+		if(isComittee){
+			System.out.println("Camp Committee cannot quit camp!!!");
+		}
+		else{
+			camp.getAttendees().remove(student);
+		}
+		
 	}
 
 	

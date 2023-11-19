@@ -4,22 +4,56 @@ import CAMs_App.boundary.CampComMenu;
 import CAMs_App.boundary.StudentMenu;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.*;
+import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
+import CAMs_App.service.StudentCampService;
 
 
 public class StudentController extends UserController {
-    Student currentUser = (Student)AuthData.getCurrentUser();
+    static Student currentUser = (Student)AuthData.getCurrentUser();
 
 	public void viewAvailableCamp(){
-        
-
+        StudentCampService.viewAvailableCamps();
     }
 
-    public void joinAsAttendee(String campName){}
+    public void joinAsAttendee(){
+        String campName = AuthData.getCurrentCamp().getCampName();
+        Camp camp = DatabaseService.getCamp(campName);
 
-    public void joinAsCommittee(String campName){}
+        if(camp.getRemainingSlot() != 0)
+            StudentCampService.registerAsAttendee(campName);
+    }
 
-    public void withdrawCamp(String campName){}
+    public void joinAsCommittee(){
+        String campName = AuthData.getCurrentCamp().getCampName();
+
+        Camp camp = DatabaseService.getCamp(campName);
+        
+        if(camp.getCommittee().size() != camp.getCampCommitteeSlots())
+            StudentCampService.registerAsCommittee(campName);
+    }
+
+    public void withdrawCamp(){
+        String campName = AuthData.getCurrentCamp().getCampName();
+
+        System.out.println("Are you sure you want to withdraw from this camp? (Y/N)");
+
+        char ans = sc.next().charAt(0);
+
+        if(ans == 'Y'){
+            if(currentUser.getIsComittee()){
+                StudentCampService.withdrawCamp(campName, currentUser, true);
+            }
+            else{
+                StudentCampService.withdrawCamp(campName, currentUser, false);
+            }
+        }
+        else{
+            System.out.println("cancel withdraw...");
+        }
+
+        
+    }
     
     public void viewRegisteredCamp(){}
 

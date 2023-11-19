@@ -29,6 +29,7 @@ public class CampInfo {
         setCampCommitteeSlots(campCommitteeSlots);
         setDescription(description);
         setStaffInCharge(staffInCharge);
+        setVisibility(visibility);
         setNumberOfCampDays(numberOfCampDays);
         setRemainingSlot(remainingSlot);
     } 
