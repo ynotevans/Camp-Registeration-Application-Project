@@ -35,11 +35,11 @@ public class MainMenu implements Menu{
 
 
         Camp camp1 = new Camp("camp1", LocalDate.of(2023, 10, 30), 
-        LocalDate.of(2023, 10, 15), Faculty.EEE , "SRC", 
+        LocalDate.of(2023, 10, 15), Faculty.SCSE , "SRC", 
         30 , 10, "EEE camp ", "WWW111", 
         true, 3, 30);
         Camp camp2 = new Camp("camp2", LocalDate.of(2023, 10, 31), 
-        LocalDate.of(2023, 10, 16), Faculty.SBS , "SRC", 
+        LocalDate.of(2023, 10, 16), Faculty.EEE , "SRC", 
         30 , 10, "EEE camp ", "RRR222", 
         true, 3, 30);
 

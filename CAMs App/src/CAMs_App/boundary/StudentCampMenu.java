@@ -37,15 +37,15 @@ public class StudentCampMenu implements Menu{
                     int choice1 = sc.nextInt();
 
                     if(choice1 == 1){
-                        studentController.joinAsAttendee(null);    //update campName
+                        studentController.joinAsAttendee();    //update campName
                     }
                     else{
-                        studentController.joinAsAttendee(null);
+                        studentController.joinAsCommittee();
                     }
                     break;
 
                 case 2:    //withdraw camp
-                    studentController.withdrawCamp(null);
+                    studentController.withdrawCamp();
                     break;
                 
                 case 3:    //submit enquiry

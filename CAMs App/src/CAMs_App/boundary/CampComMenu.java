@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import CAMs_App.controllers.CampComController;
 import CAMs_App.data.AuthData;
-import CAMs_App.entity.User;
+import CAMs_App.entity.*;
 import CAMs_App.service.HelperService;
 
 public class CampComMenu implements Menu{
-    User currentStudent = AuthData.getCurrentUser();
+    Student currentStudent = (Student)AuthData.getCurrentUser();
     CampComController campComController = new CampComController();
 
     public void printMenu(){
