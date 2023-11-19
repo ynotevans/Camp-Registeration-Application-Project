@@ -1,6 +1,6 @@
 package CAMs_App.service;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,40 +10,14 @@ import CAMs_App.entity.*;
 
 public class StaffCampService extends CampManagementService{
     Scanner sc = new Scanner(System.in);
-    public void createCamp (String campName,LocalDate dates,LocalDate registerDate,String availability,
-    String location,int totalSlots,int campCommitteeSlots,String description,String staffInCharge){
-        Camp camp = new Camp();
-        System.out.println("Enter camp name: ");
-        campName = sc.nextLine();
-        camp.setCampName(campName);
-        System.out.println("Enter camp date: ");
-        // scan date
-        camp.setCampDate(dates);
-        System.out.println("Enter camp reg date: ");
-        // scan date
-        camp.setRegCloseDate(registerDate);
-        System.out.println("Enter camp location: ");
-        location = sc.nextLine();
-        camp.setLocation(location);
-        System.out.println("Enter number of camp committeee slots: ");
-        campCommitteeSlots = sc.nextInt();
-        camp.setCampCommitteeSlots(campCommitteeSlots);
-        System.out.println("Enter camp description: ");
-        description = sc.nextLine();
-        camp.setDescription(description);
-        System.out.println("Enter camp staff in charge name: ");
-        staffInCharge = sc.nextLine();
-        camp.setStaffInCharge(staffInCharge);
-        camp.setVisibility(true);
 
-        Database.getCampData().put(campName , camp);
+    
+    public static void addNewCampToDB (Camp camp){
+        Database.getCampData().put(camp.getCampName(), camp);
     }
 
-    public void editCamp(Camp camp){
-       
-    }
 
-    public boolean deleteCamp(String campName){
+    public static boolean deleteCamp(String campName){
         Camp camp = DatabaseService.getCamp(campName);
 
         if(camp.getAttendees().size()!= 0) return false;
@@ -54,13 +28,12 @@ public class StaffCampService extends CampManagementService{
 
     }
 
-
-    public void toggleVisibility(Camp camp , boolean visibility){
+    public static void toggleVisibility(Camp camp , boolean visibility){
       camp.setVisibility(visibility);
     }
 
     // view camp
-    public void viewAllCamps(){
+    public static void viewAllCamps(){
         Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
@@ -69,7 +42,7 @@ public class StaffCampService extends CampManagementService{
     }
 
     // see staff created camps
-    public void viewCampsCreated(String userID){
+    public static void viewCampsCreated(String userID){
         Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
@@ -84,19 +57,44 @@ public class StaffCampService extends CampManagementService{
 
     
     // generate attendance report
-    public void generateAttendanceReport(Camp camp){
-        System.out.println("Participants attending camp");
-        for(int i=0;i<camp.getAttendees().size();i++)
+    public static void generateAttendanceReport(Camp camp){
+        System.out.println("Number of participants: " + camp.getAttendees().size());
+        System.out.println("Participants list");
+        for(int i = 0 ; i < camp.getAttendees().size() ; i++)
             System.out.println(camp.getAttendees().get(i).getUserID());
-        System.out.println("Committee members attending camp");
+           
+        System.out.println("Number of committee: " + camp.getCommittee().size());
+        System.out.println("Committee list: ");
         for(int i=0;i>camp.getCommittee().size();i++)
             System.out.println(camp.getCommittee().get(i).getUserID());
     }
+
     // generate performance report
-    public void generatePerformanceReport(Camp camp){
+    public static void generatePerformanceReport(Camp camp){
         for(int i=0;i<camp.getAttendees().size();i++){
             System.out.println(camp.getAttendees().get(i).getUserID()+":"
             +camp.getAttendees().get(i).getPoints());
         }
-    }    
+    } 
+    
+    //generate attendees list
+    public static void generateAttendeeList(Camp camp){
+        ArrayList<Student> attendees = camp.getAttendees();
+
+        for(int i = 0 ; i < attendees.size() ; i++){
+            System.out.println("User ID: " + attendees.get(i).getUserID());
+            System.out.println("Faculty: " + attendees.get(i).getFaculty());
+        }
+    }
+
+     //generate committee list
+    public static void generateCommitteeList(Camp camp){
+        ArrayList<Student> committee = camp.getCommittee();
+
+        for(int i = 0 ; i < committee.size() ; i++){
+            System.out.print("User ID: " + committee.get(i).getUserID());
+            System.out.print("  Faculty: " + committee.get(i).getFaculty());
+
+        }
+    }
 }

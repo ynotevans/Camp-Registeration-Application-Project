@@ -3,22 +3,79 @@ package CAMs_App.controllers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
 import java.util.Scanner;
 
 import CAMs_App.data.AuthData;
-import CAMs_App.data.Database;
+
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.Staff;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
 public class StaffController extends UserController{
-    SuggestionsService suggestionsService = new SuggestionsService();
-    StaffCampService staffCampService = new StaffCampService();
-
-    public void createCamp(){
     
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public void createCamp(){
+        Camp camp = new Camp();
+       
+
+        //read camp name
+        System.out.println("Enter camp name: ");
+        String campName = sc.next();
+        
+        while(DatabaseService.checkIfCampNameExists(campName)){
+            System.out.println("Camp Name already exists!! Enter another name");
+            campName = sc.next();
+        }
+
+
+        //camp starting date
+        System.out.println("Enter starting date in dd-mm-yyyy format:");
+        String start = sc.next();
+        LocalDate startDateTime = LocalDate.parse(start,formatter);
+        camp.setCampDate(startDateTime);
+        
+        //camp ending date
+        System.out.println("Enter camp duration in day(s)");                    
+        String end = sc.next();
+        LocalDate endDateTime = LocalDate.parse(end,formatter);
+        camp.setCampEndDate(endDateTime);
+        
+        //set camp days
+        camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(startDateTime, endDateTime));
+                   
+        //registratoin closing date
+        System.out.println("Enter camp registration closing date: ");
+        String date = sc.next(); 
+        LocalDate regClosing = LocalDate.parse(date,formatter);
+        camp.setRegCloseDate(regClosing);
+
+        //camp location
+        System.out.println("Enter camp location: ");
+        String location = sc.next();
+        camp.setLocation(location);
+        
+        //number of committee slots
+        System.out.println("Enter number of camp committeee slots: ");
+        int campCommitteeSlots = sc.nextInt();
+        camp.setCampCommitteeSlots(campCommitteeSlots);
+
+        //Camp Descriptions
+        System.out.println("Enter camp description: ");
+        String description = sc.next();
+        camp.setDescription(description);
+
+        //staff id of staff incharge
+        System.out.println("Enter camp staff in charge name: ");
+        String staffInCharge = sc.next();
+
+        camp.setStaffInCharge(staffInCharge);
+        camp.setVisibility(true);
+
+        StaffCampService.addNewCampToDB(camp);
     }
 
     public void editCamp(){
@@ -99,34 +156,65 @@ public class StaffController extends UserController{
         }while(choice!=8);
     }
 
-    public void deleteCamp(){
-
+    public void deleteCamp(String campName){
+        if(StaffCampService.deleteCamp(campName)){
+            System.out.println("Unable to delete camp with participants");
+        }
+        else{
+            System.out.println("Camp deleted");
+        }
     }
 
     public void toggleVisibility(){
+        Camp camp = AuthData.getCurrentCamp();
+        System.out.println("Toggle camp visibility");
+       
+        while (true){
+             System.out.println("Press 1 to turn off, 2 to turn on");
+             int choice = sc.nextInt();
+            if(choice == 1){
+                camp.setVisibility(false);
+                break;
+            }
+            else if(choice == 2){
+                camp.setVisibility(true);
+                break;
+            }
+            else{
+                System.out.println("Wrong input!! Please try again...");
+            }
+        }
 
     }
 
     public void viewAllCamp(){
         System.out.println("print all camp........");
-        staffCampService.viewAllCamps();
+        StaffCampService.viewAllCamps();
     }
 
     public void viewCreatedCamp(String userID){
         System.out.println("print staff created camp........");
-        staffCampService.viewCampsCreated(userID);
+        StaffCampService.viewCampsCreated(userID);
     }
 
     public void generateReport(String campName){
-
+        Camp camp = DatabaseService.getCamp(campName);
+        StaffCampService.generatePerformanceReport(camp);
     }
 
     public void viewCommitteeList(String campName){
-
+        Camp camp = DatabaseService.getCamp(campName);
+        StaffCampService.generateCommitteeList(camp);
     }
 
     public void viewAttendeeList(String campName){
-
+        Camp camp = DatabaseService.getCamp(campName);
+        if(camp.getAttendees() == null){
+            System.out.println("This camp doesn't have any attendee");
+        }
+        else{
+            StaffCampService.generateAttendeeList(camp);
+        }
     }
 
     public void viewSuggestions(){
@@ -134,7 +222,7 @@ public class StaffController extends UserController{
     }
 
     public void processSuggestions(int index){                   //set the process attribute
-        suggestionsService.processSuggestions(null, index);
+        SuggestionsService.processSuggestions(null, index);
     }
 
     public void approveSuggestion(Student student, int index){                    //only show the processed suggestions
@@ -150,7 +238,7 @@ public class StaffController extends UserController{
             approve = false;
 
         
-        if(suggestionsService.approveSuggestions(null, index, approve)){
+        if(SuggestionsService.approveSuggestions(null, index, approve)){
             CampComController.addPoints(student);
         }
 
