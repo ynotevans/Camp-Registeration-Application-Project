@@ -14,11 +14,11 @@ public class Camp extends CampInfo{
     private ArrayList<Suggestions> suggestions = new ArrayList<>();
     
     //constructor
-    public Camp(String campName , LocalDate campDate , LocalDate regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
-             super(campName , campDate , regCloseDate ,  userGroup , location, totalSlots, campCommitteeSlots, description,  staffInCharge,  visibility, numberOfCampDays, remainingSlot);
+    public Camp(String campName , LocalDate campDate , LocalDate campEndDate, LocalDate regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays, int remainingSlot){
+             super(campName , campDate ,campEndDate, regCloseDate ,  userGroup , location, totalSlots, campCommitteeSlots, description,  staffInCharge,  visibility, numberOfCampDays, remainingSlot);
        
     }
-
+    
     //default constructor
     public Camp(){
         super();
