@@ -1,5 +1,7 @@
 package CAMs_App.controllers;
 
+import java.util.ArrayList;
+
 import CAMs_App.boundary.CampComMenu;
 import CAMs_App.boundary.StudentMenu;
 import CAMs_App.data.AuthData;
@@ -20,10 +22,20 @@ public class StudentController extends UserController {
     }
 
     public void joinAsAttendee(){
+        Student student = (Student)AuthData.getCurrentUser();
         String campName = AuthData.getCurrentCamp().getCampName();
         Camp camp = DatabaseService.getCamp(campName);
+        ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
-        if(camp.getRemainingSlot() != 0) {
+        if (camp.getRemainingSlot() == 0) {
+            System.out.println("Camp is full!");
+        }
+
+        else if (registeredCamp.contains(campName)){
+            System.out.println("Camp has been registered already.");
+        }
+
+        else {
             StudentCampService.registerAsAttendee(campName);
             System.out.println("Successfully Registered!\n");
         }
