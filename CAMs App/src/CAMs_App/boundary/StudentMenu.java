@@ -36,7 +36,14 @@ public class StudentMenu implements Menu {
 
             switch (choice) {
                 case 1:    //create camp
-                    studentController.viewAvailableCamp();
+                    if (studentController.viewAvailableCamp()==true){
+                        StudentCampMenu campMenu = new StudentCampMenu();
+                        campMenu.viewApp();
+                    }
+
+                    else{
+                         System.out.println("Currently no available camp for you.");
+                    }
                     break;
 
                 case 2:    //view all camp
