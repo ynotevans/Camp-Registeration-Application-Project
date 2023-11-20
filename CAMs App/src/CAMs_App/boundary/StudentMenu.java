@@ -27,18 +27,24 @@ public class StudentMenu implements Menu {
 
     public void viewApp(){
         HelperService.clearScreen();
-        this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
         do{
+            
+            this.printMenu();
             System.out.print("Enter ur selection: ");
             choice = sc.nextInt();
 
             switch (choice) {
                 case 1:    //create camp
                     if (studentController.viewAvailableCamp()==true){
+                        System.out.print("Select a camp: ");
+                        String campName = sc.next();
+                        Camp selectedCamp = DatabaseService.getCamp(campName);
+                        AuthData.setCurrentCamp(selectedCamp);
                         StudentCampMenu campMenu = new StudentCampMenu();
                         campMenu.viewApp();
+                        
                     }
 
                     else{
