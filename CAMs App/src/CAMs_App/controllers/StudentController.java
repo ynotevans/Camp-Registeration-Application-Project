@@ -12,8 +12,11 @@ import CAMs_App.service.StudentCampService;
 public class StudentController extends UserController {
     static Student currentUser = (Student)AuthData.getCurrentUser();
 
-	public void viewAvailableCamp(){
-        StudentCampService.viewAvailableCamps();
+	public boolean viewAvailableCamp(){
+        if (StudentCampService.viewAvailableCamps()==0){
+            return false;
+        }
+        return true;
     }
 
     public void joinAsAttendee(){
