@@ -32,7 +32,7 @@ public class StudentMenu implements Menu {
         do{
             
             this.printMenu();
-            System.out.print("Enter ur selection: ");
+            System.out.print("Enter selection: ");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -48,14 +48,14 @@ public class StudentMenu implements Menu {
                     }
 
                     else{
-                         System.out.println("Currently no available camp for you.");
+                         System.out.println("Currently no available camp(s) for you.");
                     }
                     break;
 
                 case 2:    //view all camp
                     if (studentController.viewRegisteredCamp()==true){
 
-                        System.out.print("Select a camp to operate (campName): ");
+                        System.out.print("Select a camp to edit (Enter the camp name): ");
                         String campName = sc.next();
 
                         if(DatabaseService.checkCampName(campName, currentStudent.getUserID())){
@@ -66,7 +66,7 @@ public class StudentMenu implements Menu {
                     }
 
                     else {
-                            System.out.println("Currently no available camp for you.");
+                            System.out.println("Currently no registered camp(s) for you.");
                     }
 
                     break;
