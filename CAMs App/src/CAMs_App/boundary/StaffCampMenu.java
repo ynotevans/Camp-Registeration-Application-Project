@@ -75,7 +75,14 @@ public class StaffCampMenu implements Menu {
                     break;
                                 
                 case 10:    //logout
-                    staffController.logout();
+                    System.out.println("Logging out...");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    MainMenu menu = new MainMenu();
+                    menu.viewApp();
                     break;
                 
                 default:
