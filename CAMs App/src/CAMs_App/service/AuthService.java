@@ -10,6 +10,7 @@ public abstract class AuthService {
 
     public boolean logout(){
         AuthData.setCurrentUser(null);
+        AuthData.setCurrentCamp(null);
         return true;
     }
 

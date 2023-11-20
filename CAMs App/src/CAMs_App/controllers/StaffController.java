@@ -34,31 +34,37 @@ public class StaffController extends UserController{
 
 
         //camp starting date
-        System.out.println("Enter starting date in dd-mm-yyyy format:");
-        String start = sc.next();
-        try {
-            // Parse the user input into a LocalDateTime object
-            LocalDate startDateTime = LocalDate.parse(start,formatter);
-            camp.setCampDate(startDateTime);
+        while(true){
+            try {
+                // Parse the user input into a LocalDateTime object
+                System.out.println("Enter starting date in dd-mm-yyyy format:");
+                String start = sc.next();
+                LocalDate startDateTime = LocalDate.parse(start,formatter);
+                camp.setCampDate(startDateTime);
+                break;
             
+            } catch (Exception e) {
+                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+            } 
+        }
         
-        } catch (Exception e) {
-            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
-        } 
+        
         
         //camp ending date
-        System.out.println("Enter end date for camp in dd-mm-yyyy format:");                    
-        String end = sc.next();
-    
-        try {
-            // Parse the user input into a LocalDateTime object
-            LocalDate endDateTime = LocalDate.parse(end,formatter);
-            camp.setCampEndDate(endDateTime);
+        while (true) {
+             try {
+                // Parse the user input into a LocalDateTime object
+                System.out.println("Enter end date for camp in dd-mm-yyyy format:");                    
+                String end = sc.next();
+                LocalDate endDateTime = LocalDate.parse(end,formatter);
+                camp.setCampEndDate(endDateTime);
+                break;
             
-        
-        } catch (Exception e) {
-            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+            } catch (Exception e) {
+                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+            }
         }
+       
        
         //set camp days
         camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate())+1);
@@ -66,17 +72,20 @@ public class StaffController extends UserController{
 
                    
         //registratoin closing date
-        System.out.println("Enter camp registration closing date: ");
-        String date = sc.next(); 
-        try {
-            // Parse the user input into a LocalDateTime object
-            LocalDate regClosing = LocalDate.parse(date,formatter);
-            camp.setRegCloseDate(regClosing);
+        while (true) {
+            try {
+                // Parse the user input into a LocalDateTime object
+                System.out.println("Enter camp registration closing date: ");
+                String date = sc.next(); 
+                LocalDate regClosing = LocalDate.parse(date,formatter);
+                camp.setRegCloseDate(regClosing);
+                break;
             
-        
-        } catch (Exception e) {
-            System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+            } catch (Exception e) {
+                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+            }
         }
+        
         
 
         //User group
