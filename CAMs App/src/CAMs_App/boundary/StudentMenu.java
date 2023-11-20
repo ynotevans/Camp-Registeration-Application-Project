@@ -76,7 +76,14 @@ public class StudentMenu implements Menu {
                     break;
 
                 case 4:    //logout
-                    studentController.logout();
+                    System.out.println("Logging out...");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    MainMenu menu = new MainMenu();
+                    menu.viewApp();
                     break;
                 
                 default:
