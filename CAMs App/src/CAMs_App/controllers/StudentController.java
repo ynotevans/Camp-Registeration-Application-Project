@@ -23,8 +23,10 @@ public class StudentController extends UserController {
         String campName = AuthData.getCurrentCamp().getCampName();
         Camp camp = DatabaseService.getCamp(campName);
 
-        if(camp.getRemainingSlot() != 0)
+        if(camp.getRemainingSlot() != 0) {
             StudentCampService.registerAsAttendee(campName);
+            System.out.println("Successfully Registered!\n");
+        }
     }
 
     public void joinAsCommittee(){
