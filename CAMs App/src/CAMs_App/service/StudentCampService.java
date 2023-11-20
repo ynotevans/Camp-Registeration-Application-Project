@@ -78,7 +78,7 @@ public class StudentCampService {
 	}
 
 	// view available camp
-    public static void viewAvailableCamps(){
+    public static int viewAvailableCamps(){
 		int i=0;
         Map<String, Camp> camp1 = Database.getCampData(); 
 
@@ -89,10 +89,7 @@ public class StudentCampService {
 					i++;
 				}
         }
-
-		if(i==0){
-			System.out.println("Currently no available camp for you.");
-		}
+		return i;
     }
 
 	public static int viewRegisteredCamp(){
