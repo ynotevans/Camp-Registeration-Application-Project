@@ -3,6 +3,7 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
+import CAMs_App.entity.Student;
 import CAMs_App.service.HelperService;
 
 public class StudentCampMenu implements Menu{
@@ -15,16 +16,17 @@ public class StudentCampMenu implements Menu{
         System.out.println("(2) Withdraw camp");
         System.out.println("(3) Submit enquiries for this camp");
         System.out.println("(4) View your submitted enquiries");
-        System.out.println("(5) Logout\n");
+        System.out.println("(5) Go to previous page");
+        System.out.println("(6) Logout\n");
     }
 
     
 
     public void viewApp(){
-        this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
         do{
+            this.printMenu();
             System.out.print("Enter ur selection: ");
             choice = sc.nextInt();
 
@@ -37,7 +39,9 @@ public class StudentCampMenu implements Menu{
                     int choice1 = sc.nextInt();
 
                     if(choice1 == 1){
+                        HelperService.clearScreen();
                         studentController.joinAsAttendee();    //update campName
+
                     }
                     else{
                         studentController.joinAsCommittee();
@@ -56,7 +60,12 @@ public class StudentCampMenu implements Menu{
                     studentController.viewEnquiry();
                     break;
 
-                case 5:    //logout
+                case 5: //go to previous page
+                    StudentMenu studentMenu = new StudentMenu();
+                    studentMenu.viewApp();
+                    break;
+
+                case 6:    //logout
                     studentController.logout();
                     break;
                 
