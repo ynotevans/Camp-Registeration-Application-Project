@@ -68,8 +68,13 @@ public class StudentCampService {
 	}
 
 	public static void registerAsAttendee(String campName){
+		Student user = (Student)AuthData.getCurrentUser();
 		Camp camp = DatabaseService.getCamp(campName);
-		camp.addAttendees((Student)AuthData.getCurrentUser());
+		camp.addAttendees(user);
+		ArrayList<String> registeredCamp = user.getRegisteredCamp();
+		registeredCamp.add(campName);
+
+		
 	}
 	
 	public static void registerAsCommittee(String campName){
