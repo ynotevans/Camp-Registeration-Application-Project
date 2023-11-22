@@ -36,7 +36,7 @@ public class Student extends User {
 		points = i;
 	}
 	
-	public static ArrayList<String> getRegisteredCamp() {
+	public ArrayList<String> getRegisteredCamp() {
 		return registeredCamp;
 	}
 	
@@ -44,7 +44,7 @@ public class Student extends User {
 		registeredCamp = list;
 	}
 	
-	public static ArrayList<String> getWithdrawnCamp() {
+	public ArrayList<String> getWithdrawnCamp() {
 		return withdrawnCamp;
 	}
 	

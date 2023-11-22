@@ -98,8 +98,9 @@ public class StudentCampService {
     }
 
 	public static int viewRegisteredCamp(){
+		Student user = (Student)AuthData.getCurrentUser();
 		int i = 0;
-		ArrayList<String> registeredCamp = Student.getRegisteredCamp();
+		ArrayList<String> registeredCamp = user.getRegisteredCamp();
 		for (String camp : registeredCamp){
 			
 			System.out.println(camp);
