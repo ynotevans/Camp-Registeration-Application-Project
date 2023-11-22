@@ -7,6 +7,7 @@ import CAMs_App.boundary.StudentMenu;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.*;
 import CAMs_App.service.DatabaseService;
+import CAMs_App.service.EnquiriesService;
 import CAMs_App.service.HelperService;
 import CAMs_App.service.StudentCampService;
 
@@ -79,13 +80,67 @@ public class StudentController extends UserController {
         return true;
     }
 
-    public void viewEnquiry(){}
+    public void viewEnquiry(){
+    	Student student = (Student)AuthData.getCurrentUser();
+        ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        
+        for(int i=0;i<qList.size();i++) {
+        	if(qList.get(i).getInquirer()==student.getUserID()) {
+        		EnquiriesService.viewEnquiries(qList.get(i));
+        	}
+        }
+    }
 
-    public void createEnquiry(){}
+    public void createEnquiry(){
+    	Camp camp = AuthData.getCurrentCamp();
+    	System.out.println("Please provide your enquiry: ");
+        String enquiry = sc.next();
+    	
+        EnquiriesService.createEnquiries(camp.getCampName(), enquiry);
+    }
 
-    public void editEnquiries(){}
+    public void editEnquiries(){
+    	Camp camp = AuthData.getCurrentCamp();
+    	Student student = (Student)AuthData.getCurrentUser();
+    	ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        
+        for(int i=0;i<qList.size();i++) {
+        	if(qList.get(i).getInquirer()==student.getUserID()) {
+        		if(qList.get(i).getProcessed() == true){
+                    System.out.println("Your enquiry has been processed!!");
+                }
+        		else {
+        			EnquiriesService.viewEnquiries(qList.get(i));
+        			System.out.println("Please edit your enquiry: ");
+                    String editEnquiry = sc.next();
+                    EnquiriesService.editEnquiries(camp.getCampName(), i, editEnquiry);
+        		}
+        	}
+        }
+    }
 
-    public void deleteEnquiries(){}
+    public void deleteEnquiries(){
+    	Camp camp = AuthData.getCurrentCamp();
+    	Student student = (Student)AuthData.getCurrentUser();
+        ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        
+        for(int i=0;i<qList.size();i++) {
+        	if(qList.get(i).getInquirer()==student.getUserID()) {
+        		if(qList.get(i).getProcessed() == true){
+                    System.out.println("Your enquiry has been processed!!");
+                }
+        		else {
+        			EnquiriesService.viewEnquiries(qList.get(i));
+        			System.out.println("Comfirm to delete (y/n): ");
+                    String confirm = sc.next();
+                    if(confirm=="y") {
+                    	EnquiriesService.deleteEnquiry(camp.getCampName(), i);
+                    	System.out.println("Successfully deleted. ");
+                    }
+        		}
+        	}
+        }
+    }
 
 
     public void switchMode(int currentMode){
