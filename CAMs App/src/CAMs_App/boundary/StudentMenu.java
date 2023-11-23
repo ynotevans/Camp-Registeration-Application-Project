@@ -38,18 +38,29 @@ public class StudentMenu implements Menu {
             switch (choice) {
                 case 1:    //create camp
                     if (studentController.viewAvailableCamp()==true){
-                        System.out.print("Select a camp: ");
+                        System.out.print("Enter a camp name: ");
                         String campName = sc.next();
-                        Camp selectedCamp = DatabaseService.getCamp(campName);
-                        AuthData.setCurrentCamp(selectedCamp);
-                        StudentCampMenu campMenu = new StudentCampMenu();
-                        campMenu.viewApp();
-                        
+                        try {
+                            Camp selectedCamp = DatabaseService.getCamp(campName);
+                            AuthData.setCurrentCamp(selectedCamp);
+                            StudentCampMenu campMenu = new StudentCampMenu();
+                            campMenu.viewApp();
+                        }
+                        catch (Exception e) {
+                            System.out.println("Camp name not valid, cannot register.");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException error) {
+                                error.printStackTrace();
+                            }
+                            viewApp();
+                        }
                     }
 
                     else{
                          System.out.println("Currently no available camp(s) for you.");
                     }
+
                     break;
 
                 case 2:    //view all camp
