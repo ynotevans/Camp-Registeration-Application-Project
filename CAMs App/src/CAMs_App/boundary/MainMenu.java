@@ -30,7 +30,7 @@ public class MainMenu implements Menu{
 
         Staff staff1 = new Staff("WWW111", null, Faculty.SCSE);
         Staff staff2 = new Staff("RRR222", null, Faculty.EEE);
-        Student student3 = new Student("TTT444", "test", Faculty.SCSE);
+        Student student3 = new Student("TTT444", "test", Faculty.EEE);
         Student student4 = new Student("YYY555", null, Faculty.CCEB);
 
 
