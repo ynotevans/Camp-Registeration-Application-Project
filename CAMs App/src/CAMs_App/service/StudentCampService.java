@@ -78,8 +78,12 @@ public class StudentCampService {
 	}
 	
 	public static void registerAsCommittee(String campName){
+		Student user = (Student)AuthData.getCurrentUser();
 		Camp camp = DatabaseService.getCamp(campName);
-		camp.addCommittee((Student)AuthData.getCurrentUser());
+		camp.addCommittee(user);
+		ArrayList<String> registeredCamp = user.getRegisteredCamp();
+		registeredCamp.add(0,campName);
+		user.setIsComittee(true);
 	}
 
 	// view available camp

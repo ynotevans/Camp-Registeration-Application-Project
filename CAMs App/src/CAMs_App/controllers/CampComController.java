@@ -12,7 +12,10 @@ public class CampComController extends StudentController{
     public void createSuggestion(){}
 
     public void viewCampDetails(){     ///print the camp details
-
+        
+        String campName = AuthData.getCurrentCamp().getCampName();
+        Camp camp = DatabaseService.getCamp(campName);
+        HelperService.viewCamp(camp);
     }
 
     public void generateReport(){}
