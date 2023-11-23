@@ -62,7 +62,7 @@ public class StaffCampMenu implements Menu {
                     break;
 
                 case 7:    //process suggestion
-                    staffController.processSuggestions(0);
+                    staffController.processSuggestions();
                     break;
                 
                 case 8:    //approve suggestion

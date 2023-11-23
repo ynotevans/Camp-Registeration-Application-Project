@@ -299,7 +299,7 @@ public class StaffController extends UserController{
     }
 
     //Enquiries
-    public void viewEnquiries(String campName){
+    public void viewEnquiries(){
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
         System.out.println("Press 2: View Unprocessed Enquiries");
@@ -339,7 +339,7 @@ public class StaffController extends UserController{
 
     }
 
-    public void replyEnquiries(String campName){
+    public void replyEnquiries(){
         System.out.println("Which enquiries you would like to reply: ");
         int index = sc.nextInt();
         Camp camp = AuthData.getCurrentCamp();
