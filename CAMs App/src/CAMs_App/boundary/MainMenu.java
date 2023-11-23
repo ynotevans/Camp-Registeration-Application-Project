@@ -24,13 +24,13 @@ public class MainMenu implements Menu{
     }
 
     public void testData(){
-        Map<String, Staff> user = new HashMap<String, Staff>();
-        Map<String, Student> user1 = new HashMap<String, Student>();
-        Map<String, Camp> camp = new HashMap<String, Camp>();
+        Map<String, Staff> user = Database.getStaffData();
+        Map<String, Student> user1 = Database.getStudentsData();
+        Map<String, Camp> camp = Database.getCampData();
 
-        Staff staff1 = new Staff("WWW111", null, Faculty.SCSE);
-        Staff staff2 = new Staff("RRR222", null, Faculty.EEE);
-        Student student3 = new Student("TTT444", "test", Faculty.SCSE);
+        Staff staff1 = new Staff("WWW111", null, Faculty.NTU);
+        Staff staff2 = new Staff("RRR222", null, Faculty.NTU);
+        Student student3 = new Student("TTT444", "test", Faculty.EEE);
         Student student4 = new Student("YYY555", null, Faculty.CCEB);
 
 
@@ -52,9 +52,9 @@ public class MainMenu implements Menu{
         user1.put("TTT444", student3);
         user1.put("YYY555", student4);
         
-        Database.setstaffData(user);
-        Database.setStudentsData(user1);
-        Database.setCampData(camp);
+        // Database.setstaffData(user);
+        // Database.setStudentsData(user1);
+        // Database.setCampData(camp);
     }
 
     public void viewApp(){
