@@ -43,13 +43,7 @@ public final class EnquiriesService {
         }
     }
 
-    public static void viewEnquiries(Enquiries q){
-        System.out.println("Inquirer:" + q.getInquirer());
-        System.out.println("Enquiry: " + q.getEnquiry());
-
-        System.out.println("Answerer: " + q.getAnswerer());
-        System.out.println("Answer: " + q.getAnswer());
-    }
+  
 
 
 }

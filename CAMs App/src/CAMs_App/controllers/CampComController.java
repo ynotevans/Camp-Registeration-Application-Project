@@ -25,14 +25,14 @@ public class CampComController extends StudentController{
         ArrayList<Enquiries> q = camp.getEnquiryList();
         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
             System.out.println("Enquiry: " + (i+1));
-            EnquiriesService.viewEnquiries(q.get(i));
+            HelperService.viewEnquiries(q.get(i));
         }
     }
 
     
     public void viewEnquiry(int index){
        Camp camp = user.getComitteeCamp(); // ??
-       EnquiriesService.viewEnquiries(camp.getEnquiryList().get(index));
+       HelperService.viewEnquiries(camp.getEnquiryList().get(index));
     }
     
     

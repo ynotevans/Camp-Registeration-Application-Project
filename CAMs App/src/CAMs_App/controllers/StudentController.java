@@ -86,7 +86,7 @@ public class StudentController extends UserController {
         
         for(int i=0;i<qList.size();i++) {
         	if(qList.get(i).getInquirer()==student.getUserID()) {
-        		EnquiriesService.viewEnquiries(qList.get(i));
+        		HelperService.viewEnquiries(qList.get(i));
         	}
         }
     }
@@ -110,7 +110,7 @@ public class StudentController extends UserController {
                     System.out.println("Your enquiry has been processed!!");
                 }
         		else {
-        			EnquiriesService.viewEnquiries(qList.get(i));
+        			HelperService.viewEnquiries(qList.get(i));
         			System.out.println("Please edit your enquiry: ");
                     String editEnquiry = sc.next();
                     EnquiriesService.editEnquiries(camp.getCampName(), i, editEnquiry);
@@ -130,7 +130,7 @@ public class StudentController extends UserController {
                     System.out.println("Your enquiry has been processed!!");
                 }
         		else {
-        			EnquiriesService.viewEnquiries(qList.get(i));
+        			HelperService.viewEnquiries(qList.get(i));
         			System.out.println("Comfirm to delete (y/n): ");
                     String confirm = sc.next();
                     if(confirm=="y") {
