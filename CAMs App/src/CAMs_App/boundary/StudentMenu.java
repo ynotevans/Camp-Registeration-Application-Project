@@ -38,23 +38,25 @@ public class StudentMenu implements Menu {
             switch (choice) {
                 case 1:    //create camp
                     if (studentController.viewAvailableCamp()==true){
-                        System.out.print("Enter a camp name: ");
+                        System.out.print("Enter a camp name to operate, else just key in anything to return to menu: ");
                         String campName = sc.next();
-                        try {
+                        if (DatabaseService.checkIfCampNameExists(campName) == false) {
+                            System.out.println("Camp name does not exist. Going back to previous menu.");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            }
+                            viewApp();
+
+                        }
+                        
+                        else {
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
                             StudentCampMenu campMenu = new StudentCampMenu();
                             campMenu.viewApp();
-                        }
-                        catch (Exception e) {
-                            System.out.println("Camp name not valid, cannot register.");
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException error) {
-                                error.printStackTrace();
-                            }
-                            viewApp();
-                        }
+                        } 
                     }
 
                     else{
@@ -84,6 +86,8 @@ public class StudentMenu implements Menu {
 
                 case 3:    //switch mode
                     studentController.switchMode(1);
+                    CampComMenu menu = new CampComMenu();
+                    menu.viewApp();
                     break;
 
                 case 4:    //logout
@@ -93,8 +97,8 @@ public class StudentMenu implements Menu {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    MainMenu menu = new MainMenu();
-                    menu.viewApp();
+                    MainMenu comMenu = new MainMenu();
+                    comMenu.viewApp();
                     break;
                 
                 default:
