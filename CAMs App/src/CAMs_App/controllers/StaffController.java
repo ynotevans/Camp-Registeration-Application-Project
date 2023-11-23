@@ -306,9 +306,9 @@ public class StaffController extends UserController{
         System.out.println("Press 3: View All Enquiries");
 
         int choice= sc.nextInt();
-
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> q = camp.getEnquiryList();
+
         switch (choice) {
             case 1:
                 for(int i = 0 ; i < q.size() ; i++){
@@ -402,7 +402,9 @@ public void viewSuggestions(){
         HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
     }
 
-    public void approveSuggestion(Student student, int index){                    //only show the processed suggestions
+    public void approveSuggestion(Student student){ 
+        System.out.println("Which suggestion you would like to process: ");
+        int index = sc.nextInt();            
         System.out.println("Do you want to accept this suggestion? (Y/N)");
         char ans = sc.next().charAt(0);
         boolean approve;
@@ -413,7 +415,7 @@ public void viewSuggestions(){
             approve = false;
 
         
-        SuggestionsService.approveSuggestions(index, approve);
+        SuggestionsService.approveSuggestions(index , approve);
         CampComController.addPoints(student);
         System.out.println("Suggestion has been processed...");
         if(approve)System.out.println("1 point awarded to suggestor");
