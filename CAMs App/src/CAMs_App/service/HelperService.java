@@ -29,4 +29,30 @@ public class HelperService {
         System.out.println("Camp remaining slot: " + camp.getRemainingSlot());
         System.out.println("\n");
     }
+
+    public static void viewEnquiries(Enquiries q){
+      System.out.println("Inquirer:" + q.getInquirer());
+      System.out.println("Enquiry: " + q.getEnquiry());
+
+      System.out.println("Answerer: " + q.getAnswerer());
+      System.out.println("Answer: " + q.getAnswer());
+  }
+
+    public static void printSuggestions(Suggestions s){
+      System.out.println("Suggested by: " + s.getSuggestBy());
+      System.out.println("Suggested by: " + s.getSuggestion());
+      
+      System.out.print("Status: ");     
+      if(s.getProcessed()){
+        if(s.getAccepted()){
+          System.out.println("Suggestion accepted!!");
+        }
+        else{
+          System.out.println("Suggestion rejected");
+        }
+      }
+      else{
+        System.out.println("Suggestion under process...");
+      }
+    }
 }
