@@ -48,22 +48,21 @@ public class StudentController extends UserController {
         Camp camp = DatabaseService.getCamp(campName);
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
+        if (camp.getCampCommitteeSlots() == 0) {
+            System.out.println("Camp Committee slots are full!");
+        }
+
+        else if(registeredCamp.contains(campName)) {
+            System.out.println("Camp has been registered already. Going back previous menu...\n");
+        }
         
-        if(camp.getCommittee().size() != camp.getCampCommitteeSlots())
-            StudentCampService.registerAsCommittee(campName);
-
-        if (camp.getRemainingSlot() == 0) {
-            System.out.println("Camp is full!");
-        }
-
-        else if (registeredCamp.contains(campName)){
-            System.out.println("Camp has been registered already.\n");
-        }
-
+        
         else {
             StudentCampService.registerAsCommittee(campName);
             System.out.println("Successfully Registered as committee!\n");
         }
+
+
     }
 
     public void withdrawCamp(){

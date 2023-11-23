@@ -10,7 +10,7 @@ public class StudentCampMenu implements Menu{
     StudentController studentController = new StudentController();
 
     public void printMenu(){
-        // HelperService.clearScreen();
+        HelperService.clearScreen();
         System.out.println("Available actions for this camp: ");
         System.out.println("(1) Register camp");
         System.out.println("(2) Withdraw camp");
@@ -45,6 +45,11 @@ public class StudentCampMenu implements Menu{
                     }
                     else{
                         studentController.joinAsCommittee();
+                    }
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                     break;
 
