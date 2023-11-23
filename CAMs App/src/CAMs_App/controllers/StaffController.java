@@ -3,15 +3,19 @@ package CAMs_App.controllers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import CAMs_App.data.AuthData;
 
 import CAMs_App.entity.Student;
+import CAMs_App.entity.Suggestions;
 import CAMs_App.enums.Faculty;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.Enquiries;
 import CAMs_App.service.DatabaseService;
+import CAMs_App.service.EnquiriesService;
+import CAMs_App.service.HelperService;
 import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
@@ -21,7 +25,6 @@ public class StaffController extends UserController{
     public void createCamp(){
         Camp camp = new Camp();
        
-
         //read camp name
         System.out.println("Enter camp name: ");
         String campName = sc.next();
@@ -295,17 +298,111 @@ public class StaffController extends UserController{
         }
     }
 
-    public void viewSuggestions(){
+    //Enquiries
+    public void viewEnquiries(String campName){
+        System.out.println("Select your choice: ");
+        System.out.println("Press 1: View Processed Enquiries");
+        System.out.println("Press 2: View Unprocessed Enquiries");
+        System.out.println("Press 3: View All Enquiries");
+
+        int choice= sc.nextInt();
+
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Enquiries> q = camp.getEnquiryList();
+        switch (choice) {
+            case 1:
+                for(int i = 0 ; i < q.size() ; i++){
+                    if(q.get(i).getProcessed()){
+                        System.out.println("EnqriesID: " + i+1);
+                        HelperService.viewEnquiries(q.get(i));
+                    }
+                }
+                break;
+            
+            case 2:
+            for(int i = 0 ; i < q.size() ; i++){
+                    if(!q.get(i).getProcessed()){
+                        System.out.println("EnqriesID: " + i+1);
+                        HelperService.viewEnquiries(q.get(i));
+                    }
+                }
+            break;
+        
+            case 3:
+            for(int i = 0 ; i < q.size() ; i++){
+                   System.out.println("EnqriesID: " + i+1);
+                   HelperService.viewEnquiries(q.get(i));
+             }
+            break;
+
+        }
 
     }
 
-    public void processSuggestions(int index){                   //set the process attribute
-        SuggestionsService.processSuggestions(null, index);
+    public void replyEnquiries(String campName){
+        System.out.println("Which enquiries you would like to reply: ");
+        int index = sc.nextInt();
+        Camp camp = AuthData.getCurrentCamp();
+        Enquiries q = camp.getEnquiryList().get(index);
+
+        System.out.println("Enter your reply: ");
+        String reply = sc.next();
+        EnquiriesService.replyEnquiries(q,reply);
+        System.out.println("Enquiries replied");
+}
+
+//suggestions
+public void viewSuggestions(){
+     System.out.println("Select your choice: ");
+        System.out.println("Press 1: View Suggestions Under Process");  
+        System.out.println("Press 2: View Processed Suggestions");
+        System.out.println("Press any number: View New Suggestions");
+
+
+        int choice = sc.nextInt();
+
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Suggestions> s = camp.getSuggestionList();
+        switch (choice) {
+            case 1:
+                System.out.println("Suggestions under process: ");
+                for(int i = 0 ; i < s.size() ; i++){
+                    if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
+                        System.out.println("SuggestionID: " + i+1);
+                        HelperService.printSuggestions(s.get(i));
+                    }
+                }
+                break;
+            
+            case 2:
+            for(int i = 0 ; i < s.size() ; i++){
+                System.out.println("Processed suggestions");
+                    if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
+                        System.out.println("SuggestionID: " + i+1);
+                        HelperService.printSuggestions(s.get(i));
+                    }
+                }
+            break;
+        
+            case 3:
+            for(int i = 0 ; i < s.size() ; i++){
+                   System.out.println("SuggestionsID: " + i+1);
+                   HelperService.printSuggestions(s.get(i));
+             }
+            break;
+        }
+
+    }
+
+    public void processSuggestions(){
+        System.out.println("Which suggestion you would like to process: ");
+        int index = sc.nextInt();  
+        SuggestionsService.processSuggestions(index);
+        System.out.println("Suggesstion status set to processing...");
+        HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
     }
 
     public void approveSuggestion(Student student, int index){                    //only show the processed suggestions
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("Do you want to accept this suggestion? (Y/N)");
         char ans = sc.next().charAt(0);
         boolean approve;
@@ -316,21 +413,9 @@ public class StaffController extends UserController{
             approve = false;
 
         
-        if(SuggestionsService.approveSuggestions(null, index, approve)){
-            CampComController.addPoints(student);
-        }
-
-        sc.close();
+        SuggestionsService.approveSuggestions(index, approve);
+        CampComController.addPoints(student);
+        System.out.println("Suggestion has been processed...");
+        if(approve)System.out.println("1 point awarded to suggestor");
     }
-
-    public void viewEnquiries(){
-
-    }
-
-    public void replyEnquiries(){
-
-    }
-
-    
-
 }

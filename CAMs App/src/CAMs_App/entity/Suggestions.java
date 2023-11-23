@@ -4,15 +4,15 @@ package CAMs_App.entity;
 
 public class Suggestions {
     private String suggestion;
-    private String suggestBy;  //UserID, use string?
+    private String suggestBy;  
     private Boolean processed;
     private Boolean accepted;
 
     public Suggestions(String suggestion, String suggestBy){
         this.suggestion = suggestion;
         this.suggestBy = suggestBy;
-        this.processed = false;
-        this.accepted = false;
+        this.processed = null;
+        this.accepted = null;
     }
 
     public void setSuggestion(String suggestion) {
