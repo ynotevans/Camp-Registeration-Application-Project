@@ -79,9 +79,10 @@ public class StudentCampService {
 	public static void registerAsCommittee(String campName){
 		Student user = (Student)AuthData.getCurrentUser();
 		Camp camp = DatabaseService.getCamp(campName);
+		// Camp camp = user.getComitteeCamp();
 		camp.addCommittee(user);
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
-		registeredCamp.add(0,campName);
+		registeredCamp.add(campName);
 		user.setIsComittee(true);
 	}
 

@@ -106,6 +106,7 @@ public class StudentMenu implements Menu {
 
                             else {
                                 // edit camp function
+                                campMenu.viewApp(); 
                                 try {
                                     Thread.sleep(3000);
                                     } catch (InterruptedException e) {
