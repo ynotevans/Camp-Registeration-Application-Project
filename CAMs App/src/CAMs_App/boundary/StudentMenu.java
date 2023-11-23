@@ -46,7 +46,7 @@ public class StudentMenu implements Menu {
                         if (DatabaseService.checkIfCampNameExists(campName) == false) {
                             System.out.println("Camp name does not exist. Going back to previous menu...");
                             try {
-                                Thread.sleep(3000);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                             e.printStackTrace();
                             }
@@ -65,12 +65,12 @@ public class StudentMenu implements Menu {
                     else{
                          System.out.println("Currently no available camp(s) for you.\n");
                          try {
-                            Thread.sleep(3000);
+                            Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-
+                    
                     break;
 
                 case 2:    //view all registered camp
@@ -83,7 +83,7 @@ public class StudentMenu implements Menu {
                         if (DatabaseService.checkIfCampNameExists(campName) == false) {
                             System.out.println("Camp name does not exist. Going back to previous menu...");
                             try {
-                                Thread.sleep(3000);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                             e.printStackTrace();
                             }
@@ -97,7 +97,7 @@ public class StudentMenu implements Menu {
                             if (currentStudent.getIsComittee()){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
                                 try {
-                                    Thread.sleep(3000);
+                                    Thread.sleep(1000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -108,7 +108,7 @@ public class StudentMenu implements Menu {
                                 // edit camp function
                                 campMenu.viewApp(); 
                                 try {
-                                    Thread.sleep(3000);
+                                    Thread.sleep(1000);
                                     } catch (InterruptedException e) {
                                 e.printStackTrace();
                                 }
@@ -120,7 +120,7 @@ public class StudentMenu implements Menu {
                     else {
                             System.out.println("Currently no registered camp(s) for you. Going back previous menu...\n");
                             try {
-                                Thread.sleep(3000);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -142,7 +142,7 @@ public class StudentMenu implements Menu {
                 case 4:    //logout
                     System.out.println("Logging out...");
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -153,7 +153,7 @@ public class StudentMenu implements Menu {
                 default:
                     System.out.println("Invalid selection, please select again...");
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

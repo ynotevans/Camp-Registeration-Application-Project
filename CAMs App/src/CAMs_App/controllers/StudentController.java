@@ -78,10 +78,11 @@ public class StudentController extends UserController {
             }
             else{
                 StudentCampService.withdrawCamp(campName, currentUser, false);
+                System.out.println("Withdrawn successfully.");
             }
         }
         else{
-            System.out.println("cancel withdraw...");
+            System.out.println("Cancelling withdraw...");
         }
 
         

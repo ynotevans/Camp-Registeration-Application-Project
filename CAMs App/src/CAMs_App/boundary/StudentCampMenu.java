@@ -55,6 +55,11 @@ public class StudentCampMenu implements Menu{
 
                 case 2:    //withdraw camp
                     studentController.withdrawCamp();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 
                 case 3:    //submit enquiry
