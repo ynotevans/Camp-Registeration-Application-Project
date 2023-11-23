@@ -3,16 +3,12 @@ import CAMs_App.entity.*;
 import CAMs_App.data.AuthData;
 public final class EnquiriesService {
 
-    public static boolean replyEnquiries(String CampName, int index , String reply){
-        Camp camp = DatabaseService.getCamp(CampName);
-        Enquiries q = camp.getEnquiryList().get(index);
-        if(q.getProcessed())return false;
-        else{
+    public static void replyEnquiries(Enquiries q ,String reply){
+       
             q.setAnswer(reply);
             q.setAnswerer(AuthData.getCurrentUser().getUserID());
             q.setProcessed();
-        }
-        return true;
+    
     }
 
     public static void createEnquiries(String CampName , String question){
@@ -42,8 +38,4 @@ public final class EnquiriesService {
            return true;
         }
     }
-
-  
-
-
 }

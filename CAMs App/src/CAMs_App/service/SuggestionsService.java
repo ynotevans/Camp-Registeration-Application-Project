@@ -6,25 +6,21 @@ import CAMs_App.entity.Suggestions;
 
 public class SuggestionsService {
     
-    public static boolean approveSuggestions(String CampName, int index, boolean approve){
-        Camp camp = DatabaseService.getCamp(CampName);
+    public static void approveSuggestions(int index, boolean approve){
+        Camp camp = AuthData.getCurrentCamp();
         Suggestions s = camp.getSuggestionList().get(index);
 
         if(approve == true){
             s.setAccepted(true);
-            return true;
         }else{
-            System.out.println("Your suggestion is not accepted. Thank you...");
             s.setAccepted(false);
-            return false;
         }
     }
 
 
-    public static void processSuggestions(String CampName, int index){
-        Camp camp = DatabaseService.getCamp(CampName);
+    public static void processSuggestions(int index){
+        Camp camp = AuthData.getCurrentCamp();
         Suggestions s = camp.getSuggestionList().get(index);
-
         s.setProcessed(true);
     }
 
