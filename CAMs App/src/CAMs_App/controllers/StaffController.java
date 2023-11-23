@@ -20,7 +20,7 @@ import CAMs_App.service.StaffCampService;
 import CAMs_App.service.SuggestionsService;
 
 public class StaffController extends UserController{
-    
+    Scanner sc = new Scanner(System.in);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public void createCamp(){
         Camp camp = new Camp();

@@ -11,7 +11,6 @@ import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
 
 public class StudentCampService {
-	static Student currentStudent = (Student) AuthData.getCurrentUser();
 	
 	private static boolean checkClash(Camp camp1 , Camp camp2){
 		LocalDate camp1Start = camp1.getCampDate();
@@ -92,7 +91,7 @@ public class StudentCampService {
         Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
-			if((camp.getVisibility() == true && camp.getUserGroup().toString() == currentStudent.getFaculty()) 
+			if((camp.getVisibility() == true && camp.getUserGroup().toString() == AuthData.getCurrentUser().getFaculty()) 
 				|| camp.getUserGroup() == Faculty.NTU){
 					HelperService.viewCamp(camp);
 					i++;

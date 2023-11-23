@@ -52,9 +52,9 @@ public class MainMenu implements Menu{
         user1.put("TTT444", student3);
         user1.put("YYY555", student4);
         
-        // Database.setstaffData(user);
-        // Database.setStudentsData(user1);
-        // Database.setCampData(camp);
+        Database.setstaffData(user);
+        Database.setStudentsData(user1);
+        Database.setCampData(camp);
     }
 
     public void viewApp(){
