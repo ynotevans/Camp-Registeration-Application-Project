@@ -14,6 +14,7 @@ public class StudentMenu implements Menu {
     StudentController studentController = new StudentController();
 
     public void printMenu(){
+        HelperService.clearScreen();
         System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
         System.out.println("Student profile reflected here....");
         System.out.println("Available actions for you: ");
@@ -36,7 +37,7 @@ public class StudentMenu implements Menu {
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1:    //create camp
+                case 1:    //view camp
                     if (studentController.viewAvailableCamp()==true){
                         System.out.print("Enter a camp name to operate, else just key in anything to return to menu: ");
                         String campName = sc.next();
@@ -60,12 +61,12 @@ public class StudentMenu implements Menu {
                     }
 
                     else{
-                         System.out.println("Currently no available camp(s) for you.");
+                         System.out.println("Currently no available camp(s) for you.\n");
                     }
 
                     break;
 
-                case 2:    //view all camp
+                case 2:    //view all registered camp
                     if (studentController.viewRegisteredCamp()==true){
 
                         System.out.print("Select a camp to edit (Enter the camp name): ");
@@ -76,18 +77,40 @@ public class StudentMenu implements Menu {
                             AuthData.setCurrentCamp(selectedCamp);
                         }
 
+                        else {
+                            if (DatabaseService.checkIfCampNameExists(campName) == false) {
+                                System.out.println("Camp name does not exist. Going back to previous menu.");
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                }
+                                viewApp();
+                            }
+                        }
+
                     }
 
                     else {
-                            System.out.println("Currently no registered camp(s) for you.");
+                            System.out.println("Currently no registered camp(s) for you.\n");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                     }
 
                     break;
 
                 case 3:    //switch mode
+                    
                     studentController.switchMode(1);
-                    CampComMenu menu = new CampComMenu();
-                    menu.viewApp();
+                    System.out.println("Sorry, you are not a camp committee. Going back previous menu...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case 4:    //logout
