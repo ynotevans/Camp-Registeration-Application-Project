@@ -9,6 +9,7 @@ import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
+import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
 import CAMs_App.enums.*;
 
@@ -67,7 +68,10 @@ public class MainMenu implements Menu{
     }
 
     public void viewApp(){
-        this.testData();
+        //this.testData();
+        DatabaseService.readfromStaffCSV();
+        DatabaseService.readfromStudentCSV();
+        DatabaseService.readfromCampCSV();
 
         this.printMenu();
         Scanner sc = new Scanner(System.in);

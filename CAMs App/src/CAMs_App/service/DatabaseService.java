@@ -19,8 +19,10 @@ import java.util.Set;
 import javax.xml.crypto.Data;
 
 import CAMs_App.entity.Student;
+import CAMs_App.entity.Suggestions;
 import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.enums.Faculty;
 
@@ -46,17 +48,24 @@ public class DatabaseService {
             // Write the header (keys of the Map) to the CSV file
             writer.write(String.join(",", header));
             writer.newLine();
+			String registeredCamp,withdrawnCamp;
 
 			for (Student student : dataMap.values()){
-
-				String registeredCamp = String.join("|", student.getRegisteredCamp());
-				String withdrawnCamp = String.join("|", student.getWithdrawnCamp());
+				if(student.getRegisteredCamp() == null)
+					registeredCamp = "null";
+				else
+					registeredCamp = String.join("|", student.getRegisteredCamp());
+				
+				if(student.getWithdrawnCamp() == null)
+					withdrawnCamp = "null";
+				else
+					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
 
 				// Write the values to the CSV file
             	writer.write(String.format("%s,%s,%s,%b,%d,%s,%s" , student.getUserID(),student.getPassword(), 
 											student.getFaculty(),student.getIsComittee(),student.getPoints(),
-											registeredCamp.isEmpty() ? "null" :registeredCamp,
-											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp));
+											registeredCamp,
+											withdrawnCamp));
 				writer.newLine();
 			}
 
@@ -178,11 +187,13 @@ public class DatabaseService {
 		header.add("userGroup");
 		header.add("location");
 		header.add("totalSlots");
+		header.add("remainingSlot");
 		header.add("campCommitteeSlots");
+		header.add("campCommitteeRemainingSlot");
 		header.add("description");
 		header.add("staffInCharge");
 		header.add("visibility");
-		header.add("remainingSlot");
+		header.add("numberOfCampDays");
 		header.add("attendees");  //ArrayList
 		header.add("committee");   //ArrayList
 		header.add("enquiries");  //ArrayList
@@ -197,11 +208,20 @@ public class DatabaseService {
 
 			ArrayList<String> attendeestr = new ArrayList<String>();
 			ArrayList<String> committeestr = new ArrayList<String>();
+			ArrayList<String> enquiriesstr = new ArrayList<String>();
+			ArrayList<String> suggestionsstr = new ArrayList<String>();
+			ArrayList<String> singleenquiry = new ArrayList<String>();
+			ArrayList<String> singlesuggestion = new ArrayList<String>();
+			
 
 			for (Camp camp : dataMap.values()){
 				//convert to ArrayList<String> to store to csv
 				attendeestr.clear();
 				committeestr.clear();
+				enquiriesstr.clear();
+				suggestionsstr.clear();
+				singleenquiry.clear();
+				singlesuggestion.clear();
 
 				for(int i=0; i<camp.getAttendees().size();i++){
 					attendeestr.add(camp.getAttendees().get(i).getUserID());
@@ -211,21 +231,48 @@ public class DatabaseService {
 					committeestr.add(camp.getCommittee().get(i).getUserID());
 				}
 
+				for(int i=0; i<camp.getEnquiryList().size();i++){
+					singleenquiry.add(camp.getEnquiryList().get(i).getEnquiry());
+					singleenquiry.add(camp.getEnquiryList().get(i).getAnswer());
+					singleenquiry.add(camp.getEnquiryList().get(i).getInquirer());
+					singleenquiry.add(camp.getEnquiryList().get(i).getAnswerer());
+					singleenquiry.add(String.valueOf(camp.getEnquiryList().get(i).getProcessed()));
+				}
+
+				for(int i=0; i<camp.getEnquiryList().size();i++){
+					enquiriesstr.add( String.join("*", singleenquiry));
+				}
+
+				for(int i=0; i<camp.getSuggestionList().size();i++){
+					singlesuggestion.add(camp.getSuggestionList().get(i).getSuggestion());
+					singlesuggestion.add(camp.getSuggestionList().get(i).getSuggestBy());
+					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getProcessed()));
+					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getAccepted()));
+				}
+
+				for(int i=0; i<camp.getSuggestionList().size();i++){
+					suggestionsstr.add( String.join("*", singlesuggestion));
+				}
+
 				String attendees = String.join("|", attendeestr);
 				String committee = String.join("|", committeestr);
+				String enquiries = String.join("|", enquiriesstr);
+				String suggestions = String.join("|", suggestionsstr);
 
 				// Write the values to the CSV file
-            	writer.write(String.format("%s,%s,%s,%s,%s,%s,%d,%d,%s,%s,%b,%d,%s,%s", 
+            	writer.write(String.format("%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%s,%s,%b,%d,%s,%s,%s,%s", 
 											camp.getCampName(),camp.getCampDate().toString(), 
 											camp.getCampEndDate().toString(), camp.getRegCloseDate().toString(), 
-											camp.getUserGroup(),camp.getLocation(),camp.getTotalSlots(),
-											camp.getCampCommitteeSlots(),camp.getDescription(),camp.getStaffInCharge(),
-											camp.getVisibility(),camp.getRemainingSlot(),
+											camp.getUserGroup(),camp.getLocation(),camp.getTotalSlots(),camp.getRemainingSlot(),
+											camp.getCampCommitteeSlots(),camp.getCampCommitteeRemainingSlots(),
+											camp.getDescription(),camp.getStaffInCharge(),
+											camp.getVisibility(),camp.getNumberOfCampDays(),
 											attendeestr.isEmpty() ? "null" : attendees,
-											committeestr.isEmpty() ? "null" : committee));
+											committeestr.isEmpty() ? "null" : committee,
+											enquiriesstr.isEmpty() ? "null" : enquiries,
+											suggestionsstr.isEmpty() ? "null" : suggestions));
 				writer.newLine();
 			}
-
             System.out.println("Data written to " + csvFilePath);
         } catch (IOException e) {
             e.printStackTrace();
@@ -254,20 +301,28 @@ public class DatabaseService {
 				Faculty userGroup = Faculty.valueOf(values[++i]);
 				String location = values[++i];
 				int totalSlots = Integer.parseInt(values[++i]);
+				int remainingSlot = Integer.parseInt(values[++i]);        
 				int campCommitteeSlots = Integer.parseInt(values[++i]);
+				int campCommitteeRemainingSlot = Integer.parseInt(values[++i]);
 				String description = values[++i];
 				String staffInCharge = values[++i];
 				Boolean visibility = Boolean.valueOf(values[++i]);
-				int numberOfCampDays = Integer.parseInt(values[++i]);
-				int remainingSlot;        //need to update ltr
+				int numberOfCampDays = Integer.parseInt(values[++i]);	
 				String[] attendeeArr = values[++i].split("\\|");
 				String[] committeeArr = values[++i].split("\\|");
+				String[] enquiriestr = values[++i].split("\\|");
+				String[] suggestionstr = values[++i].split("\\|");
+
 				
 
-				// Camp camp = new Camp( campName,  campDate,  campEndDate, 
-				// 					  regCloseDate,  userGroup, location, 
-				// 					  totalSlots,  campCommitteeSlots,  description, 
-				// 					  staffInCharge,  visibility,  numberOfCampDays);
+				Camp camp = new Camp( campName,  campDate,  campEndDate, 
+									  regCloseDate,  userGroup, location, 
+									  totalSlots,  campCommitteeSlots,  description, 
+									  staffInCharge,  visibility);
+				
+				camp.setNumberOfCampDays(numberOfCampDays);
+				camp.setRemainingSlot(remainingSlot);
+				camp.setCampCommitteeRemainingSlots(campCommitteeRemainingSlot);
 				
 				// //insert the data into ArrayList
 				if (!attendeeArr[0].equals("null")){
@@ -283,6 +338,45 @@ public class DatabaseService {
 						camp.addCommittee(student);
 					}
 				}
+
+				//split the data to create enquiry and suggestions
+				if(!camp.getEnquiryList().isEmpty()){
+					for(int j=0; j<enquiriestr.length; j++){
+						String[] singleEnquiry = enquiriestr[j].split("\\*");
+						String enquirymessage = singleEnquiry[0];
+						String asnwer = singleEnquiry[1];
+						String inquirer = singleEnquiry[2];
+						String asnwerer = singleEnquiry[3];
+						boolean enquiryProccessd = Boolean.valueOf(singleEnquiry[4]);
+
+						if (!enquiriestr[0].equals("null")){
+							Enquiries enquiries = new Enquiries(enquirymessage,inquirer);
+							enquiries.setAnswerer(asnwerer);
+							enquiries.setAnswer(asnwer);
+							if(enquiryProccessd)
+								enquiries.setProcessed();
+							camp.addQuery(enquiries);
+						}
+					}
+				}
+				
+				if(!camp.getSuggestionList().isEmpty()){
+					for(int j=0; j<suggestionstr.length; j++){
+						String[] singleSuggestion = suggestionstr[j].split("\\*");
+						String message = singleSuggestion[0];
+						String suggester = singleSuggestion[1];
+						boolean processed = Boolean.valueOf(singleSuggestion[2]);
+						boolean accepted = Boolean.valueOf(singleSuggestion[3]);
+
+						if (!suggestionstr[0].equals("null")){
+							Suggestions newSuggestion = new Suggestions(message, suggester);
+							newSuggestion.setProcessed(processed);
+							newSuggestion.setAccepted(accepted);
+							camp.addSuggestion(newSuggestion);
+						}
+					}
+				}
+				
 				user.put(values[0], camp);
                 System.out.println(); // Move to the next line for the next row
             }

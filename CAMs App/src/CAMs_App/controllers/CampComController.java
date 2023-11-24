@@ -30,14 +30,14 @@ public class CampComController extends StudentController{
         ArrayList<Enquiries> q = camp.getEnquiryList();
         for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
             System.out.println("Enquiry: " + (i+1));
-            HelperService.viewEnquiries(q.get(i));
+            EnquiriesService.viewEnquiries(q.get(i));
         }
     }
 
     
     public void viewEnquiry(int index){
        Camp camp = user.getComitteeCamp(); // ??
-       HelperService.viewEnquiries(camp.getEnquiryList().get(index));
+       EnquiriesService.viewEnquiries(camp.getEnquiryList().get(index));
     }
     
     
@@ -82,7 +82,7 @@ public class CampComController extends StudentController{
        for(int i = 0 ; i < sList.size() ; i++){
         if(sList.get(i).getSuggestBy() == AuthData.getCurrentUser().getUserID()){
             System.out.println("SuggestionsID " + (i + 1));
-            HelperService.printSuggestions(sList.get(i));
+            SuggestionsService.printSuggestions(sList.get(i));
             System.out.println(" ");
         }
        }
