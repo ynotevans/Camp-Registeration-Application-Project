@@ -30,59 +30,69 @@ public class StaffMenu implements Menu{
         
         Scanner sc = new Scanner(System.in);
         int choice;
-        do{
-            this.printMenu();
-            System.out.print("Enter ur selection: ");
-            choice = sc.nextInt();
+        try {
+            do{
+                this.printMenu();
+                System.out.print("Enter ur selection: ");
+                choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:    //create camp
-                    staffController.createCamp();
-                    break;
+                switch (choice) {
+                    case 1:    //create camp
+                        staffController.createCamp();
+                        break;
 
-                case 2:    //view all camp
-                    staffController.viewAllCamp();
-                    break;
-                
-                case 3:    //view staff created camp
-                    staffController.viewCreatedCamp(currentStaff.getUserID());
-
-                    System.out.print("Select a camp to operate (campName): ");
-                    String campName = sc.next();
-
-                    if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){
-                        Camp selectedCamp = DatabaseService.getCamp(campName);
-                        AuthData.setCurrentCamp(selectedCamp);
-
-                        StaffCampMenu campMenu = new StaffCampMenu();   //not here
-                        campMenu.viewApp();
-                    }
-                    else{
-                        System.out.println("Camp not exist, please enter the correct camp Name... ");
-                    }
+                    case 2:    //view all camp
+                        staffController.viewAllCamp();
+                        break;
                     
+                    case 3:    //view staff created camp
+                        staffController.viewCreatedCamp(currentStaff.getUserID());
+
+                        System.out.print("Select a camp to operate (campName): ");
+                        String campName = sc.next();
+
+                        if(DatabaseService.checkCampName(campName, currentStaff.getUserID())){
+                            Camp selectedCamp = DatabaseService.getCamp(campName);
+                            AuthData.setCurrentCamp(selectedCamp);
+
+                            StaffCampMenu campMenu = new StaffCampMenu();   //not here
+                            campMenu.viewApp();
+                        }
+                        else{
+                            System.out.println("Camp not exist, please enter the correct camp Name... ");
+                        }
+                        
+                        
+                        break;
                     
-                    break;
-                
-                case 4:    //logout
-                    System.out.println("Logging out...");
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    MainMenu menu = new MainMenu();
-                    menu.viewApp();
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+                    case 4:    //logout
+                        System.out.println("Logging out...");
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        MainMenu menu = new MainMenu();
+                        menu.viewApp();
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        break;
+                }
+
+            }while(choice != 4);
+        
+            sc.close();
+
+        }catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
-
-        }while(choice != 4);
-    
-        sc.close();
-
+            viewApp();
+        }
     }
 }

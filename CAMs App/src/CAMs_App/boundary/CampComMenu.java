@@ -31,51 +31,61 @@ public class CampComMenu implements Menu{
         this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
-        do{
-            System.out.print("Enter ur selection: ");
-            choice = sc.nextInt();
+        try {
+            do{
+                System.out.print("Enter ur selection: ");
+                choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:    //view camp details
-                    campComController.viewCampDetails();
-                    break;
+                switch (choice) {
+                    case 1:    //view camp details
+                        campComController.viewCampDetails();
+                        break;
 
-                case 2:    //view  enquiries
-                    campComController.viewAllEnquiries();    //update the functions
-                    break;
-            
-                case 3:    //reply enquiries
-                    campComController.replyEnquiry(0);   //update the functions
-                    break;
+                    case 2:    //view  enquiries
+                        campComController.viewAllEnquiries();    //update the functions
+                        break;
                 
-                case 4:    //creata suggestion
-                    campComController.createSuggestion();
-                    break;
-                
-                case 5:    //view suggestions
-                    campComController.viewSuggestion(null);
-                    break;
+                    case 3:    //reply enquiries
+                        campComController.replyEnquiry(0);   //update the functions
+                        break;
+                    
+                    case 4:    //creata suggestion
+                        campComController.createSuggestion();
+                        break;
+                    
+                    case 5:    //view suggestions
+                        campComController.viewSuggestion(null);
+                        break;
 
-                case 6:    //generate report
-                    campComController.generateReport();
-                    break;
-                
-                case 7:    //switch mode
-                    campComController.switchMode(2);
-                    break;
+                    case 6:    //generate report
+                        campComController.generateReport();
+                        break;
+                    
+                    case 7:    //switch mode
+                        campComController.switchMode(2);
+                        break;
 
-                case 8:    //logout
-                    campComController.logout();
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+                    case 8:    //logout
+                        campComController.logout();
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        break;
+                }
+
+            }while(choice != 7);
+        
+            sc.close();
+
+        }catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
-
-        }while(choice != 7);
-    
-        sc.close();
-
+            viewApp();
+        }
     }
 }
