@@ -5,8 +5,8 @@ import CAMs_App.enums.*;
 
 public class Student extends User {
 	private boolean isCommittee;
-	private ArrayList<String> registeredCamp;
-	private ArrayList<String> withdrawnCamp;
+	private ArrayList<String> registeredCamp= new ArrayList<String>();;
+	private ArrayList<String> withdrawnCamp = new ArrayList<String>();;
 	private Camp committeeCamp;
 	private int points;
 	private CampCompMem campCompMem = new CampCompMem();
@@ -14,9 +14,7 @@ public class Student extends User {
 	public Student(String userID, String password, Faculty faculty) {
 		super(userID, password, faculty);
 		super.setIdentity(Identity.student);
-		isCommittee = false;
-		registeredCamp = new ArrayList<String>();
-		withdrawnCamp  = new ArrayList<String>();
+		isCommittee = false; 
 		committeeCamp = null;
 		points = 0;
 	}

@@ -44,7 +44,6 @@ public class StudentCampMenu implements Menu{
                         }
                         else{
                             studentController.joinAsCommittee();
-                            System.out.println("test");
                         }
                         try {
                             Thread.sleep(3000);

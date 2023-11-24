@@ -60,8 +60,8 @@ public class DatabaseService {
 				// Write the values to the CSV file
             	writer.write(String.format("%s,%s,%s,%b,%d,%s,%s" , student.getUserID(),student.getPassword(), 
 											student.getFaculty(),student.getIsComittee(),student.getPoints(),
-											registeredCamp,
-											withdrawnCamp));
+											registeredCamp.isEmpty() ? "null" :registeredCamp,
+											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp));
 				writer.newLine();
 			}
 
