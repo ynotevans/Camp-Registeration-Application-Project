@@ -303,6 +303,7 @@ public class StaffController extends UserController{
             }
             else{
                camp.setVisibility(true);
+               break;
             }
         }
 

@@ -1,3 +1,3 @@
-campName,campDate,campEndDate,regCloseDate,userGroup,location,totalSlots,campCommitteeSlots,description,staffInCharge,visibility,remainingSlot,attendees,committee
-camp1,2023-10-30,2023-11-03,2023-10-15,EEE,SRC,30,10,EEE camp ,WWW111,true,30,TTT444|RRR222|WWW333,null
-camp2,2023-10-31,2023-11-05,2023-10-16,SBS,SRC,30,10,EEE camp ,RRR222,true,30,TTT444|RRR222|WWW333,null
+campName,campDate,campEndDate,regCloseDate,userGroup,location,totalSlots,remainingSlot,campCommitteeSlots,campCommitteeRemainingSlot,description,staffInCharge,visibility,numberOfCampDays,attendees,committee,enquiries,sugggestion
+camp1,2023-10-30,2023-11-03,2023-10-15,EEE,SRC,30,30,10,10,EEE camp ,WWW111,true,0,null,null,null,null
+camp2,2023-10-31,2023-11-05,2023-10-16,SBS,SRC,30,30,10,10,EEE camp ,RRR222,true,0,null,null,enquiry1*WWW111*TTT444*WWW111*true,sugggestion2*CCC111*true*true
