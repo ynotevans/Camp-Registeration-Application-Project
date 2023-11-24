@@ -1,6 +1,7 @@
 package CAMs_App.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,9 +40,9 @@ public class StaffCampService extends CampManagementService{
 
     // view camp
     public static void viewAllCamps(){
-        Map<String, Camp> camp1 = Database.getCampData(); 
+        List<Camp> sortArr= HelperService.filter();
 
-        for (Camp camp : camp1.values()){
+        for (Camp camp : sortArr){
             HelperService.viewCamp(camp);
         }
     }

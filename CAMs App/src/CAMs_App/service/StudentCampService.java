@@ -2,10 +2,9 @@ package CAMs_App.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import CAMs_App.data.AuthData;
-import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
@@ -91,9 +90,11 @@ public class StudentCampService {
 	// view available camp
     public static int viewAvailableCamps(){
 		int i=0;
-        Map<String, Camp> camp1 = Database.getCampData(); 
+		List<Camp> sortArr= HelperService.filter();
 
-        for (Camp camp : camp1.values()){
+		HelperService.clearScreen();
+		HelperService.printRoute("Student Menu ---> View Available Camp");
+        for (Camp camp : sortArr){
 			if((camp.getVisibility() == true && camp.getUserGroup().toString() == AuthData.getCurrentUser().getFaculty()) 
 				|| camp.getUserGroup() == Faculty.NTU){
 					HelperService.viewCamp(camp);
@@ -108,8 +109,11 @@ public class StudentCampService {
 		int i = 0;
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
 		if(registeredCamp != null){
+			HelperService.clearScreen();
+			HelperService.printRoute("Student Menu ---> View Available Camp");
 			for (String camp : registeredCamp){
-				System.out.println(camp);
+				Camp camp1 = DatabaseService.getCamp(camp);
+				HelperService.viewCamp(camp1);
 				i++;
 			}
 		}
