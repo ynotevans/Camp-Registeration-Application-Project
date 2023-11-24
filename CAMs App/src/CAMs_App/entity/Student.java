@@ -4,11 +4,11 @@ import java.util.*;
 import CAMs_App.enums.*;
 
 public class Student extends User {
-	private boolean isCommittee;
+	private boolean isCommittee = false;
 	private ArrayList<String> registeredCamp;
 	private ArrayList<String> withdrawnCamp;
-	private Camp committeeCamp;
-	private int points;
+	private Camp committeeCamp = null;
+	private int points = 0;
 	private CampCompMem campCompMem = new CampCompMem();
 	
 	public Student(String userID, String password, Faculty faculty) {
