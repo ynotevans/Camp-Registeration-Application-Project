@@ -23,11 +23,11 @@ public class StaffController extends UserController{
        
         //read camp name
         System.out.println("Enter camp name: ");
-        String campName = sc.next();
+        String campName = sc.nextLine();
         
         while(DatabaseService.checkIfCampNameExists(campName)){
             System.out.println("Camp Name already exists!! Enter another name");
-            campName = sc.next();
+            campName = sc.nextLine();
         }
         camp.setCampName(campName);
 
@@ -37,7 +37,7 @@ public class StaffController extends UserController{
             try {
                 // Parse the user input into a LocalDateTime object
                 System.out.println("Enter starting date in dd-mm-yyyy format:");
-                String start = sc.next();
+                String start = sc.nextLine();
                 LocalDate startDateTime = LocalDate.parse(start,formatter);
                 camp.setCampDate(startDateTime);
                 break;
@@ -53,7 +53,7 @@ public class StaffController extends UserController{
         try {
             // Parse the user input into a LocalDateTime object
             System.out.println("Enter end date for camp in dd-mm-yyyy format:");
-            String end = sc.next();
+            String end = sc.nextLine();
             LocalDate endDateTime = LocalDate.parse(end, formatter);
 
             if (endDateTime.isBefore(camp.getCampDate())) {
@@ -96,7 +96,7 @@ public class StaffController extends UserController{
 
         //User group
         System.out.println("Enter faculty for which the camp is open to: ");
-        String fac = sc.next();
+        String fac = sc.nextLine();
         try {
             Faculty faculty = Faculty.valueOf(fac.toUpperCase());
             camp.setUserGroup(faculty);
@@ -106,7 +106,7 @@ public class StaffController extends UserController{
 
         //camp location
         System.out.println("Enter camp location: ");
-        String location = sc.next();
+        String location = sc.nextLine();
         camp.setLocation(location);
 
         //number of committee slots
@@ -119,28 +119,21 @@ public class StaffController extends UserController{
         }
         camp.setCampCommitteeSlots(campCommitteeSlots);
 
-        //number of participants slots
+        //total number of slots
         System.out.println("Enter total number of camp slots: ");
-        int campSlots = sc.nextInt();
-      
-
-        while(campSlots <= 0 || campSlots < campCommitteeSlots){
-            System.out.println("Camp slots cannot be negative or lesser than the number of committee slots\n Please try again: ");
-            campSlots = sc.nextInt();
-        }
-        
+        int campSlots = HelperService.readInt(0 ,campCommitteeSlots , "total slot cannot be less than committee slot");      
         camp.setTotalSlots(campSlots);
 
 
         //Camp Descriptions
         System.out.println("Enter camp description: ");
-        String description = sc.next();
+        String description = sc.nextLine();
         camp.setDescription(description);
         
         //set visibility
         System.out.println("Set Visibility: ");
         System.out.println("Input 1 to make camp visible, else invisible....");
-        int visibility = sc.nextInt();
+        int visibility = HelperService.readInt();
         if(visibility == 1) camp.setVisibility(true);
         else camp.setVisibility(false);
         
@@ -175,11 +168,11 @@ public class StaffController extends UserController{
                 case 1:
                     System.out.println("Edit camp name");
                     System.out.println("Change camp name to");
-                    String newCampName = sc.next();
+                    String newCampName = sc.nextLine();
                     String oldCampName = camp.getCampName();
                     while(DatabaseService.checkIfCampNameExists(newCampName)){
                         System.out.println("Camp Name already exists!! Enter another name");
-                        newCampName = sc.next();
+                        newCampName = sc.nextLine();
                     }
                     camp.setCampName(newCampName);
                     System.out.println("Camp name changed in to "+camp.getCampName());
@@ -188,7 +181,7 @@ public class StaffController extends UserController{
                 case 2:
                     System.out.println("Edit camp dates");
                     System.out.println("Enter starting date in dd-mm-yyyy format:");
-                    String start = sc.next();
+                    String start = sc.nextLine();
 
                     try {
                         LocalDate startDateTime = LocalDate.parse(start,formatter);
@@ -200,7 +193,7 @@ public class StaffController extends UserController{
                     }
 
                     System.out.println("Enter ending date in dd-mm-yyyy format:");
-                    String end = sc.next();
+                    String end = sc.nextLine();
 
                     try {
                         LocalDate endDateTime = LocalDate.parse(end,formatter);
@@ -243,26 +236,16 @@ public class StaffController extends UserController{
                 case 5:
                     System.out.println("Edit camp location");
                     System.out.println("Enter camp's new location:");
-                    camp.setLocation(sc.next());
+                    camp.setLocation(sc.nextLine());
                     System.out.println("Camp location changed to: "+camp.getLocation());                    
                     break;
                 
                 case 6:
                     System.out.println("Edit total camp slots");
-                    int totalSlots;
-                    while(true){
-                        try{
-                            System.out.println("Set number of camp commitee slots");
-                            totalSlots = sc.nextInt();
-                            if(totalSlots > 0 && totalSlots > camp.getCampCommitteeSlots())
-                                break;
-                            else
-                                System.out.println("Slot cannot be <= 0 and must be more than the number of committee slots!!!");        
-                        }catch (InputMismatchException e) {
-                            System.out.println("Invalid input");
-                            sc.nextLine();
-                        }
-                    }
+                    int totalSlots;     
+                    System.out.println("Set total number of camp slots");
+                    int campMember = camp.getTotalSlots() - camp.getRemainingSlot() - camp.getCampCommitteeRemainingSlots();
+                    totalSlots = HelperService.readInt(0 , campMember , "New camp slot cannot be lesser than the current total number of attendees and committee");   //new camp slot cannot be less than current number of attendees + committee
                     camp.setTotalSlots(totalSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
                     break;
@@ -270,26 +253,15 @@ public class StaffController extends UserController{
                 case 7:
                     System.out.println("Edit camp committee slots(up to 10 slots)");
                     int committeeSlots;
-                    while(true){
-                        try{
-                            System.out.println("Set number of camp commitee slots");
-                            committeeSlots = sc.nextInt();
-                            if(committeeSlots>=0 && committeeSlots<=10)
-                                break;
-                            else
-                                System.out.println("Reenter number between 0 to 10");        
-                        }catch (InputMismatchException e) {
-                            System.out.println("Invalid input. Enter a number between 0 to 10.");
-                            sc.nextLine();
-                        }
-                    }
+                    System.out.println("Set number of camp commitee slots");
+                    committeeSlots = HelperService.readInt(camp.getCampCommitteeRemainingSlots(),10 , "New camp committee slot cannot be more than 10 or less then the current number of committee member");                            
                     camp.setCampCommitteeSlots(committeeSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
                     break;
                 case 8:
                     System.out.println("Edit camp description");
                     System.out.println("Enter new camp description");
-                    camp.setDescription(sc.next());
+                    camp.setDescription(sc.nextLine());
                     System.out.println("Camp description has been changed to\n"+camp.getDescription());
                     break;       
                 case 9:
@@ -316,18 +288,14 @@ public class StaffController extends UserController{
         System.out.println("Toggle camp visibility");
        
         while (true){
-             System.out.println("Press 1 to turn off, 2 to turn on");
+             System.out.println("Press 1 to turn off, any number to turn on");
              int choice = HelperService.readInt();
             if(choice == 1){
                 camp.setVisibility(false);
                 break;
             }
-            else if(choice == 2){
-                camp.setVisibility(true);
-                break;
-            }
             else{
-                System.out.println("Wrong input!! Please try again...");
+               camp.setVisibility(true);
             }
         }
 
@@ -367,7 +335,7 @@ public class StaffController extends UserController{
     public void viewEnquiries(){
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
-        System.out.println("Press 2: View Unprocessed Enquiries");
+        System.out.println("Press 2: View New Enquiries");
         System.out.println("Press any number: View All Enquiries");
 
         int choice = HelperService.readInt(); 
@@ -376,27 +344,33 @@ public class StaffController extends UserController{
 
         switch (choice) {
             case 1:
+            System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
                         System.out.println("EnqriesID: " + i+1);
                         HelperService.viewEnquiries(q.get(i));
+                        System.out.println(" ");
                     }
                 }
                 break;
             
             case 2:
+            System.out.println("New Enquiries ");
             for(int i = 0 ; i < q.size() ; i++){
                     if(!q.get(i).getProcessed()){
                         System.out.println("EnqriesID: " + i+1);
                         HelperService.viewEnquiries(q.get(i));
+                        System.out.println(" ");
                     }
                 }
             break;
         
             default:
+            System.out.println("List of all enquiries:");
             for(int i = 0 ; i < q.size() ; i++){
                    System.out.println("EnqriesID: " + i+1);
                    HelperService.viewEnquiries(q.get(i));
+                   System.out.println(" ");
              }
             break;
 
@@ -407,10 +381,14 @@ public class StaffController extends UserController{
     public void replyEnquiries(){
         Camp camp = AuthData.getCurrentCamp();
         System.out.println("Which enquiries you would like to reply: ");
-        int index = HelperService.readInt(1 , camp.getEnquiryList().size()); 
-        Enquiries q = camp.getEnquiryList().get(index);
+        int index = HelperService.readInt(1 , camp.getEnquiryList().size(),"Enquiry index out of bound"); 
+        Enquiries q = camp.getEnquiryList().get(index -1);
+        if(q.getProcessed()) {
+            System.out.println("Unable to reply to processed enquiry");
+            return;
+        }
         System.out.println("Enter your reply: ");
-        String reply = sc.next();
+        String reply = sc.nextLine();
         EnquiriesService.replyEnquiries(q,reply);
         System.out.println("Enquiries replied");
     }
@@ -420,7 +398,8 @@ public class StaffController extends UserController{
     System.out.println("Select your choice: ");
     System.out.println("Press 1: View Suggestions Under Process");  
     System.out.println("Press 2: View Processed Suggestions");
-    System.out.println("Press any number: View New Suggestions");
+    System.out.println("Press 3: View New Suggestions");
+    System.out.println("Press any number: View All Suggestions");
     
     int choice = HelperService.readInt();
 
@@ -428,41 +407,55 @@ public class StaffController extends UserController{
     ArrayList<Suggestions> s = camp.getSuggestionList();
     switch (choice) {
         case 1:
-            System.out.println("Suggestions under process: ");
+        System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < s.size() ; i++){
                 if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
                     System.out.println("SuggestionID: " + i+1);
                     HelperService.printSuggestions(s.get(i));
+                    System.out.println(" ");
                 }
             }
             break;
         
         case 2:
+        System.out.println("Processed suggestions");
         for(int i = 0 ; i < s.size() ; i++){
-            System.out.println("Processed suggestions");
                 if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
                     System.out.println("SuggestionID: " + i+1);
                     HelperService.printSuggestions(s.get(i));
+                    System.out.println(" ");
                 }
             }
         break;
 
         case 3:
+        System.out.println("New suggestions: ");
         for(int i = 0 ; i < s.size() ; i++){
                 System.out.println("SuggestionsID: " + i+1);
                 HelperService.printSuggestions(s.get(i));
+                System.out.println(" ");
             }
+        break;
+
+        default:
+        System.out.println("List of all suggestions: ");
+        for(int i = 0 ; i < s.size() ; i ++){
+            System.out.println("SuggestionID: " + i+i);
+            HelperService.printSuggestions(s.get(i));
+            System.out.println(" ");
+        }
         break;
     }
 
     }
 
     public void processSuggestions(){
+    ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
     System.out.println("Which suggestion you would like to process: ");
-    int index = HelperService.readInt(); 
-    SuggestionsService.processSuggestions(index);
+    int index = HelperService.readInt(1 , sList.size() , "Suggestion index out of bound"); 
+    SuggestionsService.processSuggestions(index - 1);
     System.out.println("Suggesstion status set to processing...");
-    HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
+    HelperService.printSuggestions(sList.get(index - 1));
     }
 
     public void approveSuggestion(Student student){ 
@@ -472,10 +465,8 @@ public class StaffController extends UserController{
     char ans = sc.next().toUpperCase().charAt(0);
     boolean approve;
 
-    if(ans == 'Y')
-        approve = true;
-    else
-        approve = false;
+    if(ans == 'Y')  approve = true;
+    else approve = false;
 
 
     SuggestionsService.approveSuggestions(index , approve);

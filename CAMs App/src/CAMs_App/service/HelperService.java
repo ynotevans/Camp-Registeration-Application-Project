@@ -34,7 +34,7 @@ static Scanner sc = new Scanner(System.in);
   }
 
  
-  public static int readInt(int min, int max) {
+  public static int readInt(int min, int max , String message) {
     while (true) {
       try {
         int userInput = -1;
@@ -49,7 +49,7 @@ static Scanner sc = new Scanner(System.in);
         sc.nextLine();
         System.out.println("\nInvalid Input, Enter an integer!");
       } catch (OutOfRange e) {
-        System.out.println("\nInput is out of allowed range");
+        System.out.println(message);
       }
     }
   }
