@@ -22,30 +22,7 @@ public class CampComController extends StudentController{
 
     public void generateReport(){}
 
-    public void deleteSuggestion(){
-        if(!SuggestionsService.submittedSuggestions()){
-            System.out.println("You have not submitted any suggestions");
-        }
-        Camp camp = AuthData.getCurrentCamp();
-        ArrayList<Suggestions> sList = camp.getSuggestionList();
-        this.viewSuggestion();
-        System.out.println("Which suggestion you would like to delete: ");
-        int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
-        Suggestions s = sList.get(index -1);
-        while(s.getSuggestBy() != AuthData.getCurrentUser().getUserID()){
-            System.out.println("Unable to edit suggestion from other committee member. Please try again");
-            index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
-        }
-        s = sList.get(index -1);
-        if(s.getProcessed()){
-            System.out.println("Unable to delete.\nYour suggestion is currently under process or has been approved/rejected");
-            return;
-        }
-        else{
-            sList.remove(index);
-            System.out.println("Your suggestion has been deleted");
-        }
-    }
+    
 	
 	
     public void viewAllEnquiries(){
@@ -138,19 +115,32 @@ public class CampComController extends StudentController{
 
     }
     
-    public void deleteSuggestion(Camp camp, Suggestions s){
-         if(s.getSuggestBy() == user.getUserID() && s.getProcessed() == false){
-            System.out.println("Deleting your suggestion...");
-            camp.getSuggestionList().remove(s);                          //need to modify again to check the index of the suggestion to be deleted
-            System.out.println("Successfully deleted. ");
+    public void deleteSuggestion(){
+        if(!SuggestionsService.submittedSuggestions()){
+            System.out.println("You have not submitted any suggestions");
         }
-        else if(s.getProcessed() == true){
-            System.out.println("Your suggestion has been processed!!");
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Suggestions> sList = camp.getSuggestionList();
+        this.viewSuggestion();
+        System.out.println("Which suggestion you would like to delete: ");
+        int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+        Suggestions s = sList.get(index -1);
+        while(s.getSuggestBy() != AuthData.getCurrentUser().getUserID()){
+            System.out.println("Unable to edit suggestion from other committee member. Please try again");
+            index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+        }
+        s = sList.get(index -1);
+        if(!SuggestionsService.isNew(s)){
+            System.out.println("Unable to delete.\nYour suggestion is currently under process or has been approved/rejected");
+            return;
         }
         else{
-            System.out.println("No suggestion provided...");
+            sList.remove(index);
+            System.out.println("Your suggestion has been deleted");
         }
     }
+
+    
 
     public static void addPoints(Student student) {
 		student.setPoints(student.getPoints() + 1);
