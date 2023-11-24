@@ -63,6 +63,7 @@ public class StudentController extends UserController {
             System.out.println("Enter desired position to be in the camp committee: ");
             String position = sc.next();
             StudentCampService.registerAsCommittee(position);
+            student.setCommitteeCamp(camp);
             System.out.println("Successfully Registered as committee!\n");
         }
 

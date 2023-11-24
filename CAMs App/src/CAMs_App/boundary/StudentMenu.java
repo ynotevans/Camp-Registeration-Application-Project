@@ -93,8 +93,8 @@ public class StudentMenu implements Menu {
                         else {
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
-                            StudentCampMenu campMenu = new StudentCampMenu();
-                            if (currentStudent.getIsComittee()){
+                            
+                            if (currentStudent.getComitteeCamp()==selectedCamp){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
                                 try {
                                     Thread.sleep(1000);
@@ -103,8 +103,9 @@ public class StudentMenu implements Menu {
                                 }
                                 viewApp();
                             }
-
+                            
                             else {
+                                StudentCampMenu campMenu = new StudentCampMenu();
                                 // edit camp function
                                 campMenu.viewApp(); 
                                 try {

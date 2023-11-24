@@ -1,5 +1,6 @@
 package CAMs_App.boundary;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
@@ -35,23 +36,31 @@ public class StudentCampMenu implements Menu{
                         System.out.println("(1) Attendees");
                         System.out.println("(2) Camp Committee\n");
                         System.out.print("Enter your selection: ");
-                        int choice1 = sc.nextInt();
-
-                        if(choice1 == 1){
-                            HelperService.clearScreen();
-                            studentController.joinAsAttendee();    //update campName
-
-                        }
-                        else{
-                            studentController.joinAsCommittee();
-                            System.out.println("test");
-                        }
                         try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        int choice1 = sc.nextInt();
+                            if(choice1 == 1){
+                                HelperService.clearScreen();
+                                studentController.joinAsAttendee();    //update campName
+
+                            }
+                            else if (choice1 == 2){
+                                studentController.joinAsCommittee();
+                            }
+
+                            else {
+                                System.out.println("Invalid input, returning to menu...");
+                            }
+                            
+                        } catch (InputMismatchException error){
+                            System.out.println("Invalid input, returning to menu...");
                         }
-                        studentMenu.viewApp();
+
+                        try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                        }
+                        viewApp();
                         break;
 
                     case 2:    //withdraw camp
