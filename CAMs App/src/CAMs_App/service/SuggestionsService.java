@@ -18,6 +18,10 @@ public class SuggestionsService {
 
     }
 
+    public static boolean isNew(Suggestions s){
+      if(s.getStatus().toString().equals("NEW")) return true;
+      return false;
+    }
  
 
     public static boolean submittedSuggestions(){
@@ -31,21 +35,26 @@ public class SuggestionsService {
 
     public static void printSuggestions(Suggestions s){
         System.out.println("Suggested by: " + s.getSuggestBy());
-        System.out.println("Suggested by: " + s.getSuggestion());
+        System.out.println("Suggestion details : " + s.getSuggestion());
         
         System.out.print("Status: ");     
-        if(s.getProcessed()){
+        if(isNew(s)){
+         System.out.println("Suggestion pending process...");
+        }
+        else if(s.getStatus().toString().equals("Processing")){
+          System.out.println("Suggestion is under process");
+        }
+        else{
           if(s.getAccepted()){
-            System.out.println("Suggestion accepted!!");
+            System.out.println("Suggestion accepted");
           }
           else{
             System.out.println("Suggestion rejected");
           }
         }
-        else{
-          System.out.println("Suggestion under process...");
-        }
+
       }
+    }
        //public static void approveSuggestions(int index, boolean approve){
     //     Camp camp = AuthData.getCurrentCamp();
     //     Suggestions s = camp.getSuggestionList().get(index);
@@ -87,5 +96,5 @@ public class SuggestionsService {
     // }
 
     
-}
+
 

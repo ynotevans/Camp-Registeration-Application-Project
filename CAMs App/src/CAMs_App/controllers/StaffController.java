@@ -421,14 +421,15 @@ public class StaffController extends UserController{
     int choice = HelperService.readInt();
 
     Camp camp = AuthData.getCurrentCamp();
-    ArrayList<Suggestions> s = camp.getSuggestionList();
+    ArrayList<Suggestions> sList = camp.getSuggestionList();
     switch (choice) {
         case 1:
         System.out.println("Suggestions under process: ");
-            for(int i = 0 ; i < s.size() ; i++){
-                if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
+            for(int i = 0 ; i < sList.size() ; i++){
+                Suggestions s = sList.get(i);
+                if(s.getStatus().toString().equals("PROCESSING")){
                     System.out.println("SuggestionID: " + (i+1));
-                    SuggestionsService.printSuggestions(s.get(i));
+                    SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
                 }
             }
@@ -436,10 +437,11 @@ public class StaffController extends UserController{
         
         case 2:
         System.out.println("Processed suggestions");
-        for(int i = 0 ; i < s.size() ; i++){
-                if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
-                    System.out.println("SuggestionID: " +(i+1));
-                    SuggestionsService.printSuggestions(s.get(i));
+            for(int i = 0 ; i < sList.size() ; i++){
+                Suggestions s = sList.get(i);
+                if(s.getStatus().toString().toUpperCase().equals("PROCESSED")){
+                    System.out.println("SuggestionID: " + (i+1));
+                    SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
                 }
             }
@@ -447,54 +449,65 @@ public class StaffController extends UserController{
 
         case 3:
         System.out.println("New suggestions: ");
-        for(int i = 0 ; i < s.size() ; i++){
-            if(s.get(i).getProcessed() == false){
-                System.out.println("SuggestionsID: " + (i+1));
-                SuggestionsService.printSuggestions(s.get(i));
-                System.out.println(" ");
-            }
-                
-            }
+            for(int i = 0 ; i < sList.size() ; i++){
+                Suggestions s = sList.get(i);
+                if(s.getStatus().toString().equals("NEW")){
+                    System.out.println("SuggestionID: " + (i+1));
+                    SuggestionsService.printSuggestions(s);
+                    System.out.println(" ");
+                }
+            }    
+
         break;
 
         default:
         System.out.println("List of all suggestions: ");
-        for(int i = 0 ; i < s.size() ; i ++){
+        for(int i = 0 ; i <sList.size() ; i ++){
             System.out.println("SuggestionID: " + (i+1));
-            SuggestionsService.printSuggestions(s.get(i));
+            SuggestionsService.printSuggestions(sList.get(i));
             System.out.println(" ");
         }
         break;
     }
-
-    }
-
+ }
     public void processSuggestions(){
-        ArrayList <Suggestions> s = AuthData.getCurrentCamp().getSuggestionList();
-        for(int i = 0 ; i < s.size() ; i++){
-                if(s.get(i).getProcessed() == false){
-                    System.out.println("SuggestionsID: " + (i+1));
-                    SuggestionsService.printSuggestions(s.get(i));
+        ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+         System.out.println("New suggestions: ");
+            for(int i = 0 ; i < sList.size() ; i++){
+                Suggestions s = sList.get(i);
+                if(s.getStatus().toString().equals("NEW")){
+                    System.out.println("SuggestionID: " + (i+1));
+                    SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
                 }
-        }
+            }    
+      
         System.out.println("Which suggestion you would like to process: ");
-        int index = HelperService.readInt(1 , s.size() , "Invalid Suggestion ID"); 
-        s.get(index -1).setProcessed(true);
-        System.out.println("Suggesstion status set to processing...");
-        SuggestionsService.printSuggestions(s.get(index - 1));
+        int index = HelperService.readInt(1 , sList.size() , "Invalid Suggestion ID"); 
+        if(SuggestionsService.isNew(sList.get(index -1))){
+            System.out.println("Suggestion is already under process / has been processed");
+        }
+        else{
+            System.out.println("Suggestion status set to processing...");
+        }
+
+      
+        SuggestionsService.printSuggestions(sList.get(index - 1));
     }
 
     public void approveSuggestion(){ 
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
          System.out.println("Suggestion pending approval: ");
          for(int i = 0 ; i < sList.size() ; i++){
-            System.out.println("Suggestion ID " + (i+1));
-            if(sList.get(i).getAccepted() == null){
-                SuggestionsService.printSuggestions(sList.get(i));
-                System.out.println(" ");
-            }
-      }
+                Suggestions s = sList.get(i);
+                if(s.getStatus().toString().equals("NEW")){
+                    System.out.println("SuggestionID: " + (i+1));
+                    SuggestionsService.printSuggestions(s);
+                    System.out.println(" ");
+                }
+            }    
+       
+      
     System.out.println("Which suggestion you would like to approve/reject: ");
     int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
     Suggestions s = sList.get(index -1);
@@ -505,7 +518,7 @@ public class StaffController extends UserController{
     if(ans == 'Y')  approve = true;
     else approve = false;
 
-    s.setProcessed(true);
+    s.setSuggestionStatus("PROCESSED");
     s.setAccepted(approve);
     Student student = DatabaseService.getStudent(s.getSuggestBy());
     CampComController.addPoints(student);

@@ -21,6 +21,7 @@ import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.enums.Faculty;
+import CAMs_App.enums.SuggestionStatus;
 
 
 
@@ -242,7 +243,7 @@ public class DatabaseService {
 				for(int i=0; i<camp.getSuggestionList().size();i++){
 					singlesuggestion.add(camp.getSuggestionList().get(i).getSuggestion());
 					singlesuggestion.add(camp.getSuggestionList().get(i).getSuggestBy());
-					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getProcessed()));
+					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getStatus()));
 					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getAccepted()));
 				}
 
@@ -358,12 +359,12 @@ public class DatabaseService {
 						String[] singleSuggestion = suggestionstr[j].split("\\*");
 						String message = singleSuggestion[0];
 						String suggester = singleSuggestion[1];
-						boolean processed = Boolean.valueOf(singleSuggestion[2]);
+						String status = singleSuggestion[2].toUpperCase();
 						boolean accepted = Boolean.valueOf(singleSuggestion[3]);
 
 						
 						Suggestions newSuggestion = new Suggestions(message, suggester);
-						newSuggestion.setProcessed(processed);
+						newSuggestion.setSuggestionStatus(status);
 						newSuggestion.setAccepted(accepted);
 						camp.addSuggestion(newSuggestion);
 					

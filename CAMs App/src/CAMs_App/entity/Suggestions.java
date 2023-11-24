@@ -1,17 +1,19 @@
 package CAMs_App.entity;
 
+import CAMs_App.enums.SuggestionStatus;
+
 // import java.nio.file.FileAlreadyExistsException;
 
 public class Suggestions {
     private String suggestion;
     private String suggestBy;  
-    private Boolean processed;
+    private SuggestionStatus status;
     private Boolean accepted;
 
     public Suggestions(String suggestion, String suggestBy){
         this.suggestion = suggestion;
         this.suggestBy = suggestBy;
-        this.processed = false;
+        this.status = SuggestionStatus.NEW;
         this.accepted = null;
     }
 
@@ -23,8 +25,8 @@ public class Suggestions {
         this.suggestBy = suggestBy;
     }
 
-    public void setProcessed(Boolean processed) {
-        this.processed = processed;
+    public void setSuggestionStatus(String status){
+        this.status = SuggestionStatus.valueOf(status);
     }
 
     public void setAccepted(Boolean accepted) {
@@ -39,8 +41,8 @@ public class Suggestions {
         return suggestBy;
     }
 
-    public Boolean getProcessed() {
-        return processed;
+    public SuggestionStatus getStatus() {
+        return this.status;
     }
 
     public Boolean getAccepted() {
