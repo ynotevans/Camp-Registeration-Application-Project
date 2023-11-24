@@ -24,7 +24,7 @@ public class SuggestionsService {
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Suggestions> sList = camp.getSuggestionList();
         for(int i = 0 ; i < sList.size() ; i++){
-            if(sList.get(i).getSuggestBy() == AuthData.getCurrentUser().getUserID()) return true;
+            if(sList.get(i).getSuggestBy().equals(AuthData.getCurrentUser().getUserID())) return true;
         }
     return false;
     }
