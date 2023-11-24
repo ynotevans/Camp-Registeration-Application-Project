@@ -1,6 +1,7 @@
 package CAMs_App.service;
 import CAMs_App.entity.User;
 import CAMs_App.data.AuthData;
+import CAMs_App.data.Database;
 
 
 public abstract class AuthService {
@@ -8,13 +9,16 @@ public abstract class AuthService {
     public abstract boolean login(String UserID, String password);
 
 
-    public boolean logout(){
+    public static boolean logout(){
         AuthData.setCurrentUser(null);
         AuthData.setCurrentCamp(null);
+        DatabaseService.writetoStaffCSV(Database.getStaffData());
+        DatabaseService.writetoStudentCSV(Database.getStudentsData());
+        DatabaseService.writetoCampCSV(Database.getCampData());
         return true;
     }
 
-    protected boolean authenticate(User user, String password){
+    protected static boolean authenticate(User user, String password){
         if (user == null)
             return false;
         

@@ -146,6 +146,7 @@ public class StudentMenu implements Menu {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    studentController.logout();
                     MainMenu comMenu = new MainMenu();
                     comMenu.viewApp();
                     break;

@@ -2,8 +2,6 @@ package CAMs_App.entity;
 
 import java.util.*;
 
-import CAMs_App.enums.*;
-
 public class CampCompMem {
 	private ArrayList<Suggestions> suggestions;
 	private String position;

@@ -82,6 +82,7 @@ public class StaffCampMenu implements Menu {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        staffController.logout();
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

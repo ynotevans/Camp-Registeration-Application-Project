@@ -7,7 +7,6 @@ import java.util.Map;
 import CAMs_App.data.AuthData;
 import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
 

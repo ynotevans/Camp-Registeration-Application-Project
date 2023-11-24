@@ -10,13 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.xml.crypto.Data;
 
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Suggestions;
@@ -401,7 +397,7 @@ public class DatabaseService {
 		Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
-            if(camp.getStaffInCharge() == userID && camp.getCampName().equals(campName)){
+            if(camp.getStaffInCharge().equals(userID) && camp.getCampName().equals(campName)){
 				return true;
 			}
                 //return true;
