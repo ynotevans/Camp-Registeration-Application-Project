@@ -1,6 +1,6 @@
 campName,campDate,campEndDate,regCloseDate,userGroup,location,totalSlots,remainingSlot,campCommitteeSlots,campCommitteeRemainingSlot,description,staffInCharge,visibility,numberOfCampDays,attendees,committee,enquiries,sugggestion
 camp1,2023-10-30,2023-11-03,2023-10-15,EEE,SRC,30,29,10,10,EEE camp ,WWW111,true,0,TTT444,null,null,null
 camp2,2023-10-31,2023-11-05,2023-10-16,SBS,SRC,30,30,10,10,EEE camp ,RRR222,true,0,null,null,null,null
-camp3,2023-10-30,2023-11-03,2023-10-15,NTU,SRC,30,30,10,10,EEE camp ,WWW111,true,0,null,null,testtest3*Not processed yet*CCC222*NULL*false*testtest3*Not processed yet*CCC222*NULL*false|testtest3*Not processed yet*CCC222*NULL*false*testtest3*Not processed yet*CCC222*NULL*false,null
+camp3,2023-10-30,2023-11-03,2023-10-15,NTU,SRC,30,30,10,9,EEE camp ,WWW111,true,0,null,TTT444,testtest3*Not processed yet*CCC222*NULL*false*testtest3*Not processed yet*CCC222*NULL*false|testtest3*Not processed yet*CCC222*NULL*false*testtest3*Not processed yet*CCC222*NULL*false,fdsfdsa dsfd*TTT444*false*null
 camp4,2023-11-25,2023-11-25,2023-11-22,SCSE,fsdsdf,25,25,10,0,sdfsdfsdf,WWW111,true,1,null,null,null,null
-camp5,2024-02-25,2024-02-25,2024-02-22,EEE,dfsdf,10,12,2,-4,dfssdfsdf,RRR222,true,1,null,TTT444,dsfds dsgsd*Not processed yet*TTT444*NULL*false*dsfds dsgsd*Not processed yet*TTT444*NULL*false|dsfds dsgsd*Not processed yet*TTT444*NULL*false*dsfds dsgsd*Not processed yet*TTT444*NULL*false,null
+camp5,2024-02-25,2024-02-25,2024-02-22,EEE,dfsdf,10,12,2,-5,dfssdfsdf,RRR222,true,1,null,TTT444|TTT444,dsfds dsgsd*Not processed yet*TTT444*NULL*false*dsfds dsgsd*Not processed yet*TTT444*NULL*false|dsfds dsgsd*Not processed yet*TTT444*NULL*false*dsfds dsgsd*Not processed yet*TTT444*NULL*false,sdfsf dd*TTT444*false*false
