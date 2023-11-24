@@ -9,7 +9,7 @@ public class Student extends User {
 	private static ArrayList<String> withdrawnCamp;
 	private Camp committeeCamp;
 	private int points;
-	private CampCompMem campCompMem;
+	private CampCompMem campCompMem = new CampCompMem();
 	
 	public Student(String userID, String password, Faculty faculty) {
 		super(userID, password, faculty);
@@ -61,6 +61,7 @@ public class Student extends User {
 		committeeCamp = camp;
 	}
 
+	
 	public void setCommittee(String position){
 		this.campCompMem.setPosition(position);
 	}

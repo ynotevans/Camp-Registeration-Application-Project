@@ -1,6 +1,7 @@
 package CAMs_App.controllers;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import CAMs_App.boundary.CampComMenu;
 import CAMs_App.boundary.StudentMenu;
@@ -13,6 +14,7 @@ import CAMs_App.service.StudentCampService;
 
 
 public class StudentController extends UserController {
+    Scanner sc = new Scanner(System.in);
     static Student currentUser = (Student)AuthData.getCurrentUser();
 
 	public boolean viewAvailableCamp(){
@@ -58,7 +60,9 @@ public class StudentController extends UserController {
         
         
         else {
-            StudentCampService.registerAsCommittee(campName);
+            System.out.println("Enter desired position to be in the camp committee: ");
+            String position = sc.next();
+            StudentCampService.registerAsCommittee(position);
             System.out.println("Successfully Registered as committee!\n");
         }
 
@@ -104,25 +108,24 @@ public class StudentController extends UserController {
         	if(qList.get(i).getInquirer()==student.getUserID()) {
                 System.out.println("Your submitted enquiries on this camp");
                 System.out.println("Enquiry: " + i + 1);
-        		HelperService.viewEnquiries(qList.get(i));
+        		EnquiriesService.viewEnquiries(qList.get(i));
                 System.out.println(" ");
         	}
         }
     }
 
     public void createEnquiry(){
-    	Camp camp = AuthData.getCurrentCamp();
     	System.out.println("Please provide your enquiry: ");
         sc.nextLine();
         String enquiry = sc.nextLine();
     	
-        EnquiriesService.createEnquiries(camp.getCampName(), enquiry);
+        EnquiriesService.createEnquiries(enquiry);
     }
 
     public void editEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
+        if(!EnquiriesService.submittedEnquiries()){
             System.out.println("You do not have any submitted enquiry");
             return;
         }
@@ -136,22 +139,22 @@ public class StudentController extends UserController {
         	System.out.println("Invalid enquiry id, please try again");
             index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         }
+        Enquiries q = qList.get(index -1);
+        if(q.getProcessed()){
+            System.out.println("Unable to edit prcoessed enquiry");
+            return;
+        }
         System.out.println("Enter your new enquiry: ");
         String enquiry = sc.nextLine();
-        Enquiries q = qList.get(index-1);
-        if(EnquiriesService.editEnquiries(q, enquiry)){
-            System.out.println("Enquiry updated");
-        }
-        else{
-            System.out.println("Unable to edit prcoessed enquiry");
-        }
+        q.setEnquiry(enquiry);
+        System.out.println("Enquiries Updated");
     }
 
     public void deleteEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
-            System.out.println("You do not have any submitted enquiry");
+        if(!EnquiriesService.submittedEnquiries()){
+            System.out.println("You have not submitted any enquiry");
             return;
         }
         ArrayList<Enquiries> qList = camp.getEnquiryList();
@@ -166,7 +169,7 @@ public class StudentController extends UserController {
             index = HelperService.readInt();
         }
         
-        HelperService.viewEnquiries(qList.get(index - 1));
+        EnquiriesService.viewEnquiries(qList.get(index - 1));
         System.out.println("\n Press Y to confirm deletion , any key to cancel");
         char choice = sc.next().toUpperCase().charAt(0);
         if(choice == 'Y'){
