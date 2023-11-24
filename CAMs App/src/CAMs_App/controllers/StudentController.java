@@ -55,10 +55,10 @@ public class StudentController extends UserController {
         Camp camp = AuthData.getCurrentCamp();
         if(student.getIsComittee()){
             //check if the student is a committee for any upcoming camp
-            if(!student.getComitteeCamp().getCampEndDate().isAfter(LocalDate.now())){
+            // if(!student.getComitteeCamp().getCampEndDate().isAfter(LocalDate.now())){
                 System.out.println("You are not allowed to sign up as committee for more than 1 camp");
                 return;
-            }
+            // }
         }
         
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
@@ -74,7 +74,7 @@ public class StudentController extends UserController {
         
         else {
             System.out.println("Enter desired position to be in the camp committee: ");
-            String position = sc.nextLine();
+            String position = sc.next();
             StudentCampService.registerAsCommittee(position);
             student.setCommitteeCamp(camp);
             System.out.println("Successfully Registered as committee!\n");
@@ -85,13 +85,13 @@ public class StudentController extends UserController {
 
     public void withdrawCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
-
+        Camp camp = DatabaseService.getCamp(campName);
         System.out.println("Are you sure you want to withdraw from this camp? (Y to confirm , any key to cancel)");
 
         char ans = sc.next().toUpperCase().charAt(0);
 
         if(ans == 'Y'){
-            if(currentUser.getIsComittee()){
+            if(currentUser.getComitteeCamp() == camp){
                 StudentCampService.withdrawCamp(campName, currentUser, true);
             }
             else{
