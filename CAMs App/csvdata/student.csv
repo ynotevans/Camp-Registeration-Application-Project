@@ -1,7 +1,7 @@
-userID,password,Faculty,isCommittee,points,registeredCamp,withdrawnCamp
-YYY555,password,CCEB,false,0,null,null
-RRR222,password,SCSE,false,0,null,null
-CCC111,password,SBS,false,0,null,null
-WWW333,password,CCEB,false,0,null,null
-CCC222,password,SOH,false,0,null,null
-TTT444,password,EEE,true,0,camp5|camp3,null
+userID,password,Faculty,Name,isCommittee,points,registeredCamp,withdrawnCamp
+YYY555,password,CCEB,Lily,false,0,null,null
+RRR222,password,SCSE,Amy,false,0,null,null
+CCC111,password,SBS,Ryan,false,0,null,null
+WWW333,password,CCEB,Elly,false,0,null,null
+CCC222,password,SOH,Jack,false,0,null,null
+TTT444,password,EEE,Rose,true,0,camp5|camp3,null
