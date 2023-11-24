@@ -31,69 +31,79 @@ public class StaffCampMenu implements Menu {
         this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
-        do{
-            System.out.print("Enter ur action for this camp: ");
-            choice = sc.nextInt();
+        try {
+            do{
+                System.out.print("Enter ur action for this camp: ");
+                choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:    //edit camp
-                    staffController.editCamp();
-                    break;
+                switch (choice) {
+                    case 1:    //edit camp
+                        staffController.editCamp();
+                        break;
 
-                case 2:    //delete camp
-                    System.out.println("Enter camp name to be deleted: ");
-                    String campName = sc.next();
-                    staffController.deleteCamp(campName);
-                    break;
-                
-                case 3:    //toggle camp visibility
-                    staffController.toggleVisibility();
-                    break;
-                
-                case 4:    //view enquiries
-                    staffController.viewEnquiries();
-                    break;
+                    case 2:    //delete camp
+                        System.out.println("Enter camp name to be deleted: ");
+                        String campName = sc.next();
+                        staffController.deleteCamp(campName);
+                        break;
+                    
+                    case 3:    //toggle camp visibility
+                        staffController.toggleVisibility();
+                        break;
+                    
+                    case 4:    //view enquiries
+                        staffController.viewEnquiries();
+                        break;
 
-                case 5:    //reply enquiries
-                    staffController.replyEnquiries();
-                    break;
+                    case 5:    //reply enquiries
+                        staffController.replyEnquiries();
+                        break;
 
-                case 6:    //view suggestion
-                    staffController.viewSuggestions();
-                    break;
+                    case 6:    //view suggestion
+                        staffController.viewSuggestions();
+                        break;
 
-                case 7:    //process suggestion
-                    staffController.processSuggestions();
-                    break;
-                
-                case 8:    //approve suggestion
-                    staffController.approveSuggestion((Student)AuthData.getCurrentUser());
-                    break;
+                    case 7:    //process suggestion
+                        staffController.processSuggestions();
+                        break;
+                    
+                    case 8:    //approve suggestion
+                        staffController.approveSuggestion((Student)AuthData.getCurrentUser());
+                        break;
 
-                case 9: //go to previous page
-                    StaffMenu staffMenu = new StaffMenu();
-                    staffMenu.viewApp();
-                    break;
-                                
-                case 10:    //logout
-                    System.out.println("Logging out...");
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    MainMenu menu = new MainMenu();
-                    menu.viewApp();
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+                    case 9: //go to previous page
+                        StaffMenu staffMenu = new StaffMenu();
+                        staffMenu.viewApp();
+                        break;
+                                    
+                    case 10:    //logout
+                        System.out.println("Logging out...");
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        MainMenu menu = new MainMenu();
+                        menu.viewApp();
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        break;
+                }
+
+            }while(choice != 10);
+        
+            sc.close();
+
+        } catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
-
-        }while(choice != 10);
-    
-        sc.close();
-
+            viewApp();
+        }
     }
 }

@@ -82,12 +82,18 @@ public class MainMenu implements Menu{
                         break;
                     
                     case 3:
-                        System.out.println("Prompt to Exit...");
+                        System.out.println("Ending session...");
                         System.exit(0);
                         break;
                     
                     default:
                         System.out.println("Invalid selection, please select again...");
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException error) {
+                            error.printStackTrace();
+                        }
+                        viewApp();
                         break;
                 }
 
