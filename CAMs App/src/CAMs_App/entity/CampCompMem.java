@@ -11,6 +11,7 @@ public class CampCompMem {
 	public CampCompMem(String postion){
 		this.position = postion;
 	};
+	public CampCompMem(){}
 	
 	
 	

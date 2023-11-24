@@ -7,6 +7,7 @@ import java.util.Map;
 import CAMs_App.data.AuthData;
 import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
 
@@ -80,6 +81,7 @@ public class StudentCampService {
 	public static void registerAsCommittee(String position){
 		Student student = (Student)AuthData.getCurrentUser();
 		Camp camp = AuthData.getCurrentCamp();
+	
 		student.setCommittee(position);
 		camp.addCommittee(student);
 		student.getRegisteredCamp().add(camp.getCampName());
