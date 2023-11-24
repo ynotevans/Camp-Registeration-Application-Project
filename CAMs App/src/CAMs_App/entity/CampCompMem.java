@@ -4,23 +4,22 @@ import java.util.*;
 
 import CAMs_App.enums.*;
 
-public class CampCompMem extends Student{
+public class CampCompMem {
 	private ArrayList<Suggestions> suggestions;
 	private String position;
+
+	public CampCompMem(String postion){
+		this.position = postion;
+	};
 	
-	public CampCompMem(Student student, String post) {
-		super(student.getUserID(), student.getPassword(), Faculty.valueOf(student.getFaculty()));
-		super.setIdentity(student.getIdentity());
-		position = post;
-		suggestions = new ArrayList<>();
-	}
+	
 	
 	public ArrayList<Suggestions> getSuggestion() {
 		return suggestions;
 	}
 
-	public void setSuggestion(ArrayList<Suggestions> list) {
-		suggestions = list;
+	public void setSuggestion(Suggestions s) {
+		this.suggestions.add(s);
 	}
     
     public String getPosition() {
@@ -31,16 +30,5 @@ public class CampCompMem extends Student{
     	position = post;
     }
 
-	@Override
-	public void setUserID(String userID) {
-		// TODO Auto-generated method stub
-		super.setUserID(userID);
-	}
 
-	@Override
-	public String getUserID() {
-		// TODO Auto-generated method stub
-		return super.getUserID();
-	}
-    
 }
