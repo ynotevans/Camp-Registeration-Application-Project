@@ -34,7 +34,12 @@ public class LoginMenu implements Menu {
                         StaffMenu staffMenu = new StaffMenu();
                         staffMenu.viewApp();
                     }
-                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException error) {
+                        error.printStackTrace();
+                    }
+                    viewApp();
                     break;
 
                 case 2:   //student login
@@ -43,6 +48,12 @@ public class LoginMenu implements Menu {
                         StudentMenu studentMenu = new StudentMenu();
                         studentMenu.viewApp();
                     }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException error) {
+                        error.printStackTrace();
+                    }
+                    viewApp();
                     break;
                 
                 case 3:

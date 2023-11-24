@@ -43,7 +43,7 @@ public class UserController {
     }
 
     public boolean login(boolean isStaff){
-        int attempt=1;
+        int attempt=0;
         if(isStaff){
            authService = new AuthStaffService();
         }
@@ -59,14 +59,14 @@ public class UserController {
 
         while(authenticated != true){  
             attempt++;        
-            System.out.println("Wrong UserID or Password, please enter again...");
+            System.out.println("Attempt " + attempt + ": Wrong UserID or Password, please enter again...");
             System.out.print("User ID: ");
             userID = sc.next();
             System.out.print("Password: ");
             password = sc.next();
             authenticated = authService.login(userID, password);
-            if (attempt == 5) {
-                System.out.println("You have exceeded the maximum number of attempts.");
+            if (attempt == 4) {
+                System.out.println("You have reached the maximum number of attempts.");
                 return false;
             }
         }
