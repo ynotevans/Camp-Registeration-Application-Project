@@ -23,9 +23,9 @@ public class StudentCampService {
     return isClash;
 	}
 
-	public static boolean checkCampClashDate(String campName){
+	public static boolean checkCampClashDate(){
 		Student student = (Student)AuthData.getCurrentUser();
-		Camp newCamp = DatabaseService.getCamp(campName); //to check clash date with this camp
+		Camp newCamp = AuthData.getCurrentCamp(); //to check clash date with this camp
 		
 		ArrayList<String> registeredCamp = student.getRegisteredCamp();
 		Camp camp; //camp registered by current student
@@ -38,52 +38,52 @@ public class StudentCampService {
 	return false;
 	}
 
-	public static boolean checkRegisterDeadline(String campName){
-		Camp camp = DatabaseService.getCamp(campName);
+	public static boolean checkRegisterDeadline(){
+		Camp camp = AuthData.getCurrentCamp();
 		if(camp.getRegCloseDate().isBefore(LocalDate.now()))return true;
 		return false;
 
 	}
 
-	public static boolean isCampFull(String campName){
-		Camp camp = DatabaseService.getCamp(campName);
+	public static boolean isCampFull(){
+		Camp camp = AuthData.getCurrentCamp();
 		if(camp.getRemainingSlot() == 0) return true;
 		return false;
 	}
 
-	public static void updateRemainingSlot(String campName){
-		Camp camp = DatabaseService.getCamp(campName);
+	public static void updateRemainingSlot(){
+		Camp camp = AuthData.getCurrentCamp();
 		camp.setRemainingSlot(camp.getRemainingSlot()-1);
 	}
 
-	public static boolean checkWithdrawBefore(String campName){
+	public static boolean checkWithdrawBefore(){
 		Student user = (Student)AuthData.getCurrentUser();
 		ArrayList<String> withdraw = user.getWithdrawnCamp();
+		Camp camp = AuthData.getCurrentCamp();
 		
 		for(int i = 0 ; i < withdraw.size() ; i++){
-			if(withdraw.get(i) == campName) return true; 
+			if(withdraw.get(i) == camp.getCampName()) return true; 
 		}
 		return false;
 	}
 
-	public static void registerAsAttendee(String campName){
+	public static void registerAsAttendee(){
 		Student user = (Student)AuthData.getCurrentUser();
-		Camp camp = DatabaseService.getCamp(campName);
+		Camp camp = AuthData.getCurrentCamp();
 		camp.addAttendees(user);
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
-		registeredCamp.add(campName);
+		registeredCamp.add(camp.getCampName());
 
 		
 	}
 	
-	public static void registerAsCommittee(String campName){
-		Student user = (Student)AuthData.getCurrentUser();
-		Camp camp = DatabaseService.getCamp(campName);
-		// Camp camp = user.getComitteeCamp();
-		camp.addCommittee(user);
-		ArrayList<String> registeredCamp = user.getRegisteredCamp();
-		registeredCamp.add(campName);
-		user.setIsComittee(true);
+	public static void registerAsCommittee(String position){
+		Student student = (Student)AuthData.getCurrentUser();
+		Camp camp = AuthData.getCurrentCamp();
+		student.setCommittee(position);
+		camp.addCommittee(student);
+		student.getRegisteredCamp().add(camp.getCampName());
+		student.setIsComittee(true);
 	}
 
 	// view available camp

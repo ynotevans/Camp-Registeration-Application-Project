@@ -37,7 +37,7 @@ public class StudentController extends UserController {
         }
 
         else {
-            StudentCampService.registerAsAttendee(campName);
+            StudentCampService.registerAsAttendee();
             System.out.println("Successfully Registered as attendee!\n");
         }
     }
