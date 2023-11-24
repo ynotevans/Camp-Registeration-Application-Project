@@ -29,7 +29,7 @@ public class DatabaseService {
     
 	public static void writetoStudentCSV(Map<String, Student> dataMap){
 		// Specify the file path for the CSV file
-        String csvFilePath = "CAMs App/csvdata/output.csv";
+        String csvFilePath = "CAMs App/csvdata/student.csv";
 		Set<String> header = new LinkedHashSet<String>();
 		header.add("userID");
 		header.add("password");
@@ -47,12 +47,12 @@ public class DatabaseService {
 			String registeredCamp,withdrawnCamp;
 
 			for (Student student : dataMap.values()){
-				if(student.getRegisteredCamp() == null)
+				if(student.getRegisteredCamp() == null|| student.getRegisteredCamp().size()==0)
 					registeredCamp = "null";
 				else
 					registeredCamp = String.join("|", student.getRegisteredCamp());
 				
-				if(student.getWithdrawnCamp() == null)
+				if(student.getWithdrawnCamp() == null || student.getWithdrawnCamp().size()==0)
 					withdrawnCamp = "null";
 				else
 					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
@@ -166,7 +166,7 @@ public class DatabaseService {
             }
 
 			Database.setstaffData(user);
-			System.out.println("read data from output.csv");
+			System.out.println("read data from staff.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -334,7 +334,7 @@ public class DatabaseService {
 				}
 
 				//split the data to create enquiry and suggestions
-				if(!camp.getEnquiryList().isEmpty()){
+				if(!enquiriestr[0].equals("null")){
 					for(int j=0; j<enquiriestr.length; j++){
 						String[] singleEnquiry = enquiriestr[j].split("\\*");
 						String enquirymessage = singleEnquiry[0];
@@ -343,18 +343,17 @@ public class DatabaseService {
 						String asnwerer = singleEnquiry[3];
 						boolean enquiryProccessd = Boolean.valueOf(singleEnquiry[4]);
 
-						if (!enquiriestr[0].equals("null")){
-							Enquiries enquiries = new Enquiries(enquirymessage,inquirer);
-							enquiries.setAnswerer(asnwerer);
-							enquiries.setAnswer(asnwer);
-							if(enquiryProccessd)
-								enquiries.setProcessed();
-							camp.addQuery(enquiries);
-						}
+						Enquiries enquiries = new Enquiries(enquirymessage,inquirer);
+						enquiries.setAnswerer(asnwerer);
+						enquiries.setAnswer(asnwer);
+						if(enquiryProccessd)
+							enquiries.setProcessed();
+						camp.addQuery(enquiries);
+						
 					}
 				}
 				
-				if(!camp.getSuggestionList().isEmpty()){
+				if(!suggestionstr[0].equals("null")){
 					for(int j=0; j<suggestionstr.length; j++){
 						String[] singleSuggestion = suggestionstr[j].split("\\*");
 						String message = singleSuggestion[0];
@@ -362,12 +361,12 @@ public class DatabaseService {
 						boolean processed = Boolean.valueOf(singleSuggestion[2]);
 						boolean accepted = Boolean.valueOf(singleSuggestion[3]);
 
-						if (!suggestionstr[0].equals("null")){
-							Suggestions newSuggestion = new Suggestions(message, suggester);
-							newSuggestion.setProcessed(processed);
-							newSuggestion.setAccepted(accepted);
-							camp.addSuggestion(newSuggestion);
-						}
+						
+						Suggestions newSuggestion = new Suggestions(message, suggester);
+						newSuggestion.setProcessed(processed);
+						newSuggestion.setAccepted(accepted);
+						camp.addSuggestion(newSuggestion);
+					
 					}
 				}
 				

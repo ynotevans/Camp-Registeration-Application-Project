@@ -89,12 +89,12 @@ public class StudentCampMenu implements Menu{
 
                     case 6:    //logout
                         System.out.println("Logging out...");
+                        studentController.logout();
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        studentController.logout();
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

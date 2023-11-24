@@ -67,12 +67,12 @@ public class StaffMenu implements Menu{
                     
                     case 4:    //logout
                         System.out.println("Logging out...");
+                        staffController.logout();
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        staffController.logout();
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

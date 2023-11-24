@@ -108,7 +108,7 @@ public class StudentController extends UserController {
         for(int i=0;i<qList.size();i++){
         	if(qList.get(i).getInquirer()==student.getUserID()) {
                 System.out.println("Your submitted enquiries on this camp");
-                System.out.println("Enquiry: " + i + 1);
+                System.out.println("Enquiry: " + (i + 1));
         		EnquiriesService.viewEnquiries(qList.get(i));
                 System.out.println(" ");
         	}
@@ -117,7 +117,6 @@ public class StudentController extends UserController {
 
     public void createEnquiry(){
     	System.out.println("Please provide your enquiry: ");
-        sc.nextLine();
         String enquiry = sc.nextLine();
     	
         EnquiriesService.createEnquiries(enquiry);

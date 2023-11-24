@@ -67,6 +67,8 @@ public class CampComMenu implements Menu{
 
                     case 8:    //logout
                         campComController.logout();
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.viewApp();
                         break;
                     
                     default:
