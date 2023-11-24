@@ -170,7 +170,7 @@ public class StaffController extends UserController{
             System.out.println("8.Edit camp description");
             System.out.println("9.Quit");
             System.out.println("Enter choice:");
-            choice = sc.nextInt();
+            choice = HelperService.readInt();
             switch (choice) {
                 case 1:
                     System.out.println("Edit camp name");
@@ -317,7 +317,7 @@ public class StaffController extends UserController{
        
         while (true){
              System.out.println("Press 1 to turn off, 2 to turn on");
-             int choice = sc.nextInt();
+             int choice = HelperService.readInt();
             if(choice == 1){
                 camp.setVisibility(false);
                 break;
@@ -368,9 +368,9 @@ public class StaffController extends UserController{
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
         System.out.println("Press 2: View Unprocessed Enquiries");
-        System.out.println("Press 3: View All Enquiries");
+        System.out.println("Press any number: View All Enquiries");
 
-        int choice= sc.nextInt();
+        int choice = HelperService.readInt(); 
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> q = camp.getEnquiryList();
 
@@ -393,7 +393,7 @@ public class StaffController extends UserController{
                 }
             break;
         
-            case 3:
+            default:
             for(int i = 0 ; i < q.size() ; i++){
                    System.out.println("EnqriesID: " + i+1);
                    HelperService.viewEnquiries(q.get(i));
@@ -405,11 +405,10 @@ public class StaffController extends UserController{
     }
 
     public void replyEnquiries(){
-        System.out.println("Which enquiries you would like to reply: ");
-        int index = sc.nextInt();
         Camp camp = AuthData.getCurrentCamp();
+        System.out.println("Which enquiries you would like to reply: ");
+        int index = HelperService.readInt(1 , camp.getEnquiryList().size()); 
         Enquiries q = camp.getEnquiryList().get(index);
-
         System.out.println("Enter your reply: ");
         String reply = sc.next();
         EnquiriesService.replyEnquiries(q,reply);
@@ -422,9 +421,8 @@ public class StaffController extends UserController{
     System.out.println("Press 1: View Suggestions Under Process");  
     System.out.println("Press 2: View Processed Suggestions");
     System.out.println("Press any number: View New Suggestions");
-
-
-    int choice = sc.nextInt();
+    
+    int choice = HelperService.readInt();
 
     Camp camp = AuthData.getCurrentCamp();
     ArrayList<Suggestions> s = camp.getSuggestionList();
@@ -461,17 +459,17 @@ public class StaffController extends UserController{
 
     public void processSuggestions(){
     System.out.println("Which suggestion you would like to process: ");
-    int index = sc.nextInt();  
+    int index = HelperService.readInt(); 
     SuggestionsService.processSuggestions(index);
     System.out.println("Suggesstion status set to processing...");
     HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
     }
 
     public void approveSuggestion(Student student){ 
-    System.out.println("Which suggestion you would like to process: ");
-    int index = sc.nextInt();            
-    System.out.println("Do you want to accept this suggestion? (Y/N)");
-    char ans = sc.next().charAt(0);
+    System.out.println("Which suggestion you would like to approve/reject: ");
+    int index = HelperService.readInt();          
+    System.out.println("Do you want to accept this suggestion? (Y to approve , any key to reject)");
+    char ans = sc.next().toUpperCase().charAt(0);
     boolean approve;
 
     if(ans == 'Y')
@@ -482,7 +480,15 @@ public class StaffController extends UserController{
 
     SuggestionsService.approveSuggestions(index , approve);
     CampComController.addPoints(student);
-    System.out.println("Suggestion has been processed...");
-    if(approve)System.out.println("1 point awarded to suggestor");
+   
+    if(approve){
+        System.out.println("Suggestion has been approved...");
+        System.out.println("1 point awarded to suggestor");
     }
+    else{
+        System.out.println("Suggestion has been rejected...");
+        System.out.println("0 point awarded to suggestor");
+
+    }
+}
 }

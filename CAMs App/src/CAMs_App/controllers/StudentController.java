@@ -68,9 +68,9 @@ public class StudentController extends UserController {
     public void withdrawCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
 
-        System.out.println("Are you sure you want to withdraw from this camp? (Y/N)");
+        System.out.println("Are you sure you want to withdraw from this camp? (Y to confirm , any key to cancel)");
 
-        char ans = sc.next().charAt(0);
+        char ans = sc.next().toUpperCase().charAt(0);
 
         if(ans == 'Y'){
             if(currentUser.getIsComittee()){
@@ -100,8 +100,9 @@ public class StudentController extends UserController {
     	Student student = (Student)AuthData.getCurrentUser();
         ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
         
-        for(int i=0;i<qList.size();i++) {
+        for(int i=0;i<qList.size();i++){
         	if(qList.get(i).getInquirer()==student.getUserID()) {
+                System.out.println("Enquiry: " + i + 1);
         		HelperService.viewEnquiries(qList.get(i));
         	}
         }
@@ -119,43 +120,50 @@ public class StudentController extends UserController {
     public void editEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-    	ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+    	ArrayList<Enquiries> qList = camp.getEnquiryList();
         
-        for(int i=0;i<qList.size();i++) {
-        	if(qList.get(i).getInquirer()==student.getUserID()) {
-        		if(qList.get(i).getProcessed() == true){
-                    System.out.println("Your enquiry has been processed!!");
-                }
-        		else {
-        			HelperService.viewEnquiries(qList.get(i));
-        			System.out.println("Please edit your enquiry: ");
-                    String editEnquiry = sc.next();
-                    EnquiriesService.editEnquiries(camp.getCampName(), i, editEnquiry);
-        		}
-        	}
+        this.viewEnquiry();
+        System.out.println("Which enquiry you would like to edit ?");
+        int index = HelperService.readInt();
+        
+        while(!(qList.get(index).getInquirer()==student.getUserID())) {
+        	System.out.println("Invalid enquiry id, please try again");
+            index = HelperService.readInt();
+        }
+        System.out.println("Enter your new enquiry: ");
+        String enquiry = sc.nextLine();
+        Enquiries q = qList.get(index-1);
+        if(EnquiriesService.editEnquiries(q, enquiry)){
+            System.out.println("Enquiry updated");
+        }
+        else{
+            System.out.println("Unable to edit prcoessed enquiry");
         }
     }
 
     public void deleteEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-        ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        ArrayList<Enquiries> qList = camp.getEnquiryList();
+
+        this.viewEnquiry();
         
-        for(int i=0;i<qList.size();i++) {
-        	if(qList.get(i).getInquirer()==student.getUserID()) {
-        		if(qList.get(i).getProcessed() == true){
-                    System.out.println("Your enquiry has been processed!!");
-                }
-        		else {
-        			HelperService.viewEnquiries(qList.get(i));
-        			System.out.println("Comfirm to delete (y/n): ");
-                    String confirm = sc.next();
-                    if(confirm=="y") {
-                    	EnquiriesService.deleteEnquiry(camp.getCampName(), i);
-                    	System.out.println("Successfully deleted. ");
-                    }
-        		}
-        	}
+        System.out.println("Which enquiry you would like to delete ?");
+        int index = HelperService.readInt();
+        
+        while(!(qList.get(index).getInquirer()==student.getUserID())) {
+        	System.out.println("Invalid enquiry id, please try again");
+            index = HelperService.readInt();
+        }
+        
+        HelperService.viewEnquiries(qList.get(index - 1));
+        System.out.println("\n Press Y to confirm deletion , any key to cancel");
+        char choice = sc.next().toUpperCase().charAt(0);
+        if(choice == 'Y'){
+            qList.remove(index - 1);
+        }
+        else{
+            System.out.println("Deletion canceled...");
         }
     }
 
