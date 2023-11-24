@@ -313,8 +313,6 @@ public class DatabaseService {
 				String[] enquiriestr = values[++i].split("\\|");
 				String[] suggestionstr = values[++i].split("\\|");
 
-				
-
 				Camp camp = new Camp( campName,  campDate,  campEndDate, 
 									  regCloseDate,  userGroup, location, 
 									  totalSlots,  campCommitteeSlots,  description, 

@@ -51,8 +51,10 @@ public class StaffCampService extends CampManagementService{
         Map<String, Camp> camp1 = Database.getCampData(); 
 
         for (Camp camp : camp1.values()){
-            if(camp.getStaffInCharge() == userID)
+            if(camp.getStaffInCharge().equals(userID)){
                 HelperService.viewCamp(camp);
+            }
+                
         }
     }
     
