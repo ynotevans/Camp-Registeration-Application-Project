@@ -69,6 +69,9 @@ public class StudentCampMenu implements Menu{
                 
                 case 4:    //view submitted enquiries
                     studentController.viewEnquiry();
+                    System.out.print("Key in anything to return to menu: ");
+                    sc.next();
+                    
                     break;
 
                 case 5: //go to previous page
