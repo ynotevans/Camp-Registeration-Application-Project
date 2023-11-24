@@ -25,78 +25,89 @@ public class StudentCampMenu implements Menu{
     public void viewApp(){
         Scanner sc = new Scanner(System.in);
         int choice;
-        do{
-            this.printMenu();
-            System.out.print("Enter ur selection: ");
-            choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:    //register camp
-                    System.out.println("You want to register as: ");
-                    System.out.println("(1) Attendees");
-                    System.out.println("(2) Camp Committee\n");
-                    System.out.print("Enter your selection: ");
-                    int choice1 = sc.nextInt();
+        try{
+            do{
+                this.printMenu();
+                System.out.print("Enter ur selection: ");
+                choice = sc.nextInt();
 
-                    if(choice1 == 1){
-                        HelperService.clearScreen();
-                        studentController.joinAsAttendee();    //update campName
+                switch (choice) {
+                    case 1:    //register camp
+                        System.out.println("You want to register as: ");
+                        System.out.println("(1) Attendees");
+                        System.out.println("(2) Camp Committee\n");
+                        System.out.print("Enter your selection: ");
+                        int choice1 = sc.nextInt();
 
-                    }
-                    else{
-                        studentController.joinAsCommittee();
-                    }
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    studentMenu.viewApp();
-                    break;
+                        if(choice1 == 1){
+                            HelperService.clearScreen();
+                            studentController.joinAsAttendee();    //update campName
 
-                case 2:    //withdraw camp
-                    studentController.withdrawCamp();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                
-                case 3:    //submit enquiry
-                    studentController.createEnquiry();
-                    break;
-                
-                case 4:    //view submitted enquiries
-                    studentController.viewEnquiry();
-                    System.out.print("Key in anything to return to menu: ");
-                    sc.next();
+                        }
+                        else{
+                            studentController.joinAsCommittee();
+                        }
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        studentMenu.viewApp();
+                        break;
+
+                    case 2:    //withdraw camp
+                        studentController.withdrawCamp();
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
                     
-                    break;
+                    case 3:    //submit enquiry
+                        studentController.createEnquiry();
+                        break;
+                    
+                    case 4:    //view submitted enquiries
+                        studentController.viewEnquiry();
+                        System.out.print("Key in anything to return to menu: ");
+                        sc.next();
+                        
+                        break;
 
-                case 5: //go to previous page
-                    studentMenu.viewApp();
-                    break;
+                    case 5: //go to previous page
+                        studentMenu.viewApp();
+                        break;
 
-                case 6:    //logout
-                    System.out.println("Logging out...");
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    MainMenu menu = new MainMenu();
-                    menu.viewApp();
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+                    case 6:    //logout
+                        System.out.println("Logging out...");
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        MainMenu menu = new MainMenu();
+                        menu.viewApp();
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        break;
+                }
+
+            }while(choice != 5);
+        
+            sc.close();
+
+        }catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
-
-        }while(choice != 5);
-    
-        sc.close();
-
+            viewApp();
+        }
     }
 }
