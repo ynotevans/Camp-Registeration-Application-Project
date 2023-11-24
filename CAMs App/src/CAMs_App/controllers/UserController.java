@@ -42,8 +42,8 @@ public class UserController {
         System.out.println("Password successfully changed.");
     }
 
-    public void login(boolean isStaff){
-
+    public boolean login(boolean isStaff){
+        int attempt=1;
         if(isStaff){
            authService = new AuthStaffService();
         }
@@ -57,16 +57,22 @@ public class UserController {
         String password = sc.next();
         boolean authenticated = authService.login(userID, password);;
 
-        while(authenticated != true){               
+        while(authenticated != true){  
+            attempt++;        
             System.out.println("Wrong UserID or Password, please enter again...");
             System.out.print("User ID: ");
             userID = sc.next();
             System.out.print("Password: ");
             password = sc.next();
             authenticated = authService.login(userID, password);
+            if (attempt == 5) {
+                System.out.println("You have exceeded the maximum number of attempts.");
+                return false;
+            }
         }
 
-        System.out.println("Login success");       
+        System.out.println("Login success"); 
+        return true;      
     }
 
     public void logout(){

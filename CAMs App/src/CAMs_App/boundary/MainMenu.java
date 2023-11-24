@@ -63,34 +63,45 @@ public class MainMenu implements Menu{
         this.printMenu();
         Scanner sc = new Scanner(System.in);
         int choice;
-        do{
-            System.out.print("Enter ur selection: ");
-            choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:
-                    System.out.println("Prompt to Login...");
-                    LoginMenu login = new LoginMenu();
-                    login.viewApp();
-                    break;
+        try {
 
-                case 2:
-                    System.out.println("Prompt to Change Password...");
-                    break;
-                
-                case 3:
-                    System.out.println("Prompt to Exit...");
-                    System.exit(0);
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+            do{
+                System.out.print("Enter ur selection: ");
+                choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Prompt to Login...");
+                        LoginMenu login = new LoginMenu();
+                        login.viewApp();
+                        break;
+
+                    case 2:
+                        System.out.println("Prompt to Change Password...");
+                        break;
+                    
+                    case 3:
+                        System.out.println("Prompt to Exit...");
+                        System.exit(0);
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        break;
+                }
+
+            }while(choice != 3);
+        
+            sc.close();
+        } catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
-
-        }while(choice != 3);
-    
-        sc.close();
-
+            viewApp();
+        }
     }
 }

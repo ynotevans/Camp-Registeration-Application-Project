@@ -28,19 +28,21 @@ public class LoginMenu implements Menu {
 
             switch (choice) {
                 case 1:  //staff login
-                    userController.login(true);
+                    System.out.println("(Maximum number of login attempts is 5)");
+                    if (userController.login(true)){
 
-                    StaffMenu staffMenu = new StaffMenu();
-                    staffMenu.viewApp();
+                        StaffMenu staffMenu = new StaffMenu();
+                        staffMenu.viewApp();
+                    }
                     
                     break;
 
                 case 2:   //student login
-                    userController.login(false);
-                    HelperService.clearScreen();
-                    
-                    StudentMenu studentMenu = new StudentMenu();
-                    studentMenu.viewApp();
+                    System.out.println("(Maximum number of login attempts is 5)");
+                    if(userController.login(false)) {
+                        StudentMenu studentMenu = new StudentMenu();
+                        studentMenu.viewApp();
+                    }
                     break;
                 
                 case 3:
