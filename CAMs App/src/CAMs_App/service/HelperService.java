@@ -1,19 +1,57 @@
 package CAMs_App.service;
 
-import CAMs_App.entity.*;
+import java.util.InputMismatchException;
 
-// class provides methods for reading and writing data from / to CSV files 
+import CAMs_App.entity.*;
+import java.util.Scanner;
 
 public class HelperService {
-
+static Scanner sc = new Scanner(System.in);
 /**
    * Method to clear the screen of the terminal for user experience and neat
    * interface.
    */
+
   public static void clearScreen() {
     try {
       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     } catch (Exception err) {}
+  }
+
+ 
+   public static int readInt(){
+    while (true) {
+      try {
+        int userInput = -1;
+        userInput = sc.nextInt();
+        sc.nextLine(); // Consume newline left-over
+        return userInput;
+      } catch (InputMismatchException e) {
+        sc.nextLine();
+        System.out.println("Invalid Input, enter an integer!");
+      }
+    }
+  }
+
+ 
+  public static int readInt(int min, int max) {
+    while (true) {
+      try {
+        int userInput = -1;
+        userInput = sc.nextInt();
+        sc.nextLine(); // Consume newline left-over
+        if (userInput < min || userInput > max) {
+          throw new OutOfRange();
+        } else {
+          return userInput;
+        }
+      } catch (InputMismatchException e) {
+        sc.nextLine();
+        System.out.println("\nInvalid Input, Enter an integer!");
+      } catch (OutOfRange e) {
+        System.out.println("\nInput is out of allowed range");
+      }
+    }
   }
 
     public static void viewCamp(Camp camp){
@@ -56,3 +94,23 @@ public class HelperService {
       }
     }
 }
+
+class OutOfRange extends Exception {
+
+    /**
+     * Constructor that initialises the error message
+     */
+    public OutOfRange() {
+      super("Input is out of allowed range");
+    }
+  
+    /**
+     * Overrided constructor that initialises the error message with the specified
+     * message
+     * 
+     * @param message error message to be displayed
+     */
+    public OutOfRange(String message) {
+      super(message);
+    }
+  }
