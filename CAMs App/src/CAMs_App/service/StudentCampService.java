@@ -74,7 +74,7 @@ public class StudentCampService {
 		camp.addAttendees(user);
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
 		registeredCamp.add(camp.getCampName());
-
+		camp.setRemainingSlot(camp.getRemainingSlot()-1);
 		
 	}
 	
@@ -86,6 +86,7 @@ public class StudentCampService {
 		camp.addCommittee(student);
 		student.getRegisteredCamp().add(camp.getCampName());
 		student.setIsComittee(true);
+		camp.setCampCommitteeRemainingSlots(camp.getCampCommitteeRemainingSlots()-1);
 	}
 
 	// view available camp
@@ -134,6 +135,7 @@ public class StudentCampService {
 		else {
 			registeredCamp.remove(campName);
 			camp.getAttendees().remove(student);
+			camp.setRemainingSlot(camp.getRemainingSlot()+1);
 			System.out.println("Withdrawn successfully!");
 		}
 		
