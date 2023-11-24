@@ -3,21 +3,27 @@ package CAMs_App.entity;
 import CAMs_App.enums.*;
 
 public class User {
-    private String userID;       
+    private String userID;      
+    private String name; 
     private String password;
     private Identity identity;
     private Faculty faculty;
 
     
 
-    public User(String userID, String password, Faculty faculty){
+    public User(String userID, String password, Faculty faculty, String name){
         this.userID = userID;
-        this.password = "password";  //should use default password right???
+        this.name = name;
+        this.password = password;
         this.faculty = faculty;
     }
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean setPassword(String oldPassword, String newPassword) {
@@ -39,6 +45,10 @@ public class User {
 
     public String getUserID() {
         return userID;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {

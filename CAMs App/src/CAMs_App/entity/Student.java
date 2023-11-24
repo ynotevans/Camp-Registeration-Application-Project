@@ -11,8 +11,8 @@ public class Student extends User {
 	private int points = 0;
 	private CampCompMem campCompMem = new CampCompMem();
 	
-	public Student(String userID, String password, Faculty faculty) {
-		super(userID, password, faculty);
+	public Student(String userID, String password, Faculty faculty, String name) {
+		super(userID, password, faculty, name);
 		super.setIdentity(Identity.student);
 		isCommittee = false; 
 		committeeCamp = null;
