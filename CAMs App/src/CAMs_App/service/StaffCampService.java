@@ -16,6 +16,11 @@ public class StaffCampService extends CampManagementService{
         Database.getCampData().put(camp.getCampName(), camp);
     }
 
+    public static void editCampNameinDB (String oldCampName, Camp camp){
+        Database.getCampData().put(camp.getCampName(),camp);
+        Database.getCampData().remove(oldCampName);
+    }
+
 
     public static boolean deleteCamp(String campName){
         Camp camp = DatabaseService.getCamp(campName);

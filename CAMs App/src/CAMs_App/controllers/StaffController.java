@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import CAMs_App.data.AuthData;
@@ -153,13 +154,21 @@ public class StaffController extends UserController{
             System.out.println("6.Edit number of camp committee slots");
             System.out.println("7.Edit camp description");
             System.out.println("8.Quit");
+            System.out.println("Enter choice:");
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Edit camp name");
                     System.out.println("Change camp name to");
-                    camp.setCampName(sc.next());
+                    String newCampName = sc.next();
+                    String oldCampName = camp.getCampName();
+                    while(DatabaseService.checkIfCampNameExists(newCampName)){
+                        System.out.println("Camp Name already exists!! Enter another name");
+                        newCampName = sc.next();
+                    }
+                    camp.setCampName(newCampName);
                     System.out.println("Camp name changed in to "+camp.getCampName());
+                    StaffCampService.editCampNameinDB(oldCampName,camp);
                     break;
                 case 2:
                     System.out.println("Edit camp dates");
@@ -206,8 +215,15 @@ public class StaffController extends UserController{
 
                 case 4:
                     System.out.println("Edit camp to open to own school or whole NTU");
-                    System.out.println("1.Open to School\n2.Open to NTU\nEnter(1/2):");
-                    sc.next();
+                    System.out.println("Enter faculty to open camp to:");
+                    String facultyString = sc.next();
+                    try {
+                        Faculty faculty = Faculty.valueOf(facultyString.toUpperCase());
+                        camp.setUserGroup(faculty);
+                    } catch (Exception e){
+                        System.out.println("Invalid faculty.");
+                    }
+                    System.out.println("Camp is now open to "+camp.getUserGroup());
                     break;
                 case 5:
                     System.out.println("Edit camp location");
@@ -216,9 +232,22 @@ public class StaffController extends UserController{
                     System.out.println("Camp location changed to: "+camp.getLocation());                    
                     break;
                 case 6:
-                    System.out.println("Edit camp committee slots(up to max 10");
-                    System.out.println("Set number of camp commitee slots");
-                    camp.setCampCommitteeSlots(sc.nextInt());
+                    System.out.println("Edit camp committee slots(up to 10 slots)");
+                    int committeeSlots;
+                    while(true){
+                        try{
+                            System.out.println("Set number of camp commitee slots");
+                            committeeSlots = sc.nextInt();
+                            if(committeeSlots>=0 && committeeSlots<=10)
+                                break;
+                            else
+                                System.out.println("Reenter number between 0 to 10");        
+                        }catch (InputMismatchException e) {
+                            System.out.println("Invalid input. Enter a number between 0 to 10.");
+                            sc.nextLine();
+                        }
+                    }
+                    camp.setCampCommitteeSlots(committeeSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
                     break;
                 case 7:
