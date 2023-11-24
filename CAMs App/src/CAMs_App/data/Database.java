@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.CampCompMem;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;

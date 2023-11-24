@@ -3,7 +3,6 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
-import CAMs_App.entity.Student;
 import CAMs_App.service.HelperService;
 
 public class StudentCampMenu implements Menu{
@@ -86,6 +85,7 @@ public class StudentCampMenu implements Menu{
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        studentController.logout();
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

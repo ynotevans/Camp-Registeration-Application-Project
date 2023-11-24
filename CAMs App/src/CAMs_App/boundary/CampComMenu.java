@@ -54,7 +54,7 @@ public class CampComMenu implements Menu{
                         break;
                     
                     case 5:    //view suggestions
-                        campComController.viewSuggestion(null);
+                        campComController.viewSuggestion();
                         break;
 
                     case 6:    //generate report

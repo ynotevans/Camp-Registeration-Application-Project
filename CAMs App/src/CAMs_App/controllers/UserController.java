@@ -76,7 +76,7 @@ public class UserController {
     }
 
     public void logout(){
-        authService.logout();
+        AuthService.logout();
         System.out.println("Successfully logout");
      }
 
