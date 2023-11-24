@@ -21,7 +21,6 @@ import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.enums.Faculty;
-import CAMs_App.enums.SuggestionStatus;
 
 
 
@@ -35,6 +34,7 @@ public class DatabaseService {
 		header.add("userID");
 		header.add("password");
 		header.add("Faculty");
+		header.add("Name");
 		header.add("isCommittee");
 		header.add("points");
 		header.add("registeredCamp");  //ArrayList
@@ -59,8 +59,8 @@ public class DatabaseService {
 					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
 
 				// Write the values to the CSV file
-            	writer.write(String.format("%s,%s,%s,%b,%d,%s,%s" , student.getUserID(),student.getPassword(), 
-											student.getFaculty(),student.getIsComittee(),student.getPoints(),
+            	writer.write(String.format("%s,%s,%s,%s,%b,%d,%s,%s" , student.getUserID(),student.getPassword(), 
+											student.getFaculty(),student.getName(),student.getIsComittee(),student.getPoints(),
 											registeredCamp.isEmpty() ? "null" :registeredCamp,
 											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp));
 				writer.newLine();
@@ -87,23 +87,32 @@ public class DatabaseService {
                 // Split the line into an array of values using a comma as the delimiter
 				values = line.split(",");
 				int i=0;
-				Student student = new Student(values[i], values[++i], Faculty.valueOf(values[++i]));
+				Student student = new Student(values[i], values[++i], Faculty.valueOf(values[++i]), values[++i]);
 				student.setIsComittee(Boolean.parseBoolean(values[++i]));
 				student.setPoints(Integer.parseInt(values[++i]));
 				ArrayList<String> registerCamp = new ArrayList<String>();
-				ArrayList<String> withdrawCamp = new ArrayList<String>() ;
+				ArrayList<String> withdrawCamp = new ArrayList<String>();
 				
 				//insert the data into ArrayList
 				String[] registeredCampArray = values[++i].split("\\|");
 				if (!registeredCampArray[0].equals("null")){
 					registerCamp.addAll(Arrays.asList(registeredCampArray));
 					student.setRegisteredCamp(registerCamp);
+					//student.getRegisteredCamp().addAll(Arrays.asList(registeredCampArray));
 				}
+				else{
+					student.setRegisteredCamp(registerCamp);
+				}
+				
+
                 	
                 String[] withdrawnCampArray = values[++i].split("\\|");
 				if (!withdrawnCampArray[0].equals("null")){
 					withdrawCamp.addAll(Arrays.asList(withdrawnCampArray));
-					student.setRegisteredCamp(withdrawCamp);
+					student.getWithdrawnCamp().addAll(Arrays.asList());
+				}
+				else{
+					student.setWithdrawnCamp(withdrawCamp);
 				}
                 	
 				user1.put(values[0], student);
@@ -124,6 +133,7 @@ public class DatabaseService {
 		header.add("userID");
 		header.add("password");
 		header.add("Faculty");
+		header.add("Name");
 		
 
         // Write data to the CSV file
@@ -134,8 +144,8 @@ public class DatabaseService {
 
 			for (Staff staff : dataMap.values()){
 				// Write the values to the CSV file
-            	writer.write(String.format("%s,%s,%s" , staff.getUserID(),staff.getPassword(), 
-											staff.getFaculty()));
+            	writer.write(String.format("%s,%s,%s,%s" , staff.getUserID(),staff.getPassword(), 
+											staff.getFaculty(),staff.getName()));
 				writer.newLine();
 			}
 
@@ -160,7 +170,7 @@ public class DatabaseService {
                 // Split the line into an array of values using a comma as the delimiter
 				String[] values = line.split(",");
 				int i=0;
-				Staff staff = new Staff(values[i], values[++i], Faculty.valueOf(values[++i]));
+				Staff staff = new Staff(values[i], values[++i], Faculty.valueOf(values[++i]),values[++i]);
 				
 				user.put(values[0], staff);
                 System.out.println(); // Move to the next line for the next row
