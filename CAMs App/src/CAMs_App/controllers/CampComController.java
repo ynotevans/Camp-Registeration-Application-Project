@@ -10,19 +10,42 @@ public class CampComController extends StudentController{
     Student user = (Student)AuthData.getCurrentUser();
     
     public void createSuggestion(){
-    
+        System.out.println("Enter your suggestion: ");
+        String s = sc.nextLine();
+        SuggestionsService.createSuggestion(s);
     }
 
-    public void viewCampDetails(){     ///print the camp details
-        
-        String campName = AuthData.getCurrentCamp().getCampName();
-        Camp camp = DatabaseService.getCamp(campName);
+    public void viewCampDetails(){    
+        Camp camp = AuthData.getCurrentCamp();
         HelperService.viewCamp(camp);
     }
 
     public void generateReport(){}
 
-    public void deleteSuggestion(){}
+    public void deleteSuggestion(){
+        if(!SuggestionsService.submittedSuggestions()){
+            System.out.println("You have not submitted any suggestions");
+        }
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Suggestions> sList = camp.getSuggestionList();
+        this.viewSuggestion();
+        System.out.println("Which suggestion you would like to delete: ");
+        int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+        Suggestions s = sList.get(index -1);
+        while(s.getSuggestBy() != AuthData.getCurrentUser().getUserID()){
+            System.out.println("Unable to edit suggestion from other committee member. Please try again");
+            index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+        }
+        s = sList.get(index -1);
+        if(s.getProcessed()){
+            System.out.println("Unable to delete.\nYour suggestion is currently under process or has been approved/rejected");
+            return;
+        }
+        else{
+            sList.remove(index);
+            System.out.println("Your suggestion has been deleted");
+        }
+    }
 	
 	
     public void viewAllEnquiries(){
@@ -36,7 +59,7 @@ public class CampComController extends StudentController{
 
     
     public void viewEnquiry(int index){
-       Camp camp = user.getComitteeCamp(); // ??
+       Camp camp = user.getComitteeCamp(); 
        EnquiriesService.viewEnquiries(camp.getEnquiryList().get(index));
     }
     
@@ -80,7 +103,7 @@ public class CampComController extends StudentController{
 
        System.out.println("Your submitted suggestions on this camp: ");
        for(int i = 0 ; i < sList.size() ; i++){
-        if(sList.get(i).getSuggestBy() == AuthData.getCurrentUser().getUserID()){
+        if(sList.get(i).getSuggestBy().equals(AuthData.getCurrentUser().getUserID())){
             System.out.println("SuggestionsID " + (i + 1));
             SuggestionsService.printSuggestions(sList.get(i));
             System.out.println(" ");

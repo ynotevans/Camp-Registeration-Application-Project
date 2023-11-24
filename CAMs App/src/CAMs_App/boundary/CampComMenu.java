@@ -34,7 +34,7 @@ public class CampComMenu implements Menu{
         
             do{
                 System.out.print("Enter ur selection: ");
-                choice = sc.nextInt();
+                choice = HelperService.readInt();
 
                 switch (choice) {
                     case 1:    //view camp details
