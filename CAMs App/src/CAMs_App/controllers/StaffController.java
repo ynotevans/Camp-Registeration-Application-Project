@@ -427,7 +427,7 @@ public class StaffController extends UserController{
         System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
-                if(s.getStatus().toString().equals("Processing")){
+                if(s.getStatus().toString().equals("PROCESSING")){
                     System.out.println("SuggestionID: " + (i+1));
                     SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
@@ -439,7 +439,7 @@ public class StaffController extends UserController{
         System.out.println("Processed suggestions");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
-                if(s.getStatus().toString().equals("Processed")){
+                if(s.getStatus().toString().toUpperCase().equals("PROCESSED")){
                     System.out.println("SuggestionID: " + (i+1));
                     SuggestionsService.printSuggestions(s);
                     System.out.println(" ");

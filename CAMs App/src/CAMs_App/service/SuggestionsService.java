@@ -35,7 +35,7 @@ public class SuggestionsService {
 
     public static void printSuggestions(Suggestions s){
         System.out.println("Suggested by: " + s.getSuggestBy());
-        System.out.println("Suggested by: " + s.getSuggestion());
+        System.out.println("Suggestion details : " + s.getSuggestion());
         
         System.out.print("Status: ");     
         if(isNew(s)){
