@@ -485,7 +485,7 @@ public class StaffController extends UserController{
         SuggestionsService.printSuggestions(s.get(index - 1));
     }
 
-    public void approveSuggestion(Student student){ 
+    public void approveSuggestion(){ 
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
          System.out.println("Suggestion pending approval: ");
          for(int i = 0 ; i < sList.size() ; i++){
@@ -507,6 +507,7 @@ public class StaffController extends UserController{
 
     s.setProcessed(true);
     s.setAccepted(approve);
+    Student student = DatabaseService.getStudent(s.getSuggestBy());
     CampComController.addPoints(student);
    
     if(approve){
