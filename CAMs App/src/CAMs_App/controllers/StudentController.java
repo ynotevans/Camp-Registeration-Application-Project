@@ -1,6 +1,7 @@
 package CAMs_App.controllers;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import CAMs_App.boundary.CampComMenu;
 import CAMs_App.boundary.StudentMenu;
@@ -13,6 +14,7 @@ import CAMs_App.service.StudentCampService;
 
 
 public class StudentController extends UserController {
+    Scanner sc = new Scanner(System.in);
     static Student currentUser = (Student)AuthData.getCurrentUser();
 
 	public boolean viewAvailableCamp(){
@@ -58,7 +60,9 @@ public class StudentController extends UserController {
         
         
         else {
-            StudentCampService.registerAsCommittee(campName);
+            System.out.println("Enter desired position to be in the camp committee: ");
+            String position = sc.next();
+            StudentCampService.registerAsCommittee(position);
             System.out.println("Successfully Registered as committee!\n");
         }
 
