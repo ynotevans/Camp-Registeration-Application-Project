@@ -2,23 +2,16 @@ package CAMs_App.controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import CAMs_App.data.AuthData;
-
-import CAMs_App.entity.Student;
-import CAMs_App.entity.Suggestions;
 import CAMs_App.enums.Faculty;
-import CAMs_App.entity.Camp;
-import CAMs_App.entity.Enquiries;
-import CAMs_App.service.DatabaseService;
-import CAMs_App.service.EnquiriesService;
-import CAMs_App.service.HelperService;
-import CAMs_App.service.StaffCampService;
-import CAMs_App.service.SuggestionsService;
+import CAMs_App.entity.*;
+import CAMs_App.service.*;
 
 public class StaffController extends UserController{
     Scanner sc = new Scanner(System.in);
@@ -55,22 +48,29 @@ public class StaffController extends UserController{
         }
         
         
-        
-        //camp ending date
-        while (true) {
-             try {
-                // Parse the user input into a LocalDateTime object
-                System.out.println("Enter end date for camp in dd-mm-yyyy format:");                    
-                String end = sc.next();
-                LocalDate endDateTime = LocalDate.parse(end,formatter);
-                camp.setCampEndDate(endDateTime);
-                break;
-            
-            } catch (Exception e) {
-                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+    //camp ending date
+    while (true) {
+        try {
+            // Parse the user input into a LocalDateTime object
+            System.out.println("Enter end date for camp in dd-mm-yyyy format:");
+            String end = sc.next();
+            LocalDate endDateTime = LocalDate.parse(end, formatter);
+
+            if (endDateTime.isBefore(camp.getCampDate())) {
+                System.out.println("Camp ending date is before the starting date. Please try again!!!");
+                continue;
             }
+            camp.setCampEndDate(endDateTime);
+            break;
+
+        } catch (DateTimeParseException e) {
+            System.out.println("Error: Invalid date format. Please use dd-mm-yyyy format:");
+            sc.next(); // consume the invalid input to avoid an infinite loop
         }
-       
+    }
+
+
+
        
         //set camp days
         camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate())+1);
