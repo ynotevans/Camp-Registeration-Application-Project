@@ -8,7 +8,7 @@ import CAMs_App.service.HelperService;
 
 public class StudentCampMenu implements Menu{
     StudentController studentController = new StudentController();
-
+    StudentMenu studentMenu = new StudentMenu();
     public void printMenu(){
         HelperService.clearScreen();
         System.out.println("Available actions for this camp: ");
@@ -51,6 +51,7 @@ public class StudentCampMenu implements Menu{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    studentMenu.viewApp();
                     break;
 
                 case 2:    //withdraw camp
@@ -71,7 +72,6 @@ public class StudentCampMenu implements Menu{
                     break;
 
                 case 5: //go to previous page
-                    StudentMenu studentMenu = new StudentMenu();
                     studentMenu.viewApp();
                     break;
 
