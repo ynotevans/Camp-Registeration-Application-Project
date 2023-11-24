@@ -29,7 +29,7 @@ public class DatabaseService {
     
 	public static void writetoStudentCSV(Map<String, Student> dataMap){
 		// Specify the file path for the CSV file
-        String csvFilePath = "CAMs App/csvdata/output.csv";
+        String csvFilePath = "CAMs App/csvdata/student.csv";
 		Set<String> header = new LinkedHashSet<String>();
 		header.add("userID");
 		header.add("password");
@@ -47,12 +47,12 @@ public class DatabaseService {
 			String registeredCamp,withdrawnCamp;
 
 			for (Student student : dataMap.values()){
-				if(student.getRegisteredCamp() == null)
+				if(student.getRegisteredCamp() == null|| student.getRegisteredCamp().size()==0)
 					registeredCamp = "null";
 				else
 					registeredCamp = String.join("|", student.getRegisteredCamp());
 				
-				if(student.getWithdrawnCamp() == null)
+				if(student.getWithdrawnCamp() == null || student.getWithdrawnCamp().size()==0)
 					withdrawnCamp = "null";
 				else
 					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
@@ -166,7 +166,7 @@ public class DatabaseService {
             }
 
 			Database.setstaffData(user);
-			System.out.println("read data from output.csv");
+			System.out.println("read data from staff.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }

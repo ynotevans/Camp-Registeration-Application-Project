@@ -106,7 +106,6 @@ public class StudentMenu implements Menu {
 
                             else {
                                 // edit camp function
-                                campMenu.viewApp(); 
                                 try {
                                     Thread.sleep(1000);
                                     } catch (InterruptedException e) {
@@ -141,12 +140,12 @@ public class StudentMenu implements Menu {
 
                 case 4:    //logout
                     System.out.println("Logging out...");
+                    studentController.logout();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    studentController.logout();
                     MainMenu comMenu = new MainMenu();
                     comMenu.viewApp();
                     break;
