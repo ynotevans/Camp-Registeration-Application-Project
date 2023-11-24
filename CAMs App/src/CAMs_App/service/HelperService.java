@@ -1,58 +1,64 @@
 package CAMs_App.service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Map;
 
+import CAMs_App.data.Database;
 import CAMs_App.entity.*;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class HelperService {
-static Scanner sc = new Scanner(System.in);
-/**
-   * Method to clear the screen of the terminal for user experience and neat
-   * interface.
-   */
+    static Scanner sc = new Scanner(System.in);
 
-  public static void clearScreen() {
-    try {
-      new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    } catch (Exception err) {}
-  }
-
- 
-   public static int readInt(){
-    while (true) {
-      try {
-        int userInput = -1;
-        userInput = sc.nextInt();
-        sc.nextLine(); // Consume newline left-over
-        return userInput;
-      } catch (InputMismatchException e) {
-        sc.nextLine();
-        System.out.println("Invalid Input, enter an integer!");
-      }
-    }
-  }
+    /**
+     * Method to clear the screen of the terminal for user experience and neat
+     * interface.
+    */
+    public static void clearScreen() {
+        try {
+          new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception err) {}
+    } 
 
  
-  public static int readInt(int min, int max , String message) {
-    while (true) {
-      try {
-        int userInput = -1;
-        userInput = sc.nextInt();
-        sc.nextLine(); // Consume newline left-over
-        if (userInput < min || userInput > max) {
-          throw new OutOfRange();
-        } else {
+    public static int readInt(){
+      while (true) {
+        try {
+          int userInput = -1;
+          userInput = sc.nextInt();
+          sc.nextLine(); // Consume newline left-over
           return userInput;
+        } catch (InputMismatchException e) {
+          sc.nextLine();
+          System.out.println("Invalid Input, enter an integer!");
         }
-      } catch (InputMismatchException e) {
-        sc.nextLine();
-        System.out.println("\nInvalid Input, Enter an integer!");
-      } catch (OutOfRange e) {
-        System.out.println(message);
       }
     }
-  }
+
+ 
+    public static int readInt(int min, int max , String message) {
+      while (true) {
+          try{
+              int userInput = -1;
+              userInput = sc.nextInt();
+              sc.nextLine(); // Consume newline left-over
+              if (userInput < min || userInput > max) {
+                throw new OutOfRange();
+              } else {
+                return userInput;
+              }
+          } catch (InputMismatchException e) {
+              sc.nextLine();
+              System.out.println("\nInvalid Input, Enter an integer!");
+            } catch (OutOfRange e) {
+              System.out.println(message);
+              }
+        }
+    }
 
     public static void viewCamp(Camp camp){
         System.out.println("Camp Name: " + camp.getCampName());
@@ -68,9 +74,43 @@ static Scanner sc = new Scanner(System.in);
         System.out.println("\n");
     }
 
+    public static void filter(int choice){
+        Map<String, Camp> camp = Database.getCampData();
+
+        switch (choice) {
+            case 1:    //date, 
+                // Sort by camp date
+                
+                break;
+            
+            case 2:    //location, 
+              
+                break;
+
+            case 3:    //Own faculty, 
+              
+                break;
+            
+            case 4:    //open to NTU, 
+              
+                break;
+              
+          
+            default:   //alphabetical order
+                Map<String, Camp> sortedByName = camp.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(entry -> entry.getValue().getCampName()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+                System.out.println("Sorted by camp name:");
+                sortedByName.forEach((key, value) -> System.out.println(value.getCampName()));
+
+
+                break;
+        }
+    }
    
 
-   
 }
 
 class OutOfRange extends Exception {
@@ -91,4 +131,4 @@ class OutOfRange extends Exception {
     public OutOfRange(String message) {
       super(message);
     }
-  }
+}

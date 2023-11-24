@@ -89,6 +89,7 @@ public class MainMenu implements Menu{
 
                     case 2:
                         System.out.println("Prompt to Change Password...");
+                        HelperService.filter(1);
                         break;
                     
                     case 3:
