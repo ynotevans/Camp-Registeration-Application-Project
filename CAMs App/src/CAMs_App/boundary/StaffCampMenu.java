@@ -67,7 +67,7 @@ public class StaffCampMenu implements Menu {
                         break;
                     
                     case 8:    //approve suggestion
-                        staffController.approveSuggestion((Student)AuthData.getCurrentUser());
+                        staffController.approveSuggestion();
                         break;
 
                     case 9: //go to previous page
