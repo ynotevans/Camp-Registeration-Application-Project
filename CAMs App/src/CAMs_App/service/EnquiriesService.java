@@ -41,7 +41,8 @@ public final class EnquiriesService {
         }
     }
 
-    public static boolean submittedEnquiries(String UserID , Camp camp){
+    public static boolean submittedEnquiries(){
+        Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> qList = camp.getEnquiryList();
         for(int i = 0 ; i < qList.size() ; i++){
             if(qList.get(i).getInquirer() == AuthData.getCurrentUser().getUserID()) return true;

@@ -122,7 +122,7 @@ public class StudentController extends UserController {
     public void editEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
+        if(!EnquiriesService.submittedEnquiries()){
             System.out.println("You do not have any submitted enquiry");
             return;
         }
@@ -150,8 +150,8 @@ public class StudentController extends UserController {
     public void deleteEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
-        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
-            System.out.println("You do not have any submitted enquiry");
+        if(!EnquiriesService.submittedEnquiries()){
+            System.out.println("You have not submitted any enquiry");
             return;
         }
         ArrayList<Enquiries> qList = camp.getEnquiryList();

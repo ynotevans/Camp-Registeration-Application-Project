@@ -1,7 +1,10 @@
 package CAMs_App.service;
 
+import java.util.ArrayList;
+
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Suggestions;
 
 public class SuggestionsService {
@@ -15,6 +18,8 @@ public class SuggestionsService {
         }else{
             s.setAccepted(false);
         }
+
+        s.setProcessed(true);
     }
 
 
@@ -52,4 +57,15 @@ public class SuggestionsService {
            return true;
         }
     }
+
+    public static boolean submittedSuggestions(){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Suggestions> sList = camp.getSuggestionList();
+        for(int i = 0 ; i < sList.size() ; i++){
+            if(sList.get(i).getSuggestBy() == AuthData.getCurrentUser().getUserID()) return true;
+        }
+    return false;
+    }
+
+    
 }

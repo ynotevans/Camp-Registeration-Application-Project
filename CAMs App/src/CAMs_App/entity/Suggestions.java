@@ -11,7 +11,7 @@ public class Suggestions {
     public Suggestions(String suggestion, String suggestBy){
         this.suggestion = suggestion;
         this.suggestBy = suggestBy;
-        this.processed = null;
+        this.processed = false;
         this.accepted = null;
     }
 

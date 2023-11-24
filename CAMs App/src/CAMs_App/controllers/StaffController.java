@@ -438,9 +438,12 @@ public class StaffController extends UserController{
         case 3:
         System.out.println("New suggestions: ");
         for(int i = 0 ; i < s.size() ; i++){
+            if(s.get(i).getProcessed() == false){
                 System.out.println("SuggestionsID: " + i+1);
                 HelperService.printSuggestions(s.get(i));
                 System.out.println(" ");
+            }
+                
             }
         break;
 
@@ -457,17 +460,35 @@ public class StaffController extends UserController{
     }
 
     public void processSuggestions(){
-    ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
-    System.out.println("Which suggestion you would like to process: ");
-    int index = HelperService.readInt(1 , sList.size() , "Suggestion index out of bound"); 
-    SuggestionsService.processSuggestions(index - 1);
-    System.out.println("Suggesstion status set to processing...");
-    HelperService.printSuggestions(sList.get(index - 1));
+        ArrayList <Suggestions> s = AuthData.getCurrentCamp().getSuggestionList();
+        for(int i = 0 ; i < s.size() ; i++){
+                if(s.get(i).getProcessed() == false){
+                    System.out.println("SuggestionsID: " + i+1);
+                    HelperService.printSuggestions(s.get(i));
+                    System.out.println(" ");
+                }
+        }
+        System.out.println("Which suggestion you would like to process: ");
+        int index = HelperService.readInt(1 , s.size() , "Invalid Suggestion ID"); 
+        SuggestionsService.processSuggestions(index - 1);
+        System.out.println("Suggesstion status set to processing...");
+        HelperService.printSuggestions(s.get(index - 1));
     }
 
     public void approveSuggestion(Student student){ 
+         ArrayList <Suggestions> s = AuthData.getCurrentCamp().getSuggestionList();
+         System.out.println("Suggestion pending approval: ");
+         for(int i = 0 ; i < s.size() ; i++){
+            System.out.println("Suggestion ID " + (i+1));
+            if(s.get(i).getAccepted() == null){
+                System.out.println("SuggestionsID: " + i+1);
+                HelperService.printSuggestions(s.get(i));
+                System.out.println(" ");
+            }
+      }
     System.out.println("Which suggestion you would like to approve/reject: ");
-    int index = HelperService.readInt();          
+    int index = HelperService.readInt(1,s.size() , "Invalid Suggestion ID");
+
     System.out.println("Do you want to accept this suggestion? (Y to approve , any key to reject)");
     char ans = sc.next().toUpperCase().charAt(0);
     boolean approve;
@@ -476,7 +497,7 @@ public class StaffController extends UserController{
     else approve = false;
 
 
-    SuggestionsService.approveSuggestions(index , approve);
+    SuggestionsService.approveSuggestions(index - 1 , approve);
     CampComController.addPoints(student);
    
     if(approve){
@@ -488,5 +509,6 @@ public class StaffController extends UserController{
         System.out.println("0 point awarded to suggestor");
 
     }
+
 }
 }

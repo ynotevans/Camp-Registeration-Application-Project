@@ -9,7 +9,9 @@ import CAMs_App.service.*;
 public class CampComController extends StudentController{
     Student user = (Student)AuthData.getCurrentUser();
     
-    public void createSuggestion(){}
+    public void createSuggestion(){
+    
+    }
 
     public void viewCampDetails(){     ///print the camp details
         
@@ -45,7 +47,7 @@ public class CampComController extends StudentController{
 
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
-            String ans = sc.next();
+            String ans = sc.nextLine();
             q.setAnswer(ans);
             CampComController.addPoints(user);            //addpoint fucntion put at campComController or put at staffCampService
             System.out.println("Query processed");
@@ -62,37 +64,55 @@ public class CampComController extends StudentController{
     public void submitSuggestion(){
         Camp camp = user.getComitteeCamp();
         System.out.println("Please provide your suggestion: ");
-        String suggest = sc.next();
+        String suggest = sc.nextLine();
 
-        Suggestions newSuggestions = new Suggestions(suggest, user.getUserID());
-        camp.addSuggestion(newSuggestions);
+        Suggestions Suggestions = new Suggestions(suggest, user.getUserID());
+        camp.addSuggestion(Suggestions);
     }
     
-    public void viewSuggestion(Suggestions s){
-        if(s.getSuggestBy() == user.getUserID() && s.getProcessed() == false){
-            System.out.println("Your submitted suggestion is: " + s.getSuggestion());
+    public void viewSuggestion(){
+       if(!SuggestionsService.submittedSuggestions()){
+          System.out.println("You do not have any suggestions submitted");
+          return;
+       }
+       Camp camp = AuthData.getCurrentCamp();
+       ArrayList<Suggestions> sList = camp.getSuggestionList();
+
+       System.out.println("Your submitted suggestions on this camp: ");
+       for(int i = 0 ; i < sList.size() ; i++){
+        if(sList.get(i).getSuggestBy() == AuthData.getCurrentUser().getUserID()){
+            System.out.println("SuggestionsID " + (i + 1));
+            HelperService.printSuggestions(sList.get(i));
+            System.out.println(" ");
         }
-        else if(s.getProcessed() == true){
-            System.out.println("Your suggestion has been processed!!");
-        }
-        else{
-            System.out.println("No suggestion provided...");
-        }
+       }
     }
     
-    public void editSuggestions(Suggestions s){
-        if(s.getSuggestBy() == user.getUserID() && s.getProcessed() == false){
-            System.out.println("Your submitted suggestion is: " + s.getSuggestion());
-            System.out.println("Please edit your suggestion: ");
-            String editSuggestions = sc.next();
-            s.setSuggestion(editSuggestions);
-        }
-        else if(s.getProcessed() == true){
-            System.out.println("Your suggestion has been processed!!");
-        }
-        else{
-            System.out.println("No suggestion provided...");
-        }
+    public void editSuggestions(){
+        if(!SuggestionsService.submittedSuggestions()){
+          System.out.println("You do not have any suggestions submitted");
+          return;
+       }
+
+       this.viewSuggestion();
+       ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+
+       System.out.println("Which suggestion you would like to edit? ");
+       int index = HelperService.readInt(1 , sList.size() , "Suggestion id out of bound");
+
+       Suggestions s = sList.get(index-1);
+       while (s.getSuggestBy() != AuthData.getCurrentUser().getUserID()){
+        System.out.println("Invalid suggestion id, you can only edit your own suggestion");
+        index = HelperService.readInt(1 , sList.size() , "Suggestion id out of bound");
+        s = sList.get(index-1);
+       }
+
+       System.out.println("Enter your new suggestion: ");
+       String suggestion = sc.nextLine();
+
+       s.setSuggestion(suggestion);
+       System.out.println("Your suggestion has been updated");
+
     }
     
     public void deleteSuggestion(Camp camp, Suggestions s){
