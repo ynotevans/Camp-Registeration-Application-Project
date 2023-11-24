@@ -85,6 +85,7 @@ public class StudentCampService {
 		camp.addCommittee(student);
 		student.getRegisteredCamp().add(camp.getCampName());
 		student.setIsComittee(true);
+		student.setCommitteeCamp(camp);
 		camp.setCampCommitteeRemainingSlots(camp.getCampCommitteeRemainingSlots()-1);
 	}
 
