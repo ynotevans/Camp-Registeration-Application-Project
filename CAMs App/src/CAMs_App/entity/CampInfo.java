@@ -12,12 +12,14 @@ public class CampInfo {
     private Faculty userGroup;
     private String location;
     private int totalSlots;
+    private int remainingSlot; //remaining slot for attendees
     private int campCommitteeSlots;
+    private int campCommitteeRemainingSlot; // remaining slot for committee
     private String description;
     private String staffInCharge;
     private Boolean visibility;
     private int numberOfCampDays;
-    private int remainingSlot;
+    
 
     //constructor
     public CampInfo(String campName, LocalDate campDate, LocalDate campEndDate, LocalDate regCloseDate, Faculty userGroup,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int remainingSlot){
@@ -27,12 +29,16 @@ public class CampInfo {
         setRegCloseDate(regCloseDate);
         setUserGroup(userGroup);
         setLocation(location);
-        setTotalSlots(totalSlots);
-        setCampCommitteeSlots(campCommitteeSlots);
+        setTotalSlots(totalSlots); //total = attendee + student
+        setRemainingSlot(remainingSlot); //remaining slot for student
+        setCampCommitteeSlots(campCommitteeSlots); //total committee slot
+        setCampCommitteeRemainingSlots(campCommitteeSlots); //remaining committee slot
+        //total remaining slot = remaining slot for committee + student
+
         setDescription(description);
         setStaffInCharge(staffInCharge);
         setVisibility(visibility);
-        setRemainingSlot(remainingSlot);
+
     } 
 
 
@@ -73,6 +79,9 @@ public class CampInfo {
         this.campCommitteeSlots = campCommitteeSlots;
     }
 
+    public void setCampCommitteeRemainingSlots(int campCommitteeRemainingSlot){
+        this.campCommitteeRemainingSlot = campCommitteeRemainingSlot;
+    }
     public void setDescription(String description){
         this.description = description;
     }
@@ -126,6 +135,9 @@ public class CampInfo {
         return campCommitteeSlots;
     } 
 
+    public int getCampCommitteeRemainingSlots(){
+        return this.campCommitteeRemainingSlot; 
+    }
     public String getDescription() {
         return description;
     }
