@@ -22,52 +22,70 @@ public class LoginMenu implements Menu {
         int choice;
         UserController userController=new UserController();
 
-        do{
-            System.out.print("Enter ur selection: ");
-            choice = sc.nextInt();
+        try{
+            do{
+                System.out.print("Enter ur selection: ");
+                choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:  //staff login
-                    System.out.println("(Maximum number of login attempts is 5)");
-                    if (userController.login(true)){
+                switch (choice) {
+                    case 1:  //staff login
+                        System.out.println("(Maximum 5 login attempts)");
+                        if (userController.login(true)){
 
-                        StaffMenu staffMenu = new StaffMenu();
-                        staffMenu.viewApp();
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException error) {
-                        error.printStackTrace();
-                    }
-                    viewApp();
-                    break;
+                            StaffMenu staffMenu = new StaffMenu();
+                            staffMenu.viewApp();
+                        }
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException error) {
+                            error.printStackTrace();
+                        }
+                        viewApp();
+                        break;
 
-                case 2:   //student login
-                    System.out.println("(Maximum number of login attempts is 5)");
-                    if(userController.login(false)) {
-                        StudentMenu studentMenu = new StudentMenu();
-                        studentMenu.viewApp();
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException error) {
-                        error.printStackTrace();
-                    }
-                    viewApp();
-                    break;
-                
-                case 3:
-                    System.out.println("Prompt to Exit...");
-                    break;
-                
-                default:
-                    System.out.println("Invalid selection, please select again...");
-                    break;
+                    case 2:   //student login
+                        System.out.println("(Maximum 5 login attempts)");
+                        if(userController.login(false)) {
+                            StudentMenu studentMenu = new StudentMenu();
+                            studentMenu.viewApp();
+                        }
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException error) {
+                            error.printStackTrace();
+                        }
+                        viewApp();
+                        break;
+                    
+                    case 3:
+                        System.out.println("Prompt to Exit...");
+                        System.exit(0);
+                        break;
+                    
+                    default:
+                        System.out.println("Invalid selection, please select again...");
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException error) {
+                            error.printStackTrace();
+                        }
+                        viewApp();
+                        break;
+                        
+                }
+
+            }while(choice != 3);
+
+            sc.close();
+        } catch (Exception e) {
+            System.out.println("Invalid selection, please select again...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException error) {
+                error.printStackTrace();
             }
+            viewApp();
+        }
 
-        }while(choice != 3);
-
-        sc.close();
     }
-
 }
