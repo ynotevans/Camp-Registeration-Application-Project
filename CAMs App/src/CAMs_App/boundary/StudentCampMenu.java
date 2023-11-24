@@ -45,6 +45,13 @@ public class StudentCampMenu implements Menu{
                             }
                             else if (choice1 == 2){
                                 studentController.joinAsCommittee();
+                                CampComMenu campMenu = new CampComMenu();
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                }
+                                campMenu.viewApp();
                             }
 
                             else {
@@ -56,7 +63,7 @@ public class StudentCampMenu implements Menu{
                         }
 
                         try {
-                                Thread.sleep(3000);
+                                Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                         }

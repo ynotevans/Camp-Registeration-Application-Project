@@ -48,12 +48,6 @@ public class StudentController extends UserController {
             StudentCampService.registerAsAttendee();
             System.out.println("Successfully Registered as attendee!\n");
         }
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void joinAsCommittee(){
@@ -69,7 +63,7 @@ public class StudentController extends UserController {
         
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
-        if (camp.getCampCommitteeSlots() == 0) {
+        if (camp.getCampCommitteeRemainingSlots() == 0) {
             System.out.println("Camp Committee slots are full!");
         }
 
