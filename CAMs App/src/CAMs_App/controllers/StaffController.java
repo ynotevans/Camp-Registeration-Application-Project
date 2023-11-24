@@ -96,12 +96,18 @@ public class StaffController extends UserController{
 
         //User group
         System.out.println("Enter faculty for which the camp is open to: ");
+        sc.nextLine();
         String fac = sc.nextLine();
-        try {
-            Faculty faculty = Faculty.valueOf(fac.toUpperCase());
-            camp.setUserGroup(faculty);
-        } catch (Exception e){
-            System.out.println("Invalid faculty.");
+        
+        while (true) {
+            try {
+                Faculty faculty = Faculty.valueOf(fac.toUpperCase());
+                camp.setUserGroup(faculty);  
+                break;
+            }
+            catch(Exception e){
+                 System.out.println("Invalid faculty.");
+            }
         }
 
         //camp location
@@ -121,12 +127,13 @@ public class StaffController extends UserController{
 
         //total number of slots
         System.out.println("Enter total number of camp slots: ");
-        int campSlots = HelperService.readInt(0 ,campCommitteeSlots , "total slot cannot be less than committee slot");      
+        int campSlots = HelperService.readInt(campCommitteeSlots, Integer.MAX_VALUE , "total slot cannot be less than committee slot");      
         camp.setTotalSlots(campSlots);
 
 
         //Camp Descriptions
         System.out.println("Enter camp description: ");
+        sc.nextLine();
         String description = sc.nextLine();
         camp.setDescription(description);
         

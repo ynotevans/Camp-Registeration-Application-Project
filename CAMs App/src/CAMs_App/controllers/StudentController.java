@@ -102,8 +102,10 @@ public class StudentController extends UserController {
         
         for(int i=0;i<qList.size();i++){
         	if(qList.get(i).getInquirer()==student.getUserID()) {
+                System.out.println("Your submitted enquiries on this camp");
                 System.out.println("Enquiry: " + i + 1);
         		HelperService.viewEnquiries(qList.get(i));
+                System.out.println(" ");
         	}
         }
     }
@@ -120,15 +122,19 @@ public class StudentController extends UserController {
     public void editEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
+        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
+            System.out.println("You do not have any submitted enquiry");
+            return;
+        }
     	ArrayList<Enquiries> qList = camp.getEnquiryList();
         
         this.viewEnquiry();
         System.out.println("Which enquiry you would like to edit ?");
-        int index = HelperService.readInt();
+        int index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         
         while(!(qList.get(index).getInquirer()==student.getUserID())) {
         	System.out.println("Invalid enquiry id, please try again");
-            index = HelperService.readInt();
+            index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         }
         System.out.println("Enter your new enquiry: ");
         String enquiry = sc.nextLine();
@@ -144,6 +150,10 @@ public class StudentController extends UserController {
     public void deleteEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
+        if(!EnquiriesService.submittedEnquiries(student.getUserID(), camp)){
+            System.out.println("You do not have any submitted enquiry");
+            return;
+        }
         ArrayList<Enquiries> qList = camp.getEnquiryList();
 
         this.viewEnquiry();

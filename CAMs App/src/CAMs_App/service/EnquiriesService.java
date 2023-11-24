@@ -1,5 +1,8 @@
 package CAMs_App.service;
 import CAMs_App.entity.*;
+
+import java.util.ArrayList;
+
 import CAMs_App.data.AuthData;
 public final class EnquiriesService {
 
@@ -36,5 +39,13 @@ public final class EnquiriesService {
            camp.getEnquiryList().remove(q);
            return true;
         }
+    }
+
+    public static boolean submittedEnquiries(String UserID , Camp camp){
+        ArrayList<Enquiries> qList = camp.getEnquiryList();
+        for(int i = 0 ; i < qList.size() ; i++){
+            if(qList.get(i).getInquirer() == AuthData.getCurrentUser().getUserID()) return true;
+        }
+    return false;
     }
 }
