@@ -1,5 +1,6 @@
 package CAMs_App.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,23 +58,31 @@ public class StudentController extends UserController {
 
     public void joinAsCommittee(){
         Student student = (Student)AuthData.getCurrentUser();
-        String campName = AuthData.getCurrentCamp().getCampName();
-        Camp camp = DatabaseService.getCamp(campName);
+        Camp camp = AuthData.getCurrentCamp();
+        if(student.getIsComittee()){
+            //check if the student is a committee for any upcoming camp
+            if(!student.getComitteeCamp().getCampEndDate().isAfter(LocalDate.now())){
+                System.out.println("You are not allowed to sign up as committee for more than 1 camp");
+                return;
+            }
+        }
+        
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
         if (camp.getCampCommitteeSlots() == 0) {
             System.out.println("Camp Committee slots are full!");
         }
 
-        else if(registeredCamp.contains(campName)) {
+        else if(registeredCamp.contains(camp.getCampName())){
             System.out.println("Camp has been registered already. Going back previous menu...\n");
         }
         
         
         else {
             System.out.println("Enter desired position to be in the camp committee: ");
-            String position = sc.next();
+            String position = sc.nextLine();
             StudentCampService.registerAsCommittee(position);
+            student.setCommitteeCamp(camp);
             System.out.println("Successfully Registered as committee!\n");
         }
 
@@ -112,11 +121,15 @@ public class StudentController extends UserController {
     }
 
     public void viewEnquiry(){
+        if(!EnquiriesService.submittedEnquiries()){
+            System.out.println("You have not submitted any enquiry on this camp");
+            return;
+        }
     	Student student = (Student)AuthData.getCurrentUser();
         ArrayList<Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
         
         for(int i=0;i<qList.size();i++){
-        	if(qList.get(i).getInquirer()==student.getUserID()) {
+        	if(qList.get(i).getInquirer().equals(student.getUserID())) {
                 System.out.println("Your submitted enquiries on this camp");
                 System.out.println("Enquiry: " + (i + 1));
         		EnquiriesService.viewEnquiries(qList.get(i));
@@ -145,7 +158,7 @@ public class StudentController extends UserController {
         System.out.println("Which enquiry you would like to edit ?");
         int index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         
-        while(!(qList.get(index).getInquirer()==student.getUserID())) {
+        while(!(qList.get(index).getInquirer().equals(student.getUserID()))){
         	System.out.println("Invalid enquiry id, please try again");
             index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         }
@@ -174,7 +187,7 @@ public class StudentController extends UserController {
         System.out.println("Which enquiry you would like to delete ?");
         int index = HelperService.readInt();
         
-        while(!(qList.get(index).getInquirer()==student.getUserID())) {
+        while(!(qList.get(index).getInquirer().equals(student.getUserID()))) {
         	System.out.println("Invalid enquiry id, please try again");
             index = HelperService.readInt();
         }
