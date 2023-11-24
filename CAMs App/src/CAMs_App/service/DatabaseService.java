@@ -273,7 +273,6 @@ public class DatabaseService {
 											suggestionsstr.isEmpty() ? "null" : suggestions));
 				writer.newLine();
 			}
-
             System.out.println("Data written to " + csvFilePath);
         } catch (IOException e) {
             e.printStackTrace();
