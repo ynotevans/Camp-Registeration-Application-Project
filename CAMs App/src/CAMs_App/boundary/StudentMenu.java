@@ -48,11 +48,7 @@ public class StudentMenu implements Menu {
                         String campName = sc.next();
                         if (DatabaseService.checkIfCampNameExists(campName) == false) {
                             System.out.println("Camp name does not exist. Going back to previous menu...");
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                            e.printStackTrace();
-                            }
+                            HelperService.wait(1);
                             viewApp();
 
                         }
@@ -67,11 +63,7 @@ public class StudentMenu implements Menu {
 
                     else{
                          System.out.println("Currently no available camp(s) for you.\n");
-                         try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                         HelperService.wait(1);
                     }
                     
                     break;
@@ -85,11 +77,7 @@ public class StudentMenu implements Menu {
                         
                         if (DatabaseService.checkIfCampNameExists(campName) == false) {
                             System.out.println("Camp name does not exist. Going back to previous menu...");
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                            e.printStackTrace();
-                            }
+                            HelperService.wait(1);
                             viewApp();
                         }
                         
@@ -99,22 +87,14 @@ public class StudentMenu implements Menu {
                             
                             if (currentStudent.getComitteeCamp()==selectedCamp){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                                HelperService.wait(1);
                                 viewApp();
                             }
                             
                             else {
                                 StudentCampMenu campMenu = new StudentCampMenu();
                                 // edit camp function
-                                try {
-                                    Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                e.printStackTrace();
-                                }
+                                HelperService.wait(1);
                                 campMenu.viewApp();
                             }
                         } 
@@ -122,11 +102,7 @@ public class StudentMenu implements Menu {
 
                     else {
                             System.out.println("Currently no registered camp(s) for you. Going back previous menu...\n");
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            HelperService.wait(2);
                     }
                     
                     break;
@@ -134,44 +110,29 @@ public class StudentMenu implements Menu {
                 case 3:    //switch mode
                     studentController.switchMode(1);
                     System.out.println("Sorry, you are not a camp committee. Going back previous menu...");
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    HelperService.wait(3);
                     break;
                 
                  case 4:    //change password
                     HelperService.clearScreen();
                     HelperService.printRoute("Student Menu ---> Change Password");
                     UserController.changePassword();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    HelperService.wait(1);
                     this.viewApp();
                     break;
 
                 case 5:    //logout
                     System.out.println("Logging out...");
+                    HelperService.wait(3);
                     studentController.logout();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    HelperService.wait(1);
                     MainMenu comMenu = new MainMenu();
                     comMenu.viewApp();
                     break;
                 
                 default:
                     System.out.println("Invalid selection, please select again...");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    HelperService.wait(1);
                     break;
             }
 

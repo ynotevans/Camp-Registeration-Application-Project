@@ -12,9 +12,7 @@ public abstract class AuthService {
     public static boolean logout(){
         AuthData.setCurrentUser(null);
         AuthData.setCurrentCamp(null);
-        DatabaseService.writetoStaffCSV(Database.getStaffData());
-        DatabaseService.writetoStudentCSV(Database.getStudentsData());
-        DatabaseService.writetoCampCSV(Database.getCampData());
+        Database.writeData();
         return true;
     }
 

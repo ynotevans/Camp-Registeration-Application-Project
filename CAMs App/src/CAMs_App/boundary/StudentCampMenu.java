@@ -96,8 +96,9 @@ public class StudentCampMenu implements Menu{
 
                     case 6:    //logout
                         System.out.println("Logging out...");
-                        studentController.logout();
                         HelperService.wait(3);
+                        studentController.logout();
+                        HelperService.wait(1);
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

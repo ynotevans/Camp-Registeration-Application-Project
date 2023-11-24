@@ -7,6 +7,7 @@ import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
 import CAMs_App.entity.Suggestions;
+import CAMs_App.service.DatabaseService;
 
 // import interfaces.IFileDataService;
 
@@ -31,23 +32,18 @@ public class Database {
 	private Database() {
 	}
 
-	/**
-	 * Saves the data from the DataStore to the file system.
-	 *
-	 * @return {@code true} if the data is saved successfully, {@code false}
-	 *         otherwise
-	 */
-	public static boolean saveData() {
-		Database.setStudentsData(studentsData);
-		Database.setstaffData(staffData);
-		Database.setCampData(campData);
-		// Database.setCampCompMemData(campCompMemData); // don't need this, delete during last check
-		Database.setEnquiriesData(enquiriesData);
-        Database.setEnquiriesData(enquiriesData);
-        
-
-		return true;
+	public static void readData() {
+		DatabaseService.readfromStaffCSV();
+		DatabaseService.readfromStudentCSV();
+		DatabaseService.readfromCampCSV();
 	}
+
+	public static void writeData() {
+		DatabaseService.writetoStaffCSV(Database.getStaffData());
+		DatabaseService.writetoStudentCSV(Database.getStudentsData());
+		DatabaseService.writetoCampCSV(Database.getCampData());
+	}
+
 
 	// ---------- Student ---------- //
 	/**

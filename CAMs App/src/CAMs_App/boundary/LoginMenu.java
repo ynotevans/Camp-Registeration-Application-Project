@@ -35,11 +35,7 @@ public class LoginMenu implements Menu {
                             StaffMenu staffMenu = new StaffMenu();
                             staffMenu.viewApp();
                         }
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException error) {
-                            error.printStackTrace();
-                        }
+                        HelperService.wait(1);
                         viewApp();
                         break;
 
@@ -49,11 +45,7 @@ public class LoginMenu implements Menu {
                             StudentMenu studentMenu = new StudentMenu();
                             studentMenu.viewApp();
                         }
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException error) {
-                            error.printStackTrace();
-                        }
+                        HelperService.wait(1);
                         viewApp();
                         break;
                     
@@ -64,11 +56,7 @@ public class LoginMenu implements Menu {
                     
                     default:
                         System.out.println("Invalid selection, please select again...");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException error) {
-                            error.printStackTrace();
-                        }
+                        HelperService.wait(1);
                         viewApp();
                         break;
                         

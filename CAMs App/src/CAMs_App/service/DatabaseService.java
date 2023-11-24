@@ -66,8 +66,6 @@ public class DatabaseService {
 				writer.newLine();
 			}
 
-            
-            System.out.println("Data written to " + csvFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,7 +118,6 @@ public class DatabaseService {
             }
 
 			Database.setStudentsData(user1);
-			System.out.println("read data from student.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,8 +146,6 @@ public class DatabaseService {
 				writer.newLine();
 			}
 
-            
-            System.out.println("Data written to " + csvFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,7 +172,6 @@ public class DatabaseService {
             }
 
 			Database.setstaffData(user);
-			System.out.println("read data from staff.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -280,7 +274,6 @@ public class DatabaseService {
 											suggestionsstr.isEmpty() ? "null" : suggestions));
 				writer.newLine();
 			}
-            System.out.println("Data written to " + csvFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -386,7 +379,6 @@ public class DatabaseService {
             }
 
 			Database.setCampData(user);
-			System.out.println("read data from camp.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }

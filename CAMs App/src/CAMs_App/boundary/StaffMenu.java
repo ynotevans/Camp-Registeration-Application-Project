@@ -84,8 +84,9 @@ public class StaffMenu implements Menu{
                     
                     case 5:    //logout
                         System.out.println("Logging out...");
-                        staffController.logout();
                         HelperService.wait(3);
+                        staffController.logout();
+                        HelperService.wait(1);
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;
