@@ -8,10 +8,10 @@ import CAMs_App.enums.*;
 public class Camp extends CampInfo{
 
     
-    private static ArrayList<Student> attendees = new ArrayList<>();
-    private static ArrayList<Student> committee = new ArrayList<>();
-    private static ArrayList<Enquiries> enquiries = new ArrayList<>();
-    private static ArrayList<Suggestions> suggestions = new ArrayList<>();
+    private ArrayList<Student> attendees = new ArrayList<>();
+    private ArrayList<Student> committee = new ArrayList<>();
+    private ArrayList<Enquiries> enquiries = new ArrayList<>();
+    private ArrayList<Suggestions> suggestions = new ArrayList<>();
     
     //constructor
     public Camp(String campName , LocalDate campDate , LocalDate campEndDate, LocalDate regCloseDate , Faculty userGroup ,String location, int totalSlots, int campCommitteeSlots, String description, String staffInCharge, Boolean visibility, int numberOfCampDays){
@@ -26,36 +26,36 @@ public class Camp extends CampInfo{
 
 
     public void addAttendees(Student attendee){
-        Camp.attendees.add(attendee);
+        this.attendees.add(attendee);
     }
 
     public void addCommittee(Student committee){
-        Camp.committee.add(committee);
+        this.committee.add(committee);
     }
 
     public void addQuery(Enquiries q){
-        Camp.enquiries.add(q);
+        this.enquiries.add(q);
     }
 
     public void addSuggestion(Suggestions s){
-        Camp.suggestions.add(s);
+        this.suggestions.add(s);
     }
     
     //getters
     public ArrayList<Student> getAttendees(){
-        return Camp.attendees;
+        return this.attendees;
     }
 
     public ArrayList<Student> getCommittee(){
-        return Camp.committee;
+        return this.committee;
     }
 
     public ArrayList<Enquiries> getEnquiryList(){
-        return Camp.enquiries;
+        return this.enquiries;
     }
 
     public ArrayList<Suggestions> getSuggestionList(){
-        return Camp.suggestions;
+        return this.suggestions;
     }
     
 }
