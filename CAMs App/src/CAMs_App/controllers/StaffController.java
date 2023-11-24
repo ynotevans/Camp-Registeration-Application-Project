@@ -23,6 +23,8 @@ import CAMs_App.service.SuggestionsService;
 public class StaffController extends UserController{
     Scanner sc = new Scanner(System.in);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+//camp related methods
     public void createCamp(){
         Camp camp = new Camp();
        
@@ -327,7 +329,7 @@ public class StaffController extends UserController{
         }
     }
 
-    //Enquiries
+//Enquiries
     public void viewEnquiries(){
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
@@ -378,75 +380,75 @@ public class StaffController extends UserController{
         String reply = sc.next();
         EnquiriesService.replyEnquiries(q,reply);
         System.out.println("Enquiries replied");
-}
+    }
 
 //suggestions
-public void viewSuggestions(){
-     System.out.println("Select your choice: ");
-        System.out.println("Press 1: View Suggestions Under Process");  
-        System.out.println("Press 2: View Processed Suggestions");
-        System.out.println("Press any number: View New Suggestions");
+    public void viewSuggestions(){
+    System.out.println("Select your choice: ");
+    System.out.println("Press 1: View Suggestions Under Process");  
+    System.out.println("Press 2: View Processed Suggestions");
+    System.out.println("Press any number: View New Suggestions");
 
 
-        int choice = sc.nextInt();
+    int choice = sc.nextInt();
 
-        Camp camp = AuthData.getCurrentCamp();
-        ArrayList<Suggestions> s = camp.getSuggestionList();
-        switch (choice) {
-            case 1:
-                System.out.println("Suggestions under process: ");
-                for(int i = 0 ; i < s.size() ; i++){
-                    if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
-                        System.out.println("SuggestionID: " + i+1);
-                        HelperService.printSuggestions(s.get(i));
-                    }
-                }
-                break;
-            
-            case 2:
+    Camp camp = AuthData.getCurrentCamp();
+    ArrayList<Suggestions> s = camp.getSuggestionList();
+    switch (choice) {
+        case 1:
+            System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < s.size() ; i++){
-                System.out.println("Processed suggestions");
-                    if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
-                        System.out.println("SuggestionID: " + i+1);
-                        HelperService.printSuggestions(s.get(i));
-                    }
+                if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
+                    System.out.println("SuggestionID: " + i+1);
+                    HelperService.printSuggestions(s.get(i));
                 }
+            }
             break;
         
-            case 3:
-            for(int i = 0 ; i < s.size() ; i++){
-                   System.out.println("SuggestionsID: " + i+1);
-                   HelperService.printSuggestions(s.get(i));
-             }
-            break;
-        }
+        case 2:
+        for(int i = 0 ; i < s.size() ; i++){
+            System.out.println("Processed suggestions");
+                if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
+                    System.out.println("SuggestionID: " + i+1);
+                    HelperService.printSuggestions(s.get(i));
+                }
+            }
+        break;
+
+        case 3:
+        for(int i = 0 ; i < s.size() ; i++){
+                System.out.println("SuggestionsID: " + i+1);
+                HelperService.printSuggestions(s.get(i));
+            }
+        break;
+    }
 
     }
 
     public void processSuggestions(){
-        System.out.println("Which suggestion you would like to process: ");
-        int index = sc.nextInt();  
-        SuggestionsService.processSuggestions(index);
-        System.out.println("Suggesstion status set to processing...");
-        HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
+    System.out.println("Which suggestion you would like to process: ");
+    int index = sc.nextInt();  
+    SuggestionsService.processSuggestions(index);
+    System.out.println("Suggesstion status set to processing...");
+    HelperService.printSuggestions(AuthData.getCurrentCamp().getSuggestionList().get(index));
     }
 
     public void approveSuggestion(Student student){ 
-        System.out.println("Which suggestion you would like to process: ");
-        int index = sc.nextInt();            
-        System.out.println("Do you want to accept this suggestion? (Y/N)");
-        char ans = sc.next().charAt(0);
-        boolean approve;
+    System.out.println("Which suggestion you would like to process: ");
+    int index = sc.nextInt();            
+    System.out.println("Do you want to accept this suggestion? (Y/N)");
+    char ans = sc.next().charAt(0);
+    boolean approve;
 
-        if(ans == 'Y')
-            approve = true;
-        else
-            approve = false;
+    if(ans == 'Y')
+        approve = true;
+    else
+        approve = false;
 
-        
-        SuggestionsService.approveSuggestions(index , approve);
-        CampComController.addPoints(student);
-        System.out.println("Suggestion has been processed...");
-        if(approve)System.out.println("1 point awarded to suggestor");
+
+    SuggestionsService.approveSuggestions(index , approve);
+    CampComController.addPoints(student);
+    System.out.println("Suggestion has been processed...");
+    if(approve)System.out.println("1 point awarded to suggestor");
     }
 }

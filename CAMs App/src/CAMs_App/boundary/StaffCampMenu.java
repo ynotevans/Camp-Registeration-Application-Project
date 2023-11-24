@@ -3,8 +3,9 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StaffController;
+import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
-
+import CAMs_App.entity.Student;
 public class StaffCampMenu implements Menu {
     StaffController staffController = new StaffController();
 
@@ -66,7 +67,7 @@ public class StaffCampMenu implements Menu {
                     break;
                 
                 case 8:    //approve suggestion
-                    staffController.approveSuggestion(null, 0);
+                    staffController.approveSuggestion((Student)AuthData.getCurrentUser());
                     break;
 
                 case 9: //go to previous page
