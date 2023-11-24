@@ -2,10 +2,11 @@ package CAMs_App.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import CAMs_App.enums.*;
 
-public class Camp extends CampInfo{
+public class Camp extends CampInfo implements Comparable<Camp>{
 
     
     private ArrayList<Student> attendees = new ArrayList<>();
@@ -56,6 +57,15 @@ public class Camp extends CampInfo{
 
     public ArrayList<Suggestions> getSuggestionList(){
         return this.suggestions;
+    }
+
+     @Override
+    public int compareTo(Camp other) {
+        return Comparator.comparing(Camp::getCampName)
+                .thenComparing(Camp::getLocation)
+                .thenComparing(Camp::getCampDate)
+                .thenComparing(Camp::getUserGroup)
+                .compare(this, other);
     }
     
 }

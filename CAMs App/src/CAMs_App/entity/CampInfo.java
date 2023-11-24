@@ -1,10 +1,10 @@
 package CAMs_App.entity;
 
 import java.time.LocalDate;
-// import java.util.*;
+
 import CAMs_App.enums.*;
 
-public class CampInfo {
+public class CampInfo{
     private String campName;
     private LocalDate campDate;
     private LocalDate campEndDate;
@@ -157,4 +157,8 @@ public class CampInfo {
     public int getRemainingSlot() {
         return this.remainingSlot;
     }
+
+
+   
+
 }

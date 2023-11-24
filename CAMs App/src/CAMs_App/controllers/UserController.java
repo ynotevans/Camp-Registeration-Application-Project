@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import CAMs_App.service.AuthStaffService;
 import CAMs_App.service.AuthStudentService;
+import CAMs_App.service.HelperService;
 import CAMs_App.service.AuthService;
 import CAMs_App.service.UserService;
 
@@ -11,16 +12,18 @@ public class UserController {
     AuthService authService;
     public UserController(){}
 
-    public void changePassword(){
+    public static void changePassword(){
         String oldPassword, newPassword;
         boolean success = false;
-        System.out.println("Changing Password...");
+        
 
         do {
             System.out.println("Enter your old password (Enter X to quit): ");
             oldPassword = sc.next();
             if (oldPassword.equalsIgnoreCase("X")) {
                 System.out.println("Exiting change password... ");
+                HelperService.wait(1);
+                break;
             }
 
             System.out.println("Enter your new password: ");
@@ -36,10 +39,11 @@ public class UserController {
             if (!success) {
                 System.out.println("Old password does not match.");
             }
+            else
+                 System.out.println("Password successfully changed.");
 
         } while (!success);
 
-        System.out.println("Password successfully changed.");
     }
 
     public boolean login(boolean isStaff){
@@ -55,7 +59,7 @@ public class UserController {
         String userID = sc.next();
         System.out.print("Password: ");
         String password = sc.next();
-        boolean authenticated = authService.login(userID, password);;
+        boolean authenticated = authService.login(userID, password);
 
         while(authenticated != true){  
             attempt++;        
