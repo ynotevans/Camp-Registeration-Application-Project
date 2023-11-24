@@ -63,7 +63,7 @@ public class StudentController extends UserController {
         
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
-        if (camp.getCampCommitteeSlots() == 0) {
+        if (camp.getCampCommitteeRemainingSlots() == 0) {
             System.out.println("Camp Committee slots are full!");
         }
 
