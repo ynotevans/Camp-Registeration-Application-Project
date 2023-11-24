@@ -4,6 +4,7 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
+import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
@@ -17,13 +18,15 @@ public class StudentMenu implements Menu {
 
     public void printMenu(){
         HelperService.clearScreen();
-        System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
+        HelperService.printRoute("Student Menu");
+        System.out.println("Welcome back "+ currentStudent.getName() + "!!!");
         System.out.println("Student profile reflected here....");
         System.out.println("Available actions for you: ");
         System.out.println("(1) View available camps");
         System.out.println("(2) View registered camp(s)");
         System.out.println("(3) Switch to camp committee mode");
-        System.out.println("(4) Logout\n");
+        System.out.println("(4) Change password");
+        System.out.println("(5) Logout\n");
     }
 
     
@@ -120,7 +123,7 @@ public class StudentMenu implements Menu {
                     else {
                             System.out.println("Currently no registered camp(s) for you. Going back previous menu...\n");
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -129,17 +132,28 @@ public class StudentMenu implements Menu {
                     break;
 
                 case 3:    //switch mode
-                    
                     studentController.switchMode(1);
                     System.out.println("Sorry, you are not a camp committee. Going back previous menu...");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                
+                 case 4:    //change password
+                    HelperService.clearScreen();
+                    HelperService.printRoute("Student Menu ---> Change Password");
+                    UserController.changePassword();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    this.viewApp();
                     break;
 
-                case 4:    //logout
+                case 5:    //logout
                     System.out.println("Logging out...");
                     studentController.logout();
                     try {

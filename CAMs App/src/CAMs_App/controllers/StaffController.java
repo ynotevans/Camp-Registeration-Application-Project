@@ -306,10 +306,14 @@ public class StaffController extends UserController{
              int choice = HelperService.readInt();
             if(choice == 1){
                 camp.setVisibility(false);
+                System.out.println("Camp is invisible to students now.");
+                HelperService.wait(2);
                 break;
             }
             else{
                camp.setVisibility(true);
+               System.out.println("Camp is visible to students now.");
+                HelperService.wait(2);
                break;
             }
         }
@@ -317,7 +321,6 @@ public class StaffController extends UserController{
     }
 
     public void viewAllCamp(){
-        System.out.println("print all camp........");
         StaffCampService.viewAllCamps();
     }
 

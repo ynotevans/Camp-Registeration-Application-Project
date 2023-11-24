@@ -8,6 +8,7 @@ import CAMs_App.service.HelperService;
 public class LoginMenu implements Menu {
     public void printMenu(){
         HelperService.clearScreen();
+        HelperService.printRoute("Login Menu");
         System.out.println("Login as:");
         System.out.println("(1) Staff");
         System.out.println("(2) Student");

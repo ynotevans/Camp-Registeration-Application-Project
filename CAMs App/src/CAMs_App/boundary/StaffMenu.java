@@ -3,6 +3,7 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StaffController;
+import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
@@ -14,19 +15,21 @@ public class StaffMenu implements Menu{
     StaffController staffController = new StaffController();
 
     public void printMenu(){
-        
-        System.out.println("Welcome back "+ currentStaff.getUserID() + "!!!");
+        HelperService.clearScreen();
+        HelperService.printRoute("Staff Menu");
+        System.out.println("Welcome back "+ currentStaff.getName() + "!!!");
         System.out.println("Available actions for you: ");
         System.out.println("(1) Create new camp");
         System.out.println("(2) View all camps");
         System.out.println("(3) View camp(s) created by you");
-        System.out.println("(4) Logout\n");
+        System.out.println("(4) Change password");
+        System.out.println("(5) Logout\n");
     }
 
     
 
     public void viewApp(){
-        HelperService.clearScreen();
+        this.printMenu();
         
         Scanner sc = new Scanner(System.in);
         int choice;
@@ -38,14 +41,20 @@ public class StaffMenu implements Menu{
 
                 switch (choice) {
                     case 1:    //create camp
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Menu ---> Create Camp");
                         staffController.createCamp();
                         break;
 
                     case 2:    //view all camp
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Menu ---> View All Camp");
                         staffController.viewAllCamp();
                         break;
                     
                     case 3:    //view staff created camp
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Menu ---> View Camp Created By You");
                         staffController.viewCreatedCamp(currentStaff.getUserID());
 
                         System.out.print("Select a camp to operate (campName): ");
@@ -65,14 +74,18 @@ public class StaffMenu implements Menu{
                         
                         break;
                     
-                    case 4:    //logout
+                    case 4:    //change password
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Menu ---> Change Password");
+                        UserController.changePassword();
+                        HelperService.wait(1);
+                        this.viewApp();
+                        break;
+                    
+                    case 5:    //logout
                         System.out.println("Logging out...");
                         staffController.logout();
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        HelperService.wait(3);
                         MainMenu menu = new MainMenu();
                         menu.viewApp();
                         break;

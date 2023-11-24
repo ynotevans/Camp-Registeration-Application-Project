@@ -17,10 +17,10 @@ public class MainMenu implements Menu{
     
     public void printMenu(){
         HelperService.clearScreen();
+        HelperService.printRoute("Main Menu");
         System.out.println("Welcome to CAMs !!!");
-        System.out.println("(1) Login");
-        System.out.println("(2) Change password");
-        System.out.println("(3) Exit\n");
+        System.out.println("Press any number to login");
+        System.out.println("Press 9 to quit program\n");
     }
 
     public void testData(){
@@ -28,15 +28,15 @@ public class MainMenu implements Menu{
         Map<String, Student> user1 = Database.getStudentsData();
         Map<String, Camp> camp = Database.getCampData();
 
-        Staff staff1 = new Staff("WWW111", null, Faculty.NTU);
-        Staff staff2 = new Staff("RRR222", null, Faculty.NTU);
-        Student student3 = new Student("TTT444", "test", Faculty.EEE);
-        Student student4 = new Student("YYY555", null, Faculty.CCEB);
-        Student student5 = new Student("RRR222","password" , Faculty.SCSE);
-        Student student6 = new Student("WWW333","password" , Faculty.CCEB);
+        Staff staff1 = new Staff("WWW111", null, Faculty.NTU, "peter");
+        Staff staff2 = new Staff("RRR222", null, Faculty.NTU, "peter");
+        Student student3 = new Student("TTT444", "test", Faculty.EEE, "peter");
+        Student student4 = new Student("YYY555", null, Faculty.CCEB, "peter");
+        Student student5 = new Student("RRR222","password" , Faculty.SCSE, "peter");
+        Student student6 = new Student("WWW333","password" , Faculty.CCEB, "peter");
 
-        Student student7 = new Student("CCC111","password" , Faculty.SBS);
-        Student student8 = new Student("CCC222","password" , Faculty.SOH);
+        Student student7 = new Student("CCC111","password" , Faculty.SBS, "peter");
+        Student student8 = new Student("CCC222","password" , Faculty.SOH, "peter");
 
 
         Camp camp1 = new Camp("camp1", LocalDate.of(2023, 10, 30), LocalDate.of(2023, 11, 3), 
@@ -67,51 +67,35 @@ public class MainMenu implements Menu{
     }
 
     public void viewApp(){
-        //this.testData();
         DatabaseService.readfromStaffCSV();
         DatabaseService.readfromStudentCSV();
         DatabaseService.readfromCampCSV();
 
-        this.printMenu();
+       
         Scanner sc = new Scanner(System.in);
         int choice;
 
-            do{
-                System.out.print("Enter ur selection: ");
-                choice = sc.nextInt();
+        do{
+            this.printMenu();
+            choice = sc.nextInt();
 
-                switch (choice) {
-                    case 1:
-                        System.out.println("Prompt to Login...");
-                        LoginMenu login = new LoginMenu();
-                        login.viewApp();
-                        break;
-
-                    case 2:
-                        System.out.println("Prompt to Change Password...");
-                        HelperService.filter(1);
-                        break;
-                    
-                    case 3:
-                        System.out.println("Ending session...");
-                        System.exit(0);
-                        break;
-                    
-                    default:
-                        System.out.println("Invalid selection, please select again...");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException error) {
-                            error.printStackTrace();
-                        }
-                        viewApp();
-                        break;
+            if(choice!=9){
+                LoginMenu login = new LoginMenu();
+                login.viewApp();
+            }
+            else{
+                System.out.println("Ending session...");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException error) {
+                    error.printStackTrace();
                 }
-
-            }while(choice != 3);
-        
-            sc.close();
-        }
+                System.exit(0);
+            }
+        }while(choice!=9);
+    
+        sc.close();
     }
+}
 
 

@@ -202,15 +202,9 @@ public class StudentController extends UserController {
         HelperService.clearScreen();
         //from student switch to camp committee
         if(currentMode == 1){
-            if(currentUser.getIsComittee()== true){    //need to change the condition
+            if(currentUser.getIsComittee()== true){    
                 CampComMenu campComMenu = new CampComMenu();
                 campComMenu.viewApp();
-            }
-            else{
-                System.out.println("You are not a committe member of any camp");
-                System.out.println("Unable to switch mode !!!\n");
-                StudentMenu studentMenu = new StudentMenu();
-                studentMenu.printMenu();
             }
         }
         else{

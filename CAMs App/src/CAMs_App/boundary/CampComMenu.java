@@ -13,7 +13,8 @@ public class CampComMenu implements Menu{
 
     public void printMenu(){
         HelperService.clearScreen();
-        System.out.println("Welcome back "+ currentStudent.getUserID() + "!!!");
+        HelperService.printRoute("Camp Committee Menu");
+        System.out.println("Welcome back "+ currentStudent.getName() + "!!!");
         System.out.println("Available actions for you: ");
         System.out.println("(1) View camp details");
         System.out.println("(2) View enquiries");
