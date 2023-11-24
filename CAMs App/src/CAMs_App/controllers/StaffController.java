@@ -77,7 +77,7 @@ public class StaffController extends UserController{
         //System.out.println(camp.getNumberOfCampDays());
 
                    
-        //registratoin closing date
+        //registration closing date
         while (true) {
             try {
                 // Parse the user input into a LocalDateTime object
@@ -109,15 +109,28 @@ public class StaffController extends UserController{
         String location = sc.next();
         camp.setLocation(location);
 
-        //number of participants slots
-        System.out.println("Enter total number of camp slots: ");
-        int campSlots = sc.nextInt();
-        camp.setTotalSlots(campSlots);
-        
         //number of committee slots
         System.out.println("Enter number of camp committeee slots: ");
         int campCommitteeSlots = sc.nextInt();
+        
+        while(campCommitteeSlots <= 0 || campCommitteeSlots > 10){
+            System.out.println("Camp committee slots must be between 0 to 10\n Please try again: ");
+            campCommitteeSlots = sc.nextInt();
+        }
         camp.setCampCommitteeSlots(campCommitteeSlots);
+
+        //number of participants slots
+        System.out.println("Enter total number of camp slots: ");
+        int campSlots = sc.nextInt();
+      
+
+        while(campSlots <= 0 || campSlots < campCommitteeSlots){
+            System.out.println("Camp slots cannot be negative or lesser than the number of committee slots\n Please try again: ");
+            campSlots = sc.nextInt();
+        }
+        
+        camp.setTotalSlots(campSlots);
+
 
         //Camp Descriptions
         System.out.println("Enter camp description: ");
@@ -133,10 +146,9 @@ public class StaffController extends UserController{
         
         //set creator and visibility
         camp.setStaffInCharge(AuthData.getCurrentUser().getUserID());
-
         camp.setRemainingSlot(campSlots);
-        
 
+        //add camp to database
         StaffCampService.addNewCampToDB(camp);
     }
 
@@ -153,9 +165,10 @@ public class StaffController extends UserController{
             System.out.println("3.Change registration date");
             System.out.println("4.Open camp to own school or whole NTU");
             System.out.println("5.Edit camp location");
-            System.out.println("6.Edit number of camp committee slots");
-            System.out.println("7.Edit camp description");
-            System.out.println("8.Quit");
+            System.out.println("6.Edit number of total camp slots");
+            System.out.println("7.Edit number of camp committee slots");
+            System.out.println("8.Edit camp description");
+            System.out.println("9.Quit");
             System.out.println("Enter choice:");
             choice = sc.nextInt();
             switch (choice) {
@@ -233,7 +246,28 @@ public class StaffController extends UserController{
                     camp.setLocation(sc.next());
                     System.out.println("Camp location changed to: "+camp.getLocation());                    
                     break;
+                
                 case 6:
+                    System.out.println("Edit total camp slots");
+                    int totalSlots;
+                    while(true){
+                        try{
+                            System.out.println("Set number of camp commitee slots");
+                            totalSlots = sc.nextInt();
+                            if(totalSlots > 0 && totalSlots > camp.getCampCommitteeSlots())
+                                break;
+                            else
+                                System.out.println("Slot cannot be <= 0 and must be more than the number of committee slots!!!");        
+                        }catch (InputMismatchException e) {
+                            System.out.println("Invalid input");
+                            sc.nextLine();
+                        }
+                    }
+                    camp.setTotalSlots(totalSlots);
+                    System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
+                    break;
+                
+                case 7:
                     System.out.println("Edit camp committee slots(up to 10 slots)");
                     int committeeSlots;
                     while(true){
@@ -252,20 +286,20 @@ public class StaffController extends UserController{
                     camp.setCampCommitteeSlots(committeeSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
                     break;
-                case 7:
+                case 8:
                     System.out.println("Edit camp description");
                     System.out.println("Enter new camp description");
                     camp.setDescription(sc.next());
                     System.out.println("Camp description has been changed to\n"+camp.getDescription());
                     break;       
-                case 8:
+                case 9:
                     System.out.println("Exitting camp edits.");
                     break;    
                 default:
                     System.out.println("Re-enter choice");
                     break;
             }
-        }while(choice!=8);
+        }while(choice!=9);
     }
 
     public void deleteCamp(String campName){

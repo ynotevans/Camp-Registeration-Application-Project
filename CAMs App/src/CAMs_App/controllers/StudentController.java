@@ -110,7 +110,8 @@ public class StudentController extends UserController {
     public void createEnquiry(){
     	Camp camp = AuthData.getCurrentCamp();
     	System.out.println("Please provide your enquiry: ");
-        String enquiry = sc.next();
+        sc.nextLine();
+        String enquiry = sc.nextLine();
     	
         EnquiriesService.createEnquiries(camp.getCampName(), enquiry);
     }
