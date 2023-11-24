@@ -104,19 +104,18 @@ public class StudentController extends UserController {
         	if(qList.get(i).getInquirer()==student.getUserID()) {
                 System.out.println("Your submitted enquiries on this camp");
                 System.out.println("Enquiry: " + i + 1);
-        		HelperService.viewEnquiries(qList.get(i));
+        		EnquiriesService.viewEnquiries(qList.get(i));
                 System.out.println(" ");
         	}
         }
     }
 
     public void createEnquiry(){
-    	Camp camp = AuthData.getCurrentCamp();
     	System.out.println("Please provide your enquiry: ");
         sc.nextLine();
         String enquiry = sc.nextLine();
     	
-        EnquiriesService.createEnquiries(camp.getCampName(), enquiry);
+        EnquiriesService.createEnquiries(enquiry);
     }
 
     public void editEnquiries(){
@@ -136,15 +135,15 @@ public class StudentController extends UserController {
         	System.out.println("Invalid enquiry id, please try again");
             index = HelperService.readInt(1 , qList.size() , "Enquiry index out of bound");
         }
+        Enquiries q = qList.get(index -1);
+        if(q.getProcessed()){
+            System.out.println("Unable to edit prcoessed enquiry");
+            return;
+        }
         System.out.println("Enter your new enquiry: ");
         String enquiry = sc.nextLine();
-        Enquiries q = qList.get(index-1);
-        if(EnquiriesService.editEnquiries(q, enquiry)){
-            System.out.println("Enquiry updated");
-        }
-        else{
-            System.out.println("Unable to edit prcoessed enquiry");
-        }
+        q.setEnquiry(enquiry);
+        System.out.println("Enquiries Updated");
     }
 
     public void deleteEnquiries(){
@@ -166,7 +165,7 @@ public class StudentController extends UserController {
             index = HelperService.readInt();
         }
         
-        HelperService.viewEnquiries(qList.get(index - 1));
+        EnquiriesService.viewEnquiries(qList.get(index - 1));
         System.out.println("\n Press Y to confirm deletion , any key to cancel");
         char choice = sc.next().toUpperCase().charAt(0);
         if(choice == 'Y'){
