@@ -39,6 +39,10 @@ public class StaffController extends UserController{
                 System.out.println("Enter starting date in dd-mm-yyyy format:");
                 String start = sc.nextLine();
                 LocalDate startDateTime = LocalDate.parse(start,formatter);
+                if(startDateTime.isBefore(LocalDate.now())){
+                    System.out.println("Invalid starting date. Please select a date after the current date: " + LocalDate.now());
+                    continue;
+                }
                 camp.setCampDate(startDateTime);
                 break;
             
@@ -84,6 +88,10 @@ public class StaffController extends UserController{
                 System.out.println("Enter camp registration closing date: ");
                 String date = sc.next(); 
                 LocalDate regClosing = LocalDate.parse(date,formatter);
+                if(regClosing.isAfter(camp.getCampDate())){
+                    System.out.println("Invalid registration closing date. Please select a date ealier than the camp starting date:" + camp.getCampDate());
+                    continue;
+                }
                 camp.setRegCloseDate(regClosing);
                 break;
             
@@ -97,16 +105,16 @@ public class StaffController extends UserController{
         //User group
         System.out.println("Enter faculty for which the camp is open to: ");
         sc.nextLine();
-        String fac = sc.nextLine();
         
         while (true) {
             try {
+                String fac = sc.nextLine();
                 Faculty faculty = Faculty.valueOf(fac.toUpperCase());
                 camp.setUserGroup(faculty);  
                 break;
             }
-            catch(Exception e){
-                 System.out.println("Invalid faculty.");
+            catch(IllegalArgumentException e){
+                 System.out.println("Invalid faculty. Please try again");
             }
         }
 
