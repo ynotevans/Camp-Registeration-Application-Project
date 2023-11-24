@@ -30,6 +30,7 @@ public class StudentController extends UserController {
         String campName = AuthData.getCurrentCamp().getCampName();
         Camp camp = DatabaseService.getCamp(campName);
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
+        ArrayList<String> withdrawCamp = student.getWithdrawnCamp();
 
         if (camp.getRemainingSlot() == 0) {
             System.out.println("Camp is full!");
@@ -39,9 +40,19 @@ public class StudentController extends UserController {
             System.out.println("Camp has been registered already.");
         }
 
+        else if ((withdrawCamp.contains(campName))){
+            System.out.println("You have withdrawn from this camp before, not allowed to join again!!");
+        }
+
         else {
             StudentCampService.registerAsAttendee();
             System.out.println("Successfully Registered as attendee!\n");
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

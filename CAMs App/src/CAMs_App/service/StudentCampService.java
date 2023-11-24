@@ -121,6 +121,7 @@ public class StudentCampService {
 		Camp camp = DatabaseService.getCamp(campName);
 		// Student user = (Student)AuthData.getCurrentUser();
 		ArrayList<String> registeredCamp = student.getRegisteredCamp();
+		ArrayList<String> withdrawCamp = student.getWithdrawnCamp();
 		
 		if(isComittee){
 			System.out.println("Camp Committee cannot quit camp!!!");
@@ -134,6 +135,7 @@ public class StudentCampService {
 		else {
 			registeredCamp.remove(campName);
 			camp.getAttendees().remove(student);
+			withdrawCamp.add(campName);
 			camp.setRemainingSlot(camp.getRemainingSlot()+1);
 			System.out.println("Withdrawn successfully!");
 		}

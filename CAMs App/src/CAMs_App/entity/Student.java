@@ -14,9 +14,7 @@ public class Student extends User {
 	public Student(String userID, String password, Faculty faculty) {
 		super(userID, password, faculty);
 		super.setIdentity(Identity.student);
-		isCommittee = false;
-		registeredCamp = new ArrayList<String>();
-		withdrawnCamp  = new ArrayList<String>();
+		isCommittee = false; 
 		committeeCamp = null;
 		points = 0;
 	}
