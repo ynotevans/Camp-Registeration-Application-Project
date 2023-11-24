@@ -363,7 +363,7 @@ public class StaffController extends UserController{
             System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
-                        System.out.println("EnqriesID: " + i+1);
+                        System.out.println("EnqriesID: " + (i+1));
                         EnquiriesService.viewEnquiries(q.get(i));
                         System.out.println(" ");
                     }
@@ -374,7 +374,7 @@ public class StaffController extends UserController{
             System.out.println("New Enquiries ");
             for(int i = 0 ; i < q.size() ; i++){
                     if(!q.get(i).getProcessed()){
-                        System.out.println("EnqriesID: " + i+1);
+                        System.out.println("EnqriesID: " + (i+1));
                         EnquiriesService.viewEnquiries(q.get(i));
                         System.out.println(" ");
                     }
@@ -384,7 +384,7 @@ public class StaffController extends UserController{
             default:
             System.out.println("List of all enquiries:");
             for(int i = 0 ; i < q.size() ; i++){
-                   System.out.println("EnqriesID: " + i+1);
+                   System.out.println("EnqriesID: " + (i+1));
                    EnquiriesService.viewEnquiries(q.get(i));
                    System.out.println(" ");
              }
@@ -428,7 +428,7 @@ public class StaffController extends UserController{
         System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < s.size() ; i++){
                 if(s.get(i).getProcessed() && s.get(i).getAccepted() == null){
-                    System.out.println("SuggestionID: " + i+1);
+                    System.out.println("SuggestionID: " + (i+1));
                     SuggestionsService.printSuggestions(s.get(i));
                     System.out.println(" ");
                 }
@@ -439,7 +439,7 @@ public class StaffController extends UserController{
         System.out.println("Processed suggestions");
         for(int i = 0 ; i < s.size() ; i++){
                 if(s.get(i).getProcessed() && s.get(i).getAccepted() != null){
-                    System.out.println("SuggestionID: " + i+1);
+                    System.out.println("SuggestionID: " +(i+1));
                     SuggestionsService.printSuggestions(s.get(i));
                     System.out.println(" ");
                 }
@@ -450,7 +450,7 @@ public class StaffController extends UserController{
         System.out.println("New suggestions: ");
         for(int i = 0 ; i < s.size() ; i++){
             if(s.get(i).getProcessed() == false){
-                System.out.println("SuggestionsID: " + i+1);
+                System.out.println("SuggestionsID: " + (i+1));
                 SuggestionsService.printSuggestions(s.get(i));
                 System.out.println(" ");
             }
@@ -461,7 +461,7 @@ public class StaffController extends UserController{
         default:
         System.out.println("List of all suggestions: ");
         for(int i = 0 ; i < s.size() ; i ++){
-            System.out.println("SuggestionID: " + i+i);
+            System.out.println("SuggestionID: " + (i+1));
             SuggestionsService.printSuggestions(s.get(i));
             System.out.println(" ");
         }
@@ -474,7 +474,7 @@ public class StaffController extends UserController{
         ArrayList <Suggestions> s = AuthData.getCurrentCamp().getSuggestionList();
         for(int i = 0 ; i < s.size() ; i++){
                 if(s.get(i).getProcessed() == false){
-                    System.out.println("SuggestionsID: " + i+1);
+                    System.out.println("SuggestionsID: " + (i+1));
                     SuggestionsService.printSuggestions(s.get(i));
                     System.out.println(" ");
                 }
@@ -492,7 +492,6 @@ public class StaffController extends UserController{
          for(int i = 0 ; i < sList.size() ; i++){
             System.out.println("Suggestion ID " + (i+1));
             if(sList.get(i).getAccepted() == null){
-                System.out.println("SuggestionsID: " + i+1);
                 SuggestionsService.printSuggestions(sList.get(i));
                 System.out.println(" ");
             }
