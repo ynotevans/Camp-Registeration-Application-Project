@@ -116,12 +116,22 @@ public class StudentCampService {
 
 	public static void withdrawCamp(String campName, Student student, boolean isComittee){
 		Camp camp = DatabaseService.getCamp(campName);
+		// Student user = (Student)AuthData.getCurrentUser();
+		ArrayList<String> registeredCamp = student.getRegisteredCamp();
 		
 		if(isComittee){
 			System.out.println("Camp Committee cannot quit camp!!!");
 		}
-		else{
+
+		else if (!(registeredCamp.contains(campName))){
+			System.out.println("You are not registered to this camp, cannot withdraw. Going back previous menu...");
+
+		}
+		
+		else {
+			registeredCamp.remove(campName);
 			camp.getAttendees().remove(student);
+			System.out.println("Withdrawn successfully!");
 		}
 		
 	}
