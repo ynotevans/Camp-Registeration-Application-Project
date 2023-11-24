@@ -105,11 +105,12 @@ public class StudentCampService {
 		Student user = (Student)AuthData.getCurrentUser();
 		int i = 0;
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
-		for (String camp : registeredCamp){
-			
-			System.out.println(camp);
-			i++;
+		if(registeredCamp != null){
+			for (String camp : registeredCamp){
+				System.out.println(camp);
+				i++;
 			}
+		}
 		return i;
     }
 
