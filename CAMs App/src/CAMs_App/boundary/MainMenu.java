@@ -64,8 +64,6 @@ public class MainMenu implements Menu{
         Scanner sc = new Scanner(System.in);
         int choice;
 
-        try {
-
             do{
                 System.out.print("Enter ur selection: ");
                 choice = sc.nextInt();
@@ -100,14 +98,7 @@ public class MainMenu implements Menu{
             }while(choice != 3);
         
             sc.close();
-        } catch (Exception e) {
-            System.out.println("Invalid selection, please select again...");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException error) {
-                error.printStackTrace();
-            }
-            viewApp();
         }
     }
-}
+
+

@@ -22,7 +22,6 @@ public class LoginMenu implements Menu {
         int choice;
         UserController userController=new UserController();
 
-        try{
             do{
                 System.out.print("Enter ur selection: ");
                 choice = sc.nextInt();
@@ -77,15 +76,6 @@ public class LoginMenu implements Menu {
             }while(choice != 3);
 
             sc.close();
-        } catch (Exception e) {
-            System.out.println("Invalid selection, please select again...");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException error) {
-                error.printStackTrace();
-            }
-            viewApp();
         }
-
-    }
+       
 }

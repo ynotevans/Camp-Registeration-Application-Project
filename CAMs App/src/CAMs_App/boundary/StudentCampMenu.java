@@ -25,8 +25,6 @@ public class StudentCampMenu implements Menu{
     public void viewApp(){
         Scanner sc = new Scanner(System.in);
         int choice;
-
-        try{
             do{
                 this.printMenu();
                 System.out.print("Enter ur selection: ");
@@ -47,6 +45,7 @@ public class StudentCampMenu implements Menu{
                         }
                         else{
                             studentController.joinAsCommittee();
+                            System.out.println("test");
                         }
                         try {
                             Thread.sleep(3000);
@@ -99,15 +98,6 @@ public class StudentCampMenu implements Menu{
             }while(choice != 5);
         
             sc.close();
-
-        }catch (Exception e) {
-            System.out.println("Invalid selection, please select again...");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException error) {
-                error.printStackTrace();
-            }
-            viewApp();
         }
     }
-}
+

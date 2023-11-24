@@ -30,7 +30,7 @@ public class StaffMenu implements Menu{
         
         Scanner sc = new Scanner(System.in);
         int choice;
-        try {
+        
             do{
                 this.printMenu();
                 System.out.print("Enter ur selection: ");
@@ -85,14 +85,5 @@ public class StaffMenu implements Menu{
         
             sc.close();
 
-        }catch (Exception e) {
-            System.out.println("Invalid selection, please select again...");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException error) {
-                error.printStackTrace();
-            }
-            viewApp();
         }
-    }
 }
