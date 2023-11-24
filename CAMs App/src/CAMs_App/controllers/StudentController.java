@@ -48,12 +48,6 @@ public class StudentController extends UserController {
             StudentCampService.registerAsAttendee();
             System.out.println("Successfully Registered as attendee!\n");
         }
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void joinAsCommittee(){
