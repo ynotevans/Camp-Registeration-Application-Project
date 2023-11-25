@@ -90,8 +90,8 @@ public class DatabaseService {
 				Student student = new Student(values[i], values[++i], Faculty.valueOf(values[++i]), values[++i]);
 				student.setIsComittee(Boolean.parseBoolean(values[++i]));
 				student.setPoints(Integer.parseInt(values[++i]));
-				Camp committeeCamp = DatabaseService.getCamp(values[++i]);
-				student.setCommitteeCamp(committeeCamp);
+				student.setCommitteeCampName(values[++i]);
+			
 				ArrayList<String> registerCamp = new ArrayList<String>();
 				ArrayList<String> withdrawCamp = new ArrayList<String>();
 				
@@ -385,6 +385,10 @@ public class DatabaseService {
             }
 
 			Database.setCampData(user);
+			for(Student student:Database.getStudentsData().values()){
+				String campName = student.getCommitteeCampName();
+				student.setCommitteeCamp(campName);;
+			}
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -397,8 +401,8 @@ public class DatabaseService {
 	}
 
 	public static Student getStudent(String userID){
-		Map<String ,Student> stduent = Database.getStudentsData();
-		return stduent.get(userID);
+		Map<String ,Student> student = Database.getStudentsData();
+		return student.get(userID);
 	}
 
 	public static boolean checkCampName(String campName, String userID){

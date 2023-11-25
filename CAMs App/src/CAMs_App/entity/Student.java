@@ -2,12 +2,14 @@ package CAMs_App.entity;
 
 import java.util.*;
 import CAMs_App.enums.*;
+import CAMs_App.service.DatabaseService;
 
 public class Student extends User {
 	private boolean isCommittee = false;
 	private ArrayList<String> registeredCamp;
 	private ArrayList<String> withdrawnCamp;
 	private Camp committeeCamp = null;
+	private String committeeCampName;
 	private int points = 0;
 	private CampComMem campCompMem = new CampComMem();
 	
@@ -57,6 +59,10 @@ public class Student extends User {
 	public void setCommitteeCamp(Camp camp) {
 		this.committeeCamp = camp;
 	}
+
+	public void setCommitteeCamp(String campName) {
+		this.committeeCamp = DatabaseService.getCamp(campName);
+	}
 	
 	public void setCampComMem(String position){
 		this.campCompMem.setPosition(position);
@@ -64,6 +70,14 @@ public class Student extends User {
 
 	public CampComMem getCampComMem(){
 		return this.campCompMem;
+	}
+
+	public String getCommitteeCampName(){
+		return this.committeeCampName;
+	}
+
+	public void setCommitteeCampName(String committeeCampName){
+		this.committeeCampName = committeeCampName;
 	}
 
 }

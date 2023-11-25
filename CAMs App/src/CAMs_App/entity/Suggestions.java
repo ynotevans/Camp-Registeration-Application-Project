@@ -14,7 +14,7 @@ public class Suggestions {
         this.suggestion = suggestion;
         this.suggestBy = suggestBy;
         this.status = SuggestionStatus.NEW;
-        this.accepted = null;
+        this.accepted = false;
     }
 
     public void setSuggestion(String suggestion) {

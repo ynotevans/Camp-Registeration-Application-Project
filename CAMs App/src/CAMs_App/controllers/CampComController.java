@@ -129,6 +129,7 @@ public class CampComController extends StudentController{
     public void deleteSuggestion(){
         if(!SuggestionsService.submittedSuggestions()){
             System.out.println("You have not submitted any suggestions");
+            return;
         }
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Suggestions> sList = camp.getSuggestionList();
@@ -136,18 +137,19 @@ public class CampComController extends StudentController{
         System.out.println("Which suggestion you would like to delete: ");
         int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
         Suggestions s = sList.get(index -1);
-        while(s.getSuggestBy() != AuthData.getCurrentUser().getUserID()){
+        while(!s.getSuggestBy() .equals(AuthData.getCurrentUser().getUserID())){
             System.out.println("Unable to edit suggestion from other committee member. Please try again");
             index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+            return;
         }
         s = sList.get(index -1);
-        if(!SuggestionsService.isNew(s)){
-            System.out.println("Unable to delete.\nYour suggestion is currently under process or has been approved/rejected");
+        if(!s.getStatus().toString().equals("NEW")){
+            System.out.println("Unable to delete.\nYour suggestion is currently under process or has been processed");
             return;
         }
         else{
             sList.remove(index);
-            System.out.println("Your suggestion has been deleted");
+            System.out.println("Your suggestion has been deleted...");
         }
     }
 

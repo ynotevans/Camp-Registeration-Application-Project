@@ -444,6 +444,11 @@ public class StaffController extends UserController{
         case 1:
             HelperService.clearScreen();
             HelperService.printRoute("Staff Camp Menu ---> View Processing Suggestions");
+
+            if(!SuggestionsService.hasProcessingSuggestion()){
+                System.out.println("Currently no processing suggestion");
+                return;
+            }
             System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
@@ -453,12 +458,18 @@ public class StaffController extends UserController{
                     System.out.println(" ");
                 }
             }
+         
             HelperService.pressAnyKeyToContinue(); 
             break;
         
         case 2:
             HelperService.clearScreen();
-            HelperService.printRoute("Staff Camp Menu ---> View Processed Suggestions");    
+            HelperService.printRoute("Staff Camp Menu ---> View Processed Suggestions");
+            if(!SuggestionsService.hasProcessedSuggestion()){
+                System.out.println("Currently no processed suggestion");
+                return;
+            }
+            
             System.out.println("Processed suggestions");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
@@ -474,6 +485,10 @@ public class StaffController extends UserController{
         case 3:
             HelperService.clearScreen();
             HelperService.printRoute("Staff Camp Menu ---> View New Suggestions");
+            if(!SuggestionsService.hasNewSuggestion()){
+                System.out.println("Currently no new suggestion");
+                return;
+            }
             System.out.println("New suggestions: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
@@ -489,6 +504,11 @@ public class StaffController extends UserController{
         default:
         HelperService.clearScreen();
         HelperService.printRoute("Staff Camp Menu ---> View All Suggestions");
+        
+           if(sList.isEmpty()){
+                System.out.println("Currently no suggestion submitted");
+            }
+        
         System.out.println("List of all suggestions: ");
         for(int i = 0 ; i <sList.size() ; i ++){
             System.out.println("SuggestionID: " + (i+1));
@@ -513,11 +533,13 @@ public class StaffController extends UserController{
       
         System.out.println("Which suggestion you would like to process: ");
         int index = HelperService.readInt(1 , sList.size() , "Invalid Suggestion ID"); 
-        if(SuggestionsService.isNew(sList.get(index -1))){
+        if(!sList.get(index - 1).getStatus().toString().equals("NEW")){
             System.out.println("Suggestion is already under process / has been processed");
+            return;
         }
         else{
             System.out.println("Suggestion status set to processing...");
+            sList.get(index - 1).setSuggestionStatus("PROCESSING");
         }
 
       
@@ -529,7 +551,7 @@ public class StaffController extends UserController{
          System.out.println("Suggestion pending approval: ");
          for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
-                if(s.getStatus().toString().equals("NEW")){
+                if(!s.getStatus().toString().equals("PROCESSED")){
                     System.out.println("SuggestionID: " + (i+1));
                     SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
@@ -544,12 +566,12 @@ public class StaffController extends UserController{
     char ans = sc.next().toUpperCase().charAt(0);
     boolean approve;
 
-    if(ans == 'Y')  approve = true;
+    if(ans =='Y')  approve = true;
     else approve = false;
 
     s.setSuggestionStatus("PROCESSED");
     s.setAccepted(approve);
-    Student student = DatabaseService.getStudent(s.getSuggestBy());
+    Student student = (Student)DatabaseService.getStudent(s.getSuggestBy());
     CampComController.addPoints(student);
    
     if(approve){

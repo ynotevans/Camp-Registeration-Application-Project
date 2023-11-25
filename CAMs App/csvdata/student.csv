@@ -4,4 +4,4 @@ RRR222,password,SCSE,Amy,false,0,null,null,null
 CCC111,password,SBS,Ryan,false,0,null,null,null
 WWW333,password,CCEB,Elly,false,0,null,null,null
 CCC222,password,SOH,Jack,false,0,null,null,null
-TTT444,password,EEE,Rose,false,0,null,null,null
+TTT444,password,EEE,Rose,true,1,camp3,camp3,null

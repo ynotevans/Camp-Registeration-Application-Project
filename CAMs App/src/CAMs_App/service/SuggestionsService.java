@@ -13,16 +13,35 @@ public class SuggestionsService {
         Camp camp = AuthData.getCurrentCamp();
         User user = AuthData.getCurrentUser();
         Suggestions s = new Suggestions(suggestion, user.getUserID());
-      
+        s.setSuggestionStatus("NEW");
         camp.getSuggestionList().add(s);
 
     }
 
-    public static boolean isNew(Suggestions s){
-      if(s.getStatus().toString().equals("NEW")) return true;
-      return false;
+    
+    public static boolean hasNewSuggestion(){
+        ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+        for(int i = 0 ; i < sList.size() ;i++){
+          if(sList.get(i).getStatus().toString().equals("NEW")) return true;
+        }
+        return false;
     }
- 
+    
+    public static boolean hasProcessingSuggestion(){
+        ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+        for(int i = 0 ; i < sList.size() ;i++){
+          if(sList.get(i).getStatus().toString().equals("PROCESSING")) return true;
+        }
+        return false;
+    }
+
+    public static boolean hasProcessedSuggestion(){
+         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+        for(int i = 0 ; i < sList.size() ;i++){
+          if(sList.get(i).getStatus().toString().equals("PROCESSED")) return true;
+        }
+        return false;
+    }
 
     public static boolean submittedSuggestions(){
         Camp camp = AuthData.getCurrentCamp();
@@ -38,10 +57,10 @@ public class SuggestionsService {
         System.out.println("Suggestion details : " + s.getSuggestion());
         
         System.out.print("Status: ");     
-        if(isNew(s)){
+        if(s.getStatus().toString().equals("NEW")){
          System.out.println("Suggestion pending process...");
         }
-        else if(s.getStatus().toString().equals("Processing")){
+        else if(s.getStatus().toString().equals("PROCESSING")){
           System.out.println("Suggestion is under process");
         }
         else{

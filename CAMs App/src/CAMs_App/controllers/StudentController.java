@@ -15,7 +15,7 @@ import CAMs_App.service.StudentCampService;
 
 public class StudentController extends UserController {
     Scanner sc = new Scanner(System.in);
-    static Student currentUser = (Student)AuthData.getCurrentUser();
+    //Student currentUser = (Student)AuthData.getCurrentUser();
 
 	public boolean viewAvailableCamp(){
         if (StudentCampService.viewAvailableCamps()==0){
@@ -85,6 +85,7 @@ public class StudentController extends UserController {
 
     public void withdrawCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
+        Student currentUser =(Student) AuthData.getCurrentUser();
         Camp camp = DatabaseService.getCamp(campName);
         System.out.println("Are you sure you want to withdraw from this camp? (Y to confirm , any key to cancel)");
 
@@ -206,6 +207,7 @@ public class StudentController extends UserController {
     public void switchMode(int currentMode){
         HelperService.clearScreen();
         //from student switch to camp committee
+        Student currentUser = (Student)AuthData.getCurrentUser();
         if(currentMode == 1){
             if(currentUser.getIsComittee()== true){    
                 AuthData.setCurrentCamp(currentUser.getComitteeCamp());

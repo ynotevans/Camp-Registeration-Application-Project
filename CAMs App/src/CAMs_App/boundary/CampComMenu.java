@@ -22,10 +22,11 @@ public class CampComMenu implements Menu{
         ColouredTextPrinter.printBlue("(3) Reply enquiries");
         ColouredTextPrinter.printBlue("(4) Create suggestion");
         ColouredTextPrinter.printBlue("(5) View your suggestions");
-        ColouredTextPrinter.printBlue("(6) Generate enquiries report");
-        ColouredTextPrinter.printBlue("(7) Generate attendence report");
-        ColouredTextPrinter.printBlue("(8) Switch to student mode");
-        ColouredTextPrinter.printBlue("(9) Logout\n");
+        ColouredTextPrinter.printBlue("(6) Delete your suggestions");
+        ColouredTextPrinter.printBlue("(7) Generate enquiries report");
+        ColouredTextPrinter.printBlue("(8) Generate attendence report");
+        ColouredTextPrinter.printBlue("(9) Switch to student mode");
+        ColouredTextPrinter.printBlue("(10) Logout\n");
     }
 
     
@@ -56,7 +57,7 @@ public class CampComMenu implements Menu{
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
-                    case 4:    //creata suggestion
+                    case 4:    //create suggestion
                         campComController.createSuggestion();
                         HelperService.pressAnyKeyToContinue();
                         break;
@@ -65,22 +66,27 @@ public class CampComMenu implements Menu{
                         campComController.viewSuggestion();
                         HelperService.pressAnyKeyToContinue();
                         break;
+                    
+                    case 6:
+                        campComController.deleteSuggestion();
+                        HelperService.pressAnyKeyToContinue();
+                        break;
 
-                    case 6:    //generate enquiries report
+                    case 7:    //generate enquiries report
                         campComController.generateEnquiriesReport();
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
-                    case 7:    //generate attendance report
+                    case 8:    //generate attendance report
                         campComController.generateStudentReport();
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
-                    case 8:    //switch mode
+                    case 9:    //switch mode
                         campComController.switchMode(2);
                         break;
 
-                    case 9:    //logout
+                    case 10:    //logout
                         campComController.logout();
                         MainMenu mainMenu = new MainMenu();
                         mainMenu.viewApp();
