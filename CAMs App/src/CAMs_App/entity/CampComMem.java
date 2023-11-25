@@ -14,7 +14,7 @@ public class CampComMem {
 	/**
 	 * The position this member holds in the committee.
 	 */
-	private String position;
+	private String position = "null";
 	
 	/**
 	 * Constructs a {@link CampComMem} object with the given position.

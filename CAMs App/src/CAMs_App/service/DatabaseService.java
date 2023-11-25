@@ -40,6 +40,7 @@ public class DatabaseService {
 		header.add("committeeCamp");
 		header.add("registeredCamp");  //ArrayList
 		header.add("withdrawnCamp");   //ArrayList
+		header.add("position");        //committee position
 
         // Write data to the CSV file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
@@ -60,11 +61,12 @@ public class DatabaseService {
 					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
 
 				// Write the values to the CSV file
-            	writer.write(String.format("%s,%s,%s,%s,%b,%d,%s,%s,%s" , student.getUserID(),student.getPassword(), 
+            	writer.write(String.format("%s,%s,%s,%s,%b,%d,%s,%s,%s,%s" , student.getUserID(),student.getPassword(), 
 											student.getFaculty(),student.getName(),student.getIsComittee(),student.getPoints(),
 											student.getComitteeCamp()==null ? "null": student.getComitteeCamp().getCampName(),
 											registeredCamp.isEmpty() ? "null" :registeredCamp,
-											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp));
+											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp,
+											student.getCampComMem().getPosition()));
 				writer.newLine();
 			}
 
@@ -116,6 +118,8 @@ public class DatabaseService {
 				else{
 					student.setWithdrawnCamp(withdrawCamp);
 				}
+
+				student.getCampComMem().setPosition(values[++i]);
                 	
 				user1.put(values[0], student);
                 System.out.println(); // Move to the next line for the next row
