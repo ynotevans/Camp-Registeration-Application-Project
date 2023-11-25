@@ -22,8 +22,11 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(6) View suggestions for this camp");
         ColouredTextPrinter.printBlue("(7) Process suggestions for this camp");
         ColouredTextPrinter.printBlue("(8) Approve suggestions for this camp");
-        ColouredTextPrinter.printBlue("(9) Previous Page");
-        ColouredTextPrinter.printBlue("(10) Logout\n");
+        ColouredTextPrinter.printBlue("(9) Generate committee performance report");
+        ColouredTextPrinter.printBlue("(10) Generate Student report");
+        ColouredTextPrinter.printBlue("(11) Generate Equiries Report"); 
+        ColouredTextPrinter.printBlue("(12) Previous Page");
+        ColouredTextPrinter.printBlue("(13) Logout\n");
         
     }
 
@@ -98,13 +101,37 @@ public class StaffCampMenu implements Menu {
                         
                         this.viewApp();
                         break;
+                    
+                    case 9:    //committee report
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Camp Menu ---> Committee Performance Report");
+                        staffController.generateCommitteeReport();
+                        
+                        this.viewApp();
+                        break;
+                    
+                    case 10:    //student report
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Camp Menu ---> Student Report");
+                        staffController.generateStudentReport();
+                        
+                        this.viewApp();
+                        break;
+                    
+                    case 11:    //enquiries report
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Staff Camp Menu ---> Enquiries Report");
+                        staffController.generateEnquiriesReport();
+                        
+                        this.viewApp();
+                        break;
 
-                    case 9: //go to previous page
+                    case 12: //go to previous page
                         StaffMenu staffMenu = new StaffMenu();
                         staffMenu.viewApp();
                         break;
                                     
-                    case 10:    //logout
+                    case 13:    //logout
                         System.out.println("Logging out...");
                         staffController.logout();
                         HelperService.wait(3);

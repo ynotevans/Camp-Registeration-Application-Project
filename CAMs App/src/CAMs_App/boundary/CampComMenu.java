@@ -22,9 +22,10 @@ public class CampComMenu implements Menu{
         ColouredTextPrinter.printBlue("(3) Reply enquiries");
         ColouredTextPrinter.printBlue("(4) Create suggestion");
         ColouredTextPrinter.printBlue("(5) View your suggestions");
-        ColouredTextPrinter.printBlue("(6) Generate report");
-        ColouredTextPrinter.printBlue("(7) Switch to student mode");
-        ColouredTextPrinter.printBlue("(8) Logout\n");
+        ColouredTextPrinter.printBlue("(6) Generate enquiries report");
+        ColouredTextPrinter.printBlue("(7) Generate attendence report");
+        ColouredTextPrinter.printBlue("(8) Switch to student mode");
+        ColouredTextPrinter.printBlue("(9) Logout\n");
     }
 
     
@@ -59,15 +60,19 @@ public class CampComMenu implements Menu{
                         campComController.viewSuggestion();
                         break;
 
-                    case 6:    //generate report
-                        campComController.generateReport();
+                    case 6:    //generate enquiries report
+                        campComController.generateEnquiriesReport();
                         break;
                     
-                    case 7:    //switch mode
+                    case 7:    //generate attendance report
+                        campComController.generateStudentReport();;
+                        break;
+                    
+                    case 8:    //switch mode
                         campComController.switchMode(2);
                         break;
 
-                    case 8:    //logout
+                    case 9:    //logout
                         campComController.logout();
                         MainMenu mainMenu = new MainMenu();
                         mainMenu.viewApp();
@@ -78,7 +83,7 @@ public class CampComMenu implements Menu{
                         break;
                 }
 
-            }while(choice != 7);
+            }while(choice != 8);
         
             sc.close();
 
