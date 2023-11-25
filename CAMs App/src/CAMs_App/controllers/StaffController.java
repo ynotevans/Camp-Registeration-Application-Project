@@ -447,6 +447,7 @@ public class StaffController extends UserController{
 
     Camp camp = AuthData.getCurrentCamp();
     ArrayList<Suggestions> sList = camp.getSuggestionList();
+
     switch (choice) {
         case 1:
             HelperService.clearScreen();
@@ -514,6 +515,7 @@ public class StaffController extends UserController{
         
            if(sList.isEmpty()){
                 System.out.println("Currently no suggestion submitted");
+                return;
             }
         
         System.out.println("List of all suggestions: ");
@@ -528,6 +530,10 @@ public class StaffController extends UserController{
  }
     public void processSuggestions(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+        if(!SuggestionsService.hasNewSuggestion()){
+            System.out.println("No new suggestion to process");
+            return;
+        }
          System.out.println("New suggestions: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
@@ -555,6 +561,10 @@ public class StaffController extends UserController{
 
     public void approveSuggestion(){ 
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
+         if(!(SuggestionsService.hasNewSuggestion() ||SuggestionsService.hasProcessingSuggestion())){
+            System.out.println("There is no suggestion pending approval");
+            return;
+         }
          System.out.println("Suggestion pending approval: ");
          for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
