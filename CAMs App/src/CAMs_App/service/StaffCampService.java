@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import CAMs_App.data.*;
 import CAMs_App.entity.*;
-import CAMs_App.enums.Faculty;
 
 
 public class StaffCampService extends CampManagementService{

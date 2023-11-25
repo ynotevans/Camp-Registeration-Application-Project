@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import CAMs_App.data.AuthData;
-import CAMs_App.data.Database;
 import CAMs_App.enums.Faculty;
 import CAMs_App.entity.*;
 import CAMs_App.service.*;
