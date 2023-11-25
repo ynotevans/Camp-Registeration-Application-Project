@@ -77,18 +77,18 @@ public class Camp extends CampInfo implements Comparable<Camp>{
     }
     
     /**
-     * Adds an {@link Enquiries} to the list of enquiries.
+     * Adds an entry to the list of {@link Enquiries}.
      * 
-     * @param q The {@link Enquiries} being added.
+     * @param q The inquiry to add.
      */
     public void addQuery(Enquiries q){
         this.enquiries.add(q);
     }
 
     /**
-     * Adds a {@link Suggestions} to the list of suggestion.
+     * Adds an entry to the list of {@link Suggestions}.
      * 
-     * @param s The {@link Suggestions} being added.
+     * @param s The suggestion to add.
      */
     public void addSuggestion(Suggestions s){
         this.suggestions.add(s);
