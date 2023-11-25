@@ -55,7 +55,7 @@ public class Student extends User {
 	}
 	
 	public void setCommitteeCamp(Camp camp) {
-		committeeCamp = camp;
+		this.committeeCamp = camp;
 	}
 	
 	public void setCampComMem(String position){

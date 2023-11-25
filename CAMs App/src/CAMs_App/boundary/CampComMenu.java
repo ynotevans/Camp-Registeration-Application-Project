@@ -14,7 +14,7 @@ public class CampComMenu implements Menu{
 
     public void printMenu(){
         HelperService.clearScreen();
-        HelperService.printRoute("Camp Committee Menu");
+        HelperService.printRoute("Camp committee Menu ---> "+ AuthData.getCurrentCamp().getCampName());
         ColouredTextPrinter.printBlue("Welcome back "+ currentStudent.getName() + "!!!");
         ColouredTextPrinter.printBlue("Available actions for you: ");
         ColouredTextPrinter.printBlue("(1) View camp details");
@@ -31,41 +31,49 @@ public class CampComMenu implements Menu{
     
 
     public void viewApp(){
-        this.printMenu();
+        
         Scanner sc = new Scanner(System.in);
         int choice;
         
             do{
+                this.printMenu();
                 System.out.print("Enter ur selection: ");
                 choice = HelperService.readInt();
 
                 switch (choice) {
                     case 1:    //view camp details
                         campComController.viewCampDetails();
+                        HelperService.pressAnyKeyToContinue();
                         break;
 
                     case 2:    //view  enquiries
-                        campComController.viewAllEnquiries();    //update the functions
+                        campComController.viewAllEnquiries();
+                        HelperService.pressAnyKeyToContinue();
                         break;
                 
                     case 3:    //reply enquiries
-                        campComController.replyEnquiry();   //update the functions
+                        campComController.replyEnquiry();  
+                        HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 4:    //creata suggestion
                         campComController.createSuggestion();
+                        HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 5:    //view suggestions
                         campComController.viewSuggestion();
+                        HelperService.pressAnyKeyToContinue();
                         break;
 
                     case 6:    //generate enquiries report
                         campComController.generateEnquiriesReport();
+                        HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 7:    //generate attendance report
-                        campComController.generateStudentReport();;
+                        campComController.generateStudentReport();
+                        HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 8:    //switch mode

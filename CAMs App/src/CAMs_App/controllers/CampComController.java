@@ -77,16 +77,9 @@ public class CampComController extends StudentController{
         System.out.println("Enter your suggestion: ");
         String s = sc.nextLine();
         SuggestionsService.createSuggestion(s);
+        System.out.println("Your suggestion has been added...");
     }
 
-    public void submitSuggestion(){
-        Camp camp = user.getComitteeCamp();
-        System.out.println("Please provide your suggestion: ");
-        String suggest = sc.nextLine();
-
-        Suggestions Suggestions = new Suggestions(suggest, user.getUserID());
-        camp.addSuggestion(Suggestions);
-    }
     
     public void viewSuggestion(){
        if(!SuggestionsService.submittedSuggestions()){

@@ -73,7 +73,7 @@ public class StudentController extends UserController {
         
         else {
             System.out.println("Enter desired position to be in the camp committee: ");
-            String position = sc.next();
+            String position = sc.nextLine();
             StudentCampService.registerAsCommittee(position);
             student.setCommitteeCamp(camp);
             System.out.println("Successfully Registered as committee!\n");
