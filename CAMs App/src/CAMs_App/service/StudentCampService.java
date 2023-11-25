@@ -80,7 +80,7 @@ public class StudentCampService {
 		Student student = (Student)AuthData.getCurrentUser();
 		Camp camp = AuthData.getCurrentCamp();
 	
-		student.setCommittee(position);
+		student.setCampComMem(position);
 		camp.addCommittee(student);
 		student.getRegisteredCamp().add(camp.getCampName());
 		student.setIsComittee(true);

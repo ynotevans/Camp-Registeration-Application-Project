@@ -75,8 +75,8 @@ public class StaffCampService extends CampManagementService{
         Student student = comm.get(i);
             System.out.println("Name: " + student.getName());
             System.out.println("Student ID: " + student.getUserID());
-            System.out.println("Position: " + student.getCampComm().getPosition());
-            System.out.println("# of suggestions submitted: " + student.getCampComm().getSuggestion().size());
+            System.out.println("Position: " + student.getCampComMem().getPosition());
+            System.out.println("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
         }
 
     } 
