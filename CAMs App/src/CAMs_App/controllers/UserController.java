@@ -29,8 +29,7 @@ public class UserController {
                 HelperService.wait(1);
                 break;
             }
-            
-            if (oldPassword != user.getPassword()){
+            if (!(oldPassword.equals(user.getPassword()))){
                 System.out.println("Incorrect old password, exiting...");
                 HelperService.wait(1);
                 break;
@@ -38,20 +37,18 @@ public class UserController {
 
             System.out.println("Enter your new password: ");
             newPassword = sc.next();
-
             if (newPassword.equals(oldPassword)){
                 System.out.println("New password cannot be the same as old password.");
                 continue;
             }
-
+            
             success = UserService.changePassword(oldPassword,newPassword);
-
             if (!success) {
                 System.out.println("Old password does not match.");
             }
             else
-                 System.out.println("Password successfully changed.");
-
+            System.out.println("Password successfully changed.");
+            
         } while (!success);
 
     }

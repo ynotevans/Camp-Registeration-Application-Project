@@ -4,13 +4,18 @@ import CAMs_App.data.AuthData;
 
 public class UserService {
 
+    /**
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public static boolean changePassword(String oldPassword, String newPassword){
         User user = AuthData.getCurrentUser();
         if (!oldPassword.equals(user.getPassword()))
             return false;
         else{
             user.setPassword(newPassword);
-             return true;
+            return true;
         }
     }
 }
