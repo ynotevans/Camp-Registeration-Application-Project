@@ -35,16 +35,6 @@ public class CampManagementService {
         System.out.println("Processed Enquiries");
         EnquiriesService.viewProcessedEnquiries();
     }
-   
-    
-    // public static void viewCommitteeList(){
-    //     Camp camp = AuthData.getCurrentCamp();
-    //     ArrayList<Student> committees = camp.getCommittee();
-    //     System.out.println(camp.getCampName() + "committee list: ");
-    //     for(int i = 0 ; i < camp.getAttendees().size() ; i++){
-    //         System.out.print("User ID: " + committees.get(i).getUserID() + "    ");
-    //         System.out.println("Faculty: " + committees.get(i).getFaculty().toString());
-    //     }   
-    // }
+
 
 }
