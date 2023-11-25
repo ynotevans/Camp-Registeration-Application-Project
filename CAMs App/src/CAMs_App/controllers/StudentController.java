@@ -203,6 +203,7 @@ public class StudentController extends UserController {
         //from student switch to camp committee
         if(currentMode == 1){
             if(currentUser.getIsComittee()== true){    
+                AuthData.setCurrentCamp(currentUser.getComitteeCamp());
                 CampComMenu campComMenu = new CampComMenu();
                 campComMenu.viewApp();
             }
