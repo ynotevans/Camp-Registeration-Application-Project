@@ -2,8 +2,6 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.ColorUIResource;
-
 import CAMs_App.controllers.StaffController;
 import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
@@ -26,8 +24,7 @@ public class StaffMenu implements Menu{
         ColouredTextPrinter.printBlue("(2) View all camps");
         ColouredTextPrinter.printBlue("(3) View camp(s) created by you");
         ColouredTextPrinter.printBlue("(4) Change password");
-        ColouredTextPrinter.printBlue("(5) Logout\n");
-        ColouredTextPrinter.printBlue("(6) Exit");
+        ColouredTextPrinter.printBlue("(5) Logout");
     }
 
     
@@ -76,8 +73,6 @@ public class StaffMenu implements Menu{
                         else{
                             System.out.println("Camp not exist, please enter the correct camp Name... ");
                         }
-                        
-                        
                         break;
                     
                     case 4:    //change password
@@ -102,7 +97,7 @@ public class StaffMenu implements Menu{
                         break;
                 }
 
-            }while(choice != 6);
+            }while(choice != 7);
         
             sc.close();
 

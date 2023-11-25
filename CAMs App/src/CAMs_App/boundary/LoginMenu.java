@@ -64,8 +64,6 @@ public class LoginMenu implements Menu {
                         break;
                     
                     case 3:
-                        System.out.println("Prompt to Exit...");
-                        System.exit(0);
                         break;
                     
                     default:

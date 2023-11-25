@@ -28,7 +28,6 @@ public class CampComMenu implements Menu{
         ColouredTextPrinter.printBlue("(8) Generate attendence report");
         ColouredTextPrinter.printBlue("(9) Switch to student mode");
         ColouredTextPrinter.printBlue("(10) Logout\n");
-        ColouredTextPrinter.printBlue("(11) Exit");
     }
 
     

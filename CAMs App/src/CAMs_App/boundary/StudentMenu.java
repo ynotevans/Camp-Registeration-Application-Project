@@ -148,7 +148,7 @@ public class StudentMenu implements Menu {
                     break;
             }
 
-        }while(choice != 4);
+        }while(choice != 7);
     
         sc.close();
 

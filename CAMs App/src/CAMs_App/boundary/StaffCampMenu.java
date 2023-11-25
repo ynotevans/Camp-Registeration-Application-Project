@@ -2,8 +2,6 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
-import javax.swing.text.html.HTML;
-
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
@@ -32,9 +30,7 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(9) Generate report");
         ColouredTextPrinter.printBlue("------------------------------------------");
         ColouredTextPrinter.printBlue("(10) Previous Page");
-        ColouredTextPrinter.printBlue("(11) Logout");
-        ColouredTextPrinter.printBlue("(12) Exit");
-        
+        ColouredTextPrinter.printBlue("(11) Logout\n");
     }
 
     
