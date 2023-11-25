@@ -3,6 +3,8 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.UserController;
+import CAMs_App.data.AuthData;
+import CAMs_App.entity.User;
 import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 
@@ -23,16 +25,21 @@ public class LoginMenu implements Menu {
         Scanner sc = new Scanner(System.in);
         int choice;
         UserController userController=new UserController();
-
-            do{
-                System.out.print("Enter ur selection: ");
-                choice = HelperService.readInt();
-
-                switch (choice) {
-                    case 1:  //staff login
-                        System.out.println("(Maximum 5 login attempts)");
-                        if (userController.login(true)){
-
+        
+        do{
+            System.out.print("Enter ur selection: ");
+            choice = HelperService.readInt();
+            
+            switch (choice) {
+                case 1:  //staff login
+                System.out.println("(Maximum 5 login attempts)");
+                if (userController.login(true)){
+                            User user = (User)AuthData.getCurrentUser();
+                            if (user.getPassword().equals("password")){
+                                System.out.println("\nFor first time login, please change password. ");
+                                UserController.changePassword();
+                            }
+                            HelperService.wait(2);
                             StaffMenu staffMenu = new StaffMenu();
                             staffMenu.viewApp();
                         }
@@ -43,6 +50,12 @@ public class LoginMenu implements Menu {
                     case 2:   //student login
                         System.out.println("(Maximum 5 login attempts)");
                         if(userController.login(false)) {
+                            User user = (User)AuthData.getCurrentUser();
+                            if (user.getPassword().equals("password")){
+                                System.out.println("\nFor first time login, please change password. ");
+                                UserController.changePassword();
+                            }
+                            HelperService.wait(2);
                             StudentMenu studentMenu = new StudentMenu();
                             studentMenu.viewApp();
                         }

@@ -38,7 +38,7 @@ public class Camp extends CampInfo implements Comparable<Camp>{
      * @param campDate				The starting date of this camp.
      * @param campEndDate			The ending date of this camp.
      * @param regCloseDate			The closing date for registration of this camp.
-     * @param userGroup				The faculty this camp is for.
+     * @param userGroup				The {@link Faculty} this camp is for.
      * @param location				The location of this camp.
      * @param totalSlots			The total slots for attendees for this camp.
      * @param campCommitteeSlots	The total slots for committee members for this camp.
@@ -77,18 +77,18 @@ public class Camp extends CampInfo implements Comparable<Camp>{
     }
     
     /**
-     * Adds an {@link Enquiries} to the list of enquiries.
+     * Adds an entry to the list of {@link Enquiries}.
      * 
-     * @param q The {@link Enquiries} being added.
+     * @param q The inquiry to add.
      */
     public void addQuery(Enquiries q){
         this.enquiries.add(q);
     }
 
     /**
-     * Adds a {@link Suggestions} to the list of suggestion.
+     * Adds an entry to the list of {@link Suggestions}.
      * 
-     * @param s The {@link Suggestions} being added.
+     * @param s The suggestion to add.
      */
     public void addSuggestion(Suggestions s){
         this.suggestions.add(s);
