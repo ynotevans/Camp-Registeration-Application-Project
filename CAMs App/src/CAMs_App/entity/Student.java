@@ -9,11 +9,10 @@ public class Student extends User {
 	private ArrayList<String> withdrawnCamp;
 	private Camp committeeCamp = null;
 	private int points = 0;
-	private CampCompMem campCompMem = new CampCompMem();
+	private CampComMem campCompMem = new CampComMem();
 	
 	public Student(String userID, String password, Faculty faculty, String name) {
 		super(userID, password, faculty, name);
-		super.setIdentity(Identity.student);
 		isCommittee = false; 
 		committeeCamp = null;
 		points = 0;
@@ -23,32 +22,32 @@ public class Student extends User {
 		return isCommittee;
 	}
 	
-	public void setIsComittee(boolean is_committee) {
-		isCommittee = is_committee;
+	public void setIsComittee(boolean isCommittee) {
+		this.isCommittee = isCommittee;
 	}
 	
 	public int getPoints() {
 		return points;
 	}
 	
-	public void setPoints(int i) {
-		points = i;
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	
 	public ArrayList<String> getRegisteredCamp() {
 		return registeredCamp;
 	}
 	
-	public void setRegisteredCamp(ArrayList<String> list) {
-		registeredCamp = list;
+	public void setRegisteredCamp(ArrayList<String> registeredCamp) {
+		this.registeredCamp = registeredCamp;
 	}
 	
 	public ArrayList<String> getWithdrawnCamp() {
 		return withdrawnCamp;
 	}
 	
-	public void setWithdrawnCamp(ArrayList<String> list) {
-		withdrawnCamp = list;
+	public void setWithdrawnCamp(ArrayList<String> withdrawnCamp) {
+		this.withdrawnCamp = withdrawnCamp;
 	}
 	
 	public Camp getComitteeCamp() {
@@ -58,16 +57,12 @@ public class Student extends User {
 	public void setCommitteeCamp(Camp camp) {
 		committeeCamp = camp;
 	}
-
 	
-	public void setCommittee(String position){
+	public void setCampComMem(String position){
 		this.campCompMem.setPosition(position);
 	}
 
-	public void setSuggestion(Suggestions s){
-		this.campCompMem.setSuggestion(s);
-	}
-	public CampCompMem getCampComm(){
+	public CampComMem getCampComMem(){
 		return this.campCompMem;
 	}
 
