@@ -362,7 +362,9 @@ public class StaffController extends UserController{
 
         switch (choice) {
             case 1:
-            System.out.println("Processed Enquiries: ");
+                HelperService.clearScreen();
+                HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
+                System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
                         System.out.println("EnqriesID: " + (i+1));
@@ -370,27 +372,34 @@ public class StaffController extends UserController{
                         System.out.println(" ");
                     }
                 }
+                HelperService.pressAnyKeyToContinue();
                 break;
             
             case 2:
-            System.out.println("New Enquiries ");
-            for(int i = 0 ; i < q.size() ; i++){
-                    if(!q.get(i).getProcessed()){
-                        System.out.println("EnqriesID: " + (i+1));
-                        EnquiriesService.viewEnquiries(q.get(i));
-                        System.out.println(" ");
+                HelperService.clearScreen();
+                HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
+                System.out.println("New Enquiries ");
+                for(int i = 0 ; i < q.size() ; i++){
+                        if(!q.get(i).getProcessed()){
+                            System.out.println("EnqriesID: " + (i+1));
+                            EnquiriesService.viewEnquiries(q.get(i));
+                            System.out.println(" ");
+                        }
                     }
-                }
-            break;
+                HelperService.pressAnyKeyToContinue();
+                break;
         
             default:
-            System.out.println("List of all enquiries:");
-            for(int i = 0 ; i < q.size() ; i++){
-                   System.out.println("EnqriesID: " + (i+1));
-                   EnquiriesService.viewEnquiries(q.get(i));
-                   System.out.println(" ");
-             }
-            break;
+                HelperService.clearScreen();
+                HelperService.printRoute("Staff Camp Menu ---> View All Enquiries");
+                System.out.println("List of all enquiries:");
+                for(int i = 0 ; i < q.size() ; i++){
+                    System.out.println("EnqriesID: " + (i+1));
+                    EnquiriesService.viewEnquiries(q.get(i));
+                    System.out.println(" ");
+                }
+                HelperService.pressAnyKeyToContinue();
+                break;
 
         }
 
@@ -427,7 +436,9 @@ public class StaffController extends UserController{
     ArrayList<Suggestions> sList = camp.getSuggestionList();
     switch (choice) {
         case 1:
-        System.out.println("Suggestions under process: ");
+            HelperService.clearScreen();
+            HelperService.printRoute("Staff Camp Menu ---> View Processing Suggestions");
+            System.out.println("Suggestions under process: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
                 if(s.getStatus().toString().equals("PROCESSING")){
@@ -436,10 +447,13 @@ public class StaffController extends UserController{
                     System.out.println(" ");
                 }
             }
+            HelperService.pressAnyKeyToContinue(); 
             break;
         
         case 2:
-        System.out.println("Processed suggestions");
+            HelperService.clearScreen();
+            HelperService.printRoute("Staff Camp Menu ---> View Processed Suggestions");    
+            System.out.println("Processed suggestions");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
                 if(s.getStatus().toString().toUpperCase().equals("PROCESSED")){
@@ -448,10 +462,13 @@ public class StaffController extends UserController{
                     System.out.println(" ");
                 }
             }
+            HelperService.pressAnyKeyToContinue(); 
         break;
 
         case 3:
-        System.out.println("New suggestions: ");
+            HelperService.clearScreen();
+            HelperService.printRoute("Staff Camp Menu ---> View New Suggestions");
+            System.out.println("New suggestions: ");
             for(int i = 0 ; i < sList.size() ; i++){
                 Suggestions s = sList.get(i);
                 if(s.getStatus().toString().equals("NEW")){
@@ -459,17 +476,20 @@ public class StaffController extends UserController{
                     SuggestionsService.printSuggestions(s);
                     System.out.println(" ");
                 }
-            }    
-
+            }
+            HelperService.pressAnyKeyToContinue();    
         break;
 
         default:
+        HelperService.clearScreen();
+        HelperService.printRoute("Staff Camp Menu ---> View All Suggestions");
         System.out.println("List of all suggestions: ");
         for(int i = 0 ; i <sList.size() ; i ++){
             System.out.println("SuggestionID: " + (i+1));
             SuggestionsService.printSuggestions(sList.get(i));
             System.out.println(" ");
         }
+        HelperService.pressAnyKeyToContinue(); 
         break;
     }
  }
