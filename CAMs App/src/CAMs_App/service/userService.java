@@ -6,9 +6,11 @@ public class UserService {
 
     public static boolean changePassword(String oldPassword, String newPassword){
         User user = AuthData.getCurrentUser();
-        if (!user.setPassword(oldPassword, newPassword))
+        if (!oldPassword.equals(user.getPassword()))
             return false;
-        else
-            return true;
+        else{
+            user.setPassword(newPassword);
+             return true;
+        }
     }
 }
