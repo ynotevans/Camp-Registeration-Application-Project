@@ -99,7 +99,7 @@ public class StudentMenu implements Menu {
                             
                             if (selectedCamp.getCommittee().contains(currentStudent)){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
-                                HelperService.wait(1);
+                                HelperService.pressAnyKeyToContinue();
                                 viewApp();
                             }
                             

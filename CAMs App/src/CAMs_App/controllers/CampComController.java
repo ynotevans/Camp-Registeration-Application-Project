@@ -14,21 +14,11 @@ public class CampComController extends StudentController{
         HelperService.viewCamp(camp);
     }
 
-    public void generateEnquiriesReport(){
-        System.out.println("List of all enquiries of the camp");
-        CampManagementService.enquiriesReport();
-    }
 
     public static void addPoints(Student student) {
 		student.setPoints(student.getPoints() + 1);
 	}
-
-    public void generateStudentReport(){
-        System.out.println("Generating student attendence report...");
-        CampManagementService.generateStudentListReport();
-      }
-  
-    
+      
 	
 	//enquiries
     public void viewAllEnquiries(){

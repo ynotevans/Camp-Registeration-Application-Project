@@ -2,9 +2,13 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
+import javax.swing.text.html.HTML;
+
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
+import CAMs_App.service.StaffCampService;
+import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
 public class StaffCampMenu implements Menu {
     StaffController staffController = new StaffController();
@@ -17,31 +21,20 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(1) Edit camp");
         ColouredTextPrinter.printBlue("(2) Delete camps");
         ColouredTextPrinter.printBlue("(3) Toggle camp's visibility");
+        ColouredTextPrinter.printBlue("-------------------------------------------");
         ColouredTextPrinter.printBlue("(4) View enquiries for this camp");
         ColouredTextPrinter.printBlue("(5) Reply enquiries for this camp");
+        ColouredTextPrinter.printBlue("-------------------------------------------");
         ColouredTextPrinter.printBlue("(6) View suggestions for this camp");
         ColouredTextPrinter.printBlue("(7) Process suggestions for this camp");
         ColouredTextPrinter.printBlue("(8) Approve suggestions for this camp");
-        ColouredTextPrinter.printBlue("(9) Generate committee performance report");
-        ColouredTextPrinter.printBlue("(10) Generate Student report");
-        ColouredTextPrinter.printBlue("(11) Generate Equiries Report"); 
-        ColouredTextPrinter.printBlue("(12) Previous Page");
-        ColouredTextPrinter.printBlue("(13) Logout\n");
-        //ColouredTextPrinter.printPurple("Available actions for this camp: ");
-        // ColouredTextPrinter.printPurple("(1) Edit camp");
-        // ColouredTextPrinter.printPurple("(2) Delete camps");
-        // ColouredTextPrinter.printPurple("(3) Toggle camp's visibility");
-        // ColouredTextPrinter.printPurple("(4) View enquiries for this camp");
-        // ColouredTextPrinter.printPurple("(5) Reply enquiries for this camp");
-        // ColouredTextPrinter.printPurple("(6) View suggestions for this camp");
-        // ColouredTextPrinter.printPurple("(7) Process suggestions for this camp");
-        // ColouredTextPrinter.printPurple("(8) Approve suggestions for this camp");
-        // ColouredTextPrinter.printPurple("(9) Generate committee performance report");
-        // ColouredTextPrinter.printPurple("(10) Generate Student report");
-        // ColouredTextPrinter.printPurple("(11) Generate Equiries Report");
-        // ColouredTextPrinter.printPurple("(12) Previous Page");
-        // ColouredTextPrinter.printPurple("(13) Logout");
-
+        ColouredTextPrinter.printBlue("-------------------------------------------");
+        ColouredTextPrinter.printBlue("(9) Generate report");
+        ColouredTextPrinter.printBlue("------------------------------------------");
+        ColouredTextPrinter.printBlue("(10) Previous Page");
+        ColouredTextPrinter.printBlue("(11) Logout");
+        ColouredTextPrinter.printBlue("(12) Exit");
+        
     }
 
     
@@ -119,37 +112,81 @@ public class StaffCampMenu implements Menu {
                         this.viewApp();
                         break;
                     
-                    case 9:    //committee report
+                    case 9:  //generate report
                         HelperService.clearScreen();
-                        HelperService.printRoute("Staff Camp Menu ---> Committee Performance Report");
+                        HelperService.printRoute("Staff Camp Menu ---> Print report");
+                        System.out.println("Select the report you want to generate");
+                        System.out.println("(1) Committee peformance report");
+                        System.out.println("(2) Student report");
+                        System.out.println("(3) Camp participants(Committees & attendees) report");
+                        System.out.println("(4) Enquiries report");
+                        System.out.println("(5): Stop generating report");
+                        
+                        int report = HelperService.readInt(1,5,"Invalid choice please try again");
+                        
+                        switch (report) {
+                            case 1:
+                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
+                            int filter = HelperService.readInt(); 
+                                if(filter == 1){
+                                    System.out.println("Choose the faculty");
+                                    String fac = sc.nextLine();
+                                    StaffCampService.commiteePerformanceReport(fac);
+                                }
+                                else{
+                                    StaffCampService.commiteePerformanceReport();
+                                }
+                                
+                                break;
+                            
+                            case 2:
+                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
+                            filter = HelperService.readInt(); 
+                                if(filter == 1){
+                                    System.out.println("Choose the faculty");
+                                    String fac = sc.nextLine();
+                                    CampManagementService.generateStudentListReport(fac);
+                                }
+                                else{
+                                    CampManagementService.generateStudentListReport();
+                                }
+                                
+
+                            case 3:
+                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
+                            filter = HelperService.readInt(); 
+                                if(filter == 1){
+                                    System.out.println("Choose the faculty");
+                                    String fac = sc.nextLine();
+                                    StaffCampService.commiteePerformanceReport(fac);
+                                    System.out.println(" ");
+                                    CampManagementService.generateStudentListReport(fac);
+                                }
+                                else{
+                                    StaffCampService.commiteePerformanceReport();
+                                    System.out.println(" ");
+                                    CampManagementService.generateStudentListReport();
+                                }
+                            break;
+
+                            case 4:
+                            CampManagementService.enquiriesReport();
+                            break;
+
+                            default:
+                             break;
+                        }
                         staffController.generateCommitteeReport();
                         HelperService.pressAnyKeyToContinue();
                         this.viewApp();
-                        break;
-                    
-                    case 10:    //student report
-                        HelperService.clearScreen();
-                        HelperService.printRoute("Staff Camp Menu ---> Student Report");
-                        staffController.generateStudentReport();
-                        HelperService.pressAnyKeyToContinue();
-                        this.viewApp();
-                        break;
-                    
-                    case 11:    //enquiries report
-                        HelperService.clearScreen();
-                        HelperService.printRoute("Staff Camp Menu ---> Enquiries Report");
-                        staffController.generateEnquiriesReport();
-                        HelperService.pressAnyKeyToContinue();
                         
-                        this.viewApp();
-                        break;
-
-                    case 12: //go to previous page
+                    
+                    case 10: //go to previous page
                         StaffMenu staffMenu = new StaffMenu();
                         staffMenu.viewApp();
                         break;
                                     
-                    case 13:    //logout
+                    case 11:    //logout
                         System.out.println("Logging out...");
                         staffController.logout();
                         HelperService.wait(3);
@@ -162,7 +199,7 @@ public class StaffCampMenu implements Menu {
                         break;
                 }
            
-            }while(choice != 10);
+            }while(choice != 12);
         
             sc.close();
 
