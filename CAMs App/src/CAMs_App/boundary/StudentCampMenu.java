@@ -31,7 +31,7 @@ public class StudentCampMenu implements Menu{
             do{
                 this.printMenu();
                 System.out.print("Enter ur selection: ");
-                choice = sc.nextInt();
+                choice = HelperService.readInt();
 
                 switch (choice) {
                     case 1:    //register camp

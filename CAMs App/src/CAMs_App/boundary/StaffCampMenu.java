@@ -38,8 +38,7 @@ public class StaffCampMenu implements Menu {
         int choice;
             do{
                 System.out.print("Enter ur action for this camp: ");
-                choice = sc.nextInt();
-
+                choice = HelperService.readInt();
                 switch (choice) {
                     case 1:    //edit camp
                         HelperService.clearScreen();

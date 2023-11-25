@@ -40,7 +40,7 @@ public class StudentMenu implements Menu {
             
             this.printMenu();
             System.out.print("Enter selection: ");
-            choice = sc.nextInt();
+            choice = HelperService.readInt();
 
             switch (choice) {
                 case 1:    //view camp
