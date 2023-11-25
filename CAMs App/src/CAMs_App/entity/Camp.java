@@ -38,7 +38,7 @@ public class Camp extends CampInfo implements Comparable<Camp>{
      * @param campDate				The starting date of this camp.
      * @param campEndDate			The ending date of this camp.
      * @param regCloseDate			The closing date for registration of this camp.
-     * @param userGroup				The faculty this camp is for.
+     * @param userGroup				The {@link Faculty} this camp is for.
      * @param location				The location of this camp.
      * @param totalSlots			The total slots for attendees for this camp.
      * @param campCommitteeSlots	The total slots for committee members for this camp.
