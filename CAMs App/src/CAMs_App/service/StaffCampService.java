@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import CAMs_App.data.*;
 import CAMs_App.entity.*;
+import CAMs_App.enums.Faculty;
 
 
 public class StaffCampService extends CampManagementService{
@@ -73,5 +74,26 @@ public class StaffCampService extends CampManagementService{
         }
 
     } 
+
+    public static void commiteePerformanceReport(String faculty){
+       Camp camp = AuthData.getCurrentCamp();
+       ArrayList<Student> comm  = camp.getCommittee();
+        int count = 0;
+       for(int i = 0 ; i < comm.size() ; i++){
+            Student student = comm.get(i);
+            if(student.getFaculty().equals(faculty)){
+                System.out.println("Name: " + student.getName());
+                System.out.println("Student ID: " + student.getUserID());
+                System.out.println("Position: " + student.getCampComMem().getPosition());
+                System.out.println("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
+                count++;
+            }
+        }
+        if(count == 0) {
+            System.out.println("No committee from " + faculty);
+        }
+        
+
+    }
     
 }

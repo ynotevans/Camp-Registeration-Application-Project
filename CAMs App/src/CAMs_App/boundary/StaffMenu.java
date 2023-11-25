@@ -2,6 +2,8 @@ package CAMs_App.boundary;
 
 import java.util.Scanner;
 
+import javax.swing.plaf.ColorUIResource;
+
 import CAMs_App.controllers.StaffController;
 import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
@@ -25,6 +27,7 @@ public class StaffMenu implements Menu{
         ColouredTextPrinter.printBlue("(3) View camp(s) created by you");
         ColouredTextPrinter.printBlue("(4) Change password");
         ColouredTextPrinter.printBlue("(5) Logout\n");
+        ColouredTextPrinter.printBlue("(6) Exit");
     }
 
     
@@ -99,7 +102,7 @@ public class StaffMenu implements Menu{
                         break;
                 }
 
-            }while(choice != 4);
+            }while(choice != 6);
         
             sc.close();
 

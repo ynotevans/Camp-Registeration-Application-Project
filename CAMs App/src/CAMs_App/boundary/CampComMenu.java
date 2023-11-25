@@ -5,6 +5,7 @@ import java.util.Scanner;
 import CAMs_App.controllers.CampComController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.*;
+import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 
@@ -27,6 +28,7 @@ public class CampComMenu implements Menu{
         ColouredTextPrinter.printBlue("(8) Generate attendence report");
         ColouredTextPrinter.printBlue("(9) Switch to student mode");
         ColouredTextPrinter.printBlue("(10) Logout\n");
+        ColouredTextPrinter.printBlue("(11) Exit");
     }
 
     
@@ -67,18 +69,27 @@ public class CampComMenu implements Menu{
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
-                    case 6:
+                    case 6: //delete suggestions
                         campComController.deleteSuggestion();
                         HelperService.pressAnyKeyToContinue();
                         break;
 
                     case 7:    //generate enquiries report
-                        campComController.generateEnquiriesReport();
+                        CampManagementService.enquiriesReport();
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 8:    //generate attendance report
-                        campComController.generateStudentReport();
+                        System.out.println("Press 1 to faculty by faculty");
+                        int filter = HelperService.readInt();
+                        if(filter == 1){
+                            System.out.println("Choose the faculty");
+                            String faculty = sc.nextLine();
+                            CampManagementService.generateStudentListReport(faculty);
+                        }
+                        else{
+                            CampManagementService.generateStudentListReport();
+                        }
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
@@ -97,7 +108,7 @@ public class CampComMenu implements Menu{
                         break;
                 }
 
-            }while(choice != 8);
+            }while(choice != 11);
         
             sc.close();
 
