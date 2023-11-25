@@ -8,7 +8,6 @@ import CAMs_App.service.*;
 
 public class CampComController extends StudentController{
     Student user = (Student)AuthData.getCurrentUser();
-    
     //camp
     public void viewCampDetails(){    
         Camp camp = AuthData.getCurrentCamp();
@@ -77,15 +76,6 @@ public class CampComController extends StudentController{
         System.out.println("Enter your suggestion: ");
         String s = sc.nextLine();
         SuggestionsService.createSuggestion(s);
-    }
-
-    public void submitSuggestion(){
-        Camp camp = user.getComitteeCamp();
-        System.out.println("Please provide your suggestion: ");
-        String suggest = sc.nextLine();
-
-        Suggestions Suggestions = new Suggestions(suggest, user.getUserID());
-        camp.addSuggestion(Suggestions);
     }
     
     public void viewSuggestion(){

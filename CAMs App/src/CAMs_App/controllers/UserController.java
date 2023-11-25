@@ -16,7 +16,6 @@ public class UserController {
         String oldPassword, newPassword;
         boolean success = false;
         
-
         do {
             System.out.println("Enter your old password (Enter X to quit): ");
             oldPassword = sc.next();
