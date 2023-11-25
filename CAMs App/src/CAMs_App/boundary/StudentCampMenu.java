@@ -19,8 +19,9 @@ public class StudentCampMenu implements Menu{
         ColouredTextPrinter.printBlue("(2) Withdraw camp");
         ColouredTextPrinter.printBlue("(3) Submit enquiries for this camp");
         ColouredTextPrinter.printBlue("(4) View your submitted enquiries");
-        ColouredTextPrinter.printBlue("(5) Go to previous page");
-        ColouredTextPrinter.printBlue("(6) Logout\n");
+        ColouredTextPrinter.printBlue("(5) Delete Enquiries ");
+        ColouredTextPrinter.printBlue("(6) Go to previous page");
+        ColouredTextPrinter.printBlue("(7) Logout\n");
     }
 
     
@@ -42,7 +43,7 @@ public class StudentCampMenu implements Menu{
                         System.out.println("(2) Camp Committee\n");
                         System.out.print("Enter your selection: ");
                         try {
-                        int choice1 = sc.nextInt();
+                        int choice1 = HelperService.readInt();
                             if(choice1 == 1){
                                 studentController.joinAsAttendee();    //update campName
 
@@ -75,7 +76,7 @@ public class StudentCampMenu implements Menu{
                         HelperService.clearScreen();
                         HelperService.printRoute("Student Camp Menu ---> Withdraw Camp");
                         studentController.withdrawCamp();
-                        HelperService.wait(3);
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -83,6 +84,7 @@ public class StudentCampMenu implements Menu{
                         HelperService.clearScreen();
                         HelperService.printRoute("Student Camp Menu ---> Create Enquiry");
                         studentController.createEnquiry();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -90,16 +92,22 @@ public class StudentCampMenu implements Menu{
                         HelperService.clearScreen();
                         HelperService.printRoute("Student Camp Menu ---> View Your Enquiries");
                         studentController.viewEnquiry();
-                        System.out.print("Key in anything to return to menu: ");
-                        sc.next();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
 
-                    case 5: //go to previous page
+                    case 5: 
+                        HelperService.clearScreen();
+                        HelperService.printRoute("Student Camp Menu ---> Delete Your Enquiries");
+                        studentController.deleteEnquiries();
+                        HelperService.pressAnyKeyToContinue();
+                        
+                    case 6: //go to previous page
                         studentMenu.viewApp();
                         break;
 
-                    case 6:    //logout
+
+                    case 7:    //logout
                         System.out.println("Logging out...");
                         HelperService.wait(3);
                         studentController.logout();

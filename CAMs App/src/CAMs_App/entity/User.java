@@ -6,7 +6,6 @@ public class User {
     private String userID;      
     private String name; 
     private String password;
-    private Identity identity;
     private Faculty faculty;
 
     
@@ -38,11 +37,6 @@ public class User {
         this.faculty = faculty;
     }
 
-    public boolean setIdentity(Identity status) {
-        this.identity = status;
-        return true;
-    }
-
     public String getUserID() {
         return userID;
     }
@@ -59,7 +53,4 @@ public class User {
         return faculty.toString();
     }
 
-    public Identity getIdentity() {
-        return identity;
-    }
 }

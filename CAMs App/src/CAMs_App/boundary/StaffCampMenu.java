@@ -75,6 +75,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Reply Enquiries");
                         staffController.replyEnquiries();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
 
@@ -82,7 +83,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> View Suggestions");
                         staffController.viewSuggestions();
-                        HelperService.wait(2);
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
 
@@ -90,6 +91,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Process Suggestions");
                         staffController.processSuggestions();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -97,6 +99,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Approve Suggestions");
                         staffController.approveSuggestion();
+                        HelperService.pressAnyKeyToContinue();
                         
                         this.viewApp();
                         break;
@@ -105,7 +108,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Committee Performance Report");
                         staffController.generateCommitteeReport();
-                        
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -113,7 +116,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Student Report");
                         staffController.generateStudentReport();
-                        
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -121,6 +124,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Enquiries Report");
                         staffController.generateEnquiriesReport();
+                        HelperService.pressAnyKeyToContinue();
                         
                         this.viewApp();
                         break;

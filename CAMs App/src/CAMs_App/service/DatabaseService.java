@@ -318,7 +318,7 @@ public class DatabaseService {
 									  totalSlots,  campCommitteeSlots,  description, 
 									  staffInCharge,  visibility);
 				
-				camp.setNumberOfCampDays(numberOfCampDays);
+				//camp.setNumberOfCampDays(numberOfCampDays);
 				camp.setRemainingSlot(remainingSlot);
 				camp.setCampCommitteeRemainingSlots(campCommitteeRemainingSlot);
 				
