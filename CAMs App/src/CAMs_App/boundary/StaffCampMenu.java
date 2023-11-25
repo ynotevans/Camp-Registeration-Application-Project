@@ -27,7 +27,21 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(11) Generate Equiries Report"); 
         ColouredTextPrinter.printBlue("(12) Previous Page");
         ColouredTextPrinter.printBlue("(13) Logout\n");
-        
+        //ColouredTextPrinter.printPurple("Available actions for this camp: ");
+        // ColouredTextPrinter.printPurple("(1) Edit camp");
+        // ColouredTextPrinter.printPurple("(2) Delete camps");
+        // ColouredTextPrinter.printPurple("(3) Toggle camp's visibility");
+        // ColouredTextPrinter.printPurple("(4) View enquiries for this camp");
+        // ColouredTextPrinter.printPurple("(5) Reply enquiries for this camp");
+        // ColouredTextPrinter.printPurple("(6) View suggestions for this camp");
+        // ColouredTextPrinter.printPurple("(7) Process suggestions for this camp");
+        // ColouredTextPrinter.printPurple("(8) Approve suggestions for this camp");
+        // ColouredTextPrinter.printPurple("(9) Generate committee performance report");
+        // ColouredTextPrinter.printPurple("(10) Generate Student report");
+        // ColouredTextPrinter.printPurple("(11) Generate Equiries Report");
+        // ColouredTextPrinter.printPurple("(12) Previous Page");
+        // ColouredTextPrinter.printPurple("(13) Logout");
+
     }
 
     

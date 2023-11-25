@@ -21,7 +21,7 @@ public class StudentMenu implements Menu {
         HelperService.clearScreen();
         HelperService.printRoute("Student Menu");
         ColouredTextPrinter.printBlue("Welcome back "+ currentStudent.getName() + "!!!");
-        ColouredTextPrinter.printBlue("Student profile reflected here....");
+        HelperService.printStudentProfile();
         ColouredTextPrinter.printBlue("Available actions for you: ");
         ColouredTextPrinter.printBlue("(1) View available camps");
         ColouredTextPrinter.printBlue("(2) View registered camp(s)");
