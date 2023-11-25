@@ -23,14 +23,8 @@ public class StaffCampService extends CampManagementService{
     }
 
 
-    public static boolean deleteCamp(Camp camp){
-
-        if(camp.getAttendees().size()!= 0) return false;
-        else{
-            Database.getCampData().remove(camp.getCampName());
-            return true;
-        }
-
+    public static void deleteCamp(Camp camp){
+        Database.getCampData().remove(camp.getCampName());
     }
 
     public static void toggleVisibility(Camp camp , boolean visibility){
