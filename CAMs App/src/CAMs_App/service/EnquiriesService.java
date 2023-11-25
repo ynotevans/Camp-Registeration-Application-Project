@@ -26,7 +26,7 @@ public final class EnquiriesService {
         System.out.println("Inquirer:" + q.getInquirer());
         System.out.println("Enquiry: " + q.getEnquiry());
   
-        System.out.println("Answerer: " + q.getAnswerer());
+        System.out.println("Respondent: " + q.getAnswerer());
         System.out.println("Answer: " + q.getAnswer());
         System.out.println(" ");
     }
@@ -37,7 +37,8 @@ public final class EnquiriesService {
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
             if(!q.getProcessed()){
-                System.out.println("EnqriesID: " + (i+1));
+                count++;
+                System.out.println("EnquiriesID: " + (i+1));
                 EnquiriesService.viewEnquiries(q);
             }
         }
@@ -50,7 +51,8 @@ public final class EnquiriesService {
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
             if(q.getProcessed()){
-                System.out.println("EnqriesID: " + (i+1));
+                count++;
+                System.out.println("EnquiriesID: " + (i+1));
                 EnquiriesService.viewEnquiries(q);
             }
         }
@@ -61,7 +63,7 @@ public final class EnquiriesService {
         ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
-            System.out.println("EnqriesID: " + (i+1));
+            System.out.println("EnquiriesID: " + (i+1));
             EnquiriesService.viewEnquiries(q);
 
         }

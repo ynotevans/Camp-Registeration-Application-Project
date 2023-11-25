@@ -167,7 +167,8 @@ public class StaffController extends UserController{
         int choice=0;
         do
         {
-            System.out.println("Editting "+camp.getCampName());
+            HelperService.clearScreen();
+            System.out.println("Editting "+camp.getCampName()+"...");
             System.out.println("1.Change camp name");
             System.out.println("2.Change camp dates");
             System.out.println("3.Change registration date");
@@ -186,12 +187,13 @@ public class StaffController extends UserController{
                     String newCampName = sc.nextLine();
                     String oldCampName = camp.getCampName();
                     while(DatabaseService.checkIfCampNameExists(newCampName)){
-                        System.out.println("Camp Name already exists!! Enter another name");
+                        System.out.println("Camp Name already exists!! Enter another name:");
                         newCampName = sc.nextLine();
                     }
                     camp.setCampName(newCampName);
-                    System.out.println("Camp name changed in to "+camp.getCampName());
+                    System.out.println("Camp Name changed to "+ camp.getCampName()+ "\n");
                     StaffCampService.editCampNameinDB(oldCampName,camp);
+                    HelperService.wait(2);
                     break;
                 case 2:
                     System.out.println("Edit camp dates");
@@ -220,6 +222,7 @@ public class StaffController extends UserController{
                     }
 
                     camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate()));
+                    HelperService.wait(2);
                     break;
 
                 case 3:
@@ -234,6 +237,7 @@ public class StaffController extends UserController{
                         System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
                     }
                     System.out.println("Camp new closing date: "+camp.getRegCloseDate());
+                    HelperService.wait(2);
                     break;
 
                 case 4:
@@ -247,12 +251,14 @@ public class StaffController extends UserController{
                         System.out.println("Invalid faculty.");
                     }
                     System.out.println("Camp is now open to "+camp.getUserGroup());
+                    HelperService.wait(2);
                     break;
                 case 5:
                     System.out.println("Edit camp location");
                     System.out.println("Enter camp's new location:");
                     camp.setLocation(sc.nextLine());
-                    System.out.println("Camp location changed to: "+camp.getLocation());                    
+                    System.out.println("Camp location changed to: "+camp.getLocation());           
+                    HelperService.wait(2);         
                     break;
                 
                 case 6:
@@ -263,6 +269,7 @@ public class StaffController extends UserController{
                     totalSlots = HelperService.readInt(0 , campMember , "New camp slot cannot be lesser than the current total number of attendees and committee");   //new camp slot cannot be less than current number of attendees + committee
                     camp.setTotalSlots(totalSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
+                    HelperService.wait(2);
                     break;
                 
                 case 7:
@@ -272,18 +279,25 @@ public class StaffController extends UserController{
                     committeeSlots = HelperService.readInt(camp.getCampCommitteeRemainingSlots(),10 , "New camp committee slot cannot be more than 10 or less then the current number of committee member");                            
                     camp.setCampCommitteeSlots(committeeSlots);
                     System.out.println("The camp committee slots changed to: "+camp.getCampCommitteeSlots());
+                    HelperService.wait(2);
                     break;
+
                 case 8:
                     System.out.println("Edit camp description");
                     System.out.println("Enter new camp description");
                     camp.setDescription(sc.nextLine());
                     System.out.println("Camp description has been changed to\n"+camp.getDescription());
+                    HelperService.wait(2);
                     break;       
+
                 case 9:
                     System.out.println("Exitting camp edits.");
+                    HelperService.wait(2);
                     break;    
+
                 default:
                     System.out.println("Re-enter choice");
+                    HelperService.wait(2);
                     break;
             }
         }while(choice!=9);
@@ -393,6 +407,7 @@ public class StaffController extends UserController{
 
     public void replyEnquiries(){
         Camp camp = AuthData.getCurrentCamp();
+        EnquiriesService.viewAllEnquiries();
         System.out.println("Which enquiries you would like to reply: ");
         int index = HelperService.readInt(1 , camp.getEnquiryList().size(),"Enquiry index out of bound"); 
         Enquiries q = camp.getEnquiryList().get(index -1);
