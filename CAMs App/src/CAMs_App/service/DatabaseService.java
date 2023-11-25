@@ -307,7 +307,8 @@ public class DatabaseService {
 				String description = values[++i];
 				String staffInCharge = values[++i];
 				Boolean visibility = Boolean.valueOf(values[++i]);
-				int numberOfCampDays = Integer.parseInt(values[++i]);	
+				//int numberOfCampDays = Integer.parseInt(values[++i]);	
+				Integer.parseInt(values[++i]);	
 				String[] attendeeArr = values[++i].split("\\|");
 				String[] committeeArr = values[++i].split("\\|");
 				String[] enquiriestr = values[++i].split("\\|");
