@@ -3,7 +3,7 @@ package CAMs_App.entity;
 import java.util.*;
 
 public class CampComMem {
-	private ArrayList<Suggestions> suggestions;
+	private ArrayList<Suggestions> suggestions = new ArrayList<>();
 	private String position;
 
 	public CampComMem(String postion){

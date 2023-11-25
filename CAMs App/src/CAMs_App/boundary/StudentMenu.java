@@ -83,7 +83,7 @@ public class StudentMenu implements Menu {
                 case 2:    //view all registered camp
                     Student currentStudent = (Student)AuthData.getCurrentUser();
                     if (studentController.viewRegisteredCamp()==true){
-                        System.out.print("Select a camp to edit (Enter the camp name): ");
+                        System.out.print("Select a camp to operate(Or any key to go back to previous page): ");
                         String campName = sc.next();
                         
                         

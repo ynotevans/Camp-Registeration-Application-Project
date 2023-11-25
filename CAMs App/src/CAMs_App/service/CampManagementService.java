@@ -8,7 +8,7 @@ public class CampManagementService {
      //list of student attending
     public static void generateStudentListReport(){
         Camp camp = AuthData.getCurrentCamp();
-       ArrayList<Student> attendees  = camp.getCommittee();
+        ArrayList<Student> attendees  = camp.getAttendees();
         HelperService.viewCamp(camp);
         System.out.println(" ");
         System.out.println("Number of participants: " + camp.getAttendees().size());
