@@ -5,6 +5,7 @@ import java.util.Scanner;
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
+import CAMs_App.service.ColouredTextPrinter;
 public class StaffCampMenu implements Menu {
     StaffController staffController = new StaffController();
 
@@ -12,17 +13,17 @@ public class StaffCampMenu implements Menu {
         HelperService.clearScreen();
         HelperService.clearScreen();
         HelperService.printRoute("Staff Camp Menu ---> "+ AuthData.getCurrentCamp().getCampName());
-        System.out.println("Available actions for this camp: ");
-        System.out.println("(1) Edit camp");
-        System.out.println("(2) Delete camps");
-        System.out.println("(3) Toggle camp's visibility");
-        System.out.println("(4) View enquiries for this camp");
-        System.out.println("(5) Reply enquiries for this camp");
-        System.out.println("(6) View suggestions for this camp");
-        System.out.println("(7) Process suggestions for this camp");
-        System.out.println("(8) Approve suggestions for this camp");
-        System.out.println("(9) Previous Page");
-        System.out.println("(10) Logout\n");
+        ColouredTextPrinter.printBlue("Available actions for this camp: ");
+        ColouredTextPrinter.printBlue("(1) Edit camp");
+        ColouredTextPrinter.printBlue("(2) Delete camps");
+        ColouredTextPrinter.printBlue("(3) Toggle camp's visibility");
+        ColouredTextPrinter.printBlue("(4) View enquiries for this camp");
+        ColouredTextPrinter.printBlue("(5) Reply enquiries for this camp");
+        ColouredTextPrinter.printBlue("(6) View suggestions for this camp");
+        ColouredTextPrinter.printBlue("(7) Process suggestions for this camp");
+        ColouredTextPrinter.printBlue("(8) Approve suggestions for this camp");
+        ColouredTextPrinter.printBlue("(9) Previous Page");
+        ColouredTextPrinter.printBlue("(10) Logout\n");
         
     }
 
@@ -64,6 +65,9 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> View Enquiries");
                         staffController.viewEnquiries();
+                        HelperService.wait(2);
+                        System.out.print("Enter any key to go back menu.");
+                        String key = sc.next();
                         this.viewApp();
                         break;
 
@@ -78,6 +82,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> View Suggestions");
                         staffController.viewSuggestions();
+                        HelperService.wait(2);
                         this.viewApp();
                         break;
 
@@ -92,6 +97,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Approve Suggestions");
                         staffController.approveSuggestion();
+                        
                         this.viewApp();
                         break;
 
@@ -112,7 +118,7 @@ public class StaffCampMenu implements Menu {
                         System.out.println("Invalid selection, please select again...");
                         break;
                 }
-
+           
             }while(choice != 10);
         
             sc.close();

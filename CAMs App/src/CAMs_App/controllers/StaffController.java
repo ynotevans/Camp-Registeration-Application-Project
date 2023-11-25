@@ -364,6 +364,9 @@ public class StaffController extends UserController{
             case 1:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
+                if (q.size()==0) {
+                    System.out.println("No enquiries.");
+                }
                 System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
@@ -374,18 +377,22 @@ public class StaffController extends UserController{
                 }
                 HelperService.pressAnyKeyToContinue();
                 break;
-            
             case 2:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
                 System.out.println("New Enquiries ");
-                for(int i = 0 ; i < q.size() ; i++){
+                if (q.size()==0) {
+                    System.out.println("No enquiries.");
+                }
+                else{
+                    for(int i = 0 ; i < q.size() ; i++){
                         if(!q.get(i).getProcessed()){
                             System.out.println("EnqriesID: " + (i+1));
                             EnquiriesService.viewEnquiries(q.get(i));
                             System.out.println(" ");
                         }
                     }
+                }
                 HelperService.pressAnyKeyToContinue();
                 break;
         
@@ -549,12 +556,21 @@ public class StaffController extends UserController{
     if(approve){
         System.out.println("Suggestion has been approved...");
         System.out.println("1 point awarded to suggestor");
+
+        System.out.println("Press 1 to made changes to camp details based on suggestion. Other numbers to quit");
+        int choice = HelperService.readInt();
+        if(choice == 1){
+            this.editCamp();
+        }
+        
     }
     else{
         System.out.println("Suggestion has been rejected...");
         System.out.println("0 point awarded to suggestor");
 
     }
+
+    
 
 }
 }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import CAMs_App.controllers.CampComController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.*;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 
 public class CampComMenu implements Menu{
@@ -14,16 +15,16 @@ public class CampComMenu implements Menu{
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Camp Committee Menu");
-        System.out.println("Welcome back "+ currentStudent.getName() + "!!!");
-        System.out.println("Available actions for you: ");
-        System.out.println("(1) View camp details");
-        System.out.println("(2) View enquiries");
-        System.out.println("(3) Reply enquiries");
-        System.out.println("(4) Create suggestion");
-        System.out.println("(5) View your suggestions");
-        System.out.println("(6) Generate report");
-        System.out.println("(7) Switch to student mode");
-        System.out.println("(8) Logout\n");
+        ColouredTextPrinter.printBlue("Welcome back "+ currentStudent.getName() + "!!!");
+        ColouredTextPrinter.printBlue("Available actions for you: ");
+        ColouredTextPrinter.printBlue("(1) View camp details");
+        ColouredTextPrinter.printBlue("(2) View enquiries");
+        ColouredTextPrinter.printBlue("(3) Reply enquiries");
+        ColouredTextPrinter.printBlue("(4) Create suggestion");
+        ColouredTextPrinter.printBlue("(5) View your suggestions");
+        ColouredTextPrinter.printBlue("(6) Generate report");
+        ColouredTextPrinter.printBlue("(7) Switch to student mode");
+        ColouredTextPrinter.printBlue("(8) Logout\n");
     }
 
     

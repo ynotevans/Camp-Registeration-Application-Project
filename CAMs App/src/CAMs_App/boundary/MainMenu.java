@@ -8,6 +8,7 @@ import CAMs_App.data.Database;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 import CAMs_App.enums.*;
 
@@ -17,9 +18,9 @@ public class MainMenu implements Menu{
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Main Menu");
-        System.out.println("Welcome to CAMs !!!");
-        System.out.println("Press any number to login");
-        System.out.println("Press 9 to quit program\n");
+        ColouredTextPrinter.printGreen("Welcome to CAMs !!!");
+        ColouredTextPrinter.printGreen("Press any number to login");
+        ColouredTextPrinter.printGreen("Press 9 to quit program\n");
     }
 
     public void testData(){
