@@ -351,30 +351,34 @@ public class StaffController extends UserController{
 
 //Enquiries
     public void viewEnquiries(){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Enquiries> q = camp.getEnquiryList();
+        if(q.isEmpty()){
+            System.out.println("No enquiries");
+            return;
+        }
+        int count = 0;
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
         System.out.println("Press 2: View New Enquiries");
         System.out.println("Press any number: View All Enquiries");
 
         int choice = HelperService.readInt(); 
-        Camp camp = AuthData.getCurrentCamp();
-        ArrayList<Enquiries> q = camp.getEnquiryList();
-
+       
         switch (choice) {
             case 1:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
-                if (q.size()==0) {
-                    System.out.println("No enquiries.");
-                }
                 System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
                         System.out.println("EnqriesID: " + (i+1));
                         EnquiriesService.viewEnquiries(q.get(i));
+                        count++;
                         System.out.println(" ");
                     }
                 }
+                if(count == 0) System.out.println("No processed enquiries");
                 HelperService.pressAnyKeyToContinue();
                 break;
             case 2:
@@ -389,10 +393,13 @@ public class StaffController extends UserController{
                         if(!q.get(i).getProcessed()){
                             System.out.println("EnqriesID: " + (i+1));
                             EnquiriesService.viewEnquiries(q.get(i));
+                            count++;
                             System.out.println(" ");
+                           
                         }
                     }
                 }
+                if(count == 0) System.out.println("No new enquiries");
                 HelperService.pressAnyKeyToContinue();
                 break;
         
@@ -409,7 +416,6 @@ public class StaffController extends UserController{
                 break;
 
         }
-
     }
 
     public void replyEnquiries(){
