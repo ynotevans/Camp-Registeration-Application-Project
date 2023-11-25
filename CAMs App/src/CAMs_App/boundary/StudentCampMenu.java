@@ -50,9 +50,8 @@ public class StudentCampMenu implements Menu{
                             }
                             else if (choice1 == 2){
                                 if(studentController.joinAsCommittee()==true){
-                                    CampComMenu campMenu = new CampComMenu();
                                     HelperService.wait(2);
-                                    campMenu.viewApp();
+                                    studentMenu.viewApp();
                                 }
                                 else {
                                     HelperService.wait(2);
