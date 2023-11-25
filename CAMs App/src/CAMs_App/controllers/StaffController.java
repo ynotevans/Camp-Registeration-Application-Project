@@ -329,25 +329,17 @@ public class StaffController extends UserController{
         StaffCampService.viewCampsCreated(userID);
     }
 
-    public void generateReport(String campName){
-        Camp camp = DatabaseService.getCamp(campName);
-        StaffCampService.generatePerformanceReport(camp);
+    public void generateReport(){
+      System.out.println("Generating student attendence report...");
+      StaffCampService.generateStudentListReport();
     }
 
-    public void viewCommitteeList(String campName){
-        Camp camp = DatabaseService.getCamp(campName);
-        StaffCampService.generateCommitteeList(camp);
+    public void viewCommitteeList(){
+      System.out.println("Generating committee performance report...");
+      StaffCampService.commiteePerformanceReport();
     }
 
-    public void viewAttendeeList(String campName){
-        Camp camp = DatabaseService.getCamp(campName);
-        if(camp.getAttendees() == null){
-            System.out.println("This camp doesn't have any attendee");
-        }
-        else{
-            StaffCampService.generateAttendeeList(camp);
-        }
-    }
+
 
 //Enquiries
     public void viewEnquiries(){
@@ -357,7 +349,6 @@ public class StaffController extends UserController{
             System.out.println("No enquiries");
             return;
         }
-        int count = 0;
         System.out.println("Select your choice: ");
         System.out.println("Press 1: View Processed Enquiries");
         System.out.println("Press 2: View New Enquiries");
@@ -370,48 +361,24 @@ public class StaffController extends UserController{
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
                 System.out.println("Processed Enquiries: ");
-                for(int i = 0 ; i < q.size() ; i++){
-                    if(q.get(i).getProcessed()){
-                        System.out.println("EnqriesID: " + (i+1));
-                        EnquiriesService.viewEnquiries(q.get(i));
-                        count++;
-                        System.out.println(" ");
-                    }
-                }
-                if(count == 0) System.out.println("No processed enquiries");
+                EnquiriesService.viewProcessedEnquiries();
                 HelperService.pressAnyKeyToContinue();
+
                 break;
             case 2:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
                 System.out.println("New Enquiries ");
-                if (q.size()==0) {
-                    System.out.println("No enquiries.");
-                }
-                else{
-                    for(int i = 0 ; i < q.size() ; i++){
-                        if(!q.get(i).getProcessed()){
-                            System.out.println("EnqriesID: " + (i+1));
-                            EnquiriesService.viewEnquiries(q.get(i));
-                            count++;
-                            System.out.println(" ");
-                           
-                        }
-                    }
-                }
-                if(count == 0) System.out.println("No new enquiries");
+                EnquiriesService.viewNewEnquiries();
                 HelperService.pressAnyKeyToContinue();
+        
                 break;
         
             default:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View All Enquiries");
                 System.out.println("List of all enquiries:");
-                for(int i = 0 ; i < q.size() ; i++){
-                    System.out.println("EnqriesID: " + (i+1));
-                    EnquiriesService.viewEnquiries(q.get(i));
-                    System.out.println(" ");
-                }
+                EnquiriesService.viewAllEnquiries();
                 HelperService.pressAnyKeyToContinue();
                 break;
 

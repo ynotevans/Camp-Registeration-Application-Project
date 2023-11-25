@@ -28,6 +28,43 @@ public final class EnquiriesService {
   
         System.out.println("Answerer: " + q.getAnswerer());
         System.out.println("Answer: " + q.getAnswer());
+        System.out.println(" ");
+    }
+
+    public static void viewNewEnquiries(){
+     ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        int count = 0;
+        for(int i = 0 ; i < qList.size() ; i++){
+            Enquiries q = qList.get(i);
+            if(!q.getProcessed()){
+                System.out.println("EnqriesID: " + (i+1));
+                EnquiriesService.viewEnquiries(q);
+            }
+        }
+        if(count == 0) System.out.println("No new enquiries");
+    }
+
+    public static void viewProcessedEnquiries(){
+        ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        int count = 0;
+        for(int i = 0 ; i < qList.size() ; i++){
+            Enquiries q = qList.get(i);
+            if(q.getProcessed()){
+                System.out.println("EnqriesID: " + (i+1));
+                EnquiriesService.viewEnquiries(q);
+            }
+        }
+        if(count == 0) System.out.println("No processed enquiries");
+    }
+
+    public static void viewAllEnquiries(){
+        ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        for(int i = 0 ; i < qList.size() ; i++){
+            Enquiries q = qList.get(i);
+            System.out.println("EnqriesID: " + (i+1));
+            EnquiriesService.viewEnquiries(q);
+
+        }
     }
 
      // public static void replyEnquiries(Enquiries q ,String reply){

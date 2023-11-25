@@ -64,45 +64,49 @@ public class StaffCampService extends CampManagementService{
 	}
 
     
-    // generate attendance report
-    public static void generateAttendanceReport(Camp camp){
+    //list of student attending
+    public static void generateStudentListReport(){
+        Camp camp = AuthData.getCurrentCamp();
+       ArrayList<Student> attendees  = camp.getCommittee();
+        HelperService.viewCamp(camp);
+        System.out.println(" ");
         System.out.println("Number of participants: " + camp.getAttendees().size());
         System.out.println("Participants list");
-        for(int i = 0 ; i < camp.getAttendees().size() ; i++)
-            System.out.println(camp.getAttendees().get(i).getUserID());
+        for(int i = 0 ; i < camp.getAttendees().size() ; i++){
+            Student student = attendees.get(i);
+            System.out.println("Name: " + student.getName());
+            System.out.println("Student ID: " + student.getUserID());
+            System.out.println("Position: Participants");
+        }
            
-        System.out.println("Number of committee: " + camp.getCommittee().size());
-        System.out.println("Committee list: ");
-        for(int i=0;i>camp.getCommittee().size();i++)
-            System.out.println(camp.getCommittee().get(i).getUserID());
+      
     }
 
-    // generate performance report
-    public static void generatePerformanceReport(Camp camp){
-        for(int i=0;i<camp.getAttendees().size();i++){
-            System.out.println(camp.getAttendees().get(i).getUserID()+":"
-            +camp.getAttendees().get(i).getPoints());
+    // generate committee performance report
+    public static void commiteePerformanceReport(){
+       Camp camp = AuthData.getCurrentCamp();
+       ArrayList<Student> comm  = camp.getCommittee();
+
+       for(int i = 0 ; i < comm.size() ; i++){
+        Student student = comm.get(i);
+            System.out.println("Name: " + student.getName());
+            System.out.println("Student ID: " + student.getUserID());
+            System.out.println("Position: " + student.getCampComm().getPosition());
+            System.out.println("# of suggestions submitted: " + student.getCampComm().getSuggestion().size());
         }
+
     } 
     
-    //generate attendees list
-    public static void generateAttendeeList(Camp camp){
-        ArrayList<Student> attendees = camp.getAttendees();
+   
+    //enquiries report
+    public static void enquiriesReport(){
+        Camp camp = AuthData.getCurrentCamp();
+        System.out.println("Enquiries report of " + camp.getCampName());
 
-        for(int i = 0 ; i < attendees.size() ; i++){
-            System.out.println("User ID: " + attendees.get(i).getUserID());
-            System.out.println("Faculty: " + attendees.get(i).getFaculty());
-        }
-    }
-
-     //generate committee list
-    public static void generateCommitteeList(Camp camp){
-        ArrayList<Student> committee = camp.getCommittee();
-
-        for(int i = 0 ; i < committee.size() ; i++){
-            System.out.print("User ID: " + committee.get(i).getUserID());
-            System.out.print("  Faculty: " + committee.get(i).getFaculty());
-
-        }
+        System.out.println("New Enquiries");
+        EnquiriesService.viewNewEnquiries();
+        
+        System.out.println("Processed Enquiries");
+        EnquiriesService.viewProcessedEnquiries();
     }
 }

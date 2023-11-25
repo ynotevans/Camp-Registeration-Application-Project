@@ -67,5 +67,8 @@ public class Student extends User {
 	public void setSuggestion(Suggestions s){
 		this.campCompMem.setSuggestion(s);
 	}
+	public CampCompMem getCampComm(){
+		return this.campCompMem;
+	}
 
 }
