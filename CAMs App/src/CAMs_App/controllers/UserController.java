@@ -4,8 +4,8 @@ import java.util.Scanner;
 import CAMs_App.service.AuthStaffService;
 import CAMs_App.service.AuthStudentService;
 import CAMs_App.service.HelperService;
+import CAMs_App.boundary.LoginMenu;
 import CAMs_App.data.AuthData;
-import CAMs_App.entity.Student;
 import CAMs_App.entity.User;
 import CAMs_App.service.AuthService;
 import CAMs_App.service.UserService;
@@ -48,9 +48,14 @@ public class UserController {
             }
             else
             System.out.println("Password successfully changed.");
-            
+            System.out.println("Please re-login to verify.");
+            HelperService.pressAnyKeyToContinue();
         } while (!success);
-
+        UserController userController = new UserController();
+        userController.logout();
+        HelperService.wait(1);
+        LoginMenu menu = new LoginMenu();
+        menu.viewApp();
     }
 
     public boolean login(boolean isStaff){
