@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import CAMs_App.boundary.CampComMenu;
 import CAMs_App.data.AuthData;
 import CAMs_App.enums.Faculty;
 import CAMs_App.entity.*;
@@ -564,12 +565,21 @@ public class StaffController extends UserController{
     if(approve){
         System.out.println("Suggestion has been approved...");
         System.out.println("1 point awarded to suggestor");
+
+        System.out.println("Press 1 to made changes to camp details based on suggestion. Other numbers to quit");
+        int choice = HelperService.readInt();
+        if(choice == 1){
+            this.editCamp();
+        }
+        
     }
     else{
         System.out.println("Suggestion has been rejected...");
         System.out.println("0 point awarded to suggestor");
 
     }
+
+    
 
 }
 }
