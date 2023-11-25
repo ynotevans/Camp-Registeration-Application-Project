@@ -362,36 +362,71 @@ public class StaffController extends UserController{
 
         switch (choice) {
             case 1:
-            System.out.println("Processed Enquiries: ");
+                int countProcessed = 0;
+                if (q.size()==0) {
+                    System.out.println("No enquiries.");
+                    System.out.print("Enter any key to go back menu.");
+                    String key = sc.next();
+                    return;
+                }
+                System.out.println("Processed Enquiries: ");
                 for(int i = 0 ; i < q.size() ; i++){
                     if(q.get(i).getProcessed()){
+                        countProcessed++;
                         System.out.println("EnqriesID: " + (i+1));
                         EnquiriesService.viewEnquiries(q.get(i));
                         System.out.println(" ");
                     }
+                }
+
+                if (countProcessed == 0) {
+                    System.out.println("No processed enquiries.");
+                    System.out.print("Enter any key to go back menu.");
+                    String key = sc.next();
+                    return;
+                }
+                
+                break;
+                
+            case 2:
+                int countNew = 0;
+                if (q.size()==0) {
+                    System.out.println("No enquiries.");
+                    System.out.print("Enter any key to go back menu.");
+                    String key = sc.next();
+                    return;
+                }
+                System.out.println("New Enquiries ");
+                for(int i = 0 ; i < q.size() ; i++){
+                    if(!q.get(i).getProcessed()){
+                        countNew++;
+                        System.out.println("EnqriesID: " + (i+1));
+                        EnquiriesService.viewEnquiries(q.get(i));
+                        System.out.println(" ");
+                    }
+                }
+                if (countNew == 0) {
+                    System.out.println("No new enquiries.");
+                    System.out.print("Enter any key to go back menu.");
+                    String key = sc.next();
+                    return;
                 }
                 break;
-            
-            case 2:
-            System.out.println("New Enquiries ");
-            for(int i = 0 ; i < q.size() ; i++){
-                    if(!q.get(i).getProcessed()){
-                        System.out.println("EnqriesID: " + (i+1));
-                        EnquiriesService.viewEnquiries(q.get(i));
-                        System.out.println(" ");
-                    }
-                }
-            break;
         
             default:
-            System.out.println("List of all enquiries:");
-            for(int i = 0 ; i < q.size() ; i++){
-                   System.out.println("EnqriesID: " + (i+1));
-                   EnquiriesService.viewEnquiries(q.get(i));
-                   System.out.println(" ");
-             }
+                if (q.size()==0) {
+                    System.out.println("No enquiries.");
+                    System.out.print("Enter any key to go back menu.");
+                    String key = sc.next();
+                    return;
+                }
+                System.out.println("List of all enquiries:");
+                for(int i = 0 ; i < q.size() ; i++){
+                    System.out.println("EnqriesID: " + (i+1));
+                    EnquiriesService.viewEnquiries(q.get(i));
+                    System.out.println(" ");
+                }
             break;
-
         }
 
     }

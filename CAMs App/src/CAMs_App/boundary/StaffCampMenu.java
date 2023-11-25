@@ -65,6 +65,9 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> View Enquiries");
                         staffController.viewEnquiries();
+                        HelperService.wait(2);
+                        System.out.print("Enter any key to go back menu.");
+                        String key = sc.next();
                         this.viewApp();
                         break;
 
