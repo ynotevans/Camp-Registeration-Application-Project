@@ -22,26 +22,35 @@ public final class EnquiriesService {
         }
     return false;
     }
+
+    public static boolean hasNewEnquiries(){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList <Enquiries>  qList = camp.getEnquiryList(); 
+        for(int i = 0 ; i < qList.size() ; i++){
+            if(!qList.get(i).getProcessed()) return true;
+        }
+        return false;
+    }
+    
     public static void viewEnquiries(Enquiries q){
         System.out.println("Inquirer:" + q.getInquirer());
         System.out.println("Enquiry: " + q.getEnquiry());
   
-        System.out.println("Answerer: " + q.getAnswerer());
+        System.out.println("Respondent: " + q.getAnswerer());
         System.out.println("Answer: " + q.getAnswer());
-        System.out.println(" ");
+        System.out.println();
     }
 
     public static void viewNewEnquiries(){
+    if(!hasNewEnquiries()) System.out.println("No new enquiries");
      ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
-        int count = 0;
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
             if(!q.getProcessed()){
-                System.out.println("EnqriesID: " + (i+1));
+                System.out.println("EnquiriesID: " + (i+1));
                 EnquiriesService.viewEnquiries(q);
             }
         }
-        if(count == 0) System.out.println("No new enquiries");
     }
 
     public static void viewProcessedEnquiries(){
@@ -50,7 +59,8 @@ public final class EnquiriesService {
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
             if(q.getProcessed()){
-                System.out.println("EnqriesID: " + (i+1));
+                count++;
+                System.out.println("EnquiriesID: " + (i+1));
                 EnquiriesService.viewEnquiries(q);
             }
         }
@@ -61,7 +71,7 @@ public final class EnquiriesService {
         ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
-            System.out.println("EnqriesID: " + (i+1));
+            System.out.println("EnquiriesID: " + (i+1));
             EnquiriesService.viewEnquiries(q);
 
         }

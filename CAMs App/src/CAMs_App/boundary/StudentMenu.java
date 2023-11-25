@@ -21,7 +21,7 @@ public class StudentMenu implements Menu {
         HelperService.clearScreen();
         HelperService.printRoute("Student Menu");
         ColouredTextPrinter.printBlue("Welcome back "+ currentStudent.getName() + "!!!");
-        ColouredTextPrinter.printBlue("Student profile reflected here....");
+        HelperService.printStudentProfile();
         ColouredTextPrinter.printBlue("Available actions for you: ");
         ColouredTextPrinter.printBlue("(1) View available camps");
         ColouredTextPrinter.printBlue("(2) View registered camp(s)");
@@ -55,10 +55,21 @@ public class StudentMenu implements Menu {
                         }
                         
                         else {
+
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
-                            StudentCampMenu campMenu = new StudentCampMenu();
-                            campMenu.viewApp();
+                            
+                            if (selectedCamp.getCommittee().contains(currentStudent)){
+                                System.out.println("Please toggle to camp committee menu in the menu...");
+                                HelperService.wait(1);
+                                viewApp();
+                            }
+                            
+                            
+                            else {
+                                StudentCampMenu campMenu = new StudentCampMenu();
+                                campMenu.viewApp();
+                            }
                         } 
                     }
 
@@ -86,7 +97,7 @@ public class StudentMenu implements Menu {
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
                             
-                            if (currentStudent.getComitteeCamp()==selectedCamp){
+                            if (selectedCamp.getCommittee().contains(currentStudent)){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
                                 HelperService.wait(1);
                                 viewApp();

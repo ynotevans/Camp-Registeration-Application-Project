@@ -48,10 +48,15 @@ public class CampComController extends StudentController{
     }
     
     
-    public void replyEnquiry(int index){
-         Camp camp = user.getComitteeCamp();
-         Enquiries q = camp.getEnquiryList().get(index - 1);
-
+    public void replyEnquiry(){
+        if(!EnquiriesService.hasNewEnquiries()){
+            System.err.println("No new Enquiries to ");
+        }
+        Camp camp = AuthData.getCurrentCamp();
+        EnquiriesService.viewNewEnquiries();
+        System.out.println("Which enquiry do you want to reply?");
+        int index = HelperService.readInt();
+        Enquiries q = camp.getEnquiryList().get(index-1);
         if(!q.getProcessed()){
             System.out.println("Reply to query: ");
             String ans = sc.nextLine();
