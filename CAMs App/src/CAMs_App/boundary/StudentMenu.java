@@ -55,10 +55,21 @@ public class StudentMenu implements Menu {
                         }
                         
                         else {
+
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
-                            StudentCampMenu campMenu = new StudentCampMenu();
-                            campMenu.viewApp();
+                            
+                            if (selectedCamp.getCommittee().contains(currentStudent)){
+                                System.out.println("Please toggle to camp committee menu in the menu...");
+                                HelperService.wait(1);
+                                viewApp();
+                            }
+                            
+                            
+                            else {
+                                StudentCampMenu campMenu = new StudentCampMenu();
+                                campMenu.viewApp();
+                            }
                         } 
                     }
 
