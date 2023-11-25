@@ -131,6 +131,7 @@ public class StaffController extends UserController{
             campCommitteeSlots = sc.nextInt();
         }
         camp.setCampCommitteeSlots(campCommitteeSlots);
+        camp.setCampCommitteeRemainingSlots(campCommitteeSlots);
 
         //total number of slots
         System.out.println("Enter total number of camp slots: ");

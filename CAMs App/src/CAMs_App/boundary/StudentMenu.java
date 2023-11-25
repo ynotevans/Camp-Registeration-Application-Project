@@ -86,7 +86,7 @@ public class StudentMenu implements Menu {
                             Camp selectedCamp = DatabaseService.getCamp(campName);
                             AuthData.setCurrentCamp(selectedCamp);
                             
-                            if (currentStudent.getComitteeCamp()==selectedCamp){
+                            if (selectedCamp.getCommittee().contains(currentStudent)){
                                 System.out.println("Please toggle to camp committee menu in the menu...");
                                 HelperService.wait(1);
                                 viewApp();
