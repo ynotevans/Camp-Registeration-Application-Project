@@ -329,14 +329,19 @@ public class StaffController extends UserController{
         StaffCampService.viewCampsCreated(userID);
     }
 
-    public void generateReport(){
+    public void generateStudentReport(){
       System.out.println("Generating student attendence report...");
-      StaffCampService.generateStudentListReport();
+      CampManagementService.generateStudentListReport();
     }
 
-    public void viewCommitteeList(){
+    public void generateCommitteeReport(){
       System.out.println("Generating committee performance report...");
       StaffCampService.commiteePerformanceReport();
+    }
+
+    public void generateEnquiriesReport(){
+        System.out.println("List of all enquiries of the camp");
+        CampManagementService.enquiriesReport();
     }
 
 

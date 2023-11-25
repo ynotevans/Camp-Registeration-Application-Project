@@ -9,22 +9,29 @@ import CAMs_App.service.*;
 public class CampComController extends StudentController{
     Student user = (Student)AuthData.getCurrentUser();
     
-    public void createSuggestion(){
-        System.out.println("Enter your suggestion: ");
-        String s = sc.nextLine();
-        SuggestionsService.createSuggestion(s);
-    }
-
+    //camp
     public void viewCampDetails(){    
         Camp camp = AuthData.getCurrentCamp();
         HelperService.viewCamp(camp);
     }
 
-    public void generateReport(){}
+    public void generateEnquiriesReport(){
+        System.out.println("List of all enquiries of the camp");
+        CampManagementService.enquiriesReport();
+    }
 
+    public static void addPoints(Student student) {
+		student.setPoints(student.getPoints() + 1);
+	}
+
+    public void generateStudentReport(){
+        System.out.println("Generating student attendence report...");
+        CampManagementService.generateStudentListReport();
+      }
+  
     
 	
-	
+	//enquiries
     public void viewAllEnquiries(){
         Camp camp = user.getComitteeCamp(); // ???
         ArrayList<Enquiries> q = camp.getEnquiryList();
@@ -61,6 +68,12 @@ public class CampComController extends StudentController{
     }
     
   //Suggestions
+      public void createSuggestion(){
+        System.out.println("Enter your suggestion: ");
+        String s = sc.nextLine();
+        SuggestionsService.createSuggestion(s);
+    }
+
     public void submitSuggestion(){
         Camp camp = user.getComitteeCamp();
         System.out.println("Please provide your suggestion: ");
@@ -142,9 +155,7 @@ public class CampComController extends StudentController{
 
     
 
-    public static void addPoints(Student student) {
-		student.setPoints(student.getPoints() + 1);
-	}
+   
     
 
 }
