@@ -58,15 +58,15 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Edit Camp");
                         staffController.editCamp();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
 
                     case 2:    //delete camp
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Delete Camp");
-                        System.out.println("Enter camp name to be deleted: ");
-                        String campName = sc.next();
-                        staffController.deleteCamp(campName);
+                        staffController.deleteCamp();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     
@@ -74,6 +74,7 @@ public class StaffCampMenu implements Menu {
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Camp Menu ---> Toggle Camp Visibility");
                         staffController.toggleVisibility();
+                        HelperService.pressAnyKeyToContinue();
                         this.viewApp();
                         break;
                     

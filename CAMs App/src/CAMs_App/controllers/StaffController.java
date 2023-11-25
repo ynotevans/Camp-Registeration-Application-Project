@@ -304,8 +304,9 @@ public class StaffController extends UserController{
         }while(choice!=9);
     }
 
-    public void deleteCamp(String campName){
-        if(StaffCampService.deleteCamp(campName)){
+    public void deleteCamp(){
+        Camp camp = AuthData.getCurrentCamp();
+        if(!(camp.getAttendees().isEmpty() || camp.getCommittee().isEmpty())){
             System.out.println("Unable to delete camp with participants");
         }
         else{
@@ -315,6 +316,10 @@ public class StaffController extends UserController{
 
     public void toggleVisibility(){
         Camp camp = AuthData.getCurrentCamp();
+        if(!(camp.getAttendees().isEmpty() && camp.getCommittee().isEmpty())){
+            System.out.println("Unable to turn off visibility: there are students who have already signed up for this camp");
+            return;
+        }
         System.out.println("Toggle camp visibility");
        
         while (true){
