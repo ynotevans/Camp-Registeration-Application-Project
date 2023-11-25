@@ -180,10 +180,15 @@ public class StudentController extends UserController {
         
         System.out.println("Which enquiry you would like to delete ?");
         int index = HelperService.readInt();
-        
-        while(!(qList.get(index).getInquirer().equals(student.getUserID()))) {
+        Enquiries q = qList.get(index - 1);
+        while(!(q.getInquirer().equals(student.getUserID()))) {
         	System.out.println("Invalid enquiry id, please try again");
             index = HelperService.readInt();
+        }
+        q = qList.get(index - 1);
+        if(q.getProcessed()){
+            System.out.println("Unable to delete processed enquiries");
+            return;
         }
         
         EnquiriesService.viewEnquiries(qList.get(index - 1));

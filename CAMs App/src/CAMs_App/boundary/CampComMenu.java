@@ -49,7 +49,7 @@ public class CampComMenu implements Menu{
                         break;
                 
                     case 3:    //reply enquiries
-                        campComController.replyEnquiry(0);   //update the functions
+                        campComController.replyEnquiry();   //update the functions
                         break;
                     
                     case 4:    //creata suggestion

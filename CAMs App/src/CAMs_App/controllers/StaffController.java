@@ -407,13 +407,17 @@ public class StaffController extends UserController{
     }
 
     public void replyEnquiries(){
+        if(!EnquiriesService.hasNewEnquiries()){
+            System.out.println("No new enquiries to reply");
+            return;
+        }
         Camp camp = AuthData.getCurrentCamp();
-        EnquiriesService.viewAllEnquiries();
+        EnquiriesService.viewNewEnquiries();
         System.out.println("Which enquiries you would like to reply: ");
         int index = HelperService.readInt(1 , camp.getEnquiryList().size(),"Enquiry index out of bound"); 
         Enquiries q = camp.getEnquiryList().get(index -1);
         if(q.getProcessed()) {
-            System.out.println("Unable to reply to processed enquiry");
+            System.out.println("Wrong ID , Unable to reply to processed enquiry");
             return;
         }
         System.out.println("Enter your reply: ");

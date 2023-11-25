@@ -13,7 +13,6 @@ public class Student extends User {
 	
 	public Student(String userID, String password, Faculty faculty, String name) {
 		super(userID, password, faculty, name);
-		super.setIdentity(Identity.student);
 		isCommittee = false; 
 		committeeCamp = null;
 		points = 0;

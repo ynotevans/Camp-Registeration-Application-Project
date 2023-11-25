@@ -1,6 +1,7 @@
 package CAMs_App.entity;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import CAMs_App.enums.*;
 
@@ -34,7 +35,7 @@ public class CampInfo{
         setCampCommitteeSlots(campCommitteeSlots); //total committee slot
         setCampCommitteeRemainingSlots(campCommitteeSlots); //remaining committee slot
         //total remaining slot = remaining slot for committee + student
-
+        setNumberOfCampDays((int)ChronoUnit.DAYS.between(campDate, campEndDate)+1);
         setDescription(description);
         setStaffInCharge(staffInCharge);
         setVisibility(visibility);
