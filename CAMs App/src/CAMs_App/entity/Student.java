@@ -4,7 +4,7 @@ import java.util.*;
 import CAMs_App.enums.*;
 import CAMs_App.service.DatabaseService;
 
-public class Student extends User {
+public class Student extends User implements Comparable<Student> {
 	private boolean isCommittee = false;
 	private ArrayList<String> registeredCamp;
 	private ArrayList<String> withdrawnCamp;
@@ -79,5 +79,15 @@ public class Student extends User {
 	public void setCommitteeCampName(String committeeCampName){
 		this.committeeCampName = committeeCampName;
 	}
+
+	/**
+     * Compares the different parameters between students.
+     */
+	@Override
+    public int compareTo(Student other) {
+        return Comparator.comparing(Student::getName)
+                .thenComparing(Student::getFaculty)
+                .compare(this, other);
+    }
 
 }

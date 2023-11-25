@@ -109,12 +109,13 @@ public class StudentCampService {
 		Student user = (Student)AuthData.getCurrentUser();
 		int i = 0;
 		ArrayList<String> registeredCamp = user.getRegisteredCamp();
-		if(registeredCamp != null){
+		List<Camp> sortArr= HelperService.sortCampListByName(registeredCamp);
+		if(sortArr != null){
 			HelperService.clearScreen();
-			HelperService.printRoute("Student Menu ---> View Available Camp");
-			for (String camp : registeredCamp){
-				Camp camp1 = DatabaseService.getCamp(camp);
-				HelperService.viewCamp(camp1);
+			HelperService.printRoute("Student Menu ---> View Registered Camp");
+
+			for (Camp camp1 : sortArr){
+				HelperService.printRegisteredCamp(camp1, (Student)AuthData.getCurrentUser());
 				i++;
 			}
 		}
