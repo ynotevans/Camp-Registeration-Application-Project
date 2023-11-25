@@ -35,7 +35,7 @@ public class StaffController extends UserController{
         while(true){
             try {
                 // Parse the user input into a LocalDateTime object
-                System.out.println("Enter starting date in dd-mm-yyyy format:");
+                System.out.println("Enter starting date for camp created in dd-mm-yyyy format:");
                 String start = sc.nextLine();
                 LocalDate startDateTime = LocalDate.parse(start,formatter);
                 if(startDateTime.isBefore(LocalDate.now())){
@@ -55,7 +55,7 @@ public class StaffController extends UserController{
     while (true) {
         try {
             // Parse the user input into a LocalDateTime object
-            System.out.println("Enter end date for camp in dd-mm-yyyy format:");
+            System.out.println("Enter end date for camp created in dd-mm-yyyy format:");
             String end = sc.nextLine();
             LocalDate endDateTime = LocalDate.parse(end, formatter);
 
@@ -157,6 +157,7 @@ public class StaffController extends UserController{
 
         //add camp to database
         StaffCampService.addNewCampToDB(camp);
+        System.out.println("Camp created successfully!");
     }
 
     public void editCamp(){

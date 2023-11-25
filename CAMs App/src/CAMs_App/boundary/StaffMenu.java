@@ -45,6 +45,7 @@ public class StaffMenu implements Menu{
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Menu ---> Create Camp");
                         staffController.createCamp();
+                        HelperService.wait(2);
                         break;
 
                     case 2:    //view all camp
