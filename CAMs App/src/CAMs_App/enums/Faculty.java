@@ -1,8 +1,83 @@
 package CAMs_App.enums;
 
+/**
+ * The {@link Faculty} enum represents various faculties in NTU in the system.
+ * The {@link User} is allocated to a single faculty
+ */
 public enum Faculty{
-        NIE, NBS, EEE, SOH, MAE, SCSE,
-        SPMS, SSS, CCEB, LKC, SBS, CEE,
-        MSE, WKWSOC, ADM, ASE, SCBE,
-        NTU; //for staff
-    };
+    /**
+     * {@link Student} belongs to one of the following faculties
+     */
+    /**
+     * Faculty for Nanyang Institute of Education.
+     */
+    NIE,
+    /**
+     * Faculty for Nanyang Business School.
+     */
+    NBS,
+    /**
+     * Faculty for School of Electrical and Electronic Engineering.
+     */
+    EEE,
+    /**
+     * Faculty for School of Humanities.
+     */
+    SOH,
+    /**
+     * Faculty for School of Mechanical and Aerospace Engineering.
+     */
+    MAE,
+    /**
+     * Faculty for School of Computer Science and Engineering.
+     */
+    SCSE,
+    /**
+     * Faculty for School of Physical and Mathematical Sciences.
+     */
+    SPMS,
+    /**
+     * Faculty for School of Social Sciences.
+     */
+    SSS,
+    /**
+     * Faculty for College of Continuing and Lifelong Education.
+     */
+    CCEB,
+    /**
+     * Faculty for Lee Kong Chian School of Medicine.
+     */
+    LKC,
+    /**
+     * Faculty for School of Biological Science.
+     */
+    SBS,
+    /**
+     * Faculty for School of Civil and Environmental Engineering.
+     */
+    CEE,
+    /**
+     * Faculty for School of Materials Science and Engineering.
+     */
+    MSE,
+    /**
+     * Faculty for Wee Kim Wee School of Communication and Information.
+     */
+    WKWSOC,
+    /**
+     * Faculty for School of Art, Design and Media.
+     */
+    ADM,
+    /**
+     * Faculty for Asian School of the Environment.
+     */
+    ASE,
+    /**
+     * Faculty for School of Chemistry,Chemical Engineering and Biomedical.
+     */
+    SCBE,
+    /**
+     * {@link Staff} uses to NTU faculty
+     */
+    NTU; 
+};
