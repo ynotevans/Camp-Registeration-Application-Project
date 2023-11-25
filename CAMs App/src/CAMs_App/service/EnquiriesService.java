@@ -76,33 +76,5 @@ public final class EnquiriesService {
 
         }
     }
-
-     // public static void replyEnquiries(Enquiries q ,String reply){
-       
-    //         q.setAnswer(reply);
-    //         q.setAnswerer(AuthData.getCurrentUser().getUserID());
-    //         q.setProcessed();
-    
-    // }
-    
-    // public static boolean editEnquiries(Enquiries q , String question){
-    //    if(q.getProcessed()) return false;
-    //    else{
-    //     q.setEnquiry(question);
-    //    }
-    //    return true;
-        
-    // }
-
-    // public static boolean deleteEnquiry(String CampName , int index){
-    //     Camp camp = DatabaseService.getCamp(CampName);
-    //     Enquiries q = camp.getEnquiryList().get(index);
-    //     if(q.getProcessed()) return false;
-    //     else{
-    //        camp.getEnquiryList().remove(q);
-    //        return true;
-    //     }
-    // }
-
-    
+ 
 }
