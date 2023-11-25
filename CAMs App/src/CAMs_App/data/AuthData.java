@@ -6,7 +6,6 @@ import CAMs_App.entity.*;
 public class AuthData {
     private static User currentUser;
     private static Camp currentCamp;
-    private AuthData(){};
 
     public static void setCurrentUser(User currentUser) {
         if(currentUser instanceof Student)  AuthData.currentUser = (Student)currentUser;

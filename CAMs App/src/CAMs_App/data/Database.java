@@ -3,34 +3,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CAMs_App.entity.Camp;
-import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
-import CAMs_App.entity.Suggestions;
 import CAMs_App.service.DatabaseService;
-
-// import interfaces.IFileDataService;
-
 
 public class Database {
 
 	private static Map<String, Student> studentsData = new HashMap<String, Student>();
 
-	
 	private static Map<String, Staff> staffData = new HashMap<String, Staff>();
-
-	
-	//private static Map<String, CampCompMem> campCompMemData = new HashMap<String, CampCompMem>();
 
 	private static Map<String, Camp> campData = new HashMap<String, Camp>();
 
-	private static Map<Integer, Suggestions> suggestionsData = new HashMap<Integer, Suggestions>();
-
-    private static Map<Integer, Enquiries> enquiriesData = new HashMap<Integer, Enquiries>();
-
-	
-	private Database() {
-	}
 
 	public static void readData() {
 		DatabaseService.readfromStaffCSV();
@@ -43,7 +27,6 @@ public class Database {
 		DatabaseService.writetoStudentCSV(Database.getStudentsData());
 		DatabaseService.writetoCampCSV(Database.getCampData());
 	}
-
 
 	// ---------- Student ---------- //
 	/**
@@ -64,7 +47,6 @@ public class Database {
 	 */
 	public static void setStudentsData(Map<String, Student> studentsData) {
 		Database.studentsData = studentsData;
-		// fileDataService.exportStudentData(filePathsMap.get("user"), filePathsMap.get("student"), studentsData);
 	}
 
 	// ---------- Staff ---------- //
@@ -86,9 +68,7 @@ public class Database {
 	 */
 	public static void setstaffData(Map<String, Staff> staffData) {
 		Database.staffData = staffData;
-		// fileDataService.exportSupervisorData(filePathsMap.get("user"), filePathsMap.get("supervisor"), supervisorsData);
 	}
-
 
 	// ---------- Camp ---------- //
 	/**
@@ -109,140 +89,6 @@ public class Database {
 	 */
 	public static void setCampData(Map<String, Camp> campData) {
 		Database.campData = campData;
-		// fileDataService.exportProjectData(filePathsMap.get("project"), projectsData);
 	}
 
-	// ---------- Suggestion ---------- //
-	/**
-	 * Gets the Suggestion data map.
-	 *
-	 * @return a {@link Map} containing Suggestion ID as the key and {@link Request}
-	 *         objects as the value
-	 */
-	public static Map<Integer, Suggestions> getSuggestionsData() {
-		return Database.suggestionsData;
-	}
-
-	/**
-	 * Sets the Suggestion data map and saves the data to the file system.
-	 *
-	 * @param requestData a {@link Map} containing Suggestion ID as the key and
-	 *                    {@link Request} objects as the value
-	 */
-	public static void setSuggestionsData(Map<Integer, Suggestions> suggestionsData) {
-		Database.suggestionsData = suggestionsData;
-		// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
-		// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
-    }
-
-    // ---------- Enqueiries ---------- //
-	/**
-	 * Gets the Enqueiries data map.
-	 *
-	 * @return a {@link Map} containing Enqueiries ID as the key and {@link Enqueiries}
-	 *         objects as the value
-	 */
-	public static Map<Integer, Enquiries> getEnquiriesData() {
-		return Database.enquiriesData;
-	}
-
-	/**
-	 * Sets the Enqueiries data map and saves the data to the file system.
-	 *
-	 * @param requestData a {@link Map} containing Enqueiries ID as the key and
-	 *                    {@link Enqueiries} objects as the value
-	 */
-	public static void setEnquiriesData(Map<Integer, Enquiries> EnquiriesData) {
-		Database.enquiriesData = EnquiriesData;
-		// fileDataService.exportRequestData(filePathsMap.get("request"), filePathsMap.get("transferStudentRequest"),
-		// 		filePathsMap.get("changeProjectTitleRequest"), requestData);
-	}
-
-/*
-    // private static ArrayList<User> database = new ArrayList<>();
-    // private static ArrayList<Camp> campDataBase = new ArrayList<>();
-
-    // public ArrayList<Camp> getCampDataBase() {
-    //     return campDataBase;
-    // }
-
-    // public ArrayList<User> getDatabase() {
-    //     return database;
-    // }
-
-    // public static void setCampDataBase(ArrayList<Camp> campDataBase) {
-    //     Database.campDataBase = campDataBase;
-    // }
-
-    // public static void setDatabase(ArrayList<User> database) {
-    //     Database.database = database;
-    // }
-
-
-    // // to incorporate service 
-    // public static int findUserPos(User user, ArrayList<User> database){
-    //     int j;
-    //     for (j=0;j<database.size();j++) {
-    //         if (database.get(j).getUserID() == user.getUserID())
-    //             return j;
-    //     }
-    //     return -1;
-    // }
-
-    // public static void addUserToDatabase(User user, ArrayList<User> database){
-    //     int j = findUserPos(user, database);
-    //     if (j!=-1) {
-    //         database.set(j,user);
-    //         System.out.println(user.getUserID() + " successfully added.");
-    //         return;
-    //     }
-
-    //     database.add(user);
-    //     System.out.println(user.getUserID() + " successfully added.");
-    //     return;
-    // }
-
-    // // Camp
-
-    // public static int findCampPos(Camp camp, ArrayList<Camp> campDataBase){
-    //     int j;
-    //     for (j=0;j<campDataBase.size();j++) {
-    //         if (campDataBase.get(j).getCampName() == camp.getCampName())
-    //             return j;
-    //     }
-    //     return -1;
-    // }
-
-    // public static boolean findCamp(Camp camp, ArrayList<Camp> campDataBase){
-    //     int j;
-    //     for (j=0;j<campDataBase.size();j++) {
-    //         if (campDataBase.get(j).getCampName() == camp.getCampName())
-    //             return true;
-    //     }
-    //     return false;
-    // }    
-
-    // public static void addCampToDatabase(Camp camp, ArrayList<Camp> campDataBase){
-    //     int j = findCampPos(camp, campDataBase);
-    //     if (j!=-1) {
-    //         campDataBase.set(j,camp);
-    //         System.out.println(camp.getCampName() + " successfully added.");
-    //         return;
-    //     }
-
-    //     campDataBase.add(camp);
-    //     System.out.println(camp.getCampName() + " successfully added.");
-    //     return;
-    // }
-
-    // public static boolean removeCampFromDatabase(Camp camp, ArrayList<Camp> campDataBase){
-    //     int j = findCampPos(camp, campDataBase);
-    //     if (j!=-1) {
-    //         campDataBase.remove(j);
-    //         System.out.println("Successfully removed.");
-    //         return true;
-    //     }
-    //     return false;
-    // }
-*/
 }
