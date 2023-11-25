@@ -9,6 +9,7 @@ import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
 import CAMs_App.entity.Student;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
 
@@ -19,14 +20,14 @@ public class StudentMenu implements Menu {
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Student Menu");
-        System.out.println("Welcome back "+ currentStudent.getName() + "!!!");
-        System.out.println("Student profile reflected here....");
-        System.out.println("Available actions for you: ");
-        System.out.println("(1) View available camps");
-        System.out.println("(2) View registered camp(s)");
-        System.out.println("(3) Switch to camp committee mode");
-        System.out.println("(4) Change password");
-        System.out.println("(5) Logout\n");
+        ColouredTextPrinter.printBlue("Welcome back "+ currentStudent.getName() + "!!!");
+        ColouredTextPrinter.printBlue("Student profile reflected here....");
+        ColouredTextPrinter.printBlue("Available actions for you: ");
+        ColouredTextPrinter.printBlue("(1) View available camps");
+        ColouredTextPrinter.printBlue("(2) View registered camp(s)");
+        ColouredTextPrinter.printBlue("(3) Switch to camp committee mode");
+        ColouredTextPrinter.printBlue("(4) Change password");
+        ColouredTextPrinter.printBlue("(5) Logout\n");
     }
 
     

@@ -7,6 +7,7 @@ import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.User;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
 
@@ -17,13 +18,13 @@ public class StaffMenu implements Menu{
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Staff Menu");
-        System.out.println("Welcome back "+ currentStaff.getName() + "!!!");
-        System.out.println("Available actions for you: ");
-        System.out.println("(1) Create new camp");
-        System.out.println("(2) View all camps");
-        System.out.println("(3) View camp(s) created by you");
-        System.out.println("(4) Change password");
-        System.out.println("(5) Logout\n");
+        ColouredTextPrinter.printBlue("Welcome back "+ currentStaff.getName() + "!!!");
+        ColouredTextPrinter.printBlue("Available actions for you: ");
+        ColouredTextPrinter.printBlue("(1) Create new camp");
+        ColouredTextPrinter.printBlue("(2) View all camps");
+        ColouredTextPrinter.printBlue("(3) View camp(s) created by you");
+        ColouredTextPrinter.printBlue("(4) Change password");
+        ColouredTextPrinter.printBlue("(5) Logout\n");
     }
 
     

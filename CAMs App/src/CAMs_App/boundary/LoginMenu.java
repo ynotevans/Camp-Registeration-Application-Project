@@ -3,16 +3,17 @@ package CAMs_App.boundary;
 import java.util.Scanner;
 
 import CAMs_App.controllers.UserController;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 
 public class LoginMenu implements Menu {
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Login Menu");
-        System.out.println("Login as:");
-        System.out.println("(1) Staff");
-        System.out.println("(2) Student");
-        System.out.println("(3) Exit\n");
+        ColouredTextPrinter.printGreen("Login as: ");
+        ColouredTextPrinter.printGreen("(1) Staff ");
+        ColouredTextPrinter.printGreen("(2) Student ");
+        ColouredTextPrinter.printGreen("(3) Exit \n");
         
     }
 

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
-
+import CAMs_App.service.ColouredTextPrinter;
 public class StudentCampMenu implements Menu{
     StudentController studentController = new StudentController();
     StudentMenu studentMenu = new StudentMenu();
@@ -14,13 +14,13 @@ public class StudentCampMenu implements Menu{
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Student Camp Menu ---> "+ AuthData.getCurrentCamp().getCampName());
-        System.out.println("Available actions for this camp: ");
-        System.out.println("(1) Register camp");
-        System.out.println("(2) Withdraw camp");
-        System.out.println("(3) Submit enquiries for this camp");
-        System.out.println("(4) View your submitted enquiries");
-        System.out.println("(5) Go to previous page");
-        System.out.println("(6) Logout\n");
+        ColouredTextPrinter.printBlue("Available actions for this camp: ");
+        ColouredTextPrinter.printBlue("(1) Register camp");
+        ColouredTextPrinter.printBlue("(2) Withdraw camp");
+        ColouredTextPrinter.printBlue("(3) Submit enquiries for this camp");
+        ColouredTextPrinter.printBlue("(4) View your submitted enquiries");
+        ColouredTextPrinter.printBlue("(5) Go to previous page");
+        ColouredTextPrinter.printBlue("(6) Logout\n");
     }
 
     
