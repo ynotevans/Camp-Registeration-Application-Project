@@ -4,6 +4,9 @@ import java.util.Scanner;
 import CAMs_App.service.AuthStaffService;
 import CAMs_App.service.AuthStudentService;
 import CAMs_App.service.HelperService;
+import CAMs_App.data.AuthData;
+import CAMs_App.entity.Student;
+import CAMs_App.entity.User;
 import CAMs_App.service.AuthService;
 import CAMs_App.service.UserService;
 
@@ -17,10 +20,18 @@ public class UserController {
         boolean success = false;
         
         do {
+            User user = (User)AuthData.getCurrentUser();
             System.out.println("Enter your old password (Enter X to quit): ");
             oldPassword = sc.next();
+            
             if (oldPassword.equalsIgnoreCase("X")) {
                 System.out.println("Exiting change password... ");
+                HelperService.wait(1);
+                break;
+            }
+            
+            if (oldPassword != user.getPassword()){
+                System.out.println("Incorrect old password, exiting...");
                 HelperService.wait(1);
                 break;
             }
