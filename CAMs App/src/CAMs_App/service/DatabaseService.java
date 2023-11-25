@@ -238,10 +238,9 @@ public class DatabaseService {
 					singleenquiry.add(camp.getEnquiryList().get(i).getInquirer());
 					singleenquiry.add(camp.getEnquiryList().get(i).getAnswerer());
 					singleenquiry.add(String.valueOf(camp.getEnquiryList().get(i).getProcessed()));
-				}
 
-				for(int i=0; i<camp.getEnquiryList().size();i++){
 					enquiriesstr.add( String.join("*", singleenquiry));
+					singleenquiry.clear();
 				}
 
 				for(int i=0; i<camp.getSuggestionList().size();i++){
@@ -249,11 +248,12 @@ public class DatabaseService {
 					singlesuggestion.add(camp.getSuggestionList().get(i).getSuggestBy());
 					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getStatus()));
 					singlesuggestion.add(String.valueOf(camp.getSuggestionList().get(i).getAccepted()));
+
+					suggestionsstr.add( String.join("*", singlesuggestion));
+					singlesuggestion.clear();
 				}
 
-				for(int i=0; i<camp.getSuggestionList().size();i++){
-					suggestionsstr.add( String.join("*", singlesuggestion));
-				}
+				
 
 				String attendees = String.join("|", attendeestr);
 				String committee = String.join("|", committeestr);
@@ -353,13 +353,13 @@ public class DatabaseService {
 						if(enquiryProccessd)
 							enquiries.setProcessed();
 						camp.addQuery(enquiries);
-						
 					}
 				}
 				
 				if(!suggestionstr[0].equals("null")){
 					for(int j=0; j<suggestionstr.length; j++){
 						String[] singleSuggestion = suggestionstr[j].split("\\*");
+						System.out.println(singleSuggestion);
 						String message = singleSuggestion[0];
 						String suggester = singleSuggestion[1];
 						String status = singleSuggestion[2].toUpperCase();
@@ -370,8 +370,9 @@ public class DatabaseService {
 						newSuggestion.setSuggestionStatus(status);
 						newSuggestion.setAccepted(accepted);
 						camp.addSuggestion(newSuggestion);
-					
+						
 					}
+					
 				}
 				
 				user.put(values[0], camp);
