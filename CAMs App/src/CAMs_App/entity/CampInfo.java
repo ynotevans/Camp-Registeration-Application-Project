@@ -31,7 +31,7 @@ public class CampInfo{
         setUserGroup(userGroup);
         setLocation(location);
         setTotalSlots(totalSlots); //total = attendee + student
-        setRemainingSlot(remainingSlot); //remaining slot for student
+        setRemainingSlot(totalSlots - campCommitteeSlots); //remaining slot for student
         setCampCommitteeSlots(campCommitteeSlots); //total committee slot
         setCampCommitteeRemainingSlots(campCommitteeSlots); //remaining committee slot
         //total remaining slot = remaining slot for committee + student

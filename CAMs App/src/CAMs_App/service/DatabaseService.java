@@ -37,6 +37,7 @@ public class DatabaseService {
 		header.add("Name");
 		header.add("isCommittee");
 		header.add("points");
+		header.add("committeeCamp");
 		header.add("registeredCamp");  //ArrayList
 		header.add("withdrawnCamp");   //ArrayList
 
@@ -59,8 +60,9 @@ public class DatabaseService {
 					withdrawnCamp = String.join("|", student.getWithdrawnCamp());
 
 				// Write the values to the CSV file
-            	writer.write(String.format("%s,%s,%s,%s,%b,%d,%s,%s" , student.getUserID(),student.getPassword(), 
+            	writer.write(String.format("%s,%s,%s,%s,%b,%d,%s,%s,%s" , student.getUserID(),student.getPassword(), 
 											student.getFaculty(),student.getName(),student.getIsComittee(),student.getPoints(),
+											student.getComitteeCamp()==null ? "null": student.getComitteeCamp().getCampName(),
 											registeredCamp.isEmpty() ? "null" :registeredCamp,
 											withdrawnCamp.isEmpty() ? "null" :withdrawnCamp));
 				writer.newLine();
@@ -88,6 +90,8 @@ public class DatabaseService {
 				Student student = new Student(values[i], values[++i], Faculty.valueOf(values[++i]), values[++i]);
 				student.setIsComittee(Boolean.parseBoolean(values[++i]));
 				student.setPoints(Integer.parseInt(values[++i]));
+				Camp committeeCamp = DatabaseService.getCamp(values[++i]);
+				student.setCommitteeCamp(committeeCamp);
 				ArrayList<String> registerCamp = new ArrayList<String>();
 				ArrayList<String> withdrawCamp = new ArrayList<String>();
 				
