@@ -49,14 +49,14 @@ public class StudentController extends UserController {
         }
     }
 
-    public void joinAsCommittee(){
+    public boolean joinAsCommittee(){
         Student student = (Student)AuthData.getCurrentUser();
         Camp camp = AuthData.getCurrentCamp();
         if(student.getIsComittee()){
             //check if the student is a committee for any upcoming camp
             // if(!student.getComitteeCamp().getCampEndDate().isAfter(LocalDate.now())){
                 System.out.println("You are not allowed to sign up as committee for more than 1 camp");
-                return;
+                return false; 
             // }
         }
         
@@ -77,8 +77,9 @@ public class StudentController extends UserController {
             StudentCampService.registerAsCommittee(position);
             student.setCommitteeCamp(camp);
             System.out.println("Successfully Registered as committee!\n");
+            return true;
         }
-
+        return false;
 
     }
 

@@ -51,6 +51,8 @@ public class StaffMenu implements Menu{
                         HelperService.clearScreen();
                         HelperService.printRoute("Staff Menu ---> View All Camp");
                         staffController.viewAllCamp();
+                        System.out.print("Enter any key to go back menu.");
+                        String key = sc.next();
                         break;
                     
                     case 3:    //view staff created camp
