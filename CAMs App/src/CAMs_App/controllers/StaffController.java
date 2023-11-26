@@ -501,7 +501,11 @@ public class StaffController extends UserController{
       }
     }
 
-     public void EnquiriesReportFile(){
+    /**
+     * Calls {@link CampManagementService} to generate enquiry list report as a .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
+    public void EnquiriesReportFile(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
       if(filter == 1){
@@ -551,6 +555,10 @@ public class StaffController extends UserController{
       }
     }
 
+    /**
+     * Calls {@link CampManagementService} to generate camp report as a .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
     public void CampReportFile(){
         System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
         int filter = HelperService.readInt();
@@ -570,7 +578,7 @@ public class StaffController extends UserController{
 
 
 
-//Enquiries
+
     /**
      * Calls {@link EnquiriesService} to display all enquiries, can
      * choose to filter by processed or new.
@@ -619,6 +627,7 @@ public class StaffController extends UserController{
     }
 
     /**
+     * Calls {@link EnquiriesService} to display all new enquiries
      * Prompts the staff to choose an enquiry from the list and reply to it.
      */
     public void replyEnquiries(){
@@ -643,7 +652,7 @@ public class StaffController extends UserController{
         System.out.println("Enquiries replied");
     }
 
-//suggestions
+    
     /**
      * Calls {@link SuggestionService} to display all suggestions, can
      * choose to filter by processed, processing or new.
@@ -741,7 +750,8 @@ public class StaffController extends UserController{
     }
  }
     /**
-     * Prompts the staff to choose a suggestion from the list to set as processing.
+     *  Calls {@link SuggestionService} to check if there is new suggestion
+     *  If yes then prompts the staff to choose a suggestion from the list to set as processing.
      */
     public void processSuggestions(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
@@ -775,6 +785,8 @@ public class StaffController extends UserController{
     }
 
     /**
+     * Calls {@link SuggestionService} to check if there is new suggestion or
+     * has suggestion currently in processing
      * Prompts the staff to choose a suggestion from the list to approve.
      */
     public void approveSuggestion(){ 
