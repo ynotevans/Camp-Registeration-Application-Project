@@ -224,4 +224,316 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
+
+    public static void campReportTXT(){
+        Camp camp = AuthData.getCurrentCamp();
+        String filePath = "CAMs App/report/CampReport_" + camp.getCampName()+ ".txt";
+    
+        //for committee
+        ArrayList<Student> comm  = camp.getCommittee();
+
+        //for attendees
+        ArrayList<Student> attendees  = camp.getAttendees();
+
+        //for enquiries
+        ArrayList <Enquiries> qList1 = AuthData.getCurrentCamp().getEnquiryList();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Camp Report for " + camp.getCampName() + " : ");
+            writer.newLine(); 
+            writer.newLine(); 
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Committee List: ");
+            writer.newLine(); 
+            writer.newLine(); 
+            
+
+            if(comm.isEmpty()){
+                writer.write("No committee sign up for this camp.");
+                writer.newLine(); 
+            }
+            for(int i = 0 ; i < comm.size() ; i++){
+                Student student = comm.get(i);
+                writer.write("----------------------------------------------");
+                writer.newLine();
+                writer.write("Name: " + student.getName());
+                writer.newLine();
+                writer.write("Student ID: " + student.getUserID());
+                writer.newLine();
+                writer.write("Position: " + student.getCampComMem().getPosition());
+                writer.newLine();
+                writer.write("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
+                writer.newLine();
+                writer.write("Faculty: " + student.getFaculty());
+                writer.newLine();
+                writer.newLine(); 
+            }
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Attendees Lists: ");
+            writer.newLine(); 
+            writer.newLine(); 
+            
+
+            if(attendees.isEmpty()){
+                writer.write("No student sign up for the camp");
+                writer.newLine(); // Add a new line
+            }
+            for(int i = 0 ; i < camp.getAttendees().size() ; i++){
+                Student student = attendees.get(i);
+                writer.write("----------------------------------------------");
+                writer.newLine();
+                writer.write("Name: " + student.getName());
+                writer.newLine();
+                writer.write("Student ID: " + student.getUserID());
+                writer.newLine();
+                writer.write("Faculty: " + student.getFaculty().toString());
+                writer.newLine();
+                writer.write("Position: Participants");
+                writer.newLine();
+                writer.newLine(); // Add a new line
+            }
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Enquiries List: ");
+            writer.newLine(); 
+            writer.newLine(); 
+            
+
+            writer.write("New Enquiries: ");
+            writer.newLine(); // Add a new line
+            if(!EnquiriesService.hasNewEnquiries()){
+                writer.write("--- No new enquiry for this camp ---");
+                writer.newLine(); // Add a new line
+            }
+            else{
+                ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+                for(int i = 0 ; i < qList.size() ; i++){
+                    Enquiries q = qList.get(i);
+                    if(!q.getProcessed()){
+                        writer.write("----------------------------------------------");
+                        writer.newLine();
+                        writer.write("EnquiriesID: " + (i+1));
+                        writer.newLine();
+                        writer.write("Inquirer:" + q.getInquirer());
+                        writer.newLine();
+                        writer.write("Enquiry: " + q.getEnquiry());
+                        writer.newLine();
+                        writer.newLine();
+                        writer.write("Respondent: " + q.getAnswerer());
+                        writer.newLine();
+                        writer.write("Answer: " + q.getAnswer());
+                        writer.newLine();
+                        writer.newLine();
+                    }
+                }
+            }
+
+            writer.write("Processed Enquiries:");
+            writer.newLine();
+            int count = 0;
+            for(int i = 0 ; i < qList1.size() ; i++){
+                Enquiries q = qList1.get(i);
+                if(q.getProcessed()){
+                    count++;
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                }
+            }
+            if(count == 0){
+                writer.write("--- No processed enquiry for this camp ---");
+                writer.newLine();
+            }
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public static void campReportTXT(String faculty){
+        Camp camp = AuthData.getCurrentCamp();
+        String filePath = "CAMs App/report/Filtered_CampReport_" + camp.getCampName()+ ".txt";
+    
+        //for committee
+        ArrayList<Student> comm  = camp.getCommittee();
+
+        //for attendees
+        ArrayList<Student> attendees  = camp.getAttendees();
+        int count=0;
+
+        //for enquiries
+        ArrayList<Enquiries> qList = camp.getEnquiryList();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Camp Report for " + camp.getCampName() + " : ");
+            writer.newLine(); 
+            writer.newLine(); 
+
+            writer.write("Filtered by Faculty: " + faculty +"\n");
+            writer.newLine();
+            writer.newLine();
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Committee List: ");
+            writer.newLine(); 
+            writer.newLine(); 
+
+            if(comm.isEmpty()){
+                writer.write("No committee sign up for this camp.");
+                writer.newLine(); // Add a new line
+            }
+            for(int i = 0 ; i < comm.size() ; i++){
+                Student student = comm.get(i);
+                if(student.getFaculty().equals(faculty)){
+                    count++;
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("Name: " + student.getName());
+                    writer.newLine();
+                    writer.write("Student ID: " + student.getUserID());
+                    writer.newLine();
+                    writer.write("Position: " + student.getCampComMem().getPosition());
+                    writer.newLine();
+                    writer.write("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
+                    writer.newLine();
+                    writer.write("Faculty: " + student.getFaculty());
+                    writer.newLine();
+                    writer.newLine(); // Add a new line
+                }
+            }
+
+            if(count == 0) {
+                    writer.write("No committee from " + faculty);
+                    writer.newLine();
+            }
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Attendees Lists: ");
+            writer.newLine(); 
+            writer.newLine(); 
+            
+
+            if(attendees.isEmpty()){
+                writer.write("No student sign up for the camp");
+                writer.newLine(); // Add a new line
+            }
+             for(int i = 0 ; i < camp.getAttendees().size() ; i++){
+                Student student = attendees.get(i);
+                if(student.getFaculty().equals(faculty)){
+                    count++;
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("Name: " + student.getName());
+                    writer.newLine();
+                    writer.write("Student ID: " + student.getUserID());
+                    writer.newLine();
+                    writer.write("Faculty: " + student.getFaculty().toString());
+                    writer.newLine();
+                    writer.write("Position: Participants");
+                    writer.newLine();
+                    writer.newLine(); // Add a new line
+                }
+            }
+            if(count == 0) {
+                    writer.write("No attendees from " + faculty);
+                    writer.newLine();
+            }
+
+            writer.write("_____________________________________________________________________________________");
+            writer.newLine(); 
+            writer.newLine(); 
+            writer.write("Enquiries List: ");
+            writer.newLine(); 
+            writer.newLine(); 
+            
+
+            writer.write("New Enquiries: ");
+            writer.newLine(); // Add a new line
+            count = 0;
+            for(int i = 0 ; i < qList.size() ; i++){
+                Enquiries q = qList.get(i);
+                Student student = DatabaseService.getStudent(q.getInquirer());
+                String fac = student.getFaculty();
+                if(fac == faculty && !q.getProcessed()){
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                    count++;
+                }
+            }
+            if(count == 0){
+                writer.write("--- No new enquiry from student of " + faculty.toUpperCase()+ " ---");
+                writer.newLine();
+            } 
+
+            count = 0;
+            writer.write("Processed Enquiries:");
+            writer.newLine();
+            for(int i = 0 ; i < qList.size() ; i++){
+                Enquiries q = qList.get(i);
+                Student student = DatabaseService.getStudent(q.getInquirer());
+                String fac = student.getFaculty();
+                if(fac == faculty && q.getProcessed()){
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                    count++;
+                }
+            }
+            if(count == 0){
+                writer.write("--- No processed enquiries from student of " + faculty.toUpperCase()+" ---");
+                writer.newLine();
+            } 
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

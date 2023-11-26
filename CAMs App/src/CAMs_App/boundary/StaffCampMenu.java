@@ -188,7 +188,7 @@ public class StaffCampMenu implements Menu {
                                 if(generate == 1)
                                     staffController.generateCampReport();
                                 else
-                                    //staffController.CampReportFile();
+                                    staffController.CampReportFile();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
