@@ -12,11 +12,40 @@ import CAMs_App.enums.Faculty;
 import CAMs_App.entity.*;
 import CAMs_App.service.*;
 
+/**
+ * The {@link StaffController} class is responsible for handling the
+ * staff-specific user interface and user interactions. It extends the
+ * {@link UserController} class and provides functionality for staffs to
+ * view, create and edit camps, view and reply to enquiries, as well as
+ * view and process suggestions.
+ */
 public class StaffController extends UserController{
+	/**
+	 * {@link Scanner} object to get input from the user.
+	 */
     Scanner sc = new Scanner(System.in);
+    /**
+     * {@link DateTimeFormatter} object to format local date.
+     */
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 //camp related methods
+    /**
+     * Prompts the staff to create a new camp by entering the relevant data.
+     * A new {@link Camp} object is created with the following parameters:
+     * <ol>
+     * <li>Name</li>
+	 * <li>Start date</li>
+     * <li>End date</li>
+     * <li>Duration</li>
+     * <li>Registration closing date</li>
+     * <li>User group ({@link Faculty})</li>
+     * <li>Location</li>
+     * <li>Number of slots for attendee and committee</li>
+     * <li>Description</li>
+     * <li>Visibility to students</li>
+     * </ol>
+     */
     public void createCamp(){
         Camp camp = new Camp();
        
@@ -161,6 +190,18 @@ public class StaffController extends UserController{
         System.out.println("Camp created successfully!");
     }
 
+    /**
+     * Prompts the staff to edit the current camp, allowing them to change the following parameters:
+     * <ol>
+     * <li>Name</li>
+	 * <li>Dates</li>
+     * <li>Registration closing date</li>
+     * <li>User group ({@link Faculty})</li>
+     * <li>Number of slots for attendee and committee</li>
+     * <li>Location</li>
+     * <li>Description</li>
+     * </ol>
+     */
     public void editCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -304,6 +345,9 @@ public class StaffController extends UserController{
         }while(choice!=9);
     }
 
+    /**
+     * Deletes the current camp if it is empty.
+     */
     public void deleteCamp(){
         Camp camp = AuthData.getCurrentCamp();
         if(!(camp.getAttendees().isEmpty() || camp.getCommittee().isEmpty())){
@@ -315,6 +359,9 @@ public class StaffController extends UserController{
         }
     }
 
+    /**
+     * Toggles the visibility of the current camp.
+     */
     public void toggleVisibility(){
         Camp camp = AuthData.getCurrentCamp();
         if(!(camp.getAttendees().isEmpty() && camp.getCommittee().isEmpty())){
@@ -342,15 +389,27 @@ public class StaffController extends UserController{
 
     }
 
+    /**
+     * Calls {@link StaffCampService} to display all camps.
+     */
     public void viewAllCamp(){
         StaffCampService.viewAllCamps();
     }
-
+    
+    /**
+     * View a list of created camps by the given user ID.
+     * 
+     * @param userID The given ID of the user.
+     */
     public void viewCreatedCamp(String userID){
         System.out.println("Listing camps you created........");
         StaffCampService.viewCampsCreated(userID);
     }
 
+    /**
+     * Calls {@link CampManagementService} to generate student list report, can
+     * choose to filter by {@link Faculty}.
+     */
     public void generateStudentReport(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
@@ -364,23 +423,13 @@ public class StaffController extends UserController{
         System.out.println("Generating student attendence report...");
         CampManagementService.generateStudentListReport();
       }
+      
     }
 
-    public void studentReportFile(){
-        System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
-        int filter = HelperService.readInt();
-        if(filter == 1){
-        System.out.println("Faculty: ");
-        String faculty = sc.nextLine();
-        ColouredTextPrinter.printYellow("Generating student attendence report of " + faculty.toUpperCase() + " in .txt...\n");
-        CampManagementService.StudentListTXT(faculty.toUpperCase());
-        }
-        else{
-            ColouredTextPrinter.printYellow("Generating student attendence report in .txt...\n");
-            CampManagementService.StudentListTXT();
-        }
-    }
-
+    /**
+     * Calls {@link CampManagementService} to generate committee report, can
+     * choose to filter by {@link Faculty}.
+     */
     public void generateCommitteeReport(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
@@ -426,6 +475,10 @@ public class StaffController extends UserController{
       }
     }
 
+    /**
+     * Calls {@link CampManagementService} to generate camp list report, can
+     * choose to filter by {@link Faculty}.
+     */
     public void generateCampReport(){
         System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
@@ -461,6 +514,10 @@ public class StaffController extends UserController{
 
 
 //Enquiries
+    /**
+     * Calls {@link EnquiriesService} to display all enquiries, can
+     * choose to filter by processed or new.
+     */
     public void viewEnquiries(){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> q = camp.getEnquiryList();
@@ -504,6 +561,9 @@ public class StaffController extends UserController{
         }
     }
 
+    /**
+     * Prompts the staff to choose an enquiry from the list and reply to it.
+     */
     public void replyEnquiries(){
         if(!EnquiriesService.hasNewEnquiries()){
             System.out.println("No new enquiries to reply");
@@ -527,6 +587,10 @@ public class StaffController extends UserController{
     }
 
 //suggestions
+    /**
+     * Calls {@link SuggestionService} to display all suggestions, can
+     * choose to filter by processed, processing or new.
+     */
     public void viewSuggestions(){
     System.out.println("Select your choice: ");
     System.out.println("Press 1: View Suggestions Under Process");  
@@ -619,6 +683,9 @@ public class StaffController extends UserController{
         break;
     }
  }
+    /**
+     * Prompts the staff to choose a suggestion from the list to set as processing.
+     */
     public void processSuggestions(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
         if(!SuggestionsService.hasNewSuggestion()){
@@ -650,6 +717,9 @@ public class StaffController extends UserController{
         SuggestionsService.printSuggestions(sList.get(index - 1));
     }
 
+    /**
+     * Prompts the staff to choose a suggestion from the list to approve.
+     */
     public void approveSuggestion(){ 
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
          if(!(SuggestionsService.hasNewSuggestion() ||SuggestionsService.hasProcessingSuggestion())){
