@@ -1,0 +1,40 @@
+Camp Report for camp4 : 
+
+_____________________________________________________________________________________
+
+Committee List: 
+
+No committee sign up for this camp.
+_____________________________________________________________________________________
+
+Attendees Lists: 
+
+----------------------------------------------
+Name: Rose
+Student ID: TTT444
+Faculty: EEE
+Position: Participants
+
+_____________________________________________________________________________________
+
+Enquiries List: 
+
+New Enquiries: 
+----------------------------------------------
+EnquiriesID: 1
+Inquirer:TTT444
+Enquiry: TTT444 enquiry 1
+
+Respondent: NULL
+Answer: Not processed yet
+
+----------------------------------------------
+EnquiriesID: 2
+Inquirer:TTT444
+Enquiry: TTT444 enquiry 2
+
+Respondent: NULL
+Answer: Not processed yet
+
+Processed Enquiries:
+--- No processed enquiry for this camp ---
