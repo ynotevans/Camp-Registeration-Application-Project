@@ -1,0 +1,7 @@
+CAMs_App
+CAMs_App.boundary
+CAMs_App.controllers
+CAMs_App.data
+CAMs_App.entity
+CAMs_App.enums
+CAMs_App.service
