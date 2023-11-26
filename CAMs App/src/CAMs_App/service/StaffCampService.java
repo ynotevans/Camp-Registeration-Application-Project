@@ -90,7 +90,9 @@ public class StaffCampService extends CampManagementService{
     public static void commiteePerformanceReport(){
        Camp camp = AuthData.getCurrentCamp();
        ArrayList<Student> comm  = camp.getCommittee();
-
+        if(comm.isEmpty()){
+            System.out.println("No committee sign up for this camp");
+        }
        for(int i = 0 ; i < comm.size() ; i++){
         Student student = comm.get(i);
             System.out.println("Name: " + student.getName());

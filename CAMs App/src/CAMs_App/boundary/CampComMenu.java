@@ -100,22 +100,12 @@ public class CampComMenu implements Menu{
                         break;
 
                     case 7:    //generate enquiries report
-                        CampManagementService.enquiriesReport();
+                        campComController.generateEnquiriesReport();
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
-                    case 8:    //generate attendance report
-                        System.out.println("Press 1 to faculty by faculty");
-                        int filter = HelperService.readInt();
-                        if(filter == 1){
-                            System.out.println("Choose the faculty");
-                            String faculty = sc.nextLine();
-                            CampManagementService.generateStudentListReport(faculty);
-                        }
-                        else{
-                            CampManagementService.generateStudentListReport();
-                        }
-                        HelperService.pressAnyKeyToContinue();
+                    case 8:    //generate student report
+                        campComController.generateStudentReport();
                         break;
                     
                     case 9:    //switch mode

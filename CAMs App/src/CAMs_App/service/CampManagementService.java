@@ -75,9 +75,7 @@ public class CampManagementService {
             }
         }
     if(count == 0){
-        HelperService.clearScreen();
         System.out.println("No attendees from " + faculty);
-        HelperService.pressAnyKeyToContinue();
     }
     }
 
@@ -96,6 +94,42 @@ public class CampManagementService {
         
         System.out.println("Processed Enquiries");
         EnquiriesService.viewProcessedEnquiries();
+    }
+
+
+    public static void enquiriesReport(String faculty){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Enquiries> qList = camp.getEnquiryList();
+
+        System.out.println("New Enquiries\n");
+        int count = 0;
+        for(int i = 0 ; i < qList.size() ; i++){
+            Enquiries q = qList.get(i);
+            Student student = DatabaseService.getStudent(q.getEnquiry());
+            String fac = student.getFaculty();
+            if(fac == faculty && !q.getProcessed()){
+                EnquiriesService.viewEnquiries(q);
+                count++;
+            }
+        }
+        if(count == 0) System.out.println("No new enquiries from student of" + faculty.toUpperCase());
+
+        count = 0;
+        System.out.println("Processed enquiries\n");
+        for(int i = 0 ; i < qList.size() ; i++){
+            Enquiries q = qList.get(i);
+            Student student = DatabaseService.getStudent(q.getEnquiry());
+            String fac = student.getFaculty();
+            if(fac == faculty && q.getProcessed()){
+                EnquiriesService.viewEnquiries(q);
+                count++;
+            }
+        }
+        if(count == 0) System.out.println("No processed enquiries from student of" + faculty.toUpperCase());
+
+
+
+
     }
 
 
