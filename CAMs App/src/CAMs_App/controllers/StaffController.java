@@ -153,11 +153,11 @@ public class StaffController extends UserController{
 
         //number of committee slots
         System.out.println("Enter number of camp committeee slots: ");
-        int campCommitteeSlots = sc.nextInt();
+        int campCommitteeSlots = HelperService.readInt();
         
         while(campCommitteeSlots <= 0 || campCommitteeSlots > 10){
             System.out.println("Camp committee slots must be between 0 to 10\n Please try again: ");
-            campCommitteeSlots = sc.nextInt();
+            campCommitteeSlots = HelperService.readInt();
         }
         camp.setCampCommitteeSlots(campCommitteeSlots);
         camp.setCampCommitteeRemainingSlots(campCommitteeSlots);
