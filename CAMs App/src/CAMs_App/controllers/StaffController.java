@@ -68,7 +68,7 @@ public class StaffController extends UserController{
 
         } catch (DateTimeParseException e) {
             System.out.println("Error: Invalid date format. Please use dd-mm-yyyy format:");
-            sc.next(); // consume the invalid input to avoid an infinite loop
+            //sc.next(); // consume the invalid input to avoid an infinite loop
         }
     }
 

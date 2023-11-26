@@ -15,15 +15,15 @@ public class Enquiries {
      */
     private String answer;
     /**
-     * The name of the inquirer
+     * The userID of the inquirer
      */
     private String inquirer; 
     /**
-     * The name of the answerer
+     * The userID of the answerer
      */
     private String answerer; 
     /**
-     * The processed status of the inquiry.
+     * The status of the inquiry.
      */
     private Boolean processed;
     
@@ -31,7 +31,7 @@ public class Enquiries {
      * Constructs an {@link Enquiries} object with the given message and sender.
      * 
      * @param enquiry	The message of the inquiry. 
-     * @param inquirer	The name of the inquirer.
+     * @param inquirer	The userID of the inquirer.
      */
     public Enquiries(String enquiry , String inquirer){
         this.enquiry = enquiry;

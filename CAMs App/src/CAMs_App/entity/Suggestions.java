@@ -14,7 +14,7 @@ public class Suggestions {
 	 */
     private String suggestion;
     /**
-     * The name of the committee member who made the suggestion.
+     * The userID of the committee member who made the suggestion.
      */
     private String suggestBy;  
     /**

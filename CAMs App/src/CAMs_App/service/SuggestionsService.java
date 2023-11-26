@@ -23,9 +23,9 @@ public class SuggestionsService {
 
     }
 
-    /**
-     * Creates a new suggestion for the current camp
-     * @param suggestion : The content of the suggestion
+     /**
+     * Checks if there is any new suggestions for the current camp
+     * @return {@code true} if there is at least 1 new suggestion, {@code false } otherwise
     */
     public static boolean hasNewSuggestion(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
@@ -35,8 +35,8 @@ public class SuggestionsService {
         return false;
     }
     /**
-     * Checks if the suggestions are currently processing for the current camp
-     * @return {@code true} if the suggestions are being processed, {@code false } otherwise
+     * Checks if there is any suggestions under process for the current camp
+     * @return {@code true} if there is at least one processing suggestion, {@code false } otherwise
     */
     public static boolean hasProcessingSuggestion(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
@@ -46,8 +46,8 @@ public class SuggestionsService {
         return false;
     }
     /**
-     * Checks if the suggestions have been proccessed in the system
-     * @return {@code true} if the suggestions are processed,{@code false} otherwise
+     * Checks if there is any suggestions that have been proccessed for the current camp
+     * @return {@code true} if there is at least one processed suggestion,{@code false} otherwise
     */
     public static boolean hasProcessedSuggestion(){
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
@@ -57,8 +57,8 @@ public class SuggestionsService {
         return false;
     }
     /**
-     * Check is the user submitted suggestions for the current camp
-     * @return {@code true} if the user submitted the suggestion, {@code false} otherwise
+     * Check if current user have submitted any suggestions for the current camp
+     * @return {@code true} if the user submitted at least one suggestion, {@code false} otherwise
     */
     public static boolean submittedSuggestions(){
         Camp camp = AuthData.getCurrentCamp();

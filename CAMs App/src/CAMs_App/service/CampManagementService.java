@@ -126,9 +126,12 @@ public class CampManagementService {
             }
         }
         if(count == 0) ColouredTextPrinter.printRed("No processed enquiries from student of " + faculty.toUpperCase());
+    }
 
-
-
+    /**
+     * Method to generate report in TXT format
+    */
+    public static void generateReportinTXT(){
 
     }
 

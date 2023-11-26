@@ -35,13 +35,13 @@ public class CampInfo{
      */
     private String location;
     /**
-     * The total slots for attendees for the camp.
+     * The total slots for the camp including both committee and attendee.
      */
     private int totalSlots;
     /**
      * The remaining slots for attendees for the camp.
      */
-    private int remainingSlot; //remaining slot for attendees
+    private int remainingSlot; 
     /**
      * The total slots for committee members for the camp.
      */
@@ -49,7 +49,7 @@ public class CampInfo{
     /**
      * The remaining slots for committee members for the camp.
      */
-    private int campCommitteeRemainingSlot; // remaining slot for committee
+    private int campCommitteeRemainingSlot; 
     /**
      * An introductory description of the camp.
      */
@@ -92,11 +92,10 @@ public class CampInfo{
         setRegCloseDate(regCloseDate);
         setUserGroup(userGroup);
         setLocation(location);
-        setTotalSlots(totalSlots); //total = attendee + student
-        setRemainingSlot(totalSlots - campCommitteeSlots); //remaining slot for student
-        setCampCommitteeSlots(campCommitteeSlots); //total committee slot
-        setCampCommitteeRemainingSlots(campCommitteeSlots); //remaining committee slot
-        //total remaining slot = remaining slot for committee + student
+        setTotalSlots(totalSlots); 
+        setRemainingSlot(totalSlots - campCommitteeSlots); 
+        setCampCommitteeSlots(campCommitteeSlots); 
+        setCampCommitteeRemainingSlots(campCommitteeSlots); 
         setNumberOfCampDays((int)ChronoUnit.DAYS.between(campDate, campEndDate)+1);
         setDescription(description);
         setStaffInCharge(staffInCharge);
