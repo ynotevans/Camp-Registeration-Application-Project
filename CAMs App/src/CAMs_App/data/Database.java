@@ -7,21 +7,38 @@ import CAMs_App.entity.Staff;
 import CAMs_App.entity.Student;
 import CAMs_App.service.DatabaseService;
 
+/**
+ * The {@link Database} class manages the data storage within the application. 
+ * It offers methods to get and set the data maps for different data types,
+ * as well as calling methods from {@link DatabaseService} for import and export data 
+ * to and from the file system.
+ */
 public class Database {
-
+	/**
+	 * {@link Map} that stores all instances of {@link Student} users.
+	 */
 	private static Map<String, Student> studentsData = new HashMap<String, Student>();
-
+	/**
+	 * {@link Map} that store all instances of {@link Staff} users.
+	 */
 	private static Map<String, Staff> staffData = new HashMap<String, Staff>();
-
+	/**
+	 * {@link Map} that store all instances of {@link Camp} objects.
+	 */
 	private static Map<String, Camp> campData = new HashMap<String, Camp>();
 
-
+	/**
+	 * Calls the methods from {@link DatabaseService} for reading from files.
+	 */
 	public static void readData() {
 		DatabaseService.readfromStaffCSV();
 		DatabaseService.readfromStudentCSV();
 		DatabaseService.readfromCampCSV();
 	}
-
+	
+	/**
+	 * Calls the methods from {@link DatabaseService} for writing to files.
+	 */
 	public static void writeData() {
 		DatabaseService.writetoStaffCSV(Database.getStaffData());
 		DatabaseService.writetoStudentCSV(Database.getStudentsData());
