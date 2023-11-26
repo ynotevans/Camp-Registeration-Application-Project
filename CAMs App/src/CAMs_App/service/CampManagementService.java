@@ -86,7 +86,6 @@ public class CampManagementService {
      * Generates the enquiries report for the current camp
      * Displays the new and processed enquiries respectively
      */
-    //enquiries report
     public static void enquiriesReport(){
         Camp camp = AuthData.getCurrentCamp();
         System.out.println("Enquiries report of " + camp.getCampName());
@@ -98,7 +97,11 @@ public class CampManagementService {
         EnquiriesService.viewProcessedEnquiries();
     }
 
-
+     /**
+     * Generates the enquiries report for the current camp
+     * Displays the new and processed enquiries respectively
+     * @parm faculty : Filtered by the faculty
+     */
     public static void enquiriesReport(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> qList = camp.getEnquiryList();
@@ -131,9 +134,9 @@ public class CampManagementService {
     }
 
     
-    /**
-     * Method to generate report in TXT format
-    */
+     /**
+     * Generates the student list report int txt format
+     */
     public static void StudentListTXT(){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> attendees  = camp.getAttendees();
@@ -170,8 +173,9 @@ public class CampManagementService {
     }
 
     /**
-     * Method to generate filtered report in TXT format
-    */
+     * Method to generate student list report in TXT format
+     * @parm faculty : Filtered by the faculty
+     */
     public static void StudentListTXT(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> attendees  = camp.getAttendees();
@@ -219,8 +223,9 @@ public class CampManagementService {
     }
 
     /**
-     * Method to generate report in TXT format
-    */
+     * Generates the enquiries report in TXT format
+     * Displays the new and processed enquiries respectively
+     */
     public static void enquiriesReportTXT(){
         Camp camp = AuthData.getCurrentCamp();
         String filePath = "CAMs App/report/Enquiry_" + camp.getCampName()+ ".txt";
@@ -293,9 +298,11 @@ public class CampManagementService {
         }
     }
 
-    /**
-     * Method to generate filtered report in TXT format
-    */
+     /**
+     * Generates the enquiries report in TXT format
+     * Displays the new and processed enquiries respectively
+     * @parm faculty : Both filtered by the faculty
+     */
     public static void enquiriesReportTXT(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Enquiries> qList = camp.getEnquiryList();

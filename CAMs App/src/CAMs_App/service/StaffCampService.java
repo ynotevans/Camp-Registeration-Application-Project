@@ -50,10 +50,10 @@ public class StaffCampService extends CampManagementService{
     public static void toggleVisibility(Camp camp , boolean visibility){
       camp.setVisibility(visibility);
     }
+
     /**
      * Displays the information about all camps
      */  
-    // view camp
     public static void viewAllCamps(){
         List<Camp> sortArr= HelperService.filter();
 
@@ -89,7 +89,7 @@ public class StaffCampService extends CampManagementService{
     /**
      * Generates committee performance report for the current camp
      */  
-    // generate committee performance report
+
     public static void commiteePerformanceReport(){
        Camp camp = AuthData.getCurrentCamp();
        ArrayList<Student> comm  = camp.getCommittee();
@@ -134,7 +134,7 @@ public class StaffCampService extends CampManagementService{
     }
 
     /**
-     * Method to generate report in TXT format
+     * Method to generate committee performance report in TXT format
     */
     public static void committeePerformanceinTXT(){
         Camp camp = AuthData.getCurrentCamp();
@@ -173,9 +173,11 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
+    
     /**
-     * Method to generate filtered report in TXT format
-    */
+     * Generate a filtered committee performance report based on faculty in TXT format
+     * @parm faculty : Filtered by the faculty
+     */ 
     public static void committeePerformanceinTXT(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> comm  = camp.getCommittee();
@@ -224,7 +226,10 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
-
+    /*Generate camp report in TXT format
+     * the report consists of committee performance list, attendees list, enquiries list
+     * enquiries list is split into two groups, processed and unprocessed   
+     */
     public static void campReportTXT(){
         Camp camp = AuthData.getCurrentCamp();
         String filePath = "CAMs App/report/CampReport_" + camp.getCampName()+ ".txt";
@@ -369,7 +374,12 @@ public class StaffCampService extends CampManagementService{
         }
         
     }
-
+  
+     /*Generate camp report in TXT format
+     * The report consists of three components: committee performance list, attendees list, enquiries list
+     * enquiries list is split into two groups, processed and unprocessed  
+     * @parm faculty : All three components are filtered by the faculty 
+     */
     public static void campReportTXT(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         String filePath = "CAMs App/report/Filtered_CampReport_" + camp.getCampName()+ ".txt";
