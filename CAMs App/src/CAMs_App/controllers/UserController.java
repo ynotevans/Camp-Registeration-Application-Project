@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import CAMs_App.service.AuthStaffService;
 import CAMs_App.service.AuthStudentService;
+import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 import CAMs_App.boundary.LoginMenu;
 import CAMs_App.data.AuthData;
@@ -113,14 +114,14 @@ public class UserController {
 
         while(authenticated != true){  
             attempt++;        
-            System.out.println("Attempt " + attempt + ": Wrong UserID or Password, please enter again...");
+            ColouredTextPrinter.printRed("Attempt " + attempt + ": Wrong UserID or Password, please enter again...");
             System.out.print("User ID: ");
             userID = sc.next();
             System.out.print("Password: ");
             password = sc.next();
             authenticated = authService.login(userID, password);
             if (attempt == 4) {
-                System.out.println("You have reached the maximum number of attempts.");
+                ColouredTextPrinter.printRed("You have reached the maximum number of attempts.");
                 return false;
             }
         }

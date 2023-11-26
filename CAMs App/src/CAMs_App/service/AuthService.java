@@ -15,11 +15,11 @@ public abstract class AuthService {
      * @return {@code true} upon successful login, else {@code false}
      */
     public abstract boolean login(String UserID, String password);
+    
     /**
      * Logs out the current user by setting the currentuser and current camp to null, writing the data to database.
      * @return {@code true} after successful logout
      */
-
     public static boolean logout(){
         AuthData.setCurrentUser(null);
         AuthData.setCurrentCamp(null);
