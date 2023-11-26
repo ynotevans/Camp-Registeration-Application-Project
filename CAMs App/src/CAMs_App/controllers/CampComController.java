@@ -127,7 +127,7 @@ public class CampComController extends StudentController{
         Suggestions s = sList.get(index -1);
         while(!s.getSuggestBy() .equals(AuthData.getCurrentUser().getUserID())){
             System.out.println("Unable to edit suggestion from other committee member. Please try again");
-            index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+            index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID, please enter a valid suggestion ID.");
             return;
         }
         s = sList.get(index -1);
@@ -136,7 +136,7 @@ public class CampComController extends StudentController{
             return;
         }
         else{
-            sList.remove(index);
+            sList.remove(index-1);
             System.out.println("Your suggestion has been deleted...");
         }
     }
