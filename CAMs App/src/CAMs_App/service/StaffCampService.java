@@ -8,29 +8,48 @@ import java.util.Scanner;
 import CAMs_App.data.*;
 import CAMs_App.entity.*;
 
-
+/**
+ * The class {@link StaffCampService} is responsible in managing the camp-related functionalities for staff users. 
+ * This class also extends from {@link CampManagementService} to obtain the various reports.
+ */
 public class StaffCampService extends CampManagementService{
     Scanner sc = new Scanner(System.in);
 
-    
+    /**
+     * Adds a new camp to the Database
+     * @param camp : New camp to be added
+     */   
     public static void addNewCampToDB (Camp camp){
         Database.getCampData().put(camp.getCampName(), camp);
     }
-
+    /**
+     * Edits camp name of an existing camp in the Database
+     * @param oldCampName : Previously stored camp name in Database
+     * @param camp : Camp to be updated
+     */  
     public static void editCampNameinDB (String oldCampName, Camp camp){
         Database.getCampData().put(camp.getCampName(),camp);
         Database.getCampData().remove(oldCampName);
     }
 
-
+    /**
+     * Deletes an existing camp from the Database
+     * @param camp : Camp to be deleted
+     */  
     public static void deleteCamp(Camp camp){
         Database.getCampData().remove(camp.getCampName());
     }
-
+    /**
+     * Toggles the vivisbility of a specified camp
+     * @param camp : Camp to be updated
+     * @param visibility : Toggles visibility of the camp
+     */  
     public static void toggleVisibility(Camp camp , boolean visibility){
       camp.setVisibility(visibility);
     }
-
+    /**
+     * Displays the information about all camps
+     */  
     // view camp
     public static void viewAllCamps(){
         List<Camp> sortArr= HelperService.filter();
@@ -39,7 +58,10 @@ public class StaffCampService extends CampManagementService{
             HelperService.viewCamp(camp);
         }
     }
-
+    /**
+     * Displays information regarding the camps created by the staff user
+     * @param userID : The userID of the staff user
+     */  
     // see staff created camps
     public static void viewCampsCreated(String userID){
         Map<String, Camp> camp1 = Database.getCampData(); 
@@ -51,14 +73,19 @@ public class StaffCampService extends CampManagementService{
                 
         }
     }
-    
+     /**
+     * Adds point to the specified student
+     * @param student : The student whose points will be updated
+     */     
     public static void addPoints(Student student) {
 		student.setPoints(student.getPoints() + 1);
 	}
 
     
    
-
+    /**
+     * Generates committee performance report for the current camp
+     */  
     // generate committee performance report
     public static void commiteePerformanceReport(){
        Camp camp = AuthData.getCurrentCamp();
@@ -73,7 +100,10 @@ public class StaffCampService extends CampManagementService{
         }
 
     } 
-
+    /**
+     * Generate a filtered committee performance report based on faculty
+     * @parm faculty : Filtered by the faculty
+     */  
     public static void commiteePerformanceReport(String faculty){
        Camp camp = AuthData.getCurrentCamp();
        ArrayList<Student> comm  = camp.getCommittee();
