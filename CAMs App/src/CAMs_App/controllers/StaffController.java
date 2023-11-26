@@ -16,8 +16,8 @@ import CAMs_App.service.*;
  * The {@link StaffController} class is responsible for handling the
  * staff-specific user interface and user interactions. It extends the
  * {@link UserController} class and provides functionality for staffs to
- * view, create and edit camps, view and reply to enquiries, as well as
- * view and process suggestions.
+ * view, create and edit camps, view and reply to enquiries,
+ * view and process suggestions, as well as generate reports.
  */
 public class StaffController extends UserController{
 	/**
