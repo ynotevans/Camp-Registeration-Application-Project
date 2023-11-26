@@ -18,7 +18,7 @@ public class CampComController extends StudentController{
 	 * The current user as obtained from {@link AuthData}.
 	 */
     Student user = (Student)AuthData.getCurrentUser();
-    //camp
+
     /**
      * View the details of the current camp.
      */
@@ -28,7 +28,7 @@ public class CampComController extends StudentController{
     }
 
     /**
-     * Award a point to the given {@link Student}.
+     * Award a point to the given {@link Student} .
      * 
      * @param student The student who will be recieving a point.
      */
@@ -106,7 +106,8 @@ public class CampComController extends StudentController{
       q.setAnswer(reply);
       q.setAnswerer(AuthData.getCurrentUser().getUserID());
       q.setProcessed();
-      System.out.println("Enquiries replied");
+      System.out.println("Enquiries replied, 1 point awarded to you");
+      addPoints((Student)AuthData.getCurrentUser());
   }
 
   //Suggestions
@@ -118,7 +119,8 @@ public class CampComController extends StudentController{
         System.out.println("Enter your suggestion: ");
         String s = sc.nextLine();
         SuggestionsService.createSuggestion(s);
-        System.out.println("Your suggestion has been added...");
+        System.out.println("Your suggestion has been added, one point awarded to you");
+        addPoints((Student)AuthData.getCurrentUser());
     }
     
       /**
