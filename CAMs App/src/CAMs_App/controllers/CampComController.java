@@ -141,6 +141,38 @@ public class CampComController extends StudentController{
         }
     }
 
+    //generate report
+    public void generateStudentReport(){
+        System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+        int filter = HelperService.readInt();
+        if(filter == 1){
+          System.out.println("Faculty: ");
+          String faculty = sc.nextLine();
+          System.out.println("Generating student attendence report of " + faculty.toUpperCase() + "...");
+          CampManagementService.generateStudentListReport(faculty.toUpperCase());
+        }
+        else{
+          System.out.println("Generating student attendence report...");
+          CampManagementService.generateStudentListReport();
+        }
+        
+      }
+      public void generateEnquiriesReport(){
+        System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+        int filter = HelperService.readInt();
+        if(filter == 1){
+          System.out.println("Faculty: ");
+          String faculty = sc.nextLine();
+          ColouredTextPrinter.printYellow("Generating enquiries report of " + faculty.toUpperCase() + "...\n");
+          CampManagementService.enquiriesReport(faculty.toUpperCase());
+        }
+        else{
+          ColouredTextPrinter.printYellow("Generating enquiries report...\n");
+          CampManagementService.enquiriesReport();
+        }
+      }
+  
+
     
 
    

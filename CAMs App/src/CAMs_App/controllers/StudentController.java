@@ -39,7 +39,9 @@ public class StudentController extends UserController {
     }
 
 	/**
-	 * Registers for the current camp as a regular attendee.
+	 * Registers for the current camp as a regular attendee by
+     * calling registerAsAttendee method from the corresponding
+     * {@link StudentCampService} object.
 	 * The register will fail if:
 	 * <ol>
 	 * <li>The camp is full</li>
@@ -73,7 +75,10 @@ public class StudentController extends UserController {
     }
 
     /**
-     * Register for the current camp as a committee member.
+     * Register for the current camp as a committee member by
+     * calling registerAsCommittee method from the corresponding
+     * {@link StudentCampService} object.
+     * Prompt user to key in the position as the committee member
 	 * The register will fail if:
 	 * <ol>
 	 * <li>The camp's committee slots are full</li>
@@ -116,7 +121,9 @@ public class StudentController extends UserController {
     }
 
     /**
-     * Withdraws the student from the current camp.
+     * Withdraws the student from the current camp by
+     * calling withdrawCamp method from the corresponding
+     * {@link StudentCampService} object.
      */
     public void withdrawCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
@@ -144,7 +151,8 @@ public class StudentController extends UserController {
     }
     
     /**
-     * Calls {@link StudentCampService} to display all registered camp of this student.
+     * Calls viewRegisteredCamp method from {@link StudentCampService} to display 
+     * all registered camp of this student.
      * 
      * @return {@code false} if no camps are registered, {@code true} if otherwise.
      */
@@ -156,7 +164,8 @@ public class StudentController extends UserController {
     }
 
     /**
-     * Calls {@link EnquiriesService} to display all enquiries created by this student.
+     * Calls viewEnquiries method from {@link EnquiriesService} to display 
+     * all enquiries created by this student.
      */
     public void viewEnquiry(){
         if(!EnquiriesService.submittedEnquiries()){
@@ -177,6 +186,7 @@ public class StudentController extends UserController {
     }
 
     /**
+     * Calls createEnquiries method from {@link EnquiriesService} to create enquiry.
      * Prompts the student to enter a enquiry for the current camp.
      */
     public void createEnquiry(){
@@ -258,7 +268,7 @@ public class StudentController extends UserController {
     }
 
     /**
-     * Switches the current user mode to camp committee
+     * Switches the current user mode to camp committee mode
      * @param currentMode The current user mode the system is in.
      */
     public void switchMode(int currentMode){

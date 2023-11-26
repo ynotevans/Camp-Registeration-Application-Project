@@ -44,8 +44,9 @@ public class StudentMenu implements Menu {
      * The viewApp() method allows Student user to perform various actions such as 
      * <p><ul>
      * <li>View available camps : Student user view the available camps by {@link StudentController#viewAvailableCamp()}. 
-     * If a valid camp is entered in the list of available camps, the Student user will be navigated to {@link StudentCampMenu} or be prompted to switch mode to {@link CampComMem}.
-     * <li>View registered camp(s) : Student user views the camp's that they registered by {@link StudentController#viewRegisteredCamp()}. 
+     * If a valid camp is entered in the list of available camps, the Student user will be navigated to {@link StudentCampMenu} 
+     * or be prompted to switch mode to {@link CampComMem} if the selected camp is already registered as camp committee.
+     * <li>View registered camp(s) : Student user views the camp's that they have registered by {@link StudentController#viewRegisteredCamp()}. 
      * If the Student user registered a camp and selects a valid campname in the list, the Student user will be navigated to {@link StudentCampMenu} or be prompted to switch mode to {@link CampComMem}.
      * <li>Switch to camp committe mode : Student user will switch into a camp committee mode {@link CampComMem}.
      * <li>Changing password : Student user changes password via {@link UserController#changePassword()}.

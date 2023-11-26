@@ -5,7 +5,6 @@ import java.util.Scanner;
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
-import CAMs_App.service.StaffCampService;
 import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
 /**
@@ -40,7 +39,7 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(8) Approve suggestions for this camp");
         ColouredTextPrinter.printBlue("-------------------------------------------");
         ColouredTextPrinter.printBlue("(9) Generate report");
-        ColouredTextPrinter.printBlue("------------------------------------------");
+        ColouredTextPrinter.printBlue("-------------------------------------------");
         ColouredTextPrinter.printBlue("(10) Previous Page");
         ColouredTextPrinter.printBlue("(11) Logout\n");
     }
@@ -58,7 +57,7 @@ public class StaffCampMenu implements Menu {
      * <li>Process suggestions for this camp : Staff user processes the current camp's suggestions through {@link StaffController#processSuggestions()}.
      * <li>Approves suggestions for this camp :  Staff user approves the current camp's suggestsions through {@link StaffController#approveSuggestion()}.
      * <li>Generate report : Staff user can either generate {@link StaffController#generateCommitteeReport()}, {@link StaffController#generateStudentReport()} or{@link StaffController#generateEnquiriesReport()}. 
-     * These reports can be filtered to faculty or default by user input.
+     * These reports can be filtered to faculty or default (print all) by user input.
      * <li>Go to previous page : Returns the Staff user back to {@link StaffMenu}.
      * <li>Logout : Staff user logs out from the system and returning to the {@link MainMenu}.
      * </ul><p>
@@ -143,66 +142,38 @@ public class StaffCampMenu implements Menu {
                         System.out.println("Select the report you want to generate");
                         System.out.println("(1) Committee peformance report");
                         System.out.println("(2) Student report");
-                        System.out.println("(3) Camp participants(Committees & attendees) report");
-                        System.out.println("(4) Enquiries report");
+                        System.out.println("(3) Enquiries report");
+                        System.out.println("(4) Camp report");
                         System.out.println("(5): Stop generating report");
                         
                         int report = HelperService.readInt(1,5,"Invalid choice please try again");
                         
                         switch (report) {
                             case 1:
-                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
-                            int filter = HelperService.readInt(); 
-                                if(filter == 1){
-                                    System.out.println("Choose the faculty");
-                                    String fac = sc.nextLine();
-                                    StaffCampService.commiteePerformanceReport(fac);
-                                }
-                                else{
-                                    StaffCampService.commiteePerformanceReport();
-                                }
-                                
+                                staffController.generateCommitteeReport();
+                                HelperService.pressAnyKeyToContinue();   
                                 break;
                             
                             case 2:
-                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
-                            filter = HelperService.readInt(); 
-                                if(filter == 1){
-                                    System.out.println("Choose the faculty");
-                                    String fac = sc.nextLine();
-                                    CampManagementService.generateStudentListReport(fac);
-                                }
-                                else{
-                                    CampManagementService.generateStudentListReport();
-                                }
-                                
-
+                                staffController.generateStudentReport();
+                                HelperService.pressAnyKeyToContinue();
+                                break;
+                            
                             case 3:
-                            System.out.println("Press 1 Filter report by faculty. Else generate by default");
-                            filter = HelperService.readInt(); 
-                                if(filter == 1){
-                                    System.out.println("Choose the faculty");
-                                    String fac = sc.nextLine();
-                                    StaffCampService.commiteePerformanceReport(fac);
-                                    System.out.println(" ");
-                                    CampManagementService.generateStudentListReport(fac);
-                                }
-                                else{
-                                    StaffCampService.commiteePerformanceReport();
-                                    System.out.println(" ");
-                                    CampManagementService.generateStudentListReport();
-                                }
-                            break;
+                                staffController.generateEnquiriesReport();
+                                HelperService.pressAnyKeyToContinue();
+                                break;
 
                             case 4:
-                            CampManagementService.enquiriesReport();
-                            break;
+                                staffController.generateCampReport();
+                                HelperService.pressAnyKeyToContinue();
+                                break;
+
 
                             default:
                              break;
                         }
-                        staffController.generateCommitteeReport();
-                        HelperService.pressAnyKeyToContinue();
+
                         this.viewApp();
                         
                     
