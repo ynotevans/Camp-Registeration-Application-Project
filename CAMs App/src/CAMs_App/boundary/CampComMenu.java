@@ -100,12 +100,23 @@ public class CampComMenu implements Menu{
                         break;
 
                     case 7:    //generate enquiries report
-                        campComController.generateEnquiriesReport();
+                    System.out.println("Do you want to view here or generate to a file report(1 to view, any number to generate)");
+                        int generate = HelperService.readInt();
+                        if(generate == 1)
+                            campComController.generateEnquiriesReport();
+                        else
+                            campComController.EnquiriesReportFile();
                         HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 8:    //generate student report
-                        campComController.generateStudentReport();
+                    System.out.println("Do you want to view here or generate to a file report(1 to view, any number to generate)");
+                        generate = HelperService.readInt();
+                        if(generate == 1)
+                            campComController.generateStudentReport();
+                        else
+                            campComController.studentReportFile();
+                        HelperService.pressAnyKeyToContinue();
                         break;
                     
                     case 9:    //switch mode
