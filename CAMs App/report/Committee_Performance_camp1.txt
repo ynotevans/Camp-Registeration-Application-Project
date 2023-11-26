@@ -1,0 +1,20 @@
+Committee Performance Report for camp1 : 
+
+----------------------------------------------
+Name: Jack
+Student ID: CCC222
+Position: dfa sdfsadf
+# of suggestions submitted: 0
+
+----------------------------------------------
+Name: Rose
+Student ID: TTT444
+Position: sdfasd
+# of suggestions submitted: 0
+
+----------------------------------------------
+Name: Amy
+Student ID: ZZZ222
+Position: aesf
+# of suggestions submitted: 0
+

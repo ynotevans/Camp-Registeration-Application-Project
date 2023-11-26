@@ -382,6 +382,35 @@ public class StaffController extends UserController{
       }
     }
 
+    public void committeeReportFile(){
+      System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      System.out.println("Press 1 to generate in .txt file. (Any number to generate in .csv file)");
+      int type = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        if(type == 1){
+            ColouredTextPrinter.printYellow("Generating committee performance report of " + faculty.toUpperCase() + " in .txt...\n");
+            StaffCampService.committeePerformanceinTXT(faculty.toUpperCase());
+        }
+        else{
+            ColouredTextPrinter.printYellow("Generating committee performance report of " + faculty.toUpperCase() + " in .csv...\n");
+            StaffCampService.committeePerformanceinCSV(faculty.toUpperCase());
+        } 
+      }
+      else{
+        if(type == 1){
+            ColouredTextPrinter.printYellow("Generating committee performance report in .txt...\n");
+            StaffCampService.committeePerformanceinTXT();
+        }
+        else{
+            ColouredTextPrinter.printYellow("Generating committee performance report in .csv...\n");
+            StaffCampService.committeePerformanceinCSV();
+        } 
+      }
+    }
+
     public void generateEnquiriesReport(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
