@@ -99,11 +99,7 @@ public class StaffController extends UserController{
             ColouredTextPrinter.printRed("Error: Invalid date format.");
             
         }
-    }
-
-
-
-       
+    }       
         //set camp days
         camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate())+1);
         //System.out.println(camp.getNumberOfCampDays());
@@ -345,7 +341,7 @@ public class StaffController extends UserController{
     }
 
     /**
-     * Deletes the current camp if it is empty.
+     * Deletes camp, this method will fail if there is at least one attendee or committee
      */
     public void deleteCamp(){
         Camp camp = AuthData.getCurrentCamp();
@@ -359,7 +355,7 @@ public class StaffController extends UserController{
     }
 
     /**
-     * Toggles the visibility of the current camp.
+     * Toggles the visibility of the current camp. Can only turn off when no one sign up for the camp
      */
     public void toggleVisibility(){
         Camp camp = AuthData.getCurrentCamp();
@@ -575,8 +571,6 @@ public class StaffController extends UserController{
             StaffCampService.campReportTXT();
         }
     }
-
-
 
 
     /**
