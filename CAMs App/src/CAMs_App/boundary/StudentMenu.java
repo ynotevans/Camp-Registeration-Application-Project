@@ -70,6 +70,8 @@ public class StudentMenu implements Menu {
 
             switch (choice) {
                 case 1:    //view camp
+                HelperService.clearScreen();
+                HelperService.printRoute("Student Menu ---> View available camp");
                     if (studentController.viewAvailableCamp()==true){
                         System.out.print("Enter a camp name to operate, else just key in anything to return to menu: ");
                         String campName = sc.next();
@@ -107,6 +109,8 @@ public class StudentMenu implements Menu {
                     break;
 
                 case 2:    //view all registered camp
+                HelperService.clearScreen();
+                HelperService.printRoute("Student Menu ---> View registered camp");
                     Student currentStudent = (Student)AuthData.getCurrentUser();
                     if (studentController.viewRegisteredCamp()==true){
                         System.out.print("Select a camp to operate(Or any key to go back to previous page): ");
