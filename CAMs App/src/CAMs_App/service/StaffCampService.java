@@ -65,12 +65,12 @@ public class StaffCampService extends CampManagementService{
     // see staff created camps
     public static void viewCampsCreated(String userID){
         Map<String, Camp> camp1 = Database.getCampData(); 
+        List<Camp> sortArr= HelperService.sortCampsByName(camp1);
 
-        for (Camp camp : camp1.values()){
+        for (Camp camp : sortArr){
             if(camp.getStaffInCharge().equals(userID)){
                 HelperService.viewCamp(camp);
             }
-                
         }
     }
      /**
@@ -102,6 +102,9 @@ public class StaffCampService extends CampManagementService{
         }
 
     } 
+
+
+
     /**
      * Generate a filtered committee performance report based on faculty
      * @parm faculty : Filtered by the faculty

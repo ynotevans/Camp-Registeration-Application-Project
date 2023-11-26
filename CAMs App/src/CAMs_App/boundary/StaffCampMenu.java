@@ -150,21 +150,29 @@ public class StaffCampMenu implements Menu {
                         
                         switch (report) {
                             case 1:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Committee Performance Report");
                                 staffController.generateCommitteeReport();
                                 HelperService.pressAnyKeyToContinue();   
                                 break;
                             
                             case 2:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Student Report");
                                 staffController.generateStudentReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
                             
                             case 3:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Enquiries Report");
                                 staffController.generateEnquiriesReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
                             case 4:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Camp Report");
                                 staffController.generateCampReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
