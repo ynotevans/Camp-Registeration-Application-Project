@@ -14,7 +14,7 @@ import CAMs_App.service.ColouredTextPrinter;
  * It provides methods to print the main menu and viewing the application.
  * The class uses {@link StudentController} to manage student-related activities.
  * 
- *  @author Wu Ji
+ *  @author Liang Meng
  *  @version 1.0
  *  @since 2023-10-25
  */

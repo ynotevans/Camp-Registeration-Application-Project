@@ -7,6 +7,10 @@ import CAMs_App.data.AuthData;
 /**
  * The {@link EnquiriesService} class is responsible in managing the enquiries of a specified camp
  * This class provides methods in creating and viewing of enquiries
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public final class EnquiriesService {
 

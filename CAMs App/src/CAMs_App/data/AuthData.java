@@ -7,7 +7,7 @@ import CAMs_App.entity.*;
  * authenticated user within the application. It offers methods to set and get
  * the current user and camp, as well as check if the user is logged in.
  * 
- *  @author Denis Yu
+ *  @author Tony
  *  @version 1.0
  *  @since 2023-10-25
  */

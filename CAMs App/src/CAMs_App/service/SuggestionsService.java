@@ -7,6 +7,10 @@ import CAMs_App.entity.*;
 
 /**
  * The class {@link SuggestionsService} provides methods in managing the Suggestions of a specific camp
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class SuggestionsService {
     

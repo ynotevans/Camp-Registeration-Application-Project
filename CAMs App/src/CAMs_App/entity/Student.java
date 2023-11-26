@@ -10,7 +10,7 @@ import CAMs_App.service.DatabaseService;
  * such as registered camps and points earned. Each student object has a corresponding
  * {@link CampComMem} object.
  * 
- *  @author Wan Ismail
+ *  @author Tony
  *  @version 1.0
  *  @since 2023-10-25
  */

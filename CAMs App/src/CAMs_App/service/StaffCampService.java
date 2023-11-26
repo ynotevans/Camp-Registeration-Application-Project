@@ -14,6 +14,10 @@ import CAMs_App.entity.*;
 /**
  * The class {@link StaffCampService} is responsible in managing the camp-related functionalities for staff users. 
  * This class also extends from {@link CampManagementService} to obtain the various reports.
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StaffCampService extends CampManagementService{
     Scanner sc = new Scanner(System.in);
