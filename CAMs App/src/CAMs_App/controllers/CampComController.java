@@ -62,7 +62,7 @@ public class CampComController extends StudentController{
       switch (choice) {
           case 1:
               HelperService.clearScreen();
-              HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
+              HelperService.printRoute("Committee Camp Menu ---> View Processed Enquiries");
               System.out.println("Processed Enquiries:\n");
               EnquiriesService.viewProcessedEnquiries();
               HelperService.pressAnyKeyToContinue();
@@ -70,7 +70,7 @@ public class CampComController extends StudentController{
               break;
           case 2:
               HelperService.clearScreen();
-              HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
+              HelperService.printRoute("Committee Camp Menu ---> View New Enquiries");
               System.out.println("New Enquiries:\n");
               EnquiriesService.viewNewEnquiries();
               HelperService.pressAnyKeyToContinue();
@@ -79,7 +79,7 @@ public class CampComController extends StudentController{
       
           default:
               HelperService.clearScreen();
-              HelperService.printRoute("Staff Camp Menu ---> View All Enquiries");
+              HelperService.printRoute("Committee Camp Menu ---> View All Enquiries");
               System.out.println("List of all enquiries:\n");
               EnquiriesService.viewAllEnquiries();
               HelperService.pressAnyKeyToContinue();
