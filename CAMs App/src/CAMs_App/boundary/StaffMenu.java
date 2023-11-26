@@ -92,6 +92,7 @@ public class StaffMenu implements Menu{
                         }
                         else{
                             System.out.println("Camp not exist, please enter the correct camp Name... ");
+                            HelperService.wait(2);
                         }
                         break;
                     
