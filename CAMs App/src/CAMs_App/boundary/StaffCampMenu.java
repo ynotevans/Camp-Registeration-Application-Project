@@ -8,9 +8,21 @@ import CAMs_App.service.HelperService;
 import CAMs_App.service.StaffCampService;
 import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
+/**
+ * The {@link StaffCampMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application.
+ * The class uses {@link StaffController} to manage staff-related activities and 
+ * also uses {@link CampManagementService} in generating reports.
+ */
 public class StaffCampMenu implements Menu {
+    /** The controller for staff-related activities */
     StaffController staffController = new StaffController();
-
+    /**
+     * The printMenu() method displays the camp menu options available for staff user.
+     * It prints camp menu options for staff user such as edit camp, delete camp, 
+     * toggle camp visibility, view enquiries, reply enquiries, view suggestions, 
+     * process suggestions, approve suggestions, generate report, returning to previous page and logout.
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.clearScreen();
@@ -34,7 +46,24 @@ public class StaffCampMenu implements Menu {
     }
 
     
-
+    /**
+     * The viewApp() method allows Staff user to perform various camp-related actions for the current camp such as 
+     * <p><ul>
+     * <li>Edit camp : Staff user edits the current camp infomation through {@link StaffController#editCamp()}.
+     * <li>Delete camp : Staff user deletes the current camp through {@link StaffController#deleteCamp()}.
+     * <li>Toggle camp's visibility : Staff user toggles the current camp visibility through {@link StaffController#toggleVisibility()}.
+     * <li>View enquiries for this camp : Staff user views the current camp's enquiries through {@link StaffController#viewEnquiries()}.
+     * <li>Reply enquiries for this camp : Staff user replies the current camp's enquiries through {@link StaffController#replyEnquiries()}.
+     * <li>View suggestions for this camp : Staff user views the current camp's suggestions through {@link StaffController#viewSuggestions()}.
+     * <li>Process suggestions for this camp : Staff user processes the current camp's suggestions through {@link StaffController#processSuggestions()}.
+     * <li>Approves suggestions for this camp :  Staff user approves the current camp's suggestsions through {@link StaffController#approveSuggestion()}.
+     * <li>Generate report : Staff user can either generate {@link StaffController#generateCommitteeReport()}, {@link StaffController#generateStudentReport()} or{@link StaffController#generateEnquiriesReport()}. 
+     * These reports can be filtered to faculty or default by user input.
+     * <li>Go to previous page : Returns the Staff user back to {@link StaffMenu}.
+     * <li>Logout : Staff user logs out from the system and returning to the {@link MainMenu}.
+     * </ul><p>
+     * Invalid inputs prompts the user to choose again.
+     */
     public void viewApp(){
         this.printMenu();
         Scanner sc = new Scanner(System.in);
