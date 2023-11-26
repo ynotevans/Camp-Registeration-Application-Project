@@ -36,7 +36,7 @@ public class Enquiries {
     public Enquiries(String enquiry , String inquirer){
         this.enquiry = enquiry;
         this.inquirer = inquirer;
-        this.answer = "Not processed yet";
+        this.answer = "(Not processed yet)";
         this.answerer = "NULL";
         this.processed = false;
         
