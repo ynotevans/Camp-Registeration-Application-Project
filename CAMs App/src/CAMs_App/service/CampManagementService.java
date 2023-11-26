@@ -6,8 +6,22 @@ import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
+/**
+ * The{@link CampManagementService} class provides methods in printing attendence reports and enquiries
+ */
 public class CampManagementService {
      //list of student attending
+    /**
+     * Generates list of students for the current camp and display details such as:
+     * <ul>
+     * <li>Number of participants
+     * <li>Pariticipants list
+     * <li>Name
+     * <li>Student ID
+     * <li>Faculty
+     * <li>Postion
+     * </ul>
+     */
     public static void generateStudentListReport(){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> attendees  = camp.getAttendees();
@@ -30,7 +44,17 @@ public class CampManagementService {
            
       
     }
-
+    /**
+     * Generates a list of students for the current camp, filtered by faculty, and display details such as:
+     * <ul>
+     * <li>Number of participants
+     * <li>Pariticipants list
+     * <li>Name
+     * <li>Student ID
+     * <li>Faculty
+     * <li>Postion
+     * </ul>
+     */
     public static void generateStudentListReport(String faculty){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> attendees  = camp.getAttendees();
@@ -58,7 +82,10 @@ public class CampManagementService {
     }
 
 
-   
+    /**
+     * Generates the enquiries report for the current camp
+     * Displays the new and processed enquiries respectively
+     */
     //enquiries report
     public static void enquiriesReport(){
         Camp camp = AuthData.getCurrentCamp();
