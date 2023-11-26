@@ -123,7 +123,7 @@ public class CampComController extends StudentController{
         ArrayList<Suggestions> sList = camp.getSuggestionList();
         this.viewSuggestion();
         System.out.println("Which suggestion you would like to delete: ");
-        int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID");
+        int index = HelperService.readInt(1,sList.size() , "Invalid Suggestion ID, please enter a valid suggestion ID: ");
         Suggestions s = sList.get(index -1);
         while(!s.getSuggestBy() .equals(AuthData.getCurrentUser().getUserID())){
             System.out.println("Unable to edit suggestion from other committee member. Please try again");

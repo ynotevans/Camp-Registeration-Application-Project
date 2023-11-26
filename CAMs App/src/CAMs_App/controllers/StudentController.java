@@ -244,11 +244,11 @@ public class StudentController extends UserController {
         this.viewEnquiry();
         
         System.out.println("Which enquiry you would like to delete ?");
-        int index = HelperService.readInt();
+        int index = HelperService.readInt(1,qList.size() , "Invalid Enquiry ID, please enter a valid enquiry ID: ");
         Enquiries q = qList.get(index - 1);
         while(!(q.getInquirer().equals(student.getUserID()))) {
         	System.out.println("Invalid enquiry id, please try again");
-            index = HelperService.readInt();
+            index = HelperService.readInt(1,qList.size() , "Invalid Enquiry ID, please enter a valid enquiry ID: ");
         }
         q = qList.get(index - 1);
         if(q.getProcessed()){
@@ -261,6 +261,7 @@ public class StudentController extends UserController {
         char choice = sc.next().toUpperCase().charAt(0);
         if(choice == 'Y'){
             qList.remove(index - 1);
+            System.out.println("Your enquiry has been deleted...");
         }
         else{
             System.out.println("Deletion canceled...");
