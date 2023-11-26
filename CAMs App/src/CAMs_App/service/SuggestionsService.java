@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.*;
 
-
+/**
+ * The class {@link SuggestionsService} provides methods in managing the Suggestions of a specific camp
+ */
 public class SuggestionsService {
     
-   
+    /**
+     * Creates a new suggestion for the current camp
+     * @param suggestion : The content of the suggestion
+    */
     public static void createSuggestion(String suggestion){
         Camp camp = AuthData.getCurrentCamp();
         User user = AuthData.getCurrentUser();
@@ -18,7 +23,10 @@ public class SuggestionsService {
 
     }
 
-    
+    /**
+     * Creates a new suggestion for the current camp
+     * @param suggestion : The content of the suggestion
+    */
     public static boolean hasNewSuggestion(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
         for(int i = 0 ; i < sList.size() ;i++){
@@ -26,7 +34,10 @@ public class SuggestionsService {
         }
         return false;
     }
-    
+    /**
+     * Checks if the suggestions are currently processing for the current camp
+     * @return {@code true} if the suggestions are being processed, {@code false } otherwise
+    */
     public static boolean hasProcessingSuggestion(){
         ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
         for(int i = 0 ; i < sList.size() ;i++){
@@ -34,7 +45,10 @@ public class SuggestionsService {
         }
         return false;
     }
-
+    /**
+     * Checks if the suggestions have been proccessed in the system
+     * @return {@code true} if the suggestions are processed,{@code false} otherwise
+    */
     public static boolean hasProcessedSuggestion(){
          ArrayList <Suggestions> sList = AuthData.getCurrentCamp().getSuggestionList();
         for(int i = 0 ; i < sList.size() ;i++){
@@ -42,7 +56,10 @@ public class SuggestionsService {
         }
         return false;
     }
-
+    /**
+     * Check is the user submitted suggestions for the current camp
+     * @return {@code true} if the user submitted the suggestion, {@code false} otherwise
+    */
     public static boolean submittedSuggestions(){
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Suggestions> sList = camp.getSuggestionList();
@@ -51,20 +68,23 @@ public class SuggestionsService {
         }
     return false;
     }
-
-    public static void printSuggestions(Suggestions s){
-        System.out.println("Suggested by: " + s.getSuggestBy());
-        System.out.println("Suggestion details : " + s.getSuggestion());
+    /**
+     * Prints the given suggestion details
+     * @param suggestion : Prints the selected suggestion
+    */
+    public static void printSuggestions(Suggestions suggestion){
+        System.out.println("Suggested by: " + suggestion.getSuggestBy());
+        System.out.println("Suggestion details : " + suggestion.getSuggestion());
         
         System.out.print("Status: ");     
-        if(s.getStatus().toString().equals("NEW")){
+        if(suggestion.getStatus().toString().equals("NEW")){
          System.out.println("Suggestion pending process...");
         }
-        else if(s.getStatus().toString().equals("PROCESSING")){
+        else if(suggestion.getStatus().toString().equals("PROCESSING")){
           System.out.println("Suggestion is under process");
         }
         else{
-          if(s.getAccepted()){
+          if(suggestion.getAccepted()){
             System.out.println("Suggestion accepted");
           }
           else{
