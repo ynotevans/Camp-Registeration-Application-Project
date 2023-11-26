@@ -10,11 +10,40 @@ import CAMs_App.entity.User;
 import CAMs_App.service.AuthService;
 import CAMs_App.service.UserService;
 
+/**
+ * The {@link UserController} class is responsible for handling user-related
+ * actions, such as changing the user's password. This
+ * class serves as a base class for more specific user types like
+ * {@link StudentController} or {@link StaffController}.
+ */
 public class UserController {
+	/**
+	 * {@link Scanner} object to get input from the user.
+	 */
     public static final Scanner sc = new Scanner(System.in);
+    /**
+     * {@link authService} object for methods for logging in and out.
+     */
     AuthService authService;
+    
+    /**
+     * Constructs an instance of the {@link UserController} class.
+     */
     public UserController(){}
 
+    /**
+     * Changes the users password by prompting them to enter their old and new password.
+     * If the old password is correct and the new password is different,
+     * the change is successful.
+     * 
+     * The password change fails in the following scenarios:
+     * <ol>
+     * <li>The old password does not match the current password</li>
+     * <li>The new password is the same as the old password</li>
+     * <li>The user decides to quit the process by entering "X"</li>
+     * </ol>
+     * 
+     */
     public static void changePassword(){
         String oldPassword, newPassword;
         boolean success = false;
@@ -57,7 +86,16 @@ public class UserController {
         LoginMenu menu = new LoginMenu();
         menu.viewApp();
     }
-
+    
+    /**
+     * Authenticates the user by prompting them to enter their credentials.
+     * Then calls the login method from {@link authStaffService} or {@link authStudentService}.
+     * The user has four attempts to enter the correct User ID and password.
+     * 
+     * @param isStaff Indicates whether the user is logging in as a staff or student.
+     * 
+     * @return {@code true} if login successful, {@code false} if otherwise.
+     */
     public boolean login(boolean isStaff){
         int attempt=0;
         if(isStaff){
@@ -91,6 +129,9 @@ public class UserController {
         return true;      
     }
 
+    /**
+     * Calls the logout method from the corresponding {@link authService} object.
+     */
     public void logout(){
         AuthService.logout();
         System.out.println("Successfully logout");
