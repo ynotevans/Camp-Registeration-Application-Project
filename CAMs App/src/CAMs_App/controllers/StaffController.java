@@ -425,6 +425,25 @@ public class StaffController extends UserController{
       }
       
     }
+    
+    /**
+     * Calls {@link CampManagementService} to generate student list report as a .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
+    public void studentReportFile(){
+        System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+        int filter = HelperService.readInt();
+        if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        ColouredTextPrinter.printYellow("Generating student attendence report of " + faculty.toUpperCase() + " in .txt...\n");
+        CampManagementService.StudentListTXT(faculty.toUpperCase());
+        }
+        else{
+            ColouredTextPrinter.printYellow("Generating student attendence report in .txt...\n");
+            CampManagementService.StudentListTXT();
+        }
+    }
 
     /**
      * Calls {@link CampManagementService} to generate committee report, can
@@ -445,6 +464,10 @@ public class StaffController extends UserController{
       }
     }
 
+    /**
+     * Calls {@link CampManagementService} to generate committee report as a .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
     public void committeeReportFile(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
@@ -460,6 +483,10 @@ public class StaffController extends UserController{
       }
     }
 
+    /**
+     * Calls {@link CampManagementService} to generate enquiry list report, can
+     * choose to filter by {@link Faculty}.
+     */
     public void generateEnquiriesReport(){
       System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
