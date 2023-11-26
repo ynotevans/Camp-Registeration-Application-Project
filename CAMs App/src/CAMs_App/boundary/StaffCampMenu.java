@@ -154,9 +154,9 @@ public class StaffCampMenu implements Menu {
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Committee Performance Report");
                                 if(generate == 1)
-                                staffController.generateCommitteeReport();
+                                    staffController.generateCommitteeReport();
                                 else
-                                //call generate file func
+                                    staffController.committeeReportFile();
                                 
                                 HelperService.pressAnyKeyToContinue();   
                                 break;
@@ -165,23 +165,23 @@ public class StaffCampMenu implements Menu {
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Student Report");
                                 if(generate == 1)
-                                staffController.generateStudentReport();
+                                    staffController.generateStudentReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
                             
                             case 3:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Enquiries Report");
-                            if(generate == 1)
-                                staffController.generateEnquiriesReport();
+                                if(generate == 1)
+                                    staffController.generateEnquiriesReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
                             case 4:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Camp Report");
-                            if(generate == 1)
-                                staffController.generateCampReport();
+                                if(generate == 1)
+                                    staffController.generateCampReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
