@@ -140,7 +140,7 @@ public class CampManagementService {
         String filePath = "CAMs App/report/StudentList_" + camp.getCampName()+ ".txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Committee Performance Report for " + camp.getCampName() + " : ");
+            writer.write("Camp Attendees Report for " + camp.getCampName() + " : ");
             writer.newLine(); // Add a new line
             writer.newLine(); // Add a new line
 
@@ -179,7 +179,7 @@ public class CampManagementService {
         int count = 0;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Committee Performance Report for " + camp.getCampName() + " : ");
+            writer.write("Camp Attendees for " + camp.getCampName() + " : ");
             writer.newLine(); // Add a new line
             writer.newLine(); // Add a new line
 
@@ -214,6 +214,160 @@ public class CampManagementService {
             }
             ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
         }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to generate report in TXT format
+    */
+    public static void enquiriesReportTXT(){
+        Camp camp = AuthData.getCurrentCamp();
+        String filePath = "CAMs App/report/Enquiry_" + camp.getCampName()+ ".txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Enquiries report of " + camp.getCampName() + " : ");
+            writer.newLine(); // Add a new line
+            writer.newLine(); // Add a new line
+
+            writer.write("New Enquiries: ");
+            writer.newLine(); // Add a new line
+            if(!EnquiriesService.hasNewEnquiries()){
+                writer.write("--- No new enquiry for this camp ---");
+                writer.newLine(); // Add a new line
+            }
+            else{
+                ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+                for(int i = 0 ; i < qList.size() ; i++){
+                    Enquiries q = qList.get(i);
+                    if(!q.getProcessed()){
+                        writer.write("----------------------------------------------");
+                        writer.newLine();
+                        writer.write("EnquiriesID: " + (i+1));
+                        writer.newLine();
+                        writer.write("Inquirer:" + q.getInquirer());
+                        writer.newLine();
+                        writer.write("Enquiry: " + q.getEnquiry());
+                        writer.newLine();
+                        writer.newLine();
+                        writer.write("Respondent: " + q.getAnswerer());
+                        writer.newLine();
+                        writer.write("Answer: " + q.getAnswer());
+                        writer.newLine();
+                        writer.newLine();
+                    }
+                }
+            }
+
+            writer.write("Processed Enquiries:");
+            writer.newLine();
+            ArrayList <Enquiries> qList1 = AuthData.getCurrentCamp().getEnquiryList();
+            int count = 0;
+            for(int i = 0 ; i < qList1.size() ; i++){
+                Enquiries q = qList1.get(i);
+                if(q.getProcessed()){
+                    count++;
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                }
+            }
+            if(count == 0){
+                writer.write("--- No processed enquiry for this camp ---");
+                writer.newLine();
+            }
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to generate filtered report in TXT format
+    */
+    public static void enquiriesReportTXT(String faculty){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Enquiries> qList = camp.getEnquiryList();
+        String filePath = "CAMs App/report/Filtered_Enquiry_" + camp.getCampName()+ ".txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Enquiries report of " + camp.getCampName() + " : ");
+            writer.newLine(); // Add a new line
+            writer.newLine(); // Add a new line
+
+            writer.write("New Enquiries: ");
+            writer.newLine(); // Add a new line
+            int count = 0;
+            for(int i = 0 ; i < qList.size() ; i++){
+                Enquiries q = qList.get(i);
+                Student student = DatabaseService.getStudent(q.getInquirer());
+                String fac = student.getFaculty();
+                if(fac == faculty && !q.getProcessed()){
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                    count++;
+                }
+            }
+            if(count == 0){
+                writer.write("--- No new enquiry from student of " + faculty.toUpperCase()+ " ---");
+                writer.newLine();
+            } 
+
+            count = 0;
+            writer.write("Processed Enquiries:");
+            writer.newLine();
+            for(int i = 0 ; i < qList.size() ; i++){
+                Enquiries q = qList.get(i);
+                Student student = DatabaseService.getStudent(q.getInquirer());
+                String fac = student.getFaculty();
+                if(fac == faculty && q.getProcessed()){
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("EnquiriesID: " + (i+1));
+                    writer.newLine();
+                    writer.write("Inquirer:" + q.getInquirer());
+                    writer.newLine();
+                    writer.write("Enquiry: " + q.getEnquiry());
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Respondent: " + q.getAnswerer());
+                    writer.newLine();
+                    writer.write("Answer: " + q.getAnswer());
+                    writer.newLine();
+                    writer.newLine();
+                    count++;
+                }
+            }
+            if(count == 0){
+                writer.write("--- No processed enquiries from student of " + faculty.toUpperCase()+" ---");
+                writer.newLine();
+            } 
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -1,0 +1,21 @@
+Enquiries report of camp4 : 
+
+New Enquiries: 
+----------------------------------------------
+EnquiriesID: 1
+Inquirer:TTT444
+Enquiry: TTT444 enquiry 1
+
+Respondent: NULL
+Answer: Not processed yet
+
+----------------------------------------------
+EnquiriesID: 2
+Inquirer:TTT444
+Enquiry: TTT444 enquiry 2
+
+Respondent: NULL
+Answer: Not processed yet
+
+Processed Enquiries:
+--- No processed enquiry for this camp ---

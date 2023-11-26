@@ -177,7 +177,7 @@ public class StaffCampMenu implements Menu {
                                 if(generate == 1)
                                     staffController.generateEnquiriesReport();
                                 else
-                                    staffController.committeeReportFile();
+                                    staffController.EnquiriesReportFile();
 
                                 HelperService.pressAnyKeyToContinue();
                                 break;
@@ -188,7 +188,7 @@ public class StaffCampMenu implements Menu {
                                 if(generate == 1)
                                     staffController.generateCampReport();
                                 else
-                                    staffController.committeeReportFile();
+                                    //staffController.CampReportFile();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 

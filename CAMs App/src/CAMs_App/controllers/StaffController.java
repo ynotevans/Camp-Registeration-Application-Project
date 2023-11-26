@@ -426,6 +426,21 @@ public class StaffController extends UserController{
       }
     }
 
+     public void EnquiriesReportFile(){
+      System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        ColouredTextPrinter.printYellow("Generating committee enquiries report of " + faculty.toUpperCase() + " in .txt...\n");
+        CampManagementService.enquiriesReportTXT(faculty.toUpperCase());
+      }
+      else{
+        ColouredTextPrinter.printYellow("Generating enquiries report in .txt...\n");
+        CampManagementService.enquiriesReportTXT();
+      }
+    }
+
     public void generateCampReport(){
         System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
       int filter = HelperService.readInt();
