@@ -1,6 +1,6 @@
 campName,campDate,campEndDate,regCloseDate,userGroup,location,totalSlots,remainingSlot,campCommitteeSlots,campCommitteeRemainingSlot,description,staffInCharge,visibility,numberOfCampDays,attendees,committee,enquiries,sugggestion
-camp1,2023-10-30,2023-11-03,2023-10-15,NTU,SRC,30,30,10,9,EEE camp ,WWW111,true,5,null,CCC222,sdafds dsdfd*qq qq*TTT444*CCC222*true|ds sdfsd*d*TTT444*CCC222*true|dfd sdfds*(Not processed yet)*TTT444*NULL*false|sfs dsfd*(Not processed yet)*TTT444*NULL*false,null
-camp2,2023-11-25,2023-11-25,2023-11-22,SCSE,WAVE,25,25,10,10,sdfsdfsdf,WWW111,true,1,null,null,null,null
-camp3,2023-10-30,2023-11-03,2023-10-15,EEE,DRC,30,30,10,10,EEE camp ,WWW111,true,5,null,null,null,null
-camp4,2024-02-25,2024-02-25,2024-02-22,EEE,AUDI,10,10,2,1,dfssdfsdf,RRR222,true,1,null,TTT444,null,dsfds*TTT444*NEW*false
-camp5,2023-10-31,2023-11-05,2023-10-16,SBS,EAVE,30,30,10,10,EEE camp ,RRR222,true,6,null,null,null,null
+camp1,2023-10-30,2023-11-03,2023-10-15,NTU,SRC,30,30,10,9,NTU camp ,WWW111,true,5,null,CCC222,null,null
+camp2,2023-11-25,2023-11-25,2023-11-22,SCSE,WAVE,25,25,10,10,SCSE camp,WWW111,true,1,null,null,null,null
+camp3,2023-10-30,2023-11-03,2023-10-15,EEE,PIONEER,30,30,10,10,EEE camp ,WWW111,true,5,null,null,null,null
+camp4,2024-02-25,2024-02-25,2024-02-22,EEE,Nanyang Audi,10,10,2,2,EEE orientation,RRR222,true,1,null,TTT444,null,null
+camp5,2023-10-31,2023-11-05,2023-10-16,SBS,SBS building,30,30,10,10,SBS camp ,RRR222,true,6,null,null,null,null
