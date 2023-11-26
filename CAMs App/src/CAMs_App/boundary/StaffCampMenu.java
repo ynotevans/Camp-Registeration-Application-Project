@@ -145,7 +145,7 @@ public class StaffCampMenu implements Menu {
                         System.out.println("(2) Student report");
                         System.out.println("(3) Enquiries report");
                         System.out.println("(4) Camp report");
-                        System.out.println("(5): Stop generating report");
+                        System.out.println("(5) Stop generating report");
                         
                         int report = HelperService.readInt(1,5,"Invalid choice please try again");
                         

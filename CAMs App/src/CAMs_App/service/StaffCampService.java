@@ -91,14 +91,16 @@ public class StaffCampService extends CampManagementService{
        Camp camp = AuthData.getCurrentCamp();
        ArrayList<Student> comm  = camp.getCommittee();
         if(comm.isEmpty()){
-            System.out.println("No committee sign up for this camp");
+            ColouredTextPrinter.printRed("No committee sign up for this camp");
         }
        for(int i = 0 ; i < comm.size() ; i++){
         Student student = comm.get(i);
             System.out.println("Name: " + student.getName());
             System.out.println("Student ID: " + student.getUserID());
+            System.out.println("Faculty: " + student.getFaculty());
             System.out.println("Position: " + student.getCampComMem().getPosition());
             System.out.println("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
+            System.out.println(" ");
         }
 
     } 
@@ -116,12 +118,14 @@ public class StaffCampService extends CampManagementService{
                 System.out.println("Name: " + student.getName());
                 System.out.println("Student ID: " + student.getUserID());
                 System.out.println("Position: " + student.getCampComMem().getPosition());
+                System.out.println("Faculty: " + student.getFaculty());
                 System.out.println("# of suggestions submitted: " + student.getCampComMem().getSuggestion().size());
+                System.out.println(" ");
                 count++;
             }
         }
         if(count == 0) {
-            System.out.println("No committee from " + faculty);
+            ColouredTextPrinter.printRed("No committee from " + faculty);
         }
         
 
