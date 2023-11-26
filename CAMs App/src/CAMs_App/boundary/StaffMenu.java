@@ -91,7 +91,8 @@ public class StaffMenu implements Menu{
                             campMenu.viewApp();
                         }
                         else{
-                            System.out.println("Camp not exist, please enter the correct camp Name... ");
+                            System.out.println("Camp does not exist. ");
+                            HelperService.wait(2);
                         }
                         break;
                     

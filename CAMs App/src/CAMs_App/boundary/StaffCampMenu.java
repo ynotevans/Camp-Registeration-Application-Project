@@ -5,7 +5,6 @@ import java.util.Scanner;
 import CAMs_App.controllers.StaffController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
-import CAMs_App.service.StaffCampService;
 import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
 /**
@@ -58,7 +57,7 @@ public class StaffCampMenu implements Menu {
      * <li>Process suggestions for this camp : Staff user processes the current camp's suggestions through {@link StaffController#processSuggestions()}.
      * <li>Approves suggestions for this camp :  Staff user approves the current camp's suggestsions through {@link StaffController#approveSuggestion()}.
      * <li>Generate report : Staff user can either generate {@link StaffController#generateCommitteeReport()}, {@link StaffController#generateStudentReport()} or{@link StaffController#generateEnquiriesReport()}. 
-     * These reports can be filtered to faculty or default by user input.
+     * These reports can be filtered to faculty or default (print all) by user input.
      * <li>Go to previous page : Returns the Staff user back to {@link StaffMenu}.
      * <li>Logout : Staff user logs out from the system and returning to the {@link MainMenu}.
      * </ul><p>
