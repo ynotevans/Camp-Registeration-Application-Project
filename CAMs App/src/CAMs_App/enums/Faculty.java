@@ -77,6 +77,7 @@ public enum Faculty{
      */
     SCBE,
     /**
+     * University-wide camp, anyone can attend
      * {@link Staff} uses to NTU faculty
      */
     NTU; 
