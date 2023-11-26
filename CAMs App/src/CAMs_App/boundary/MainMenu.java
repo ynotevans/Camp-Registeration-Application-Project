@@ -12,9 +12,14 @@ import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
 import CAMs_App.enums.*;
 
-
+/**
+ * The {@link MainMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application 
+ */
 public class MainMenu implements Menu{
-    
+    /**
+     * Prints the main menu with welcome message and options to login or quit program
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Main Menu");
@@ -65,7 +70,13 @@ public class MainMenu implements Menu{
         Database.setStudentsData(user1);
         Database.setCampData(camp);
     }
-
+    /**
+     * Displays the main menu and read the user input for login or exitting the program
+     * <p><ul>
+     * <li>If the user chooses to log in, the user will be navigated to {@link LoginMenu}.
+     * <li>If the user chooses to exit, the program will be terminated.
+     * </ul><p>
+     */
     public void viewApp(){
         Database.readData();
         Scanner sc = new Scanner(System.in);
