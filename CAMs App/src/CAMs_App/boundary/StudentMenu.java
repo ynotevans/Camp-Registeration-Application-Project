@@ -12,11 +12,20 @@ import CAMs_App.entity.Student;
 import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
-
+/**
+ * The {@link StudentMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application.
+ * The class uses {@link StudentController} to manage student-related activities.
+ */
 public class StudentMenu implements Menu {
+    /** The currently logged-in Student user. */
     User currentStudent = AuthData.getCurrentUser();
+    /** The controller for student-related activities */
     StudentController studentController = new StudentController();
-
+    /**
+     * The printMenu() method displays the menu options available for student user.
+     * It prints student menu options such as view available camps, view registered camp(s), switch to camp committee mode, change password and logout.
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Student Menu");
@@ -31,7 +40,19 @@ public class StudentMenu implements Menu {
     }
 
     
-
+    /**
+     * The viewApp() method allows Student user to perform various actions such as 
+     * <p><ul>
+     * <li>View available camps : Student user view the available camps by {@link StudentController#viewAvailableCamp()}. 
+     * If a valid camp is entered in the list of available camps, the Student user will be navigated to {@link StudentCampMenu} or be prompted to switch mode to {@link CampComMem}.
+     * <li>View registered camp(s) : Student user views the camp's that they registered by {@link StudentController#viewRegisteredCamp()}. 
+     * If the Student user registered a camp and selects a valid campname in the list, the Student user will be navigated to {@link StudentCampMenu} or be prompted to switch mode to {@link CampComMem}.
+     * <li>Switch to camp committe mode : Student user will switch into a camp committee mode {@link CampComMem}.
+     * <li>Changing password : Student user changes password via {@link UserController#changePassword()}.
+     * <li>Logging out : Student user logs out from the system and returning to the {@link MainMenu}.
+     * </ul><p>
+     * Invalid inputs prompts the user to choose again.
+     */
     public void viewApp(){
         HelperService.clearScreen();
         Scanner sc = new Scanner(System.in);
