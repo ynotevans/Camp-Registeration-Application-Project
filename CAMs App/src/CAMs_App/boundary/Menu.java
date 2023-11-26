@@ -10,7 +10,7 @@ public interface Menu {
      */
     public void printMenu();
     /**
-     * Call the printMenu(), prompt user input and calls the respective menu based on user input
+     * Call the printMenu(), prompt user input and calls the respective menu or controller based on user input
      */
     public void viewApp();
     
