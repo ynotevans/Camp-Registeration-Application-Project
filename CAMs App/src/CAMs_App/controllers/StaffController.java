@@ -347,23 +347,86 @@ public class StaffController extends UserController{
     }
 
     public void viewCreatedCamp(String userID){
-        System.out.println("print staff created camp........");
+        System.out.println("Listing camps you created........");
         StaffCampService.viewCampsCreated(userID);
     }
 
     public void generateStudentReport(){
-      System.out.println("Generating student attendence report...");
-      CampManagementService.generateStudentListReport();
+      System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        System.out.println("Generating student attendence report of " + faculty.toUpperCase() + "...");
+        CampManagementService.generateStudentListReport(faculty.toUpperCase());
+      }
+      else{
+        System.out.println("Generating student attendence report...");
+        CampManagementService.generateStudentListReport();
+      }
+      
     }
 
     public void generateCommitteeReport(){
-      System.out.println("Generating committee performance report...");
-      StaffCampService.commiteePerformanceReport();
+      System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        System.out.println("Generating committee performance report of " + faculty.toUpperCase() + "...");
+        StaffCampService.commiteePerformanceReport(faculty.toUpperCase());
+      }
+      else{
+        System.out.println("Generating committee performance report...");
+        StaffCampService.commiteePerformanceReport();
+      }
     }
 
     public void generateEnquiriesReport(){
-        System.out.println("List of all enquiries of the camp");
+      System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        ColouredTextPrinter.printYellow("Generating enquiries report of " + faculty.toUpperCase() + "...\n");
+        CampManagementService.enquiriesReport(faculty.toUpperCase());
+      }
+      else{
+        ColouredTextPrinter.printYellow("Generating enquiries report...\n");
         CampManagementService.enquiriesReport();
+      }
+    }
+
+    public void generateCampReport(){
+        System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
+      int filter = HelperService.readInt();
+      if(filter == 1){
+        System.out.println("Faculty: ");
+        String faculty = sc.nextLine();
+        ColouredTextPrinter.printYellow("Generating camp report of " + faculty.toUpperCase() + "...\n");
+        System.out.println("Committee List:\n");
+        StaffCampService.commiteePerformanceReport(faculty.toUpperCase());
+
+        System.out.println("Attendees Lists:\n");
+        CampManagementService.generateStudentListReport(faculty.toUpperCase());
+        
+        System.out.println("Enquiries List:\n");
+        CampManagementService.enquiriesReport(faculty);
+        
+      }
+      else{
+        ColouredTextPrinter.printYellow("Generating camp report...\n");
+        StaffCampService.commiteePerformanceReport();
+
+        System.out.println("Committee List:\n");
+        StaffCampService.commiteePerformanceReport();
+
+        System.out.println("Attendees Lists:\n");
+        CampManagementService.generateStudentListReport();
+        
+        System.out.println("Enquiries List:\n");
+        CampManagementService.enquiriesReport();
+      }
     }
 
 
