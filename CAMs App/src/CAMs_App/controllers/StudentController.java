@@ -12,11 +12,25 @@ import CAMs_App.service.EnquiriesService;
 import CAMs_App.service.HelperService;
 import CAMs_App.service.StudentCampService;
 
-
+/**
+ * The {@link StudentController} class is responsible for handling the
+ * student-specific user interface and user interactions. It extends the
+ * {@link UserController} class and provides functionality for students to
+ * view available and registered camps, register for camps, withdraw from camps,
+ * as well as create, edit and delete enquiries to camps they registered for.
+ */
 public class StudentController extends UserController {
+	/**
+	 * {@link Scanner} object to get input from the user.
+	 */
     Scanner sc = new Scanner(System.in);
     //Student currentUser = (Student)AuthData.getCurrentUser();
 
+    /**
+     * Calls {@link StudentCampService} to display all camps available for register to this student.
+     * 
+     * @return {@code false} if no camps are available, {@code true} if otherwise.
+     */
 	public boolean viewAvailableCamp(){
         if (StudentCampService.viewAvailableCamps()==0){
             return false;
@@ -24,6 +38,17 @@ public class StudentController extends UserController {
         return true;
     }
 
+	/**
+	 * Registers for the current camp as a regular attendee by
+     * calling registerAsAttendee method from the corresponding
+     * {@link StudentCampService} object.
+	 * The register will fail if:
+	 * <ol>
+	 * <li>The camp is full</li>
+     * <li>The student has already registered for the camp</li>
+     * <li>The student has withdrawn from this camp before</li>
+     * </ol>
+	 */
     public void joinAsAttendee(){
         Student student = (Student)AuthData.getCurrentUser();
         String campName = AuthData.getCurrentCamp().getCampName();
@@ -49,6 +74,18 @@ public class StudentController extends UserController {
         }
     }
 
+    /**
+     * Register for the current camp as a committee member by
+     * calling registerAsCommittee method from the corresponding
+     * {@link StudentCampService} object.
+     * Prompt user to key in the position as the committee member
+	 * The register will fail if:
+	 * <ol>
+	 * <li>The camp's committee slots are full</li>
+     * <li>The student has already registered for the camp</li>
+     * </ol>
+     * @return {@code true} if register successful, {@code false} if otherwise.
+     */
     public boolean joinAsCommittee(){
         Student student = (Student)AuthData.getCurrentUser();
         Camp camp = AuthData.getCurrentCamp();
@@ -83,6 +120,11 @@ public class StudentController extends UserController {
 
     }
 
+    /**
+     * Withdraws the student from the current camp by
+     * calling withdrawCamp method from the corresponding
+     * {@link StudentCampService} object.
+     */
     public void withdrawCamp(){
         String campName = AuthData.getCurrentCamp().getCampName();
         Student currentUser =(Student) AuthData.getCurrentUser();
@@ -108,6 +150,12 @@ public class StudentController extends UserController {
         
     }
     
+    /**
+     * Calls viewRegisteredCamp method from {@link StudentCampService} to display 
+     * all registered camp of this student.
+     * 
+     * @return {@code false} if no camps are registered, {@code true} if otherwise.
+     */
     public boolean viewRegisteredCamp(){
         if (StudentCampService.viewRegisteredCamp()==0){
             return false;
@@ -115,6 +163,10 @@ public class StudentController extends UserController {
         return true;
     }
 
+    /**
+     * Calls viewEnquiries method from {@link EnquiriesService} to display 
+     * all enquiries created by this student.
+     */
     public void viewEnquiry(){
         if(!EnquiriesService.submittedEnquiries()){
             System.out.println("You have not submitted any enquiry on this camp");
@@ -133,13 +185,21 @@ public class StudentController extends UserController {
         }
     }
 
+    /**
+     * Calls createEnquiries method from {@link EnquiriesService} to create enquiry.
+     * Prompts the student to enter a enquiry for the current camp.
+     */
     public void createEnquiry(){
     	System.out.println("Please provide your enquiry: ");
         String enquiry = sc.nextLine();
     	
         EnquiriesService.createEnquiries(enquiry);
     }
-
+    
+    /**
+     * Prompts the student to select a submitted enquiry for edit, 
+     * the edit will fail if enquiry is already processed.
+     */
     public void editEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
@@ -168,6 +228,10 @@ public class StudentController extends UserController {
         System.out.println("Enquiries Updated");
     }
 
+    /**
+     * Prompts the student to select a submitted enquiry to delete, 
+     * the delete will fail if enquiry is already processed.
+     */
     public void deleteEnquiries(){
     	Camp camp = AuthData.getCurrentCamp();
     	Student student = (Student)AuthData.getCurrentUser();
@@ -203,7 +267,10 @@ public class StudentController extends UserController {
         }
     }
 
-
+    /**
+     * Switches the current user mode to camp committee mode
+     * @param currentMode The current user mode the system is in.
+     */
     public void switchMode(int currentMode){
         HelperService.clearScreen();
         //from student switch to camp committee

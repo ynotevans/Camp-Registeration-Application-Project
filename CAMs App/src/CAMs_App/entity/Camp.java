@@ -9,7 +9,7 @@ import CAMs_App.enums.*;
 /**
  * The {@link Camp} class represents a camp in the system.
  * It extends the {@link CampInfo} class, which contains basic camp information.
- * It implements the comparable interface.
+ * It implements the comparable interface for sorting purpose.
  */
 
 public class Camp extends CampInfo implements Comparable<Camp>{
@@ -131,7 +131,7 @@ public class Camp extends CampInfo implements Comparable<Camp>{
     }
     
     /**
-     * Compares the different parameters between camps.
+     * Compares the different parameters between camps for sorting purpose.
      */
      @Override
     public int compareTo(Camp other) {
