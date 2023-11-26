@@ -4,11 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 import CAMs_App.data.*;
 import CAMs_App.entity.*;
@@ -135,7 +133,6 @@ public class StaffCampService extends CampManagementService{
         
     }
 
-
     /**
      * Method to generate report in TXT format
     */
@@ -227,82 +224,4 @@ public class StaffCampService extends CampManagementService{
         }
     }
 
-    /**
-     * Method to generate report in CSV format
-    */
-    public static void committeePerformanceinCSV(){
-        Camp camp = AuthData.getCurrentCamp();
-        ArrayList<Student> comm  = camp.getCommittee();
-        if(comm.isEmpty()){
-            ColouredTextPrinter.printRed("There is no committee in this camp, unable to generate report!!!");
-        }else{
-            String filePath = "CAMs App/report/Committee_Performance_" + camp.getCampName()+ ".csv";
-            Set<String> header = new LinkedHashSet<String>();
-            header.add("Name");
-            header.add("StudentID");
-            header.add("Position");
-            header.add("# of Suggestions Submitted");
-            header.add("Faculty");
-
-            // Write data to the CSV file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                // Write the header (keys of the Map) to the CSV file
-                writer.write(String.join(",", header));
-                writer.newLine();
-
-                for (Student student : comm){
-                    // Write the values to the CSV file
-                    writer.write(String.format("%s,%s,%s,%d,%s" , student.getName(),student.getUserID(), 
-                                                student.getCampComMem().getPosition(),
-                                                student.getCampComMem().getSuggestion().size(),
-                                                student.getFaculty()));
-                    writer.newLine();
-                }
-                ColouredTextPrinter.printYellow("Succesfully generated .csv file ");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Method to generate filtered report in CSV format
-    */
-    public static void committeePerformanceinCSV(String faculty){
-        Camp camp = AuthData.getCurrentCamp();
-        ArrayList<Student> comm  = camp.getCommittee();
-        if(comm.isEmpty()){
-            ColouredTextPrinter.printRed("There is no committee in this camp, unable to generate report!!!");
-        }else{
-            String filePath = "CAMs App/report/Filtered_Committee_Performance_" + camp.getCampName()+ ".csv";
-            Set<String> header = new LinkedHashSet<String>();
-            header.add("Name");
-            header.add("StudentID");
-            header.add("Position");
-            header.add("# of Suggestions Submitted");
-            header.add("Faculty");
-
-            // Write data to the CSV file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                // Write the header (keys of the Map) to the CSV file
-                writer.write(String.join(",", header));
-                writer.newLine();
-
-                for (Student student : comm){
-                    // Write the values to the CSV file
-                    if(student.getFaculty().equals(faculty)){
-                        writer.write(String.format("%s,%s,%s,%d,%s" , student.getName(),student.getUserID(), 
-                                                student.getCampComMem().getPosition(),
-                                                student.getCampComMem().getSuggestion().size(),
-                                                student.getFaculty()));
-                        writer.newLine();
-                    }
-                }
-                ColouredTextPrinter.printYellow("Succesfully generated .csv file ");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
 }

@@ -166,6 +166,8 @@ public class StaffCampMenu implements Menu {
                                 HelperService.printRoute("Staff Camp Menu ---> Print Student Report");
                                 if(generate == 1)
                                     staffController.generateStudentReport();
+                                else
+                                    staffController.studentReportFile();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
                             
@@ -174,6 +176,9 @@ public class StaffCampMenu implements Menu {
                                 HelperService.printRoute("Staff Camp Menu ---> Print Enquiries Report");
                                 if(generate == 1)
                                     staffController.generateEnquiriesReport();
+                                else
+                                    staffController.committeeReportFile();
+
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
@@ -182,6 +187,8 @@ public class StaffCampMenu implements Menu {
                                 HelperService.printRoute("Staff Camp Menu ---> Print Camp Report");
                                 if(generate == 1)
                                     staffController.generateCampReport();
+                                else
+                                    staffController.committeeReportFile();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 

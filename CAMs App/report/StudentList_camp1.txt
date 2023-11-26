@@ -1,0 +1,14 @@
+Committee Performance Report for camp1 : 
+
+----------------------------------------------
+Name: Ryan
+Student ID: CCC111
+Faculty: SBS
+Position: Participants
+
+----------------------------------------------
+Name: Lily
+Student ID: YYY555
+Faculty: CCEB
+Position: Participants
+

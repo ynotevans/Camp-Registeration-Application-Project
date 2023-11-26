@@ -1,11 +1,13 @@
 package CAMs_App.service;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Student;
-import CAMs_App.enums.Faculty;
 /**
  * The{@link CampManagementService} class provides methods in printing attendence reports and enquiries
  */
@@ -128,11 +130,92 @@ public class CampManagementService {
         if(count == 0) ColouredTextPrinter.printRed("No processed enquiries from student of " + faculty.toUpperCase());
     }
 
+    
     /**
      * Method to generate report in TXT format
     */
-    public static void generateReportinTXT(){
+    public static void StudentListTXT(){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Student> attendees  = camp.getAttendees();
+        String filePath = "CAMs App/report/StudentList_" + camp.getCampName()+ ".txt";
 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Committee Performance Report for " + camp.getCampName() + " : ");
+            writer.newLine(); // Add a new line
+            writer.newLine(); // Add a new line
+
+            if(attendees.isEmpty()){
+                writer.write("No student sign up for the camp");
+                writer.newLine(); // Add a new line
+            }
+            for(int i = 0 ; i < camp.getAttendees().size() ; i++){
+                Student student = attendees.get(i);
+                writer.write("----------------------------------------------");
+                writer.newLine();
+                writer.write("Name: " + student.getName());
+                writer.newLine();
+                writer.write("Student ID: " + student.getUserID());
+                writer.newLine();
+                writer.write("Faculty: " + student.getFaculty().toString());
+                writer.newLine();
+                writer.write("Position: Participants");
+                writer.newLine();
+                writer.newLine(); // Add a new line
+            }
+
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to generate filtered report in TXT format
+    */
+    public static void StudentListTXT(String faculty){
+        Camp camp = AuthData.getCurrentCamp();
+        ArrayList<Student> attendees  = camp.getAttendees();
+        String filePath = "CAMs App/report/Filtered_StudentList_" + camp.getCampName()+ ".txt";
+        int count = 0;
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Committee Performance Report for " + camp.getCampName() + " : ");
+            writer.newLine(); // Add a new line
+            writer.newLine(); // Add a new line
+
+            writer.write("Filtered by Faculty: " + faculty +"\n");
+            writer.newLine(); // Add a new line
+
+            if(attendees.isEmpty()){
+                writer.write("No student sign up for the camp");
+                writer.newLine(); // Add a new line
+            }
+             for(int i = 0 ; i < camp.getAttendees().size() ; i++){
+                Student student = attendees.get(i);
+                if(student.getFaculty().equals(faculty)){
+                    count++;
+                    writer.write("----------------------------------------------");
+                    writer.newLine();
+                    writer.write("Name: " + student.getName());
+                    writer.newLine();
+                    writer.write("Student ID: " + student.getUserID());
+                    writer.newLine();
+                    writer.write("Faculty: " + student.getFaculty().toString());
+                    writer.newLine();
+                    writer.write("Position: Participants");
+                    writer.newLine();
+                    writer.newLine(); // Add a new line
+                }
+            }
+
+            if(count == 0) {
+                    writer.write("No attendees from " + faculty);
+                    writer.newLine();
+            }
+            ColouredTextPrinter.printYellow("Succesfully generated .txt file ");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
