@@ -8,11 +8,22 @@ import CAMs_App.entity.*;
 import CAMs_App.service.CampManagementService;
 import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.HelperService;
-
+/**
+ * The {@link CampComMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application.
+ * The class uses {@link campComController} to manage camp committee-related activities and 
+ * also uses {@link CampManagementService} in generating reports.
+ */
 public class CampComMenu implements Menu{
+    /** The currently logged-in Student user. */
     Student currentStudent = (Student)AuthData.getCurrentUser();
+    /** The controller for camp committee-related activities */
     CampComController campComController = new CampComController();
-
+    /**
+     * The printMenu() method displays the camp menu options available for the camp committee user.
+     * It prints camp committee menu options such as view camp details, view enquiries, reply enquiries, create suggestions, view own suggestions, delete own suggestions, generate enquiries report, generate attendence report, 
+     * switch to user mode and logout.
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Camp committee Menu ---> "+ AuthData.getCurrentCamp().getCampName());
@@ -31,7 +42,22 @@ public class CampComMenu implements Menu{
     }
 
     
-
+    /**
+     * The viewApp() method allows camp committee user to perform various camp related actions for the selected camp such as 
+     * <p><ul>
+     * <li>View camp details : Camp Committee user view camp details thorugh {@link CampComController#viewCampDetails()}.
+     * <li>View enquiries : Camp Committee user view the camp's enquiries through {@link CampComController#viewAllEnquiries()}.
+     * <li>Reply enquiries : Camp Committee user reply the camp's enquiries through {@link CampComController#replyEnquiry()}.
+     * <li>Create suggestions : Camp Committee user creates suggestions for the camp through {@link CampComController#createSuggestion()}.
+     * <li>View your suggestions : Camp Committee user view thier own suggestions for the camp through {@link CampComController#viewSuggestion()}.
+     * <li>Delete your suggestions : Camp Committee user deletes their own suggestions for the camp through {@link CampComController#deleteSuggestion()}.
+     * <li>Generate enquiries report : Camp Committee user creates suggestions for the camp through {@link CampManagementService#enquiriesReport()}.
+     * <li>Generate attendence suggestions : Camp Committee user creates suggestions for the camp through {@link CampManagementService#generateStudentListReport()}, filterable by faculty or default.
+     * <li>Switch to camp committe mode : Camp Committee user will switch into a student mode {@link Student}.
+     * <li>Logout : Camp Committee user logs out from the system and returning to the {@link MainMenu}.
+     * </ul><p>
+     * Invalid inputs prompts the user to choose again.
+     */
     public void viewApp(){
         
         Scanner sc = new Scanner(System.in);
