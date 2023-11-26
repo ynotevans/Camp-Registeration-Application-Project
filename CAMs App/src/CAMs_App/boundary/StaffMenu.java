@@ -10,11 +10,20 @@ import CAMs_App.entity.User;
 import CAMs_App.service.ColouredTextPrinter;
 import CAMs_App.service.DatabaseService;
 import CAMs_App.service.HelperService;
-
+/**
+ * The {@link StaffMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application.
+ * The class uses {@link StaffController} to manage staff-related activities 
+ */
 public class StaffMenu implements Menu{
+    /** The currently logged-in Staff user. */
     User currentStaff = AuthData.getCurrentUser();
+    /** The controller for staff-related activities */
     StaffController staffController = new StaffController();
-
+    /**
+     * The printMenu() method displays the menu options available for staff user.
+     * It prints staff menu options such as creating a new camp, viewing all camps, viewing camps created by the staff user, changing password and logging out.
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Staff Menu");
@@ -28,7 +37,18 @@ public class StaffMenu implements Menu{
     }
 
     
-
+    /**
+     * The viewApp() method allows Staff to perform various actions such as 
+     * <p><ul>
+     * <li>Creating a camp : Staff user will be navigated to {@link StaffController#createCamp()} method
+     * <li>Viewing all camps : Staff user will be navigated to {@link StaffController#viewAllCamp()} method
+     * <li>Viewing camps created by the staff member : Displays the camps made by Staff user {@link StaffController#viewCreatedCamp(String)}.
+     * Staff user will be navigated to {@link StaffCampMenu} after entering a valid camp.
+     * <li>Changing password : Staff user changes password via {@link UserController#changePassword()}.
+     * <li>Logging out : Staff user logs out from the system and returning to the {@link MainMenu}.
+     * </ul><p>
+     * Invalid inputs prompts the user to choose again.
+     */
     public void viewApp(){
         this.printMenu();
         
