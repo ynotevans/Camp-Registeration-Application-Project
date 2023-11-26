@@ -68,7 +68,7 @@ public class StaffController extends UserController{
                 String start = sc.nextLine();
                 LocalDate startDateTime = LocalDate.parse(start,formatter);
                 if(startDateTime.isBefore(LocalDate.now())){
-                    System.out.println("Invalid starting date. Please select a date after the current date: " + LocalDate.now());
+                 ColouredTextPrinter.printRed("Invalid starting date. Please select a date after the current date: " + LocalDate.now());
                     continue;
                 }
                 camp.setCampDate(startDateTime);
@@ -156,7 +156,7 @@ public class StaffController extends UserController{
         int campCommitteeSlots = HelperService.readInt();
         
         while(campCommitteeSlots <= 0 || campCommitteeSlots > 10){
-            System.out.println("Camp committee slots must be between 0 to 10\n Please try again: ");
+           ColouredTextPrinter.printRed("Camp committee slots must be between 0 to 10\nPlease try again: ");
             campCommitteeSlots = HelperService.readInt();
         }
         camp.setCampCommitteeSlots(campCommitteeSlots);
@@ -170,7 +170,6 @@ public class StaffController extends UserController{
 
         //Camp Descriptions
         System.out.println("Enter camp description: ");
-        sc.nextLine();
         String description = sc.nextLine();
         camp.setDescription(description);
         
