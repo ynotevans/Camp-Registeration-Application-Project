@@ -24,9 +24,15 @@ import CAMs_App.enums.Faculty;
 
 
 
-
+/**
+ * The {@link DatabaseService} class provides methods to reading and writing of data into CSV file for student,staff and camp entities
+ */
 public class DatabaseService {
-    
+    /**
+     * Writes student data to CSV file
+	 * @param dataMap : Map containing the student data
+	 * 
+     */
 	public static void writetoStudentCSV(Map<String, Student> dataMap){
 		// Specify the file path for the CSV file
         String csvFilePath = "CAMs App/csvdata/student.csv";
@@ -74,7 +80,9 @@ public class DatabaseService {
             e.printStackTrace();
         }
 	}
-
+	/**
+     * Reads student data from a CSV file and updates the application's data.
+     */
 	public static void readfromStudentCSV(){
 		String csvFilePath = "CAMs App/csvdata/student.csv";
 		Map<String, Student> user1 = Database.getStudentsData();
@@ -130,7 +138,10 @@ public class DatabaseService {
             e.printStackTrace();
         }
 	}
-
+	/**
+     * Writes staff to CSV file
+	 * @param dataMap : Map containing staff data
+     */
 	public static void writetoStaffCSV(Map<String, Staff> dataMap){
 		// Specify the file path for the CSV file
         String csvFilePath = "CAMs App/csvdata/staff.csv";
@@ -158,7 +169,9 @@ public class DatabaseService {
             e.printStackTrace();
         }
 	}
-
+	/**
+     * Reads staff data from a CSV file and updates the application's data.
+     */
 	public static void readfromStaffCSV(){
 		String csvFilePath = "CAMs App/csvdata/staff.csv";
 		Map<String, Staff> user = Database.getStaffData();
@@ -184,7 +197,10 @@ public class DatabaseService {
             e.printStackTrace();
         }
 	}
-
+	/**
+     * Writes camp data to CSV file
+	 * @param dataMap : Map containing camp data
+     */
 	public static void writetoCampCSV(Map<String, Camp> dataMap){
 		// Specify the file path for the CSV file
         String csvFilePath = "CAMs App/csvdata/camp.csv";
@@ -286,7 +302,9 @@ public class DatabaseService {
             e.printStackTrace();
         }
 	}
-
+	/**
+     * Reads camp data from CSV file and updates the application's data.
+     */
 	public static void readfromCampCSV(){
 		String csvFilePath = "CAMs App/csvdata/camp.csv";
 		Map<String, Camp> user = Database.getCampData();
@@ -398,17 +416,30 @@ public class DatabaseService {
         }
 
 	}
-
+	/**
+     * Get camp data through the camp name
+	 * @param campName : Name of camp to retrive
+	 * @return the camp data from the retrived camp name
+     */
 	public static Camp getCamp(String campName){
 		Map<String ,Camp> campData = Database.getCampData();
 		return campData.get(campName);
 	}
-
+	/**
+     * Get student data through the student userID
+	 * @param userID : userID of student to retrive
+	 * @return the student data from the retrived userID
+     */
 	public static Student getStudent(String userID){
 		Map<String ,Student> student = Database.getStudentsData();
 		return student.get(userID);
 	}
-
+	/**
+     * Check if staff user is responsible of a given camp
+	 * @param campName : Name of camp to check
+	 * @param userID : Staff user's userID to check
+	 * @return {@code true} if the staff user is in charge of the camp,{@code false} otherwise
+     */
 	public static boolean checkCampName(String campName, String userID){
 		Map<String, Camp> camp1 = Database.getCampData(); 
 
@@ -420,7 +451,11 @@ public class DatabaseService {
         }
 		return false;
 	}
-
+	/**
+     * Check if camp exist of a specific name exist in the Database
+	 * @param campName : Name of camp to check
+	 * @return {@code true} if the camp exist in the database, {@code false} otherwise
+     */
 	public static boolean checkIfCampNameExists(String campName){
 		Map<String, Camp> camp1 = Database.getCampData(); 
         for (Camp camp : camp1.values()){
