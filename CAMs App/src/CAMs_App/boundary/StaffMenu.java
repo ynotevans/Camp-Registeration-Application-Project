@@ -50,7 +50,7 @@ public class StaffMenu implements Menu{
      * Staff user will be navigated to {@link StaffCampMenu} after entering a valid camp.
      * <li>Changing password : Staff user changes password via {@link UserController#changePassword()}.
      * <li>Logging out : Staff user logs out from the system and returning to the {@link MainMenu}.
-     * </ul><p>
+     * </ul></p>
      * Invalid inputs prompts the user to choose again.
      */
     public void viewApp(){
