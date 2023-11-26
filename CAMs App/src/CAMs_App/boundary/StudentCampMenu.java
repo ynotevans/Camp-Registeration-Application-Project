@@ -7,10 +7,20 @@ import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
 import CAMs_App.service.HelperService;
 import CAMs_App.service.ColouredTextPrinter;
+/**
+ * The {@link StudentCampMenu} implements the generic menu, {@link Menu}. 
+ * It provides methods to print the main menu and viewing the application.
+ * The class uses {@link StudentController} to manage student-related activities.
+ */
 public class StudentCampMenu implements Menu{
+    /** The controller for student-related activities */
     StudentController studentController = new StudentController();
+    /** Uses reference of main student menu */
     StudentMenu studentMenu = new StudentMenu();
-
+    /**
+     * The printMenu() method displays the camp menu options available for student user.
+     * It prints camp menu options for student user such as register camp, withdraw camp, submit enquiries for the camp, view submitted enquiries, deleteing of enquiries, returning to previous page and logout.
+     */
     public void printMenu(){
         HelperService.clearScreen();
         HelperService.printRoute("Student Camp Menu ---> "+ AuthData.getCurrentCamp().getCampName());
@@ -25,7 +35,19 @@ public class StudentCampMenu implements Menu{
     }
 
     
-
+     /**
+     * The viewApp() method allows Student user to perform various camp-related actions for the current camp such as 
+     * <p><ul>
+     * <li>Register camp : Student user register camp either as {@link Student} or {@link CampComMem}, through {@link StudentController#joinAsAttendee()} or {@link StudentController#joinAsCommittee()} respectively.
+     * <li>Withdraw camp : Student user withdraw from the camp by {@link StudentController#withdrawCamp()}.
+     * <li>Submit enquiries for this camp : Student user creates and submits enquiries by {@link StudentController#createEnquiry()}.
+     * <li>View your submitted enquiries: Student user views thier sumbitted enquiries via {@link StudentController#viewEnquiry()}.
+     * <li>Delete enquiries : Student user deletes enquiries by {@link StudentController#deleteEnquiries()}.
+     * <li>Go to previous page : Returns the Student user back to {@link StudentMenu}.
+     * <li>Logout : Student user logs out from the system and returning to the {@link MainMenu}.
+     * </ul><p>
+     * Invalid inputs prompts the user to choose again.
+     */
     public void viewApp(){
         Scanner sc = new Scanner(System.in);
         int choice;
