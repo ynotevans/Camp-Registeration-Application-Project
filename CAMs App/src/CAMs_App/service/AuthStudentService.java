@@ -7,6 +7,10 @@ import CAMs_App.data.Database;
 /**
  * The class {@link AuthStudentService} extends from the abstract class {@link AuthService}. 
  * It authenticates serivces applicable to student users. The class contains AuthStudentService constructor and login method.
+ * 
+ *  @author Tony
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class AuthStudentService extends AuthService {
     /**

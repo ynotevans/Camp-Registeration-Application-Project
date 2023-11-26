@@ -14,6 +14,10 @@ import CAMs_App.service.HelperService;
  * The {@link StaffMenu} implements the generic menu, {@link Menu}. 
  * It provides methods to print the main menu and viewing the application.
  * The class uses {@link StaffController} to manage staff-related activities 
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StaffMenu implements Menu{
     /** The currently logged-in Staff user. */

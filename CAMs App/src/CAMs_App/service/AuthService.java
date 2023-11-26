@@ -6,6 +6,10 @@ import CAMs_App.data.Database;
 /**
  * The abstract class {@link AuthService} used as a base for authentication services in this application.
  * The class contains static method for logging out a user and a protected method for authentication.
+ * 
+ *  @author Tony
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public abstract class AuthService {
     /**

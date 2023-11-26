@@ -10,6 +10,10 @@ import CAMs_App.enums.*;
  * The {@link Camp} class represents a camp in the system.
  * It extends the {@link CampInfo} class, which contains basic camp information.
  * It implements the comparable interface for sorting purpose.
+ * 
+ *  @author Denis Yu
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 
 public class Camp extends CampInfo implements Comparable<Camp>{

@@ -18,6 +18,10 @@ import CAMs_App.service.*;
  * {@link UserController} class and provides functionality for staffs to
  * view, create and edit camps, view and reply to enquiries,
  * view and process suggestions, as well as generate reports.
+ * 
+ *  @author Tony
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StaffController extends UserController{
 	/**

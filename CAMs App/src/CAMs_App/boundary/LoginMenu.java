@@ -10,6 +10,10 @@ import CAMs_App.service.HelperService;
 /**
  * The {@link LoginMenu} implements the generic menu, {@link Menu}.
  * It provides methods to print the main menu and viewing the application 
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class LoginMenu implements Menu {
     /**

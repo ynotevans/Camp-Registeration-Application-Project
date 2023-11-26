@@ -9,6 +9,10 @@ import CAMs_App.service.DatabaseService;
  * It extends {@link User} class and includes additional information 
  * such as registered camps and points earned. Each student object has a corresponding
  * {@link CampComMem} object.
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class Student extends User implements Comparable<Student> {
 	/**

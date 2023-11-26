@@ -1,12 +1,12 @@
 package CAMs_App.boundary;
 
-// import java.util.ArrayList;
 import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
 import CAMs_App.controllers.UserController;
 import CAMs_App.data.AuthData;
 import CAMs_App.entity.Camp;
+import CAMs_App.entity.CampComMem;
 import CAMs_App.entity.User;
 import CAMs_App.entity.Student;
 import CAMs_App.service.ColouredTextPrinter;
@@ -16,6 +16,10 @@ import CAMs_App.service.HelperService;
  * The {@link StudentMenu} implements the generic menu, {@link Menu}. 
  * It provides methods to print the main menu and viewing the application.
  * The class uses {@link StudentController} to manage student-related activities.
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StudentMenu implements Menu {
     /** The currently logged-in Student user. */

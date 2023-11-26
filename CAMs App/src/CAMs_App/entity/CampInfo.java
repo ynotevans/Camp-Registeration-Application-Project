@@ -8,6 +8,10 @@ import CAMs_App.enums.*;
 /**
  * The {@link CampInfo} class contains all information on a {@link Camp} 
  * that inherits it.
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class CampInfo{
 	/**

@@ -16,6 +16,10 @@ import CAMs_App.service.UserService;
  * actions, such as changing the user's password. This
  * class serves as a base class for more specific user types like
  * {@link StudentController} or {@link StaffController}.
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class UserController {
 	/**

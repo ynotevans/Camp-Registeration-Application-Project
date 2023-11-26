@@ -5,6 +5,10 @@ import CAMs_App.enums.*;
 /**
  * The {@link Staff} class represents a staff user in the system.
  * It extends the {@link User} class, which contains basic user information.
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class Staff extends User{
 	/**
