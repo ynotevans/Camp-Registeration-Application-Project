@@ -32,12 +32,12 @@ public class Student extends User implements Comparable<Student> {
 	 */
 	private String committeeCampName;
 	/**
-	 * The number of points this student earned.
+	 * The number of points this student earned as a committee.
 	 */
 	private int points = 0;
 	/**
-	 * The corresponding {@link CampComMem} object to this student.
-	 */
+ 	* Student's committee information and methods encapsulated in a {@code CampComMem} object.
+ 	*/
 	private CampComMem campComMem = new CampComMem();
 	
 	/**

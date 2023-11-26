@@ -23,7 +23,7 @@ public final class EnquiriesService {
     }
     /**
      * Checks if the user submitted enquiries for the current camp
-     * @return {@code true} if the user submitted enquiries, {@code false} otherwise
+     * @return {@code true} if the user submitted at least one enquiries, {@code false} otherwise
      */
     public static boolean submittedEnquiries(){
         Camp camp = AuthData.getCurrentCamp();
@@ -35,7 +35,7 @@ public final class EnquiriesService {
     }
     /**
      * Check if there are new enquiries for the current camp
-     * @return {@code true} if there are new enquiries, {@code false} otherwise
+     * @return {@code true} if there is at least one new, {@code false} otherwise
      */
     public static boolean hasNewEnquiries(){
         Camp camp = AuthData.getCurrentCamp();
