@@ -151,6 +151,8 @@ public class StaffCampMenu implements Menu {
                         int generate = HelperService.readInt();
                         switch (report){
                             case 1:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Committee Performance Report");
                                 if(generate == 1)
                                 staffController.generateCommitteeReport();
                                 else
@@ -159,19 +161,25 @@ public class StaffCampMenu implements Menu {
                                 HelperService.pressAnyKeyToContinue();   
                                 break;
                             
-                            case 2: 
+                            case 2:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Student Report");
                                 if(generate == 1)
                                 staffController.generateStudentReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
                             
                             case 3:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Enquiries Report");
                             if(generate == 1)
                                 staffController.generateEnquiriesReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
 
                             case 4:
+                                HelperService.clearScreen();
+                                HelperService.printRoute("Staff Camp Menu ---> Print Camp Report");
                             if(generate == 1)
                                 staffController.generateCampReport();
                                 HelperService.pressAnyKeyToContinue();
