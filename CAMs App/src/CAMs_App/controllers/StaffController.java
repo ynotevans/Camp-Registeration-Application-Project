@@ -25,7 +25,7 @@ public class StaffController extends UserController{
         String campName = sc.nextLine();
         
         while(DatabaseService.checkIfCampNameExists(campName)){
-            System.out.println("Camp Name already exists!! Enter another name");
+            ColouredTextPrinter.printRed("Camp Name already exists!! Enter another name");
             campName = sc.nextLine();
         }
         camp.setCampName(campName);
@@ -46,7 +46,7 @@ public class StaffController extends UserController{
                 break;
             
             } catch (Exception e) {
-                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                ColouredTextPrinter.printRed("Error: Invalid date and time format.");
             } 
         }
         
@@ -60,15 +60,15 @@ public class StaffController extends UserController{
             LocalDate endDateTime = LocalDate.parse(end, formatter);
 
             if (endDateTime.isBefore(camp.getCampDate())) {
-                System.out.println("Camp ending date is before the starting date. Please try again!!!");
+                ColouredTextPrinter.printRed("Camp ending date is before the starting date. Please try again!!!");
                 continue;
             }
             camp.setCampEndDate(endDateTime);
             break;
 
         } catch (DateTimeParseException e) {
-            System.out.println("Error: Invalid date format. Please use dd-mm-yyyy format:");
-            //sc.next(); // consume the invalid input to avoid an infinite loop
+            ColouredTextPrinter.printRed("Error: Invalid date format.");
+            
         }
     }
 
@@ -88,14 +88,14 @@ public class StaffController extends UserController{
                 String date = sc.next(); 
                 LocalDate regClosing = LocalDate.parse(date,formatter);
                 if(regClosing.isAfter(camp.getCampDate())){
-                    System.out.println("Invalid registration closing date. Please select a date ealier than the camp starting date:" + camp.getCampDate());
+                    ColouredTextPrinter.printRed("Invalid registration closing date. Please select a date ealier than the camp starting date:" + camp.getCampDate());
                     continue;
                 }
                 camp.setRegCloseDate(regClosing);
                 break;
             
             } catch (Exception e) {
-                System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                ColouredTextPrinter.printRed("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
             }
         }
         
@@ -113,7 +113,7 @@ public class StaffController extends UserController{
                 break;
             }
             catch(IllegalArgumentException e){
-                 System.out.println("Invalid faculty. Please try again");
+                 ColouredTextPrinter.printRed("Invalid faculty. Please try again");
             }
         }
 
@@ -207,7 +207,7 @@ public class StaffController extends UserController{
                         camp.setCampDate(startDateTime);
 
                     } catch (Exception e) {
-                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                        ColouredTextPrinter.printRed("Error: Invalid date and time format.");
                     }
 
                     System.out.println("Enter ending date in dd-mm-yyyy format:");
@@ -219,7 +219,7 @@ public class StaffController extends UserController{
                         camp.setCampDate(endDateTime);
 
                     } catch (Exception e) {
-                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                        ColouredTextPrinter.printRed("Error: Invalid date and time format.");
                     }
 
                     camp.setNumberOfCampDays((int)ChronoUnit.DAYS.between(camp.getCampDate(), camp.getCampEndDate()));
@@ -235,7 +235,7 @@ public class StaffController extends UserController{
                         camp.setRegCloseDate(regDateTime);
 
                     } catch (Exception e) {
-                        System.out.println("Error: Invalid date and time format. Please use dd-mm-yyyy format:");
+                         ColouredTextPrinter.printRed("Error: Invalid date and time format.");
                     }
                     System.out.println("Camp new closing date: "+camp.getRegCloseDate());
                     HelperService.wait(2);
@@ -249,7 +249,7 @@ public class StaffController extends UserController{
                         Faculty faculty = Faculty.valueOf(facultyString.toUpperCase());
                         camp.setUserGroup(faculty);
                     } catch (Exception e){
-                        System.out.println("Invalid faculty.");
+                       ColouredTextPrinter.printRed("Invalid faculty.");
                     }
                     System.out.println("Camp is now open to "+camp.getUserGroup());
                     HelperService.wait(2);
@@ -307,7 +307,7 @@ public class StaffController extends UserController{
     public void deleteCamp(){
         Camp camp = AuthData.getCurrentCamp();
         if(!(camp.getAttendees().isEmpty() || camp.getCommittee().isEmpty())){
-            System.out.println("Unable to delete camp with participants");
+           ColouredTextPrinter.printRed("Unable to delete camp with participants");
         }
         else{
             StaffCampService.deleteCamp(camp);
@@ -318,7 +318,7 @@ public class StaffController extends UserController{
     public void toggleVisibility(){
         Camp camp = AuthData.getCurrentCamp();
         if(!(camp.getAttendees().isEmpty() && camp.getCommittee().isEmpty())){
-            System.out.println("Unable to turn off visibility: there are students who have already signed up for this camp");
+           ColouredTextPrinter.printRed("Unable to turn off visibility: there are students who have already signed up for this camp");
             return;
         }
         System.out.println("Toggle camp visibility");
@@ -357,11 +357,11 @@ public class StaffController extends UserController{
       if(filter == 1){
         System.out.println("Faculty: ");
         String faculty = sc.nextLine();
-        System.out.println("Generating student attendence report of " + faculty.toUpperCase() + "...");
+        ColouredTextPrinter.printYellow("Generating student attendence report of " + faculty.toUpperCase() + "...\n");
         CampManagementService.generateStudentListReport(faculty.toUpperCase());
       }
       else{
-        System.out.println("Generating student attendence report...");
+        ColouredTextPrinter.printYellow("Generating student attendence report...\n");
         CampManagementService.generateStudentListReport();
       }
       
@@ -377,7 +377,7 @@ public class StaffController extends UserController{
         StaffCampService.commiteePerformanceReport(faculty.toUpperCase());
       }
       else{
-        ColouredTextPrinter.printYellow("Generating committee performance report...");
+        ColouredTextPrinter.printYellow("Generating committee performance report...\n");
         StaffCampService.commiteePerformanceReport();
       }
     }
@@ -416,7 +416,6 @@ public class StaffController extends UserController{
       }
       else{
         ColouredTextPrinter.printYellow("Generating camp report...\n");
-        StaffCampService.commiteePerformanceReport();
 
         System.out.println("Committee List:\n");
         StaffCampService.commiteePerformanceReport();
@@ -450,7 +449,7 @@ public class StaffController extends UserController{
             case 1:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
-                System.out.println("Processed Enquiries: ");
+                System.out.println("Processed Enquiries:\n");
                 EnquiriesService.viewProcessedEnquiries();
                 HelperService.pressAnyKeyToContinue();
 
@@ -458,7 +457,7 @@ public class StaffController extends UserController{
             case 2:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
-                System.out.println("New Enquiries ");
+                System.out.println("New Enquiries:\n");
                 EnquiriesService.viewNewEnquiries();
                 HelperService.pressAnyKeyToContinue();
         
@@ -467,7 +466,7 @@ public class StaffController extends UserController{
             default:
                 HelperService.clearScreen();
                 HelperService.printRoute("Staff Camp Menu ---> View All Enquiries");
-                System.out.println("List of all enquiries:");
+                System.out.println("List of all enquiries:\n");
                 EnquiriesService.viewAllEnquiries();
                 HelperService.pressAnyKeyToContinue();
                 break;
@@ -486,7 +485,7 @@ public class StaffController extends UserController{
         int index = HelperService.readInt(1 , camp.getEnquiryList().size(),"Enquiry index out of bound"); 
         Enquiries q = camp.getEnquiryList().get(index -1);
         if(q.getProcessed()) {
-            System.out.println("Wrong ID , Unable to reply to processed enquiry");
+           ColouredTextPrinter.printRed("Wrong ID , Unable to reply to processed enquiry");
             return;
         }
         System.out.println("Enter your reply: ");

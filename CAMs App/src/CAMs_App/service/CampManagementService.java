@@ -105,7 +105,7 @@ public class CampManagementService {
         int count = 0;
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
-            Student student = DatabaseService.getStudent(q.getEnquiry());
+            Student student = DatabaseService.getStudent(q.getInquirer());
             String fac = student.getFaculty();
             if(fac == faculty && !q.getProcessed()){
                 EnquiriesService.viewEnquiries(q);

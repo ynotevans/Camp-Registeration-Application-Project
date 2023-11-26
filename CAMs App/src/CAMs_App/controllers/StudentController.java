@@ -11,7 +11,7 @@ import CAMs_App.service.DatabaseService;
 import CAMs_App.service.EnquiriesService;
 import CAMs_App.service.HelperService;
 import CAMs_App.service.StudentCampService;
-
+import CAMs_App.service.ColouredTextPrinter;
 /**
  * The {@link StudentController} class is responsible for handling the
  * student-specific user interface and user interactions. It extends the
@@ -57,15 +57,15 @@ public class StudentController extends UserController {
         ArrayList<String> withdrawCamp = student.getWithdrawnCamp();
 
         if (camp.getRemainingSlot() == 0) {
-            System.out.println("Camp is full!");
+            ColouredTextPrinter.printRed("Camp is full!");
         }
 
         else if (registeredCamp.contains(campName)){
-            System.out.println("Camp has been registered already.");
+            ColouredTextPrinter.printRed("Camp has been registered already.");
         }
 
         else if ((withdrawCamp.contains(campName))){
-            System.out.println("You have withdrawn from this camp before, not allowed to join again!!");
+           ColouredTextPrinter.printRed("You have withdrawn from this camp before, not allowed to join again!!");
         }
 
         else {
@@ -92,7 +92,7 @@ public class StudentController extends UserController {
         if(student.getIsComittee()){
             //check if the student is a committee for any upcoming camp
             // if(!student.getComitteeCamp().getCampEndDate().isAfter(LocalDate.now())){
-                System.out.println("You are not allowed to sign up as committee for more than 1 camp");
+                 ColouredTextPrinter.printRed("You are not allowed to sign up as committee for more than 1 camp");
                 return false; 
             // }
         }
@@ -100,7 +100,7 @@ public class StudentController extends UserController {
         ArrayList<String> registeredCamp = student.getRegisteredCamp();
 
         if (camp.getCampCommitteeRemainingSlots() == 0) {
-            System.out.println("Camp Committee slots are full!");
+            ColouredTextPrinter.printRed("Camp Committee slots are full!");
         }
 
         else if(registeredCamp.contains(camp.getCampName())){
@@ -247,7 +247,7 @@ public class StudentController extends UserController {
         int index = HelperService.readInt();
         Enquiries q = qList.get(index - 1);
         while(!(q.getInquirer().equals(student.getUserID()))) {
-        	System.out.println("Invalid enquiry id, please try again");
+        	 ColouredTextPrinter.printRed("Invalid enquiry id, please try again");
             index = HelperService.readInt();
         }
         q = qList.get(index - 1);

@@ -7,12 +7,12 @@ import CAMs_App.data.Database;
 import CAMs_App.entity.Staff;
 /**
  * The class {@link AuthStaffService} extends from the abstract class {@link AuthService}. 
- * It authenticates serivces applicable to staff users. The class contains AuthStaffService constructor and login method.
+ * It authenticates services applicable to staff users. The class contains AuthStaffService constructor and login method.
  */
 public class AuthStaffService extends AuthService {
-    /**
-     * A {@link AuthStaffService} constructor, to create an instance of authentication service of staff users.
-     */
+    // /**
+    //  * A {@link AuthStaffService} constructor, to create an instance of authentication service of staff users.
+    //  */
     public AuthStaffService(){};
     /**
      * Logs in the staff user with userID and password
