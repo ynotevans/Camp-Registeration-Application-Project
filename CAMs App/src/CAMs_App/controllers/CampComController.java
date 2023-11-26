@@ -36,57 +36,79 @@ public class CampComController extends StudentController{
 		student.setPoints(student.getPoints() + 1);
 	}
       
-	
-	//enquiries
-    /**
-     * Calls {@link EnquiriesService} to display all {@link Enquiries} 
-     * for the camp this member is in the committee of.
-     */
-    public void viewAllEnquiries(){
-        Camp camp = user.getComitteeCamp(); // ???
-        ArrayList<Enquiries> q = camp.getEnquiryList();
-        for(int i = 0 ; i < camp.getEnquiryList().size() ; i++){
-            System.out.println("Enquiry: " + (i+1));
-            EnquiriesService.viewEnquiries(q.get(i));
-        }
-    }
 
     /**
      * Calls {@link EnquiriesService} to display a specific enquiry with the given index.
      * @param index Index of the enquiry to view.
      */
-    public void viewEnquiry(int index){
-       Camp camp = user.getComitteeCamp(); 
-       EnquiriesService.viewEnquiries(camp.getEnquiryList().get(index));
-    }
+    public void viewEnquiries(){
+      Camp camp = AuthData.getCurrentCamp();
+      ArrayList<Enquiries> q = camp.getEnquiryList();
+      if(q.isEmpty()){
+          System.out.println("No enquiries");
+          return;
+      }
+      System.out.println("Select your choice: ");
+      System.out.println("Press 1: View Processed Enquiries");
+      System.out.println("Press 2: View New Enquiries");
+      System.out.println("Press any number: View All Enquiries");
+
+      int choice = HelperService.readInt(); 
+     
+      switch (choice) {
+          case 1:
+              HelperService.clearScreen();
+              HelperService.printRoute("Staff Camp Menu ---> View Processed Enquiries");
+              System.out.println("Processed Enquiries:\n");
+              EnquiriesService.viewProcessedEnquiries();
+              HelperService.pressAnyKeyToContinue();
+
+              break;
+          case 2:
+              HelperService.clearScreen();
+              HelperService.printRoute("Staff Camp Menu ---> View New Enquiries");
+              System.out.println("New Enquiries:\n");
+              EnquiriesService.viewNewEnquiries();
+              HelperService.pressAnyKeyToContinue();
+      
+              break;
+      
+          default:
+              HelperService.clearScreen();
+              HelperService.printRoute("Staff Camp Menu ---> View All Enquiries");
+              System.out.println("List of all enquiries:\n");
+              EnquiriesService.viewAllEnquiries();
+              HelperService.pressAnyKeyToContinue();
+              break;
+
+      }
+  }
     
     /**
      * Prompts the member to select an enquiry from the list to reply to.
      */
-    public void replyEnquiry(){
-        if(!EnquiriesService.hasNewEnquiries()){
-            System.err.println("No new Enquiries to ");
-        }
-        Camp camp = AuthData.getCurrentCamp();
-        EnquiriesService.viewNewEnquiries();
-        System.out.println("Which enquiry do you want to reply?");
-        int index = HelperService.readInt();
-        Enquiries q = camp.getEnquiryList().get(index-1);
-        if(!q.getProcessed()){
-            System.out.println("Reply to query: ");
-            String ans = sc.nextLine();
-            q.setAnswer(ans);
-            CampComController.addPoints(user);            //addpoint fucntion put at campComController or put at staffCampService
-            System.out.println("Query processed");
-            System.out.println("1 point awarded");
-            System.out.println("Current point(s): " + user.getPoints());
+    public void replyEnquiries(){
+      if(!EnquiriesService.hasNewEnquiries()){
+          System.out.println("No new enquiries to reply");
+          return;
+      }
+      Camp camp = AuthData.getCurrentCamp();
+      EnquiriesService.viewNewEnquiries();
+      System.out.println("Which enquiries you would like to reply: ");
+      int index = HelperService.readInt(1 , camp.getEnquiryList().size(),"Enquiry index out of bound"); 
+      Enquiries q = camp.getEnquiryList().get(index -1);
+      if(q.getProcessed()) {
+         ColouredTextPrinter.printRed("Wrong ID , Unable to reply to processed enquiry");
+          return;
+      }
+      System.out.println("Enter your reply: ");
+      String reply = sc.nextLine();
+      q.setAnswer(reply);
+      q.setAnswerer(AuthData.getCurrentUser().getUserID());
+      q.setProcessed();
+      System.out.println("Enquiries replied");
+  }
 
-        }
-        else{
-            System.out.println("This query has already been processed...");
-        }
-    }
-    
   //Suggestions
     /**
      * Calls createSuggestion method from {@link SuggestionService} to create suggestion.
