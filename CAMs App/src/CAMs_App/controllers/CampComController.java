@@ -89,7 +89,7 @@ public class CampComController extends StudentController{
   }
     
     /**
-     * Prompts the member to select an enquiry from the list to reply to.
+     * Prompts the committee to select an enquiry from the list to reply to award a point to the committee.
      */
     public void replyEnquiries(){
       if(!EnquiriesService.hasNewEnquiries()){
@@ -117,7 +117,7 @@ public class CampComController extends StudentController{
   //Suggestions
     /**
      * Calls createSuggestion method from {@link SuggestionService} to create suggestion.
-     * Prompts the member to enter a suggestion for their committee camp.
+     * Prompts the committee to enter a suggestion for their committee camp and award a point to the committee
      */
       public void createSuggestion(){
         System.out.println("Enter your suggestion: ");
@@ -149,7 +149,8 @@ public class CampComController extends StudentController{
     }
     
     /**
-     * Prompts the member to select a submitted suggestion for edit.
+     * Prompts the member to select a submitted suggestion for edit. Only allowed to edit when
+     * suggestion status is new
      */
     public void editSuggestions(){
         if(!SuggestionsService.submittedSuggestions()){
@@ -248,7 +249,10 @@ public class CampComController extends StudentController{
         }
       }
 
-
+ /**
+     * Calls {@link CampManagementService} to generate enquiry list report in .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
       public void EnquiriesReportFile(){
         System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
         int filter = HelperService.readInt();
@@ -264,7 +268,10 @@ public class CampComController extends StudentController{
         }
       }
 
-
+/**
+     * Calls {@link CampManagementService} to generate student list report in .txt file, can
+     * choose to filter by {@link Faculty}.
+     */
       public void studentReportFile(){
         System.out.println("Press 1 to filter report by faculty.(Any number to generate by default)");
         int filter = HelperService.readInt();
