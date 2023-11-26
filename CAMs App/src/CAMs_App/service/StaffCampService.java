@@ -61,9 +61,14 @@ public class StaffCampService extends CampManagementService{
     public static void viewAllCamps(){
         List<Camp> sortArr= HelperService.filter();
 
-        for (Camp camp : sortArr){
-            HelperService.viewCamp(camp);
+        if(sortArr.size() == 0)
+            ColouredTextPrinter.printRed("Currently no camp is creted!!!");
+        else{
+            for (Camp camp : sortArr){
+                HelperService.viewCamp(camp);
+            }
         }
+        
     }
     /**
      * Displays information regarding the camps created by the staff user

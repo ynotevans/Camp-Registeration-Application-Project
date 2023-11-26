@@ -317,10 +317,12 @@ public class DatabaseService {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             
 			String line;
+			int counter = 0;
 			reader.readLine();  //skip the header
 
             // Read each line from the CSV file
             while ((line = reader.readLine()) != null) {
+				counter++;
                 // Split the line into an array of values using a comma as the delimiter
 				String[] values = line.split(",");
 				int i=0;
@@ -406,7 +408,9 @@ public class DatabaseService {
 					
 				}
 				
-				user.put(values[0], camp);
+				if(counter!=0)
+					user.put(values[0], camp);
+				
                 System.out.println(); // Move to the next line for the next row
             }
 
