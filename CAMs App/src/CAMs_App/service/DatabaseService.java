@@ -81,7 +81,7 @@ public class DatabaseService {
         }
 	}
 	/**
-     * Reads student data from a CSV file and updates the application's data.
+     * Reads data from a CSV file and import to the database by creating new student instances.
      */
 	public static void readfromStudentCSV(){
 		String csvFilePath = "CAMs App/csvdata/student.csv";
@@ -139,7 +139,7 @@ public class DatabaseService {
         }
 	}
 	/**
-     * Writes staff to CSV file
+     * Writes staff data to CSV file
 	 * @param dataMap : Map containing staff data
      */
 	public static void writetoStaffCSV(Map<String, Staff> dataMap){
@@ -170,7 +170,7 @@ public class DatabaseService {
         }
 	}
 	/**
-     * Reads staff data from a CSV file and updates the application's data.
+     * Reads staff data from a CSV file and import to the database by creating new staff instances
      */
 	public static void readfromStaffCSV(){
 		String csvFilePath = "CAMs App/csvdata/staff.csv";
@@ -303,7 +303,7 @@ public class DatabaseService {
         }
 	}
 	/**
-     * Reads camp data from CSV file and updates the application's data.
+     * Reads camp data from CSV file and import to the database by creating new camp instances
      */
 	public static void readfromCampCSV(){
 		String csvFilePath = "CAMs App/csvdata/camp.csv";
@@ -417,7 +417,7 @@ public class DatabaseService {
 
 	}
 	/**
-     * Get camp data through the camp name
+     * Get camp reference through the camp name
 	 * @param campName : Name of camp to retrive
 	 * @return the camp data from the retrived camp name
      */
@@ -426,7 +426,7 @@ public class DatabaseService {
 		return campData.get(campName);
 	}
 	/**
-     * Get student data through the student userID
+     * Get student reference through the student userID
 	 * @param userID : userID of student to retrive
 	 * @return the student data from the retrived userID
      */
@@ -435,7 +435,7 @@ public class DatabaseService {
 		return student.get(userID);
 	}
 	/**
-     * Check if staff user is responsible of a given camp
+     * Check if input campName and userID match with the camp, used to print staff created camp
 	 * @param campName : Name of camp to check
 	 * @param userID : Staff user's userID to check
 	 * @return {@code true} if the staff user is in charge of the camp,{@code false} otherwise
