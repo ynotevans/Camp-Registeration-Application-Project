@@ -9,14 +9,13 @@ import CAMs_App.entity.Camp;
 import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Student;
 /**
- * The{@link CampManagementService} class provides methods in printing attendence reports and enquiries
- * 
+ * The{@link CampManagementService} class provides methods to generate reports that can be called by both
+ * {@link StaffController} and {@link CampComController}
  *  @author Liang Meng
  *  @version 1.0
  *  @since 2023-10-25
  */
 public class CampManagementService {
-     //list of student attending
     /**
      * Generates list of students for the current camp and display details such as:
      * <ul>
