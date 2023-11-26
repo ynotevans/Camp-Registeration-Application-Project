@@ -38,7 +38,7 @@ public class StaffCampMenu implements Menu {
         ColouredTextPrinter.printBlue("(7) Process suggestions for this camp");
         ColouredTextPrinter.printBlue("(8) Approve suggestions for this camp");
         ColouredTextPrinter.printBlue("-------------------------------------------");
-        ColouredTextPrinter.printBlue("(9) Generate report");
+        ColouredTextPrinter.printBlue("(9) View / Generate report");
         ColouredTextPrinter.printBlue("-------------------------------------------");
         ColouredTextPrinter.printBlue("(10) Previous Page");
         ColouredTextPrinter.printBlue("(11) Logout\n");
@@ -144,21 +144,27 @@ public class StaffCampMenu implements Menu {
                         System.out.println("(2) Student report");
                         System.out.println("(3) Enquiries report");
                         System.out.println("(4) Camp report");
-                        System.out.println("(5): Stop generating report");
+                        System.out.println("(5) Stop generating report");
                         
                         int report = HelperService.readInt(1,5,"Invalid choice please try again");
-                        
-                        switch (report) {
+                        System.out.println("Do you want to view here or generate to a file report(1 to view, any number to generate)");
+                        int generate = HelperService.readInt();
+                        switch (report){
                             case 1:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Committee Performance Report");
+                                if(generate == 1)
                                 staffController.generateCommitteeReport();
+                                else
+                                //call generate file func
+                                
                                 HelperService.pressAnyKeyToContinue();   
                                 break;
                             
                             case 2:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Student Report");
+                                if(generate == 1)
                                 staffController.generateStudentReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
@@ -166,6 +172,7 @@ public class StaffCampMenu implements Menu {
                             case 3:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Enquiries Report");
+                            if(generate == 1)
                                 staffController.generateEnquiriesReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;
@@ -173,6 +180,7 @@ public class StaffCampMenu implements Menu {
                             case 4:
                                 HelperService.clearScreen();
                                 HelperService.printRoute("Staff Camp Menu ---> Print Camp Report");
+                            if(generate == 1)
                                 staffController.generateCampReport();
                                 HelperService.pressAnyKeyToContinue();
                                 break;

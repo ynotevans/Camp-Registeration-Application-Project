@@ -62,7 +62,7 @@ public final class EnquiriesService {
      * If there are no new enquiries, prints "No new enquiries".
      */
     public static void viewNewEnquiries(){
-    if(!hasNewEnquiries()) System.out.println("No new enquiries");
+    if(!hasNewEnquiries()) ColouredTextPrinter.printRed("No new enquiries");
      ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
@@ -87,13 +87,17 @@ public final class EnquiriesService {
                 EnquiriesService.viewEnquiries(q);
             }
         }
-        if(count == 0) System.out.println("No processed enquiries");
+        if(count == 0) ColouredTextPrinter.printRed("No processed enquiries");
     }
     /**
      * Displays all enquiries and its details for the current camp
      */
     public static void viewAllEnquiries(){
         ArrayList <Enquiries> qList = AuthData.getCurrentCamp().getEnquiryList();
+        if(qList.isEmpty()){
+            ColouredTextPrinter.printRed("No Enquiries");
+            return;
+        }
         for(int i = 0 ; i < qList.size() ; i++){
             Enquiries q = qList.get(i);
             System.out.println("EnquiriesID: " + (i+1));

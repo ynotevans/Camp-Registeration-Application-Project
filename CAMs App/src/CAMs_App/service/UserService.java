@@ -12,12 +12,13 @@ public class UserService {
      * @return {@code true} if change of password is successful, {@code false} otherwise
      */
     public static boolean changePassword(String oldPassword, String newPassword){
+        
         User user = AuthData.getCurrentUser();
         if (!oldPassword.equals(user.getPassword()))
             return false;
         else{
             user.setPassword(newPassword);
-             return true;
+            return true;
         }
     }
 }

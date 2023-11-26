@@ -373,11 +373,11 @@ public class StaffController extends UserController{
       if(filter == 1){
         System.out.println("Faculty: ");
         String faculty = sc.nextLine();
-        System.out.println("Generating committee performance report of " + faculty.toUpperCase() + "...");
+        ColouredTextPrinter.printYellow("Generating committee performance report of " + faculty.toUpperCase() + "...\n");
         StaffCampService.commiteePerformanceReport(faculty.toUpperCase());
       }
       else{
-        System.out.println("Generating committee performance report...");
+        ColouredTextPrinter.printYellow("Generating committee performance report...");
         StaffCampService.commiteePerformanceReport();
       }
     }

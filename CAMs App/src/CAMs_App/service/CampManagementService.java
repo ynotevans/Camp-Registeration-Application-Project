@@ -27,10 +27,10 @@ public class CampManagementService {
         ArrayList<Student> attendees  = camp.getAttendees();
 
         if(attendees.isEmpty()){
-            System.out.println("No student sign up for the camp");
+            ColouredTextPrinter.printRed("No student sign up for the camp");
             return;
         }
-        HelperService.viewCamp(camp);
+        
         System.out.println(" ");
         System.out.println("Number of participants: " + camp.getAttendees().size());
         System.out.println("Participants list");
@@ -59,10 +59,10 @@ public class CampManagementService {
         Camp camp = AuthData.getCurrentCamp();
         ArrayList<Student> attendees  = camp.getAttendees();
         int count = 0;
-        HelperService.viewCamp(camp);
+        
         System.out.println(" ");
-        System.out.println("Number of participants: " + camp.getAttendees().size());
-        System.out.println("Participants list");
+        System.out.println("Number of participants: " + camp.getAttendees().size()+ "\n");
+        System.out.println("Participants list: ");
         for(int i = 0 ; i < camp.getAttendees().size() ; i++){
             Student student = attendees.get(i);
             if(student.getFaculty().equals(faculty)){
@@ -75,7 +75,7 @@ public class CampManagementService {
             }
         }
     if(count == 0){
-        System.out.println("No attendees from " + faculty);
+        ColouredTextPrinter.printRed("No attendees from " + faculty);
     }
     }
 
@@ -112,7 +112,7 @@ public class CampManagementService {
                 count++;
             }
         }
-        if(count == 0) System.out.println("No new enquiries from student of" + faculty.toUpperCase());
+        if(count == 0) ColouredTextPrinter.printRed("No new enquiries from student of " + faculty.toUpperCase());
 
         count = 0;
         System.out.println("Processed enquiries\n");
@@ -125,7 +125,7 @@ public class CampManagementService {
                 count++;
             }
         }
-        if(count == 0) System.out.println("No processed enquiries from student of" + faculty.toUpperCase());
+        if(count == 0) ColouredTextPrinter.printRed("No processed enquiries from student of " + faculty.toUpperCase());
 
 
 
