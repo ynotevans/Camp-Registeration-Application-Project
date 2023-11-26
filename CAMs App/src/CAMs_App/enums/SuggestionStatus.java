@@ -1,8 +1,14 @@
 package CAMs_App.enums;
 
+import CAMs_App.entity.Suggestions;
+
 /**
  * The {@link SuggestionsStatus} enum represents the suggestions status in the system.
  * The {@link Suggestions} uses the following enumerations of {@link SuggestionsStatus}.
+ * 
+ *  @author Denis Yu
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public enum SuggestionStatus {
     /**

@@ -7,6 +7,10 @@ import CAMs_App.enums.SuggestionStatus;
 /**
  * The {@link Suggestions} class represents a suggestion submitted to a camp
  * by a camp committee member.
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class Suggestions {
 	/**

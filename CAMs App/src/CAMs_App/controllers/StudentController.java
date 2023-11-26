@@ -18,6 +18,10 @@ import CAMs_App.service.ColouredTextPrinter;
  * {@link UserController} class and provides functionality for students to
  * view available and registered camps, register for camps, withdraw from camps,
  * as well as create, edit and delete enquiries to camps they registered for.
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StudentController extends UserController {
 	/**

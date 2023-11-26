@@ -5,12 +5,18 @@ import java.util.Scanner;
 
 import CAMs_App.controllers.StudentController;
 import CAMs_App.data.AuthData;
+import CAMs_App.entity.CampComMem;
+import CAMs_App.entity.Student;
 import CAMs_App.service.HelperService;
 import CAMs_App.service.ColouredTextPrinter;
 /**
  * The {@link StudentCampMenu} implements the generic menu, {@link Menu}. 
  * It provides methods to print the main menu and viewing the application.
  * The class uses {@link StudentController} to manage student-related activities.
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StudentCampMenu implements Menu{
     /** The controller for student-related activities */

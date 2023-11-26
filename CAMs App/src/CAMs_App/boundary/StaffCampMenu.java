@@ -12,6 +12,10 @@ import CAMs_App.service.ColouredTextPrinter;
  * It provides methods to print the main menu and viewing the application.
  * The class uses {@link StaffController} to manage staff-related activities and 
  * also uses {@link CampManagementService} in generating reports.
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StaffCampMenu implements Menu {
     /** The controller for staff-related activities */

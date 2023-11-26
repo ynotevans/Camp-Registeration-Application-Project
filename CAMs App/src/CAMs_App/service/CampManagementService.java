@@ -10,6 +10,10 @@ import CAMs_App.entity.Enquiries;
 import CAMs_App.entity.Student;
 /**
  * The{@link CampManagementService} class provides methods in printing attendence reports and enquiries
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class CampManagementService {
      //list of student attending

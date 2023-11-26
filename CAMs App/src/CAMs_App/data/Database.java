@@ -12,6 +12,10 @@ import CAMs_App.service.DatabaseService;
  * It offers methods to get and set the data maps for different data types,
  * as well as calling methods from {@link DatabaseService} for import and export data 
  * to and from the file system.
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class Database {
 	/**

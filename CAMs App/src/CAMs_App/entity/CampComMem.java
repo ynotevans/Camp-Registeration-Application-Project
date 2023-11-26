@@ -4,6 +4,10 @@ import java.util.*;
 
 /**
  * The {@link CampComMem} class represents a committee member of a camp.
+ * 
+ *  @author Denis Yu
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 
 public class CampComMem {

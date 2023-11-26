@@ -10,6 +10,10 @@ import CAMs_App.entity.Student;
 import CAMs_App.enums.Faculty;
 /**
  * The class {@link StudentCampService} is responsible in managing the camp-related functionalities for student users
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class StudentCampService {
 	/**

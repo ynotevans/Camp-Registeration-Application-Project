@@ -5,6 +5,10 @@ import CAMs_App.enums.*;
 /**
  * The {@link User} class represents a user in the system.
  * Users have a name, faculty, unique ID and password.
+ * 
+ *  @author Denis Yu
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class User {
 	/**

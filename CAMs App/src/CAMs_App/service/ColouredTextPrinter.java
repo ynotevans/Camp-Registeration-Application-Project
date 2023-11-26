@@ -2,6 +2,10 @@ package CAMs_App.service;
 /**
  * The class {@link ColouredTextPrinter} prints color text in the console using ANSI escape codes.
  * The class includes methods for printing text of various colors and a rainbow effect for each color
+ * 
+ *  @author Liang Meng
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class ColouredTextPrinter {
         // ANSI escape codes for colors

@@ -12,6 +12,10 @@ import CAMs_App.service.*;
  * camp committee-specific user interface and user interactions. It extends the
  * {@link UserController} class and provides functionality for committee memebers to
  * view and reply to enquiries, create and edit suggestions, as well as generate reports.
+ * 
+ *  @author Tony
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class CampComController extends StudentController{
 	/**

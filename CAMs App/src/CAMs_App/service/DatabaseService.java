@@ -26,6 +26,10 @@ import CAMs_App.enums.Faculty;
 
 /**
  * The {@link DatabaseService} class provides methods to reading and writing of data into CSV file for student,staff and camp entities
+ * 
+ *  @author Wu Ji
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class DatabaseService {
     /**

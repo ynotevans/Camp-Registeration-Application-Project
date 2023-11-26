@@ -1,8 +1,15 @@
 package CAMs_App.enums;
 
+import CAMs_App.entity.Staff;
+import CAMs_App.entity.User;
+
 /**
  * The {@link Faculty} enum represents various faculties in NTU in the system.
  * The {@link User} is allocated to a single faculty
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public enum Faculty{
     /**

@@ -3,6 +3,10 @@ package CAMs_App.entity;
 /**
  * The {@link Enquiries} class represents an inquiry submitted to a camp
  * by a student.
+ * 
+ *  @author Wan Ismail
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class Enquiries {
 	

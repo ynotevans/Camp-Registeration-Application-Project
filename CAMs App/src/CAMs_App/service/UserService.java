@@ -3,6 +3,10 @@ import CAMs_App.entity.User;
 import CAMs_App.data.AuthData;
 /**
  * The class {@link UserService} provides method to change user's password
+ * 
+ *  @author Tony
+ *  @version 1.0
+ *  @since 2023-10-25
  */
 public class UserService {
     /**
